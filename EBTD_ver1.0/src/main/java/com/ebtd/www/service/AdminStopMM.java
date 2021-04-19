@@ -139,13 +139,13 @@ public class AdminStopMM {
 		return "사용 가능한 정류장 이름 입니다.";
 	}
 	
-	public Object checkPosition(Integer s_X, Integer s_Y) {
-		StopBean sb = sDao.checkPosition(s_X, s_Y);
-		System.out.println(sb);
-		if(sb!=null) {
-			return "이미 있는 정류장 이름 입니다.";
-		}
-		return "사용 가능한 정류장 이름 입니다.";
-	}
+//	public Object checkPosition(Integer s_X, Integer s_Y) {
+//		StopBean sb = sDao.checkPosition(s_X, s_Y);
+//		System.out.println(sb);
+//		if(sb!=null) {
+//			return "이미 있는 정류장 이름 입니다.";
+//		}
+//		return "사용 가능한 정류장 이름 입니다.";
+//	}
 
 }

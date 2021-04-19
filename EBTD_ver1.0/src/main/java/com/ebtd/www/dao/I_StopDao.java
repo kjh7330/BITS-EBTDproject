@@ -23,7 +23,7 @@ public interface I_StopDao {
 
 	StopBean checkStopList(String s_Name);
 	
-	StopBean checkPosition(Integer s_X, Integer s_Y);
+	//StopBean checkPosition(Integer s_X, Integer s_Y);
 	
 
 

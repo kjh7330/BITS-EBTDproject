@@ -25,13 +25,13 @@
 	SELECT * FROM STOP_APPLY WHERE SA_NO=#{sa_No}
 </select>
 
-<select id="checkStopList" resultType="stop">
+<!-- <select id="checkStopList" resultType="stop">
 	SELECT * from STOP WHERE S_NAME=#{s_Name}
-</select>
+</select> -->
 
-<select id="checkPosition" resultType="stop">
+<!-- <select id="checkPosition" resultType="stop">
 	SELECT * from S_X, S_Y WHERE S_X=#{s_X}, S_Y=#{s_Y}
-</select>
+</select> -->
 
 <insert id="addStop" parameterType="stop">
 	INSERT INTO STOP VALUES(#{s_No}, #{t_Name}, #{s_Name}, #{s_X}, #{s_Y}, #{s_Detail})

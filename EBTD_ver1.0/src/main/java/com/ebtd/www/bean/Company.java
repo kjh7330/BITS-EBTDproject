@@ -1,8 +1,10 @@
 package com.ebtd.www.bean;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
-
+@Alias("Company")
 @Data //Getter AND Setter by Lombok
 @Accessors(chain = true)
 public class Company {

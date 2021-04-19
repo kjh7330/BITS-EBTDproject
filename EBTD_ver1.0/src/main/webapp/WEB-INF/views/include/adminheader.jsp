@@ -223,14 +223,14 @@
             <div class="dropdown">
                 <button class="dropbtn">회사 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/companyRequestListForm">회사 등록 승인</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/company/getCompanyRequestList">회사 등록 승인</a></div>
                     <div class="menudetail"><a style="text-decoration: none;" href="#">노선 변경 승인</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/newBusRouteListForm">&nbsp;&nbsp;- 신규 노선 등록</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/updateBusRouteListForm">&nbsp;&nbsp;- 기존 노선 수정</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/companyNameListForm">버스 회사 등록 현황</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/getNewBusRouteList">&nbsp;&nbsp;- 신규 노선 등록</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/updateBusRouteListForm">&nbsp;&nbsp;- 기존 노선 수정</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyNameListForm">버스 회사 등록 현황</a></div>
                     <div class="menudetail"><a style="text-decoration: none;" href="#">승인/반려 내역 보기</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/companyApprovalListForm">&nbsp;&nbsp;- 승인 내역</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/www/admin/company/companyRejectListForm">&nbsp;&nbsp;- 반려 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyApprovalListForm">&nbsp;&nbsp;- 승인 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyRejectListForm">&nbsp;&nbsp;- 반려 내역</a></div>
                 </div>
             </div>
             <div class="navline">
@@ -239,22 +239,22 @@
             <div class="dropdown">
                 <button class="dropbtn">이용자 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">이용자 상세</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">이용자 전체 히스토리</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">이용자 히스토리 챠트</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/getUserList">이용자 상세</a></div> 
+                    <div class="menudetail"><a style="text-decoration: none;" href="getUserHistoryList">이용자 전체 히스토리</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="getUserChart">이용자 히스토리 챠트</a></div>
                 </div>
             </div>
             <div class="navline">
                 <i class="fas fa-grip-lines-vertical"></i>
             </div>
-            <div class="dropdown">
+          <div class="dropdown">
                 <button class="dropbtn">정류장 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">정류장 전체 리스트</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">정류장 등록 및 신청 리스트</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">정류장 결재 내역함</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">정류장별 이용자 히스토리</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">정류장 이용자 챠트</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/stop/getStopList">정류장 전체 리스트</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/stop/getStopConfirmList">정류장 등록 및 신청 리스트</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/stop/getOfficialDocumentResult">정류장 결재 내역함</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/stop/getStopHistory">정류장별 이용자 히스토리</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="admin/stop/getStopChart">정류장 이용자 챠트</a></div>
                 </div>
             </div>
             <div class="navline">
