@@ -1,76 +1,91 @@
 package com.ebtd.www.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.UserBean;
-import com.ebtd.www.service.AdminMM;
+import com.ebtd.www.service.AdminCompanyMM;
 
 @Controller
 public class AdminCompanyController {
 	
 	@Autowired
-	private AdminMM am;	//관리자 서비스 클래스
+	private AdminCompanyMM acm;	//관리자 회사관리 서비스 클래스
 	
 	ModelAndView mav;
 	
 	@GetMapping(value = "/admin")
 	public String getMain() {
-		return "admin/mainForm";  //.jsp
+		return "/admin/mainForm";  //.jsp
 	}
-	//회사 등록 신청
-	@GetMapping(value = "/admin/company/companyRequestListForm")
-	public String getapprovalList() {
-		return "admin/company/companyRequestListForm";
+	//회사 등록 신청 목록 페이지
+	@GetMapping(value = "/admin/company/getCompanyRequestList")
+	public ModelAndView getCompanyRequestList() {
+		mav=acm.getCompanyRequestList();
+		return mav;
 	}
-	//회사 등록 신청 - 상세
-	@GetMapping(value = "/admin/company/companyRequestDetailForm")
-	public String getCompanyRequestDetail() {
-		return "admin/company/companyRequestDetailForm";
+	//회사 등록 신청 목록 - 상세
+	@RequestMapping(value = "/admin/company/getCompanyRequestDetail")
+	public ModelAndView getCompanyRequestDetail(String c_name) {
+		mav=acm.getCompanyRequestDetail(c_name);
+		return mav;
+	}
+	//회사 등록 신청 -> 승인하기
+	@PostMapping(value = "/admin/company/setCompanyRequestApproval")
+	public ModelAndView setCompanyRequestApproval(String c_name) {
+		mav=acm.setCompanyRequestApproval(c_name);
+		return mav;
+	}
+	//회사 등록 신청 -> 반려하기
+	@PostMapping(value = "/admin/company/setCompanyRequestReject")
+	public ModelAndView setCompanyRequestReject(String c_name) {
+		mav=acm.setCompanyRequestReject(c_name);
+		return mav;
 	}
 	//신규 노선 등록 신청 목록
-	@GetMapping(value = "/admin/company/newBusRouteListForm")
-	public String getNewBusRouteList() {
-		return "admin/company/newBusRouteListForm";
+	@GetMapping(value = "/admin/company/getNewBusRouteList")
+	public ModelAndView getNewBusRouteList() {
+		mav=acm.getNewBusRouteList();
+		return mav;
 	}
 	//기존 노선 수정 신청 목록
-	@GetMapping(value = "/admin/company/updateBusRouteListForm")
-	public String getUpdateBusRouteList() {
-		return "admin/company/updateBusRouteListForm";
+	@GetMapping(value = "admin/company/getUpdateBusRouteList")
+	public ModelAndView getUpdateBusRouteList() {
+		mav=acm.getUpdateBusRouteList();
+		return mav;
 	}
 	//버스 회사 이름 목록
-	@GetMapping(value = "/admin/company/companyNameListForm")
+	@GetMapping(value = "/company/getCompanyNameList")
 	public String getCompanyNameList() {
-		return "admin/company/companyNameListForm";
+		return "company/companyNameListForm";
 	}
 	//버스 회사 고객 소리함 목록
-	@GetMapping(value = "/admin/company/companyQuestionListForm")
+	@GetMapping(value = "/company/getCompanyQuestionList")
 	public String getCompanyQuestionList() {
-		return "admin/company/companyQuestionListForm";
+		return "company/companyQuestionListForm";
 	}
 	//버스 회사 승인 목록
-	@GetMapping(value = "/admin/company/companyApprovalListForm")
+	@GetMapping(value = "/company/getCompanyApprovalList")
 	public String getCompanyApprovalList() {
-		return "admin/company/companyApprovalListForm";
+		return "company/companyApprovalListForm";
 	}
 	//버스 회사 승인 목록 - 상세
-	@GetMapping(value = "/admin/company/companyApprovalDetailForm")
+	@GetMapping(value = "/company/getCompanyApprovalDetail")
 	public String getCompanyApprovalDetail() {
-		return "admin/company/companyApprovalDetailForm";
+		return "company/companyApprovalDetailForm";
 	}
 	//버스 회사 반려 목록
-	@GetMapping(value = "/admin/company/companyRejectListForm")
+	@GetMapping(value = "/company/getCompanyRejectList")
 	public String getCompanyRejectList() {
-		return "admin/company/companyRejectListForm";
+		return "company/companyRejectListForm";
 	}
 	//버스 회사 반려 목록 - 상세
-	@GetMapping(value = "/admin/company/companyRejectDetailForm")
+	@GetMapping(value = "/company/getCompanyRejectDetail")
 	public String getCompanyRejectDetail() {
-		return "admin/company/companyRejectDetailForm";
+		return "company/companyRejectDetailForm";
 	}
 	
 		

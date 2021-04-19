@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- I_AdminCompanyDao 전용 Mapper : 회사관리 관련 SQL문 -->
+<mapper namespace="com.ebtd.www.dao.I_AdminCompanyDao">
+	<select id="getCompanyRequestList" resultType="Company">
+		SELECT C_Name FROM COMPANY WHERE C_STATE =0
+	</select>
+	<select id="getCompanyRequestDetail" resultType="ApplyBusHistory">
+		select apde.*, s.s_name, s.t_name, c.c_name, ap.ap_date, c.c_no, c.c_username
+		from apde apde 
+		join s s on apde.s_no = s.s_no
+		join ap ap on apde.ap_no = ap.ap_no and apde.ap_b_no = ap.ap_b_no
+		join c c on c.c_username = ap.c_username
+		where ap.ap_state = 0 and c.c_name = #{c_name}
+		order by apde.ap_b_no , apde.apde_turn
+	</select>
+	<select id="getNewBusRouteList" resultType="ApplyBusHistory">
+		SELECT * FROM APPLY_BUS_HISTORY WHERE AP_STATE = 0
+	</select>
+	<select id="getUpdateBusRouteList" resultType="ApplyBusHistory">
+		SELECT * FROM APPLY_BUS_HISTORY WHERE AP_STATE = 3
+	</select>
+	<select id="getCompanyRequestRouteList" resultType="ApplyBusRoute">
+		SELECT C.C_NAME, H.AP_B_NO
+		FROM COMPANY C, APPLY_BUS_HISTORY H
+		WHERE C.C_USERNAME=H.C_USERNAME
+		AND C.C_NAME=#{c_name}
+	</select>
+	<select id="getApplyBusRouteDetail" resultType="ApplyBusHistory">
+		SELECT HD.APDE_TURN, HD.S_NO, S.S_NAME, S.T_NAME
+		FROM COMPANY C, APPLY_BUS_HISTORY H, APPLY_BUS_HISTORY_DETAIL HD, STOP S
+		WHERE C.C_USERNAME=H.C_USERNAME
+		AND H.AP_NO=HD.AP_NO
+		AND HD.S_NO=S.S_NO
+		AND H.AP_B_NO=#{ap_b_no}
+	</select>
+	<update id="setCompanyRequestApproval" parameterType="Company"> <!-- resultType은 쓰면 안돼~~! -->
+		UPDATE COMPANY SET C_STATE=1 WHERE C_NAME=#{c_name}
+	</update>
+	<update id="setCompanyRequestReject" parameterType="Company"> <!-- resultType은 쓰면 안돼요~ -->
+		UPDATE COMPANY SET C_STATE=2 WHERE C_NAME=#{c_name}
+	</update>
+	<select id="checkCompanyRequestReject" resultType="Company">
+		SELECT * FROM COMPANY WHERE C_NAME=#{c_name} AND C_STATE = 2
+	</select>
+</mapper>

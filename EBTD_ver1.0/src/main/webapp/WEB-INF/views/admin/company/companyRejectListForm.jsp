@@ -4,9 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 관리 페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+
+
+    </style>
 </head>
 <body>
+<div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
+
+
+<div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 </body>
 </html>
