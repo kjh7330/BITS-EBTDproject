@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_StopDao">
+
+<select id="getStopList" resultType="stop">
+	SELECT * FROM STOP
+</select>
+
+<select id="getStopDetail" parameterType="Integer" resultType="stop">
+	SELECT * FROM STOP WHERE S_NO = #{s_No}
+</select>
+
+<select id="getComment" parameterType="Integer" resultType="stop">
+	SELECT S_DETAIL FROM STOP WHERE S_NO = #{s_No}
+</select>
+
+<select id="getStopConfirmList" resultType="sa">
+	SELECT * FROM STOP_APPLY
+</select>
+
+<select id="getStopConfirmDetail" parameterType="Integer" resultType="sa">
+	SELECT * FROM STOP_APPLY WHERE SA_NO=#{sa_No}
+</select>
+
+<select id="checkStopList" resultType="stop">
+	SELECT * from STOP WHERE S_NAME=#{s_Name}
+</select>
+
+<select id="checkPosition" resultType="stop">
+	SELECT * from S_X, S_Y WHERE S_X=#{s_X}, S_Y=#{s_Y}
+</select>
+
+<insert id="addStop" parameterType="stop">
+	INSERT INTO STOP VALUES(#{s_No}, #{t_Name}, #{s_Name}, #{s_X}, #{s_Y}, #{s_Detail})
+</insert>
+</mapper>
