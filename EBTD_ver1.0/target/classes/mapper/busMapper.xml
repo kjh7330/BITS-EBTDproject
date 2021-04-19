@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BusDAO 전용 Mapper : 버스 관련 sql문 명시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_BusDao">
+	<select id="getStopList" resultType="com.ebtd.www.bean.StopBean">
+	SELECT * FROM S 
+	</select>
+	
+	<select id="getTownList" resultType="com.ebtd.www.bean.TownBean">
+	SELECT * FROM T
+	</select>
+	
+	<select id="busNumCheck" resultType = "int" parameterType="String">
+	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
+	</select>
+
+</mapper>
