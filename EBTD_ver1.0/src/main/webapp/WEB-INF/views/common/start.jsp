@@ -24,7 +24,7 @@
 
 		});
 		$('#company').click(function () {
-			
+			location.href = 'company/companyindexForm';
 		});
 		$('#driver').click(function () {
 			location.href = 'driver/CompanySelectForm';

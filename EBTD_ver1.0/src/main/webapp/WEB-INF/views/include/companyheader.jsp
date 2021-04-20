@@ -204,7 +204,7 @@
     <header>
         <div class="hcontainer">
             <div class="headericon"><i id="headericon" class="far fa-user"></i>관리자님</div>
-                <div class="headertitle"><img src="./resources/image/mainlogo.png" alt="EBTD메인로고" style="height: 80px;"/>&nbsp;</div>
+                <div class="headertitle"><a style="text-decoration: none;" href="/company/companyindexForm"><img src="./resources/image/mainlogo.png" alt="EBTD메인로고" style="height: 80px;"/>&nbsp;</div>
                 <div class="headeralarm">
                     <div class="headerbell">
                         <i class="fas fa-bell"></i><i class="fas fa-comment" style="font-size: 35px; color: red; position: absolute; top: 20px;"></i>
@@ -219,11 +219,11 @@
             <div class="dropdown">
                 <button class="dropbtn">노선 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="company/newBusForm">새로운 노선 등록 신청</a></div>
+                    <div class="menudetail"><a href="/company/newBusForm">새로운 노선 등록 신청</a></div>
                     <div class="menudetail"><a href="#">기존 노선 변경 신청</a></div>
                     <div class="menudetail"><a href="#">노선 변경 및 등록 신청 내역 확인</a></div>
-                    <div class="menudetail"><a class="adetail" href="#">&nbsp;&nbsp;- 신규 신청 내역</a></div>
-                    <div class="menudetail"><a class="adetail" href="#">&nbsp;&nbsp;- 변경 신청 내역</a></div>
+                    <div class="menudetail"><a class="/company/adetail" href="#">&nbsp;&nbsp;- 신규 신청 내역</a></div>
+                    <div class="menudetail"><a class="/company/adetail" href="#">&nbsp;&nbsp;- 변경 신청 내역</a></div>
                 </div>
             </div>
             <div class="navline">
@@ -242,8 +242,8 @@
             <div class="dropdown">
                 <button class="dropbtn">정류장 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="getStopList">정류장 목록</a></div>
-                    <div class="menudetail"><a href="addNewStop">정류장 등록 신청</a></div>
+                    <div class="menudetail"><a href="/company/getStopList">정류장 목록</a></div>
+                    <div class="menudetail"><a href="/company/addNewStop">정류장 등록 신청</a></div>
                     <div class="menudetail"><a href="#">정류장 등록 신청 내역 확인</a></div>
                 </div>
             </div>

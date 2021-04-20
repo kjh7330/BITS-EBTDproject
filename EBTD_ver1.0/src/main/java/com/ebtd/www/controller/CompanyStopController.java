@@ -18,7 +18,14 @@ public class CompanyStopController {
 	private CompanyStopMM sm;
 	ModelAndView mav;
 
-	@GetMapping(value = "/getStopList") 
+	@GetMapping(value = "/company/companyindexForm") 
+	public String companyIndexForm() { //정류장 목록보기 페이지 이동 
+		logger.info("정류장 목록보기 페이지 이동"); 
+		return "company/companyindex"; 
+		
+	}
+	
+	@GetMapping(value = "/company/getStopList") 
 	public ModelAndView getStopList() throws JsonProcessingException { //정류장 목록보기 페이지 이동 
 		logger.info("정류장 목록보기 페이지 이동"); 
 		mav=sm.getStopList();
@@ -26,7 +33,7 @@ public class CompanyStopController {
 		
 	}
 	
-	@GetMapping(value = "/addNewStop") 
+	@GetMapping(value = "/company/addNewStop") 
 	public String addNewStopForm() { //정류장 신청 페이지 이동 
 		logger.info("정류장 신청 페이지 이동"); 
 		//sm.addNewStop();
