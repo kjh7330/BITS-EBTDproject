@@ -7,7 +7,7 @@ import com.ebtd.www.bean.StopBean;
 
 
 
-public interface I_StopDao {
+public interface I_AdminStopDao {
 
 	List<StopBean> getStopList();
 

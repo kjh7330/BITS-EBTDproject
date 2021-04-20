@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
-import com.ebtd.www.dao.I_StopDao;
+import com.ebtd.www.dao.I_AdminStopDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class AdminStopMM {
 	@Autowired
-	private I_StopDao sDao;
+	private I_AdminStopDao sDao;
 	
 	ModelAndView mav;
 	

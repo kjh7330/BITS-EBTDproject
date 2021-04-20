@@ -242,8 +242,8 @@
             <div class="dropdown">
                 <button class="dropbtn">정류장 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="#">정류장 목록</a></div>
-                    <div class="menudetail"><a href="#">정류장 등록 신청</a></div>
+                    <div class="menudetail"><a href="getStopList">정류장 목록</a></div>
+                    <div class="menudetail"><a href="addNewStop">정류장 등록 신청</a></div>
                     <div class="menudetail"><a href="#">정류장 등록 신청 내역 확인</a></div>
                 </div>
             </div>
