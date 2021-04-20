@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DriverDAO 전용 Mapper : 게시판 관련 sql문 명시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.DriverDao">
+
+	<select id = "getCompanyList" resultType = "company_wh">
+		select * from c 
+	</select>
+	<select id = "getBusList" resultType = "bus_wh">
+		select b.*, ab.ab_no, ab.ab_type from b b join ab ab on b.b_no = ab.b_no where b.c_username = #{c_username}
+	</select>
+	<select id = "getDriverList" resultType = "driver_wh">
+		select d.* from ab ab join d d on ab.b_no = d.b_no where ab.ab_no = #{ab_no}
+	</select>
+	<select id = "getBusRouteList" resultType = "stop_wh">
+		select rb.*, s.s_name from rb rb join s s on rb.s_no = s.s_no where b_no = #{b_no} order by rb.r_turn
+	</select>
+	<select id="refresh" resultType = "reserve_wh">
+		select ur.ur_no, u.u_type, ur.ur_date, rb.r_turn ur_start_turn, rb2.r_turn ur_last_turn
+		from ur ur left 
+		join rb rb  on ur.s_nostart  = rb.s_no 
+		join rb rb2 on ur.s_nolast   = rb2.s_no
+		join u  u   on ur.u_username = u.u_username
+		where ur_status = 1 and rb.b_no = #{b_no} and rb2.b_no = #{b_no}
+	</select>
+	
+	<update id="updateBus">
+		update ab set r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no}
+	</update>
+</mapper>
+
+
+
+
