@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ebtd.www.dao.ICompanyDao">
+  	<insert id="companyJoin" parameterType="companyBean">
+  		INSERT INTO C( C_USERNAME, C_NAME, C_PASSWORD, C_NO, C_IMGEXTENTION, C_STATE)
+  			  VALUES (#{c_username},#{c_name},#{c_password},#{c_no},DEFAULT,DEFAULT)
+  	</insert>
+  	
+  	<select id="getPwd" resultType="String">
+  		select c_password from c where c_username = #{c_username}
+  	</select>
+  	
+  	<select id="existUsername" resultType="boolean">
+  		select count(c_username) from c where c_username = #{c_username}
+  	</select>
+  	
+  	<select id="accessUser" resultType="String">
+  		select c_username from c where c_username = #{c_username} and c_password=#{c_password}	
+  	</select>
+  	<select id="accessUserState" resultType="int">
+  		select c_state from c where c_username = #{c_username}
+  	</select>
+  </mapper>
