@@ -17,8 +17,10 @@ public class AdminCompanyController {
 	
 	ModelAndView mav;
 	
-	@GetMapping(value = "/admin")
+	@RequestMapping(value = "/admin")
 	public String getMain() {
+		System.out.println("요기까지옴");
+		
 		return "/admin/mainForm";  //.jsp
 	}
 	//회사 등록 신청 목록 페이지
