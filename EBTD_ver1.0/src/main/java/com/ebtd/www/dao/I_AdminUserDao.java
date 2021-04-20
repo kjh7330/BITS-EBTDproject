@@ -10,7 +10,11 @@ public interface I_AdminUserDao {
 
 	
 	List<UserBean> getUserList();
+	
+	UserBean getUserDetail(String u_userName);
 
 	List<UserReserveHistoryBean> getUserHistoryList();
+
+	
 
 }

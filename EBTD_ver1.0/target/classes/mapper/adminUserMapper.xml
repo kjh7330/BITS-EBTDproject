@@ -12,10 +12,16 @@
 		SELECT * FROM U
 	</select>
 	
+	<select id="getUserDetail" resultType="user">
+		SELECT * FROM U WHERE U_USERNAME=#{'u_userName'}
+	</select>
+	
 	<select id="getUserHistoryList" resultType="userReserveHistory">
 		SELECT URH.URH_NO, URH.U_USERNAME, URH.B_NO,B.C_USERNAME, URH.URH_DATE, URH.S_NOSTART, URH.S_NOLAST,URH.URH_STATUS 
 		FROM URH LEFT JOIN B ON URH.B_NO = B.B_NO
 	</select>
+	
+	
 	
 
 </mapper>

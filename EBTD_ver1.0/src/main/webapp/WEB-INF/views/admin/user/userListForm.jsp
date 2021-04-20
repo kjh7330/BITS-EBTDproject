@@ -54,6 +54,7 @@
 		<script type="text/javascript">
 			let uList = ${uList};
 			let str = "";
+			console.log(uList[0].u_userName);
 
 			for (let i = 0; i < uList.length; i++) {
 				//0,1을 --> 휠체어, 시각으로 바꾸어 출력
@@ -64,7 +65,7 @@
 				str += '<tr>';
 				str += '<th>' + (i+1) + '</th>'
 				//아이디
-				str += '<td><a href="#">' + uList[i].u_userName + '</a></td>';
+				str += '<td><a href="/admin/user/getUserDetail?u_userName=' + uList[i].u_userName + '">'+uList[i].u_userName+'</a></td>';
 				//이름
 				str += '<td>' + uList[i].u_name + '</td>';
 				//장애유형
@@ -81,7 +82,7 @@
 			$('#searchBtn').click(function(){
 				//입력받은 ID
 				let inputId = $('#searchInput').val();
-				console.log( inpytId );
+				console.log( inputId );
 				/* 
 				if(inputId == ''){
 					alert("아이디를 입력해주세요.");
@@ -90,7 +91,6 @@
 				} */
 			});
 		</script>
-
 
 		<div id="adminfooter"><%@ include
 				file="/WEB-INF/views/include/adminfooter.jsp"%></div>
