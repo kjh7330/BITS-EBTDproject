@@ -51,7 +51,7 @@
         <div class="ccount">Count : ${cList.size()} 개</div>
         <div>
         	<c:forEach var="company" items="${cList}">
-				<a href="/ebtd/ac/admin/company/getCompanyRequestDetail?c_name=${company.c_name}">            	
+				<a href="/www/admin/company/getCompanyRequestDetail?c_name=${company.c_name}">            	
 				<input class="cbtn" type="button" value="${company.c_name}">
 				</a>
         	</c:forEach>

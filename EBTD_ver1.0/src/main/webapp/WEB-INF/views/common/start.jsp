@@ -18,7 +18,7 @@
 
 	<script type="text/javascript">
 		$('#admin').click(function () {
-			location.href = 'admin/mainForm';
+			location.href = 'admin';
 		});
 		$('#user').click(function () {
 
