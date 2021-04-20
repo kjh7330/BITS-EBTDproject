@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Alias("stop_wh")
 @Data
 @Accessors(chain = true)
-public class DriverStopBean {
+public class Wh_StopBean {
 	private int r_turn;
 	private String b_no;
 	private int s_no;

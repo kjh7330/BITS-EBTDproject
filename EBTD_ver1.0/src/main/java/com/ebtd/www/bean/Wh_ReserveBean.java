@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @Alias("reserve_wh")
 @Data
 @Accessors(chain = true)
-public class DriverReserveBean {
+public class Wh_ReserveBean {
 	private int ur_no;
 	private int ur_start_turn;
 	private int ur_last_turn;

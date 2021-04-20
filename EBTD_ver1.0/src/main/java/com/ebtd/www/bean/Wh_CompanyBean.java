@@ -1,18 +1,19 @@
 package com.ebtd.www.bean;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
+
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("bus_wh")
+@Alias("company_wh")
 @Data
 @Accessors(chain = true)
-public class DriverBusBean {
-	private String b_no;
+public class Wh_CompanyBean {
 	private String c_username;
-	private int ab_no;
-	private int ab_wheel_cnt;
-	private int ab_blind_cnt;
-	private int ab_type;
+	private String c_name;
+	private int c_state;
 }
