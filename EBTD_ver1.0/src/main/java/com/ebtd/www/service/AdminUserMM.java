@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.bean.UserReserveHistoryBean;
-import com.ebtd.www.dao.I_UserDao;
+import com.ebtd.www.dao.I_AdminUserDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AdminUserMM {	//김아름
 
 	@Autowired
-	private I_UserDao uDao;
+	private I_AdminUserDao uDao;
 
 	ModelAndView mav;
 	
@@ -32,7 +32,7 @@ public class AdminUserMM {	//김아름
 		if( (uList!=null) && (uList.size()!= 0) ) {
 			mav.addObject("uList", om.writeValueAsString(uList));
 			//잭슨으로 데이터-->json으로 변환
-			view = "admin/user/userListForm";//.jsp
+			view = "/admin/user/userListForm";//.jsp
 			mav.setViewName(view);
 
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
@@ -59,7 +59,7 @@ public class AdminUserMM {	//김아름
 		if( (urhList!=null) && (urhList.size()!= 0) ) {
 			mav.addObject("urhList", om.writeValueAsString(urhList));
 			//잭슨으로 데이터-->json으로 변환
-			view = "admin/user/userHistoryListForm";//.jsp
+			view = "/admin/user/userHistoryListForm";//.jsp
 			mav.setViewName(view);
 
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !

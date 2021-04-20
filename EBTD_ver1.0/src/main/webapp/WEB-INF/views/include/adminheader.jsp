@@ -239,9 +239,9 @@
             <div class="dropdown">
                 <button class="dropbtn">이용자 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/getUserList">이용자 상세</a></div> 
-                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/getUserHistoryList">이용자 전체 히스토리</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/getUserChart">이용자 히스토리 챠트</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/user/getUserList">이용자 상세</a></div> 
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/user/getUserHistoryList">이용자 전체 히스토리</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/user/getUserChart">이용자 히스토리 챠트</a></div>
                 </div>
             </div>
             <div class="navline">

@@ -5,7 +5,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ebtd.www.dao.I_UserDao">
+<mapper namespace="com.ebtd.www.dao.I_AdminUserDao">
 
 	                <!-- mybatis-config.xml에 별칭설정 or Bean에 @Alias("user") -->
 	<select id="getUserList" resultType="user">

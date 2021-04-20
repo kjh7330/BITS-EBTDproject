@@ -15,38 +15,50 @@
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 
-	버스회사, 버스번호, 출발지, 목적지, 탑승시간, 하차시간, 이용일, 유저아이디, 장애유형
-	<!-- id 입력하고 검색버튼 누르면 출력.. -->
 	<div style="color: black">
-		아이디를 입력하세요: <input type="text" id="searchInput">
-		<button id="searchBtn">검색</button>
-		<br>
-	</div>
-	<div>
 		<br> 정렬:<select id="selectSort">
 			<option>전체</option>
+			<option>이용일</option>
 			<option>버스회사</option>
 			<option>버스번호</option>
 			<option>출발지</option>
 			<option>목적지</option>
 			<option>장애유형</option>	
+			<option>아이디</option>	
 		</select>
+		
+		<!-- selectSort에서 선택하면 그거에 맞춰서 선택할수있게 -->
+		상세:<select id="selectSortDetail">
+			<!-- 이용일 -->
+			<option>1주일</option>
+			<option>1개월</option>
+			<option>3개월</option>
+			<option>6개월</option>
+			<option>1년</option>
+			<!-- 장애유형 -->
+			<option>시각</option>
+			<option>휠체어</option>
+			
+		</select> 
+		<!-- 버스회사 버스번호 버스정류장 아이디 -->
+		아이디를 입력하세요: <input type="text" id="searchInput">
+		<button id="searchBtn">검색</button>
 	</div>
-	<!-- 정렬상세:<select>
-		<option disabled>시각</option>
-		<option disabled>휠체어</option>
-		</select> -->
+
 
 	<!-- 부트스트랩 -->
 	<table class="table table-sm">
 		<thead>
 			<tr>
-				<!-- 리스트 띄운 다음에 이용자아이디 누르면 이용자 상세정보 띄우기-->
+				<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
 				<th scope="col">NO</th>
-				<th scope="col">아이디</th>
-				<th scope="col">이름</th>
+				<th scope="col">이용일</th>
+				<th scope="col">버스번호</th>
+				<th scope="col">버스회사</th>
+				<th scope="col">출발지</th>
+				<th scope="col">목적지</th>
 				<th scope="col">장애유형</th>
-				<th scope="col">주소</th>
+				<th scope="col">유저아이디</th>
 			</tr>
 		</thead>
 		<tbody id="result">
@@ -65,17 +77,24 @@
 				} else urhList[i].u_type = '휠체어';
 	
 				str += '<tr>';
+				//NO
 				str += '<th>' + (i+1) + '</th>'
-				//아이디
-				str += '<td><a href="#">' + urhList[i].u_userName + '</a></td>';
-				//이름
-				str += '<td>' + urhList[i].u_name + '</td>';
+				//이용일
+				str += '<td>' + urhList[i].urh_date + '</td>';
+				//버스번호
+				str += '<td>' + urhList[i].b_no + '</td>';
+				//버스회사 
+				str += '<td>' + urhList[i].c_userName + '</td>';
+				//출발지
+				str += '<td>' + urhList[i].s_nostart + '</td>';
+				//목적지
+				str += '<td>' + urhList[i].s_nolast + '</td>';
 				//장애유형
 				str += '<td>' + urhList[i].u_type + '</td>';
-				//주소
-				str += '<td>' + urhList[i].u_address + '</td>';
-				str += "</tr>";
+				//아이디
+				str += '<td><a href="#">' + urhList[i].u_userName + '</a></td>';
 			}
+			
 			$("#result").empty();
 			$("#result").append(str);
 			

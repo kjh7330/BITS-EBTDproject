@@ -10,7 +10,7 @@ import lombok.Data;
 public class UserReserveHistoryBean {
 
 	private int urh_no; //예약번호(pk)
-	private String u_username; //id(fk)
+	private String u_userName; //id(fk)
 	private String b_no;	//버스번호(fk)
 	private String c_userName;	//버스회사
 	private String urh_date;	//이용일시
