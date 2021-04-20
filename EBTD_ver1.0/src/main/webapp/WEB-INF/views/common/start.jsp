@@ -11,13 +11,18 @@
 
 	<h1>이용자 분류</h1>
 
+	<button id = "login">로그인</button>
 	<button id = "admin">관리자</button>
 	<button id = "user">유저</button>
 	<button id = "company">회사</button>
 	<button id = "driver">기사</button>
 
 	<script type="text/javascript">
-		$('#admin').click(function () {
+	$('#login').click(function () {
+		location.href = 'loginForm';
+	});	
+	
+	$('#admin').click(function () {
 			location.href = 'admin';
 		});
 		$('#user').click(function () {
