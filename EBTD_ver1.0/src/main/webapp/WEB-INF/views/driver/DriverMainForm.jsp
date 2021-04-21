@@ -327,8 +327,8 @@
 							data : 	{
 										'car' : i+1,
 										'go' : false,
-										'blind' : '',
-										'wheel' : ''
+										'blind' : '0',
+										'wheel' : '0'
 									},
 							dataType : 'json',
 							method : 'get'
