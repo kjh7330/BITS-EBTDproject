@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.CompanyAliasBean;
+import com.ebtd.www.controller.AdminCompanyController;
 import com.ebtd.www.dao.ICompanyDao;
 
 @Service
@@ -19,6 +20,9 @@ public class IdMM {
 	//공통 MM 주입
 //	@Autowired
 //	private CommonMM cmMM;
+	@Autowired
+	private AdminCompanyController acc;
+	
 	
 	//모델앤 뷰 필드화
 	ModelAndView mav = null;
@@ -40,12 +44,13 @@ public class IdMM {
 		cb.setC_password(pwdEncoder.encode(cb.getC_password()));
 		
 		//companyJoin으로 insert문 실행 후
-		if(cDao.companyJoin(cb)) {
+		boolean flag = cDao.companyJoin(cb);
+		if(flag) {
 			//성공시 
-			view = "login";
+			view = "redirect:loginForm";
 		}else {
 			//실패시
-			return null;
+			view = "redirect:joinForm";
 		}mav.setViewName(view);
 		
 		return mav;
@@ -60,7 +65,7 @@ public class IdMM {
 		if(!cDao.existUsername(cb)) {
 			//일치하는 아이디 없을 시 로그인창으로 이동 후 msg출력
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
-			mav.setViewName("login");
+			mav.setViewName("redirect:loginForm");
 			System.out.println("existUsername");
 			return mav;
 		}
@@ -70,7 +75,7 @@ public class IdMM {
 		String dbPwd = cDao.getPwd(cb);
 		if(!pwdEncoder.matches(cb.getC_password(), dbPwd)) {
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
-			mav.setViewName("login");
+			mav.setViewName("redirect:loginForm");
 			return mav;
 		}
 		
@@ -84,7 +89,7 @@ public class IdMM {
 			if(c_state==0||c_state==2){
 				//거절 상태 혹은 대기상태시
 				mav.addObject("msg", "승인 확인 부탁드립니다.");
-				view = "login";
+				view = "redirect:loginForm";
 			}else if(c_state==1) {
 				//승인 완료된 회사일시
 				/*회사 메인 설정 완료시 수정 부탁드립니다.*/
@@ -93,7 +98,7 @@ public class IdMM {
 				session.setAttribute("c_state", c_state);
 			}else if(c_state==3) {
 				//상태가 admin 일 경우
-				view = "admin/mainForm";
+				view = "redirect:admin";
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
 			}
@@ -101,7 +106,7 @@ public class IdMM {
 		}else {
 			// 비밀번호가 틀린경우
 			mav.addObject("msg", "비밀번호를 확인해주세요");
-			view = "login";
+			view = "redirect:loginForm";
 			return mav;
 		}mav.setViewName(view);
 		return mav;

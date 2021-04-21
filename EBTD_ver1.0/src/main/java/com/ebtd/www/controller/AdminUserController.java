@@ -10,7 +10,7 @@ import com.ebtd.www.service.AdminUserMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/user")
 public class AdminUserController {	//김아름
 
 	@Autowired 

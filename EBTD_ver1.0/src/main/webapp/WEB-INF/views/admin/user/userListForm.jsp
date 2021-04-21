@@ -16,27 +16,29 @@
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 	
-	<!-- id 입력하고 검색버튼 누르면 출력.. -->
 	<div style="color: black">
-		아이디를 입력하세요: <input type="text" id="searchInput">
-		<button id="searchBtn">검색</button><br>
-	</div>
-	<div>
 		<br> 정렬:<select id="selectSort">
 			<option>전체</option>
 			<option>장애유형</option>
+			<option>아이디</option>
 		</select> 
+		
+		<!-- selectSort에서 장애유형 선택하면 얘네 선택할수있게 -->
+		상세:<select id="selectSortDetail">
+			<option>시각</option>
+			<option>휠체어</option>
+		</select> 
+		
+		<!-- 아이디 선택하면 검색할수있게 -->
+		아이디를 입력하세요: <input type="text" id="searchInput">
+		<button id="searchBtn">검색</button><br>
 	</div>
-		<!-- 정렬상세:<select>
-		<option disabled>시각</option>
-		<option disabled>휠체어</option>
-		</select> -->
 		
 		<!-- 부트스트랩 -->
 		<table class="table table-sm">
 			<thead>
 				<tr>
-					<!-- 리스트 띄운 다음에 이용자아이디 누르면 이용자 상세정보 띄우기-->
+					<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
 					<th scope="col">NO</th>
 					<th scope="col">아이디</th>
 					<th scope="col">이름</th>
