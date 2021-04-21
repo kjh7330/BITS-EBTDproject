@@ -44,7 +44,7 @@ public class AdminUserController {	//김아름
 	@GetMapping(value = "/getUserChart")
 	public ModelAndView getUserChart() {	
 		//List<UserBean> uList;
-		//uList= aum.getUserChart();	
+		aum.getUserChart();	
 		return mav;	
 	}
 

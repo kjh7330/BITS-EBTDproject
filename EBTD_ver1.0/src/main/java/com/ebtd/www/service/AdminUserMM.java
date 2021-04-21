@@ -57,10 +57,7 @@ public class AdminUserMM {	//김아름
 		//디비에서 가져온 데이터가 있으면
 		if( uInfo!=null ) {
 			mav.addObject("uInfo", om.writeValueAsString(uInfo));
-			//잭슨으로 데이터-->json으로 변환
-			view = "/admin/user/userDetailForm";//.jsp
-			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
-			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
+			view = "/admin/user/userDetailForm";//.jsp	
 		}else {
 			System.out.println("userDetail 가져오기 실패-메인으로 이동");
 			view = "/admin/mainForm";
@@ -93,6 +90,31 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserHistoryList end
+
+	//이용자 차트 보기
+	public Object getUserChart() {
+		
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		List<UserReserveHistoryBean> urhList = null;
+
+		urhList = uDao.getUserHistoryList();	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( (urhList!=null) && (urhList.size()!= 0) ) {
+			//mav.addObject("urhList", om.writeValueAsString(urhList));
+			//잭슨으로 데이터-->json으로 변환
+			view = "/admin/user/userHistoryListForm";//.jsp
+			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
+			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
+		}else {
+			System.out.println("userHistoryList가져오기 실패-메인으로 이동");
+			view = "/admin/mainForm";
+
+		}
+		mav.setViewName(view);
+		return mav;
+	}	//getUserChart end
 
 
 

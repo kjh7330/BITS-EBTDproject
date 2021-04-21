@@ -11,8 +11,9 @@
 
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
+	
+
     <main class="mainview">
-    	
     	이용자 통계 !!!!!!!!!
         <table class="maintable">
             <tr>

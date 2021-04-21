@@ -10,48 +10,62 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
+ 
+#selectSortDetail {
+	display: none
+}
+
+#searchInput{
+	display: none
+}
 </style>
 </head>
 <body>
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
-	
+
 	<div style="color: black">
 		<br> 정렬:<select id="selectSort">
 			<option>전체</option>
-			<option>장애유형</option>
-			<option>아이디</option>
-		</select> 
-		
+			<option id="u_type">장애유형</option>
+			<option id="u_id">아이디</option>
+		</select>
+
 		<!-- selectSort에서 장애유형 선택하면 얘네 선택할수있게 -->
-		상세:<select id="selectSortDetail">
-			<option>시각</option>
-			<option>휠체어</option>
-		</select> 
-		
+		<div id="selectSortDetail">
+			상세:<select>
+				<option>시각</option>
+				<option>휠체어</option>
+			</select>
+		</div>
+
 		<!-- 아이디 선택하면 검색할수있게 -->
-		아이디를 입력하세요: <input type="text" id="searchInput">
-		<button id="searchBtn">검색</button><br>
-	</div>
+		<div id="searchInput">
+		아이디를 입력하세요: <input type="text">
+		<button id="searchBtn">검색</button>
+		</div>
 		
-		<!-- 부트스트랩 -->
-		<table class="table table-sm">
-			<thead>
-				<tr>
-					<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
-					<th scope="col">NO</th>
-					<th scope="col">아이디</th>
-					<th scope="col">이름</th>
-					<th scope="col">장애유형</th>
-					<th scope="col">주소</th>
-				</tr>
-			</thead>
-			<tbody id="result">
-			</tbody>
+		<br>
+	</div>
 
-		</table>
+	<!-- 부트스트랩 -->
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
+				<th scope="col">NO</th>
+				<th scope="col">아이디</th>
+				<th scope="col">이름</th>
+				<th scope="col">장애유형</th>
+				<th scope="col">주소</th>
+			</tr>
+		</thead>
+		<tbody id="result">
+		</tbody>
 
-		<script type="text/javascript">
+	</table>
+
+	<script type="text/javascript">
 			let uList = ${uList};
 			let str = "";
 			console.log(uList[0].u_userName);
@@ -78,6 +92,19 @@
 			$("#result").append(str);
 			
 			
+			//정렬에서 장애유형 선택하면 정렬상세에 시각이랑,휠체어 선택할수 있게 띄워줘야 함
+			let selectUType = $($('#u_type')).val();
+			console.log(selectUTyle);
+			if(selectUType =='장애유형'){
+				$('#selectSortDetail').show();
+			}else{
+				$('#selectSortDetail').hide();
+			}
+			
+			
+			//정렬에서 아이디 클릭하면 검색창띄워줘야 함
+			
+			
 			//검색버튼 누르면
 			$('#searchBtn').click(function(){
 				//입력받은 ID
@@ -92,8 +119,8 @@
 			});
 		</script>
 
-		<div id="adminfooter"><%@ include
-				file="/WEB-INF/views/include/adminfooter.jsp"%></div>
+	<div id="adminfooter"><%@ include
+			file="/WEB-INF/views/include/adminfooter.jsp"%></div>
 </body>
 
 
