@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.service.AdminUserMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -27,8 +28,8 @@ public class AdminUserController {	//김아름
 
 	//이용자 상세정보 가져오고 성공하면 페이지 이동
 	@GetMapping(value = "/getUserDetail")
-	public ModelAndView getUserDetail() throws JsonProcessingException {	
-		//mav = am.getUserDetail();	
+	public ModelAndView getUserDetail(String u_userName) throws JsonProcessingException {	
+		mav = aum.getUserDetail(u_userName);
 		return mav;		
 	}
 
@@ -43,7 +44,7 @@ public class AdminUserController {	//김아름
 	@GetMapping(value = "/getUserChart")
 	public ModelAndView getUserChart() {	
 		//List<UserBean> uList;
-		//uList= aum.getUserChart();	
+		aum.getUserChart();	
 		return mav;	
 	}
 

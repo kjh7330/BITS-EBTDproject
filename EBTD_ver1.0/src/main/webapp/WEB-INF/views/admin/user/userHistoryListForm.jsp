@@ -92,7 +92,8 @@
 				//장애유형
 				str += '<td>' + urhList[i].u_type + '</td>';
 				//아이디
-				str += '<td><a href="#">' + urhList[i].u_userName + '</a></td>';
+				str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+
 			}
 			
 			$("#result").empty();
