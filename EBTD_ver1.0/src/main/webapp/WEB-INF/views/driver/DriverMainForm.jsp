@@ -315,11 +315,13 @@
 					}
 					
 					if(cycle_check == 1){
-						all_blind = 0;
-						all_wheel = 0;
-						$('#all_blind').val(0);
-						$('#all_wheel').val(0);
-						if( !$('#infinite').is(":checked") )	clearInterval(refresh);
+						if( !$('#infinite').is(":checked") )	{
+							clearInterval(refresh);
+							all_blind = 0;
+							all_wheel = 0;
+							$('#all_blind').val(0);
+							$('#all_wheel').val(0);
+						}
 						$.ajax({
 							url : 'refresh',
 							data : 	{

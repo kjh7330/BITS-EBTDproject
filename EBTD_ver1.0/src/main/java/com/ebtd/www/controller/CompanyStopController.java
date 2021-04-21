@@ -38,12 +38,5 @@ public class CompanyStopController {
 		logger.info("정류장 신청 페이지 이동"); 
 		//sm.addNewStop();
 		return "company/addNewStopForm";
-		
 	}
-	
-	
-	
-	
-
-
 }
