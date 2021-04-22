@@ -41,15 +41,7 @@ public class AdminStopController {
 		return mav; //.jsp
 	}
 	
-	/* 사용안하는 메소드
-	 * //코멘트 정보 불러오기
-	 * 
-	 * @GetMapping(value = "/admin/stop/getComment") public ModelAndView
-	 * getComment(@RequestParam("s_No")Integer s_No) throws JsonProcessingException{
-	 * mav=am.getComment(s_No); return mav; //.jsp }
-	 */	
-	
-	//코멘트 등록(아직 작업중)
+	//코멘트 등록
 	@GetMapping(value = "/admin/stop/addStopComment")
 	public ModelAndView addStopComment(StopBean sb){
 		mav=am.addStopComment(sb);

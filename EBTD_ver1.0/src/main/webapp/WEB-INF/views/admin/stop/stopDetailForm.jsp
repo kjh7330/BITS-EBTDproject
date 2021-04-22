@@ -27,10 +27,10 @@
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 <div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
+<form action="addStopComment">
 <table id="stoptable" border="1px solid black" style="color: black">
 </table>
 <div id ="textbox">
-<form action="addStopComment">
 <input id="commentvalue" name="S_DETAIL">
 <input type="submit" value="전송">
 </form>
@@ -40,7 +40,7 @@
 console.log(${sList});
 let i=0;
 let str="<tr>"
-	str+='<td>정류장 번호</td><td>'+${sList}[i]["s_NO"]+'</td>';
+	str+='<td>정류장 번호</td><td><input name="s_NO" readonly=true value='+${sList}[i]["s_NO"]+'></td>';
 	str+="</tr>";
 	str+="<tr>"
 	str+='<td>동 이름</td><td>'+${sList}[i]["t_NAME"]+'</td>';
@@ -69,18 +69,6 @@ $(function() {
 			$("#textbox").hide();
 		}
 	});	
-});
-
-/* $(function() {
-	let value=$("#commentvalue").val();
-	
-	$("#submit").click(function (value) {
-		if($("#stopDetail").val()==''){
-			location.href = '/admin/stop/addStopComment?s_No='+${sList}[i]["s_NO"]+value;
-		}else{
-			location.href = '/admin/stop/updateComment?s_No='+${sList}[i]["s_NO"]+value;
-		}
-	});	
-}); */
+}); 
 </script>
 </html>

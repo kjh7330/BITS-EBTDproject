@@ -56,30 +56,11 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-//	//정류장 코멘트 불러오기
-//	public ModelAndView getComment(Integer s_No) throws JsonProcessingException {
-//		mav = new ModelAndView();
-//		List<StopBean> sList = null;
-//		String view = null;
-//		
-//		sList=sDao.getComment(s_No);
-//		ObjectMapper om = new ObjectMapper();
-//		
-//		if(sList!=null && sList.size() != 0) {
-//			mav.addObject("sList", om.writeValueAsString(sList));
-//			view = "/admin/stop/stopCommentForm";//.jsp
-//		}else{
-//			view = "/admin/stop/stopListForm";
-//		}
-//		mav.setViewName(view);
-//		return mav;
-//	}
 	
-	//정류장 코멘트 등록(아직 미완성)
+	//정류장 코멘트 등록
 	public ModelAndView addStopComment(StopBean sb) {
 		mav = new ModelAndView();
 		String view = null;
-		System.out.println("번호가 무엇이냐!!!!!!!!!!!!!!!"+sb.getS_NO());
 		if(sDao.addStopComment(sb)!=0) {
 			view="redirect:/admin/stop/getStopDetail?s_No="+sb.getS_NO();
 		}else {
@@ -123,7 +104,8 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	
+	//정류장 등록하기
 	public ModelAndView addStop(StopBean sb) {
 		mav = new ModelAndView();
 		String view = null;

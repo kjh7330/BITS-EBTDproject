@@ -30,7 +30,6 @@
 </body>
 
 <script type="text/javascript">
-//클릭
 let i=0;
 let str='';
 for(i; i < ${sList}.length; i++){
