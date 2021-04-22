@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.service.AdminCompanyMM;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 public class AdminCompanyController {
@@ -19,8 +20,6 @@ public class AdminCompanyController {
 	
 	@RequestMapping(value = "/admin")
 	public String getMain() {
-		System.out.println("요기까지옴");
-		
 		return "/admin/mainForm";  //.jsp
 	}
 	//회사 등록 신청 목록 페이지
@@ -53,41 +52,60 @@ public class AdminCompanyController {
 		mav=acm.getNewBusRouteList();
 		return mav;
 	}
+	//신규 노선 등록 신청 목록 - 공문보기
+	@GetMapping(value = "/admin/company/getNewBusRouteOfficialDocument")
+	public ModelAndView getNewBusRouteOfficialDocument(String c_name) {
+		mav=acm.getNewBusRouteOfficialDocument(c_name);
+		return mav;
+	}
+	
 	//기존 노선 수정 신청 목록
-	@GetMapping(value = "admin/company/getUpdateBusRouteList")
+	@GetMapping(value = "/admin/company/getUpdateBusRouteList")
 	public ModelAndView getUpdateBusRouteList() {
 		mav=acm.getUpdateBusRouteList();
 		return mav;
 	}
 	//버스 회사 이름 목록
-	@GetMapping(value = "/company/getCompanyNameList")
-	public String getCompanyNameList() {
-		return "company/companyNameListForm";
+	@GetMapping(value = "/admin/company/getCompanyNameList")
+	public ModelAndView getCompanyNameList() {
+		mav=acm.getCompanyNameList();
+		return mav;
+	}
+	//버스 회사 상세 정보 보기
+	@GetMapping(value = "/admin/company/getCompanyDetail")
+	public ModelAndView getCompanyDetail(String c_name) {
+		mav=acm.getCompanyDetail(c_name);
+		return mav;
 	}
 	//버스 회사 고객 소리함 목록
-	@GetMapping(value = "/company/getCompanyQuestionList")
-	public String getCompanyQuestionList() {
-		return "company/companyQuestionListForm";
+	@GetMapping(value = "/admin/company/getCompanyQuestionList")
+	public ModelAndView getCompanyQuestionList(String c_name) {
+		mav=acm.getCompanyQuestionList(c_name);
+		return mav;
 	}
 	//버스 회사 승인 목록
-	@GetMapping(value = "/company/getCompanyApprovalList")
-	public String getCompanyApprovalList() {
-		return "company/companyApprovalListForm";
+	@GetMapping(value = "/admin/company/getCompanyApprovalList")
+	public ModelAndView getCompanyApprovalList() {
+		mav=acm.getCompanyApprovalList();
+		return mav;
 	}
 	//버스 회사 승인 목록 - 상세
-	@GetMapping(value = "/company/getCompanyApprovalDetail")
-	public String getCompanyApprovalDetail() {
-		return "company/companyApprovalDetailForm";
+	@GetMapping(value = "/admin/company/getCompanyApprovalDetail")
+	public ModelAndView getCompanyApprovalDetail() {
+		mav=acm.getCompanyApprovalDetail();
+		return mav;
 	}
 	//버스 회사 반려 목록
-	@GetMapping(value = "/company/getCompanyRejectList")
-	public String getCompanyRejectList() {
-		return "company/companyRejectListForm";
+	@GetMapping(value = "/admin/company/getCompanyRejectList")
+	public ModelAndView getCompanyRejectList() {
+		mav=acm.getCompanyRejectList();
+		return mav;
 	}
 	//버스 회사 반려 목록 - 상세
-	@GetMapping(value = "/company/getCompanyRejectDetail")
-	public String getCompanyRejectDetail() {
-		return "company/companyRejectDetailForm";
+	@GetMapping(value = "/admin/company/getCompanyRejectDetail")
+	public ModelAndView getCompanyRejectDetail() {
+		mav=acm.getCompanyRejectDetail();
+		return mav;
 	}
 	
 		
