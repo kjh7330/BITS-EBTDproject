@@ -126,7 +126,7 @@
         </table>  
 		</form>
         <div id="newcompany">
-        	<form action="joinForm" method="get"><button>신규 회사</button></form></a><br/><a>ID/PW찾기</a>
+        	<form action="joinForm" method="get"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
         </div>
         
     </section>

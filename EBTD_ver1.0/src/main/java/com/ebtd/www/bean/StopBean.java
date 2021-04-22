@@ -1,3 +1,4 @@
+
 package com.ebtd.www.bean;
 
 import org.apache.ibatis.type.Alias;

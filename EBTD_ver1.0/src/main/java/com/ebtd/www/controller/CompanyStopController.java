@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 public class CompanyStopController {
-	private static final Logger logger = LoggerFactory.getLogger(BusController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
 	@Autowired
 	private CompanyStopMM sm;
 	ModelAndView mav;
@@ -38,12 +38,5 @@ public class CompanyStopController {
 		logger.info("정류장 신청 페이지 이동"); 
 		//sm.addNewStop();
 		return "company/addNewStopForm";
-		
 	}
-	
-	
-	
-	
-
-
 }
