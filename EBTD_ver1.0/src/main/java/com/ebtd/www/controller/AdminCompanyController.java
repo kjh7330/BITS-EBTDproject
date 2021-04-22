@@ -52,13 +52,6 @@ public class AdminCompanyController {
 		mav=acm.getNewBusRouteList();
 		return mav;
 	}
-	//신규 노선 등록 신청 목록 - 공문보기
-	@GetMapping(value = "/admin/company/getNewBusRouteOfficialDocument")
-	public ModelAndView getNewBusRouteOfficialDocument(String c_name) {
-		mav=acm.getNewBusRouteOfficialDocument(c_name);
-		return mav;
-	}
-	
 	//기존 노선 수정 신청 목록
 	@GetMapping(value = "/admin/company/getUpdateBusRouteList")
 	public ModelAndView getUpdateBusRouteList() {

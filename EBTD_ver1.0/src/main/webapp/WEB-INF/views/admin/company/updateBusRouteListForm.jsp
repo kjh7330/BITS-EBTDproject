@@ -15,13 +15,13 @@
         h2, p, div, h3 { margin:0; padding:0 }
 
         /* modal trigger */
-        .modal_content2 input { border:none; 
+		.approval, .reject{
+        	border:none;
+        	text-align: center;
+        	width: 100px;
+        }
+        #mcbtn1, #mcbtn2{ border:none; 
                     font-size:15px; 
-                    background:#f44336;
-                    color:#f9f9f9; 
-                    padding:8px 16px; }
-        .modal_content3 input { border:none; 
-                    font-size:18px; 
                     background:#f44336;
                     color:#f9f9f9; 
                     padding:8px 16px; }
@@ -103,18 +103,18 @@
 			height: 250px;
 			color: black;
     	}
-    	.modal_table{
+    	.modal_table7, .modal_table, .modal_table0, .modal_table8{
     		width: 450px;
     		margin-left: 15px;
     		font-size: 10px;
     	}
-    	.modal_table2{
+    	.modal_table21, .modal_table22{
     		width: 450px;
     		font-weight:bold; 
     		font-size: 10px;
     		text-align: left;
     	}
-    	.modal_table3{
+    	.modal_table31, .modal_table32{
     		width: 450px;
     		margin-left: 15px;
     		text-align: center;
@@ -144,15 +144,18 @@
             text-align: center;
             width: 100%;
         }
-        .cdetail-btn{
+        .cdetail-btn30, .cdetail-btn40{
             text-align: center;
-            background-color: ligthgray;
+            background-color: #f5efd1;
             border-radius: 8px;
             border: none;
             width: 100px;
             height: 30px;
         }
-        .cdetail-btn:hover{
+        .cdetail-btn30:hover{
+        	background-color: pink;
+        }
+        .cdetail-btn40:hover{
         	background-color: pink;
         }
         .cdetail-btn2{
@@ -171,6 +174,7 @@
             text-align: center;
             background-color: ligthgray;
             border-radius: 8px;
+            border: none;
             width: 100px;
             height: 30px;
         }
@@ -203,7 +207,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 <div class="company-body">
     <div class="company-container">
-        <input class="cname" type="text" value="새로운 노선 등록리스트" readonly>
+        <input class="cname" type="text" value="버스 노선 변경 신청 리스트" readonly>
         <table class="cdetail">
         	<div>
         	<tr><td><br></td></tr>
@@ -222,10 +226,10 @@
         			<button id="myBtn1${abn.ap_no}" class="cdetail-btn20">공문보기</button><!-- 신청번호를 넘겨! -->
         		</td>
         		<td>
-                	<button id="myBtn2" class="cdetail-btn">승인</button>
+                	<button id="myBtn${abn.ap_b_no}" class="cdetail-btn30">승인</button>
                 </td>
                 <td>
-                	<button id="myBtn3" class="cdetail-btn">반려</button>
+                	<button id="myBtn${abn.ap_b_no}" class="cdetail-btn40">반려</button>
 				</td>
 			</tr>
 			</c:forEach>
@@ -238,17 +242,14 @@
     <div id="overlay">
        <div id="myModal" class="modal">
           <div class="modal_header">
-             <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서</h5>
+             <h5 class=".headerh5"style="margin-top:5px; margin-left:10px;">버스 노선 변경 신청 공문서</h5>
              <span class="close">&times;</span>
           </div>
           <div class="modal_content">
              <p style="color:black;">
-             <table class="modal_table3">
-             	<tr>
-             		<td>(주) ${abndList[0].c_name}</td>
-             	</tr>
-             	</table><br>
-             	<table class="modal_table" style="font-weight: bold;">
+             <table class="modal_table31">
+             </table><br>
+             	<table class="modal_table7" style="font-weight: bold;">
 	        	    <tr>
 	        	    	<td>수신</td><td>BITS(Better Ideas To Society)</td>
 	        	    </tr>
@@ -256,7 +257,7 @@
 	        	    	<td colspan="2">(경유)</td>
 	        	    </tr>
 	        	    <tr>
-	        	    	<td>제목</td><td>신규 노선 등록 승인 신청</td>
+	        	    	<td>제목</td><td>버스 노선 변경 승인 신청</td>
 	        	    </tr>
 	        	    <tr>
 	        	    	<td colspan="2"><hr size="3" noshade></hr></td>
@@ -265,49 +266,22 @@
 	        	    	<td colspan="2">1. 귀 사의 무궁한 발전을 기원합니다.</td>
 	        	    </tr>
 	        	    <tr>
-	        	    	<td colspan="2">2. 「EBTD (Efficient bus transfer system for disabled)」의 신규 버스 등록을 아래와 같이 신청하오니 승인하여 주시기 바랍니다.</td>
+	        	    	<td colspan="2">2. 「EBTD (Efficient bus transfer system for disabled)」의 버스 노선 변경 등록을 아래와 같이 신청하오니 승인하여 주시기 바랍니다.</td>
 	        	    </tr>
 	        	    <tr>
 	        	    	<td>3. 신청내용</td>
 	        	    </tr>
-	        	    <tr>
-	        	    	<td> - 신청 번호 : ${abList[0].ap_no}</td>
-	        	    	<td> - 신청일 : ${abList[0].ap_date}</td>
-	        		</tr>
-             		<tr>
-	                	<td> - 회사 이름 : ${abList[0].c_name}</td>
-	                	<td> - 사업장 등록 번호 : ${abList[0].c_no}</td>
-	                </tr>
-	                <tr>
-	                	<td colspan="2"> - 신청 아이디 : ${abList[0].c_username}</td>
-	                </tr>
-	        		<tr>
-	        			<td colspan="2"> - 버스 번호: </td>
-	        		</tr>
                	</table>
-				<table class="modal_table2">
-					<c:forEach var="abr" items="${abrList}">
-					<tr>
-						<td>
-							<input class="busnumber" value=" - " style="text-align: right" readonly>
-							<input class="busnumber" value="${abr.ap_b_no}" readonly>
-								
-       					</td>
-					</tr>
-        			</c:forEach>
+               	<table class="modal_table8" style="font-weight: bold;">
+               	</table>
+				<table class="modal_table22"> <!-- 버스 번호가 들어가는 자리 -->
 				</table><br>
-				<table class="modal_table">
+				<table class="modal_table0">
            			<tr>
 						<td>붙임</td><td colspan="3">1. 사업자등록증 사본 1부(별송) 끝.</td>
 					</tr>
 				</table>
-				<table class="modal_table3">
-					<tr>
-	        	    	<td colspan="2"><hr size="3" noshade></hr></td>
-	        	    </tr>
-					<tr>
-						<td>주식회사 ${abList[0].c_name} 대표이사</td>
-					</tr>
+				<table class="modal_table32">
 				</table>
              </p>
           </div>
@@ -322,7 +296,7 @@
     <div id="overlay4">
           <div id="myModal4" class="modal">
              <div class="modal_header">
-                <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서 (노선) </h5>
+                <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 변경 신청 공문서 (노선) </h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content4">
@@ -330,7 +304,7 @@
              	${abndList}
              		<table class="modal_table" style="font-weight: bold;">
 	        			<tr>
-							<table class="modal_table2" style="text-align: center">
+							<table class="modal_table21" style="text-align: center">
 							</table>
 	        			</tr>
                		</table>
@@ -346,17 +320,17 @@
         <div id="overlay2">
           <div id="myModal2" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;">${abList[0].c_name} - 승인하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;">${abnList[0].c_name} - 승인하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content2">
              	<p style="color:black;"><br>
              		<form action="setCompanyRequestApproval" method="post">
-		                ${abList[0].c_name}(${abList[0].c_username})<br>
-		                를 승인하시겠습니까?<br><br>
-		                <input type="hidden" name="c_name" value="${abList[0].c_name}">
-		        	    <input type="submit" value="승인">
-		        	    <input class="cancle" type="button" value="취소">
+		                <input type="text" class="approval" value="">번<br>
+		                을 승인하시겠습니까?<br><br>
+		                <input class="approval" type="hidden" name="ap_no" value="">
+		        	    <input id="mcbtn1" type="submit" value="승인">
+		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
              	</p>
              </div>
@@ -374,11 +348,11 @@
              <div class="modal_content3">
              	<p style="color:black;"><br>
              		<form action="setCompanyRequestReject" method="post">
-		                ${abList[0].c_name}(${abList[0].c_username})<br>
-		                를 반려하시겠습니까?<br><br>
-		        	    <input type="hidden" name="c_name" value="${abList[0].c_name}">
-		        	    <input type="submit" value="반려">
-		        	    <input class="cancle" type="button" value="취소">
+		                <input type="text" class="reject" value="">번<br>
+		                을 반려하시겠습니까?<br><br>
+		        	    <input class="reject" type="hidden" name="ap_no" value="">
+		        	    <input id="mcbtn1" type="submit" value="승인">
+		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
              	</p>
              </div>
@@ -397,7 +371,7 @@
 		$(".cdetail-btn20").on("click", function() {
 			$.ajax({
 				type : 'get',
-				url : 'getNewBusRouteDetail',
+				url : 'getUpdateBusRouteDetail',
 				dataType : 'json',
 				data : {
 					'ap_no' : $(this).attr('id').substring(6)
@@ -407,40 +381,96 @@
 					$("#overlay").css({	visibility : "visible",	opacity : 1	});
 					$("#myModal").css({	display : "inline"	});
 					
+					/*공문서 상단 회사이름 넣기*/
+					$('.modal_table31').html('');
+					let mt31 = '';
+					mt31 += '<tr>';
+					mt31 += '<td>(주)' + data[0]["c_name"] + '</td>';
+					mt31 += '</tr>';
+					$('.modal_table31').append(mt31);
+
+					/*공문서 하단 회사이름 넣기*/
+					$('.modal_table32').html('');
+					let mt32 = '';
+					mt32 += '<tr><td colspan="2"><hr size="3" noshade></hr></td></tr>';
+					mt32 += '<tr>';
+					mt32 += '<td>주식회사 ' + data[0]["c_name"] + ' 대표이사</td>';
+					mt32 += '</tr>';
+					$('.modal_table32').append(mt32);
+					
+					/*공문서 내용에 신청상세 넣기*/
+					$('.modal_table8').html('');
+					let mt = '';
+					mt += '<tr>';
+					mt += '<td> - 신청 번호 : ' + data[0]["ap_no"] + '</td>';
+					mt += '<td> - 신청일 : ' + data[0]["ap_date"] + '</td>';
+	        		mt += '</tr>';
+	        		mt += '<tr>';
+	        		mt += '<td> - 회사 이름 : ' + data[0]["c_name"] + '</td>';
+	        		mt += '<td> - 사업장 등록 번호 : ' + data[0]["c_no"] + '</td>';
+	        		mt += '</tr>';
+	        		mt += '<tr>';
+	        		mt += '<td colspan="2"> - 신청 아이디 : ' + data[0]["c_username"] + '</td>';
+	        		mt += '</tr>';
+	        		mt += '<tr>';
+	        		mt += '<td colspan="2"> - 버스 번호: </td>';
+	        		mt += '</tr>';
+        			$('.modal_table8').append(mt);
+        			
+ 					
 				},
 				error : function(err) {
 					console.log(err,'@@@@');
-						
+		
 				}
 
 			});
-
+			
+			$.ajax({
+				type : 'get',
+				url : 'getUpdateBusNumber',
+				dataType : 'json',
+				data : {
+					'ap_no' : $(this).attr('id').substring(6)
+				},
+				success : function(data) {
+					console.log(data);
+			
+				/*버스 번호 넣기*/
+				
+				let mt2 = '';
+				for(i in data){
+					mt2 += '<tr><td>';
+					mt2 += '<input class="busnumber" value=" - " style="text-align: right" readonly>';
+					mt2 += '<input class="busnumber" value=" ' + data[i]["ap_b_no"] + '" readonly>';
+					mt2 += '</td></tr>';
+				}
+				$('.modal_table22').append(mt2);
+				
+				}
+			});
 		}); 
 			
 			
-		$("#myBtn2").on("click", function() {
-			$("#overlay2").css({
-				visibility : "visible",
-				opacity : 1
-			});
-			$("#myModal2").css({
-				display : "inline"
-			});
+		$(".cdetail-btn30").on("click", function() {
+			let apno = $(this).attr('id').substring(5);
+			
+			$(".approval").val(apno);
+			$("#overlay2").css({visibility : "visible",	opacity : 1	});
+			$("#myModal2").css({display : "inline"});
 		});
-		$("#myBtn3").on("click", function() {
-			$("#overlay3").css({
-				visibility : "visible",
-				opacity : 1
-			});
-			$("#myModal3").css({
-				display : "inline"
-			});
+		$(".cdetail-btn40").on("click", function() {
+			let apno = $(this).attr('id').substring(5);
+			
+			$(".reject").val(apno);
+			$("#overlay3").css({visibility : "visible", opacity : 1	});
+			$("#myModal3").css({display : "inline"});
 		});
 		$(".cdetail-btn10").on("click", function() {
 			
 			$.ajax({
 				type : 'get',
-				url : 'getNewBusRouteDetail',
+				url : 'getUpdateBusRouteDetail',
 				dataType : 'json',
 				data : {
 					'ap_no' : $(this).attr('id').substring(5)
@@ -450,7 +480,7 @@
 					$("#overlay4").css({ visibility:"visible", opacity:1 });
 					$("#myModal4").css({ display: "inline"});
 					
-					$('.modal_table2').html('');
+					$('.modal_table21').html('');
 					let tx = '';
 					
 					tx += '<tr>';
@@ -470,7 +500,7 @@
 						tx += '<td>' + data[i]["t_name"] + '</td>';
 						tx += '</tr>';
 					}
-					$('.modal_table2').append(tx);
+					$('.modal_table21').append(tx);
 					
 				},
 				error : function(err) {

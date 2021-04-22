@@ -41,6 +41,7 @@ public class AdminCompanyMM {
 		String view=null;
 		List<ApplyBusHistory> abList = null;
 		List<ApplyBusRoute> abrList = null;
+		
 		//상세내역 및 공문 가져오기
 		abList = cDao.getCompanyRequestDetail(c_name);
 		//노선 가져오기
@@ -116,32 +117,49 @@ public class AdminCompanyMM {
 		
 		return om.writeValueAsString(abndList);
 	}
-	//신규등록 버스 노선의 공문 가져오기
-	public ModelAndView getNewBusRouteOfficialDocument(String c_name) {
-		return null;
+	//신규등록 버스노선의 번호만 가져오기
+	public String getNewBusNumber(String ap_no) throws JsonProcessingException {
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		List<ApplyBusHistory> abndList = null;
+		abndList = cDao.getNewBusNumber(ap_no);
+		
+		return om.writeValueAsString(abndList);
 	}
-	
-	//버스 노선 수정 요청 목록 가져오기
+	//버스 노선 변경 요청 목록 가져오기
 	public ModelAndView getUpdateBusRouteList() {
 		mav = new ModelAndView();
 		String view = null;
-		List<ApplyBusHistory> abList = null;
+		List<ApplyBusHistory> abnList = null;
 		
-		abList = cDao.getUpdateBusRouteList();
-		
-		if(abList!=null && abList.size()!=0) {
-			mav.addObject("abList",abList);
-			view="admin/company/getUpdateBusRouteList";
+		abnList = cDao.getUpdateBusRouteList();
+		System.out.println(abnList);
+		if(abnList!=null && abnList.size()!=0) {
+			mav.addObject("abnList",abnList);
+			view="admin/company/updateBusRouteListForm";
 		}else {
 			view="admin/mainForm";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
-	//
-	public String getUpdateBusRouteDetail(String ap_no) {
-		// TODO Auto-generated method stub
-		return null;
+	//버스 노선 변경 요청 상세 가져오기
+	public String getUpdateBusRouteDetail(String ap_no) throws JsonProcessingException {
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		List<ApplyBusHistory> abndList = null;
+		abndList = cDao.getUpdateBusRouteDetail(ap_no);
+		
+		return om.writeValueAsString(abndList);
+	}
+	//버스노선 변경 요청의 버스 번호만 가져오기
+	public String getUpdateBusNumber(String ap_no) throws JsonProcessingException {
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		List<ApplyBusHistory> abndList = null;
+		abndList = cDao.getUpdateBusNumber(ap_no);
+		
+		return om.writeValueAsString(abndList);
 	}
 	//버스 회사 이름 목록 가져오기
 	public ModelAndView getCompanyNameList() {

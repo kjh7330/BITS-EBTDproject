@@ -25,11 +25,23 @@ public class AdminCompanyRestController {
 		System.out.println("여기얏!");
 		return acm.getNewBusRouteDetail(ap_no);
 	}
+	//신규 노선 등록 신청 목록 - 상세 공문에서 버스번호만
+	@GetMapping(value = "/admin/company/getNewBusNumber")
+	public String getNewBusNumber(String ap_no) throws JsonProcessingException {
+		System.out.println("여기얏!");
+		return acm.getNewBusNumber(ap_no);
+	}
 	//노선 변경 신청 목록 - 상세
 	@GetMapping(value = "/admin/company/getUpdateBusRouteDetail")
 	public String getUpdateBusRouteDetail(String ap_no) throws JsonProcessingException {
 		System.out.println("여기얏!");
 		return acm.getUpdateBusRouteDetail(ap_no);
+	}
+	//노선 변경 신청 목록 - 상세 공문에서 버스번호만
+	@GetMapping(value = "/admin/company/getUpdateBusNumber")
+	public String getUpdateBusNumber(String ap_no) throws JsonProcessingException {
+		System.out.println("여기얏!");
+		return acm.getUpdateBusNumber(ap_no);
 	}
 	/*
 	@PostMapping(value = "/admin/company/setCompanyRequestApproval", produces = "application/json;charset=utf-8")

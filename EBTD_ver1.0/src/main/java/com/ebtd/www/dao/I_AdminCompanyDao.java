@@ -21,8 +21,14 @@ public interface I_AdminCompanyDao {
 	List<ApplyBusHistory> getNewBusRouteList();
 
 	List<ApplyBusHistory> getNewBusRouteDetail(String ap_no);
+	
+	List<ApplyBusHistory> getNewBusNumber(String ap_no);
 
 	List<ApplyBusHistory> getUpdateBusRouteList();
+
+	List<ApplyBusHistory> getUpdateBusRouteDetail(String ap_no);
+
+	List<ApplyBusHistory> getUpdateBusNumber(String ap_no);
 
 	List<Company> getCompanyNameList();
 
@@ -35,6 +41,9 @@ public interface I_AdminCompanyDao {
 	List<ApplyBusHistory> getCompanyRejectList();
 
 	List<ApplyBusHistory> getCompanyRejectDetail();
+
+
+
 
 
 
