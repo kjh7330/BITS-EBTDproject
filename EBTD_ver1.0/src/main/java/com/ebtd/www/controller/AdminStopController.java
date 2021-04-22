@@ -33,12 +33,6 @@ public class AdminStopController {
 		return mav; //.jsp
 	}
 	
-	//정류장 전체 리스트 창으로 이동
-	@GetMapping(value = "/admin/stop/stopListForm")
-	public String stopListForm(){
-		return "admin/stop/stopListForm"; //.jsp	
-	}
-	
 	//정류장 상세정보 불러오기
 	@GetMapping(value = "/admin/stop/getStopDetail")
 	public ModelAndView getStopDetail(@RequestParam("s_No")Integer s_No) throws JsonProcessingException {
@@ -47,32 +41,18 @@ public class AdminStopController {
 		return mav; //.jsp
 	}
 	
-	//정류장 상세정보 창으로 이동
-	@GetMapping(value = "/admin/stop/stopDetailForm")
-	public String stopDetailForm(){
-		System.out.println("ddddd");
-		return "admin/stop/stopDetailForm"; //.jsp	
-	}
-	
-	//코멘트 정보 불러오기
-	@GetMapping(value = "/admin/stop/getComment")
-	public ModelAndView getComment(@RequestParam("s_No")Integer s_No) throws JsonProcessingException{
-		System.out.println("ddddd");
-		mav=am.getComment(s_No);
-		return mav; //.jsp
-	}
-	
-	//코멘트 등록 창으로 이동
-	@GetMapping(value = "/admin/stop/stopCommentForm")
-	public String stopCommentForm(){
-		System.out.println("ddddd");
-		return "admin/stop/stopCommentForm"; //.jsp
-	}
+	/* 사용안하는 메소드
+	 * //코멘트 정보 불러오기
+	 * 
+	 * @GetMapping(value = "/admin/stop/getComment") public ModelAndView
+	 * getComment(@RequestParam("s_No")Integer s_No) throws JsonProcessingException{
+	 * mav=am.getComment(s_No); return mav; //.jsp }
+	 */	
 	
 	//코멘트 등록(아직 작업중)
-	@PostMapping(value = "/admin/stop/addStopComment")
-	public ModelAndView addStopComment(){
-		mav=am.addStopComment();
+	@GetMapping(value = "/admin/stop/addStopComment")
+	public ModelAndView addStopComment(StopBean sb){
+		mav=am.addStopComment(sb);
 		return mav;
 	}
 	
@@ -84,13 +64,6 @@ public class AdminStopController {
 		return mav; //.jsp
 	}
 	
-	//정류장 신청 창으로 이동
-	@GetMapping(value = "/admin/stop/stopConfirmListForm")
-	public String stopConfirmListForm(){
-		System.out.println("ddddd");
-		return "admin/stop/stopConfirmListForm"; //.jsp	
-	}
-	
 	//정류장 신청 상세정보 불러오기
 	@GetMapping(value = "/admin/stop/getStopConfirmDetail")
 	public ModelAndView getStopConfirmDetail(@RequestParam("sa_No")Integer sa_No) throws JsonProcessingException {
@@ -98,12 +71,6 @@ public class AdminStopController {
 		return mav; //.jsp
 	}
 	
-	//정류장 신청 상세정보 창으로 이동
-	@GetMapping(value = "/admin/stop/stopConfirmDetailForm")
-	public String stopConfirmDetailForm(){
-		System.out.println("ddddd");
-		return "admin/stop/stopConfirmDetailForm"; //.jsp	
-	}
 	
 	//정류장 등록하기 페이지 이동
 	@GetMapping(value = "/admin/stop/addStopForm")

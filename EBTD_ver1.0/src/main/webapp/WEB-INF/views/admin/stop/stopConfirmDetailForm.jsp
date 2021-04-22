@@ -19,30 +19,29 @@
 </body>
 <script type="text/javascript">
 console.log(${saList});
-let i=0;
 let str="<tr>"
-	str+='<td>신청번호</td><td>'+${saList}[i]["sa_No"]+'</td>';
+	str+='<td>신청번호</td><td>'+${saList}[0]["sa_No"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>x축</td><td>'+${saList}[i]["sa_X"]+'</td>';
+	str+='<td>x축</td><td>'+${saList}[0]["sa_X"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>y축</td><td>'+${saList}[i]["sa_Y"]+'</td>';
+	str+='<td>y축</td><td>'+${saList}[0]["sa_Y"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>정류장 이름</td><td>'+${saList}[i]["sa_Name"]+'</td>';
+	str+='<td>정류장 이름</td><td>'+${saList}[0]["sa_Name"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>동 이름</td><td>'+${saList}[i]["t_Name"]+'</td>';
+	str+='<td>동 이름</td><td>'+${saList}[0]["t_Name"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>신청 회사 이름</td><td id="Detail">'+${saList}[i]["c_UserName"]+'</td>';
+	str+='<td>신청 회사 이름</td><td id="Detail">'+${saList}[0]["c_UserName"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>신청 사유</td><td id="Detail">'+${saList}[i]["sa_Reason"]+'</td>';
+	str+='<td>신청 사유</td><td id="Detail">'+${saList}[0]["sa_Reason"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>상태</td><td id="Detail">'+${saList}[i]["sa_Status"]+'</td>';
+	str+='<td>상태</td><td id="Detail">'+${saList}[0]["sa_Status"]+'</td>';
 	str+="</tr>";
 $("#table1").append(str); 
 </script>

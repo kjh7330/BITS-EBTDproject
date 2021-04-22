@@ -20,7 +20,7 @@ public class AdminStopMM {
 	
 	ModelAndView mav;
 	
-	//정류장 리스트 보기
+	//정류장 리스트 보기 후 페이지 이동
 	public ModelAndView getStopList() throws JsonProcessingException {
 		mav = new ModelAndView();
 		List<StopBean> sList = null;
@@ -28,12 +28,12 @@ public class AdminStopMM {
 		String view = null;
 		
 		sList=sDao.getStopList();
+		
 		if(sList!=null && sList.size() != 0) {
 			mav.addObject("sList", om.writeValueAsString(sList));
-			//mav.addObject("sList", new jackson());
-			view = "forward:/admin/stop/stopListForm";//.jsp
+			view = "/admin/stop/stopListForm";//.jsp
 		}else {
-			view = "forward:/admin";
+			view = "/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -49,36 +49,44 @@ public class AdminStopMM {
 		System.out.println(sList);
 		if(sList!=null && sList.size() != 0) {
 			mav.addObject("sList", om.writeValueAsString(sList));
-			view = "forward:/admin/stop/stopDetailForm";//.jsp
+			view = "/admin/stop/stopDetailForm";//.jsp
 		}else {
-			view = "admin";
+			view = "/admin/stop/stopListForm";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
-	//정류장 코멘트 불러오기
-	public ModelAndView getComment(Integer s_No) throws JsonProcessingException {
-		mav = new ModelAndView();
-		List<StopBean> sList = null;
-		String view = null;
-		
-		sList=sDao.getComment(s_No);
-		ObjectMapper om = new ObjectMapper();
-		System.out.println(sList);
-		if(sList!=null && sList.size() != 0) {
-			mav.addObject("saList", om.writeValueAsString(sList));
-			view = "forward:/admin/stop/stopCommentForm";//.jsp
-		}else {
-			view = "admin";
-		}
-		mav.setViewName(view);
-		return mav;
-	}
+//	//정류장 코멘트 불러오기
+//	public ModelAndView getComment(Integer s_No) throws JsonProcessingException {
+//		mav = new ModelAndView();
+//		List<StopBean> sList = null;
+//		String view = null;
+//		
+//		sList=sDao.getComment(s_No);
+//		ObjectMapper om = new ObjectMapper();
+//		
+//		if(sList!=null && sList.size() != 0) {
+//			mav.addObject("sList", om.writeValueAsString(sList));
+//			view = "/admin/stop/stopCommentForm";//.jsp
+//		}else{
+//			view = "/admin/stop/stopListForm";
+//		}
+//		mav.setViewName(view);
+//		return mav;
+//	}
 	
 	//정류장 코멘트 등록(아직 미완성)
-	public ModelAndView addStopComment() {
-
-		return null;
+	public ModelAndView addStopComment(StopBean sb) {
+		mav = new ModelAndView();
+		String view = null;
+		System.out.println("번호가 무엇이냐!!!!!!!!!!!!!!!"+sb.getS_NO());
+		if(sDao.addStopComment(sb)!=0) {
+			view="redirect:/admin/stop/getStopDetail?s_No="+sb.getS_NO();
+		}else {
+			view="redirect:/admin";
+		}
+		mav.setViewName(view);
+		return mav;
 	}
 	
 	//정류장 신청리스트 불러오기
@@ -91,9 +99,9 @@ public class AdminStopMM {
 		System.out.println(saList);
 		if(saList!=null && saList.size() != 0) {
 			mav.addObject("saList", om.writeValueAsString(saList));
-			view = "forward:/admin/stop/stopConfirmListForm";//.jsp
+			view = "admin/stop/stopConfirmListForm";//.jsp
 		}else {
-			view = "forward:/admin";
+			view = "admin/stop/stopConfirmListForm";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -106,12 +114,11 @@ public class AdminStopMM {
 		
 		saList=sDao.getStopConfirmDetail(sa_No);
 		ObjectMapper om = new ObjectMapper();
-		System.out.println(saList);
 		if(saList!=null && saList.size() != 0) {
 			mav.addObject("saList", om.writeValueAsString(saList));
-			view = "forward:/admin/stop/stopConfirmDetailForm";//.jsp
+			view = "admin/stop/stopConfirmDetailForm";//.jsp
 		}else {
-			view = "forward:/admin";
+			view = "/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -121,9 +128,9 @@ public class AdminStopMM {
 		mav = new ModelAndView();
 		String view = null;
 		if(sDao.addStop(sb)) {
-			view="admin"; 
+			view="redirect:/admin/stop/getStopList"; 
 		}else {
-			view="admin";
+			view="redirect:/admin/stop/addStopForm";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -134,18 +141,19 @@ public class AdminStopMM {
 		StopBean sb = sDao.checkStopList(s_Name);
 		System.out.println(sb);
 		if(sb!=null) {
-			return "이미 있는 정류장 이름 입니다.";
+			return "사용 불가능 합니다.";
 		}
-		return "사용 가능한 정류장 이름 입니다.";
+		return "사용 가능 합니다.";
 	}
 	
-//	public Object checkPosition(Integer s_X, Integer s_Y) {
-//		StopBean sb = sDao.checkPosition(s_X, s_Y);
-//		System.out.println(sb);
-//		if(sb!=null) {
-//			return "이미 있는 정류장 이름 입니다.";
-//		}
-//		return "사용 가능한 정류장 이름 입니다.";
-//	}
-
+	//정류장 위치 중복체크
+	public String checkPosition(int s_X, int s_Y) {
+		StopBean sb = new StopBean();
+		sb.setS_X(s_X);
+		sb.setS_Y(s_Y);
+		sb = sDao.checkPosition(sb);
+		if(sb!=null) {
+			return "사용 불가능 합니다.";
+		}
+		return "사용 가능 합니다.";	}
 }

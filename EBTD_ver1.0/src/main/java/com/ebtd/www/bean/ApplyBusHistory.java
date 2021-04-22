@@ -19,4 +19,5 @@ public class ApplyBusHistory {
 	private String t_name;	   // 동 이름
 	private int ap_state;	   // 승인상태 0:미승인 1:승인 2:반려 3:수정
 	
+	
 }
