@@ -113,8 +113,8 @@ public class IdMM {
 	}
 
 	public int checkId(String c_username) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return (cDao.checkId(c_username)!=null)?1:0;
 	}
 	
 }

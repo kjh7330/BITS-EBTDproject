@@ -15,11 +15,11 @@ public class IdRestController {
 	@Autowired
 	private IdMM idmm;
 	
-//	@RequestMapping(value = "join/checkId", method = RequestMethod.GET)
-//	@ResponseBody
-//	public int checkId(@RequestParam("c_username") String c_username) {
-//		return idmm.checkId(c_username);
-//	}
+	@RequestMapping(value = "join/checkId", method = RequestMethod.GET)
+	@ResponseBody
+	public int checkId(@RequestParam("c_username") String c_username) {
+		return idmm.checkId(c_username);
+	}
 }
 
 
