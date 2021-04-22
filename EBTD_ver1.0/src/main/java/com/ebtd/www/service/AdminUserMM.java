@@ -41,8 +41,25 @@ public class AdminUserMM {	//김아름
 		}
 		mav.setViewName(view);
 		return mav;
-		 	
 	} //getUserList end
+	
+	//Rest
+	//이용자 리스트에서 아이디 검색하면
+	public String getUserSearchUserName(String u_userName) throws JsonProcessingException {
+			
+		ObjectMapper om = new ObjectMapper();
+		List<UserBean> uerInfoList = null;
+		
+		System.out.println("받은 유저네임:"+u_userName);
+		uerInfoList = uDao.getUserSearchUserName(u_userName);	// 디비 가서 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( uerInfoList!=null ) {
+			return om.writeValueAsString(uerInfoList); //List를 json으로 변환
+		}else {
+			return "userSearchUserName 가져오기 실패";
+		}
+		
+	}
 	
 	//이용자 상세정보 보기
 	public ModelAndView getUserDetail(String u_userName) throws JsonProcessingException {
@@ -115,6 +132,9 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
+	
+
 
 
 
