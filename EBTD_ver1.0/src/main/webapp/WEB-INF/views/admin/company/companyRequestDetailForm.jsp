@@ -200,9 +200,6 @@
 			
 		}
     </style>
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
@@ -248,93 +245,91 @@
     </div>
 <!--    모달 버튼 가져가세요~!     -->
 
-        <div id="overlay">
-          <div id="myModal" class="modal">
-             <div class="modal_header">
-                <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서</h5>
-                <span class="close">&times;</span>
-             </div>
-             <div class="modal_content">
-             	<p style="color:black;">
-             		<table class="modal_table3">
-             			<tr>
-             				<td>(주) ${abList[0].c_name}</td>
-             			</tr>
-             		</table>
-             		<br>
-             		<table class="modal_table" style="font-weight: bold;">
-	        	    	<tr>
-	        	    		<td>수신</td><td>BITS(Better Ideas To Society)</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td colspan="2">(경유)</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td>제목</td><td>EBTD 사용 승인 신청</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td colspan="2"><hr size="3" noshade></hr></td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td colspan="2">1. 귀 사의 무궁한 발전을 기원합니다.</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td colspan="2">2. 「EBTD (Efficient bus transfer system for disabled)」의 사용 등록을 아래와 같이 신청하오니 승인하여 주시기 바랍니다.</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td>3. 신청내용</td>
-	        	    	</tr>
-	        	    	<tr>
-	        	    		<td> - 신청 번호 : ${abList[0].ap_no}</td>
-	        	    		<td> - 신청일 : ${abList[0].ap_date}</td>
-	        			</tr>
-             			<tr>
-	                		<td> - 회사 이름 : ${abList[0].c_name}</td>
-	                		<td> - 사업장 등록 번호 : ${abList[0].c_no}</td>
-	                	</tr>
-	                	<tr>
-	                		<td colspan="2"> - 신청 아이디 : ${abList[0].c_username}</td>
-	                	</tr>
-	        			<tr>
-	        				<td colspan="2"> - 버스 번호: </td>
-	        			</tr>
-               		</table>
-					<table class="modal_table2">
-								<c:forEach var="abr" items="${abrList}">
-						<tr>
-							<td>
-								<input class="busnumber" value=" - " style="text-align: right" readonly>
-								<input class="busnumber" value="${abr.ap_b_no}" readonly>
-								
-       						</td>
-						</tr>
-								
-        						</c:forEach>
-					</table><br>
-					<table class="modal_table">
-           				<tr>
-							<td>붙임</td><td colspan="3">1. 사업자등록증 사본 1부(별송) 끝.</td>
-						</tr>
-					</table>
-					<table class="modal_table3">
-						<tr>
-	        	    		<td colspan="2"><hr size="3" noshade></hr></td>
-	        	    	</tr>
-						<tr>
-							<td>주식회사 ${abList[0].c_name} 대표이사</td>
-						</tr>
-					</table>
-             	</p>
-             </div>
-             <div class="modal_footer">
-               <p style="color:black; text-align: center;">Better Ideas To Society</p>
-             </div>
+    <div id="overlay">
+       <div id="myModal" class="modal">
+          <div class="modal_header">
+             <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서</h5>
+             <span class="close">&times;</span>
           </div>
-        </div>
+          <div class="modal_content">
+             <p style="color:black;">
+             <table class="modal_table3">
+             	<tr>
+             		<td>(주) ${abList[0].c_name}</td>
+             	</tr>
+             	</table><br>
+             	<table class="modal_table" style="font-weight: bold;">
+	        	    <tr>
+	        	    	<td>수신</td><td>BITS(Better Ideas To Society)</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td colspan="2">(경유)</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td>제목</td><td>EBTD 사용 승인 신청</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td colspan="2"><hr size="3" noshade></hr></td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td colspan="2">1. 귀 사의 무궁한 발전을 기원합니다.</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td colspan="2">2. 「EBTD (Efficient bus transfer system for disabled)」의 사용 등록을 아래와 같이 신청하오니 승인하여 주시기 바랍니다.</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td>3. 신청내용</td>
+	        	    </tr>
+	        	    <tr>
+	        	    	<td> - 신청 번호 : ${abList[0].ap_no}</td>
+	        	    	<td> - 신청일 : ${abList[0].ap_date}</td>
+	        		</tr>
+             		<tr>
+	                	<td> - 회사 이름 : ${abList[0].c_name}</td>
+	                	<td> - 사업장 등록 번호 : ${abList[0].c_no}</td>
+	                </tr>
+	                <tr>
+	                	<td colspan="2"> - 신청 아이디 : ${abList[0].c_username}</td>
+	                </tr>
+	        		<tr>
+	        			<td colspan="2"> - 버스 번호: </td>
+	        		</tr>
+               	</table>
+				<table class="modal_table2">
+					<c:forEach var="abr" items="${abrList}">
+					<tr>
+						<td>
+							<input class="busnumber" value=" - " style="text-align: right" readonly>
+							<input class="busnumber" value="${abr.ap_b_no}" readonly>
+								
+       					</td>
+					</tr>
+        			</c:forEach>
+				</table><br>
+				<table class="modal_table">
+           			<tr>
+						<td>붙임</td><td colspan="3">1. 사업자등록증 사본 1부(별송) 끝.</td>
+					</tr>
+				</table>
+				<table class="modal_table3">
+					<tr>
+	        	    	<td colspan="2"><hr size="3" noshade></hr></td>
+	        	    </tr>
+					<tr>
+						<td>주식회사 ${abList[0].c_name} 대표이사</td>
+					</tr>
+				</table>
+             </p>
+          </div>
+          <div class="modal_footer">
+             <p style="color:black; text-align: center;">Better Ideas To Society</p>
+          </div>
+       </div>
+    </div>
         
         
         
-          <div id="overlay4">
+    <div id="overlay4">
           <div id="myModal4" class="modal">
              <div class="modal_header">
                 <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서 (노선) </h5>
@@ -441,22 +436,6 @@
           $("#myModal3").css({ display: "inline"});
   });
   $("#myBtn10").on("click", function(){
-	  //선택한 버스의 노선 가져오기
-		
-	  
-	  	
-/*$('.cbtn').click(function(){
-	
-	let $c_name = $('.cbtn').val();
-	//console.log(c_name);
-	$.ajax({
-		type : 'get',
-		url : 'getCompanyRequestDetail',
-		data : {c_name : $c_name}
-	})
-});
-*/
-	  
       $("#overlay4").css({ visibility:"visible", opacity:1 });
       $("#myModal4").css({ display: "inline"});
 });

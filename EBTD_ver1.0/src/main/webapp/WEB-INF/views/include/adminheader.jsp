@@ -225,12 +225,12 @@
                 <div class="dropdown-content">
                     <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getCompanyRequestList">회사 등록 승인</a></div>
                     <div class="menudetail"><a style="text-decoration: none;" href="#">노선 변경 승인</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/getNewBusRouteList">&nbsp;&nbsp;- 신규 노선 등록</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/updateBusRouteListForm">&nbsp;&nbsp;- 기존 노선 수정</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyNameListForm">버스 회사 등록 현황</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">승인/반려 내역 보기</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyApprovalListForm">&nbsp;&nbsp;- 승인 내역</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="/ebtd/ac/admin/company/companyRejectListForm">&nbsp;&nbsp;- 반려 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getNewBusRouteList">&nbsp;&nbsp;- 신규 노선 등록</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getUpdateBusRouteList">&nbsp;&nbsp;- 기존 노선 수정</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getCompanyNameList">버스 회사 등록 현황</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="#">노선 승인/반려 내역 보기</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getCompanyApprovalList">&nbsp;&nbsp;- 노선 승인 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/admin/company/getCompanyRejectList">&nbsp;&nbsp;- 노선 반려 내역</a></div>
                 </div>
             </div>
             <div class="navline">
