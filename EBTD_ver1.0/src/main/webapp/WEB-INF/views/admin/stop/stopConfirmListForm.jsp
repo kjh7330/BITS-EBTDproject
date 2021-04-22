@@ -22,7 +22,7 @@ console.log(${saList});
 let i=0;
 let str="<tr>"
 for(i; i < ${saList}.length; i++){
-	str+='<td><a href=/ebtd/ac/admin/stop/getStopConfirmDetail?sa_No='+${saList}[i]["sa_No"]+'>';
+	str+='<td><a href=/admin/stop/getStopConfirmDetail?sa_No='+${saList}[i]["sa_No"]+'>';
 	str+=${saList}[i]['sa_Name']+'</a>';
 	str+="</td>";
 	str+="</tr>";
