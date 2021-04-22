@@ -74,7 +74,7 @@ public class IdMM {
 				//패스워드 일치 확인
 		String dbPwd = cDao.getPwd(cb);
 		if(!pwdEncoder.matches(cb.getC_password(), dbPwd)) {
-			mav.addObject("msg", "일치하는 아이디가 없습니다.");
+			mav.addObject("msg", "일치하는 아이디가 습니다.");
 			mav.setViewName("redirect:loginForm");
 			return mav;
 		}
@@ -110,6 +110,11 @@ public class IdMM {
 			return mav;
 		}mav.setViewName(view);
 		return mav;
+	}
+
+	public int checkId(String c_username) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
