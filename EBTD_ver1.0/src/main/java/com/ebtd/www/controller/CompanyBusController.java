@@ -31,15 +31,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  */
 @Controller
 @RequestMapping(value = "/company")
-public class BusController {
+public class CompanyBusController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BusController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
 	@Autowired
 	private BusMM bm;
 	ModelAndView mav;
 	
 	@GetMapping(value = "/newBusForm")
 	public ModelAndView newBusForm() throws JsonProcessingException { //신규 노선 등록 신청 페이지 이동
+		System.out.println("URL");
 		mav = new ModelAndView();
 		mav = bm.getStopInfoList();
 		return mav;

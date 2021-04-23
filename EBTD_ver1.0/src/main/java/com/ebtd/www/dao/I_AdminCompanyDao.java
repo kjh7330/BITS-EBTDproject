@@ -14,17 +14,39 @@ public interface I_AdminCompanyDao {
 
 	List<ApplyBusRoute> getCompanyRequestRouteList(String c_name);
 
-	//List<ApplyBusHistory> getApplyBusRouteDetail(String ap_b_no);
-
 	boolean setCompanyRequestApproval(String c_name);
 
 	boolean setCompanyRequestReject(String c_name);
 	
-	//List<Company> checkCompanyRequestReject(String c_name);
-
 	List<ApplyBusHistory> getNewBusRouteList();
 
+	List<ApplyBusHistory> getNewBusRouteDetail(String ap_no);
+	
+	List<ApplyBusHistory> getNewBusNumber(String ap_no);
+
 	List<ApplyBusHistory> getUpdateBusRouteList();
+
+	List<ApplyBusHistory> getUpdateBusRouteDetail(String ap_no);
+
+	List<ApplyBusHistory> getUpdateBusNumber(String ap_no);
+
+	List<Company> getCompanyNameList();
+
+	List<Company> getCompanyDetail(String c_name);
+
+	List<ApplyBusHistory> getCompanyApprovalList();
+
+	List<ApplyBusHistory> getCompanyApprovalDetail();
+
+	List<ApplyBusHistory> getCompanyRejectList();
+
+	List<ApplyBusHistory> getCompanyRejectDetail();
+
+
+
+
+
+
 
 
 

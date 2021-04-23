@@ -66,7 +66,7 @@ public class DriverMM {
 		bm.put("blind", blind);
 		if (go) {
 			bm.put("car", car);
-			bm.put("d_no", ss.getAttribute("d_no").toString());			
+			bm.put("d_no", ss.getAttribute("d_no").toString());
 		}
 		else {
 			bm.put("car", "");

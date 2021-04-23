@@ -15,18 +15,21 @@ public class AdminStopRestController {
 	@Autowired
 	private AdminStopMM am; 
 	
-	/*
-	 * @GetMapping(value="/admin/stop/checkName", produces =
-	 * "text/plain;charset=utf-8") public ResponseEntity<?> checkName(String
-	 * s_Name){ //ResponseEntity<T> 결과값과 통신의 상태값까지 저장 System.out.println("dddddd");
-	 * return ResponseEntity.ok(am.checkName(s_Name)); }
-	 */
 	
-//	@GetMapping(value="/admin/stop/checkName", produces = "text/plain;charset=utf-8")
-//	public ResponseEntity<?> checPosition(Integer s_X, Integer s_Y){ 
-//		System.out.println("ddd");
-//		System.out.println(s_X);
-//		System.out.println(s_Y);
-//		return ResponseEntity.ok(am.checkPosition(s_X, s_Y));
-//	}
+	@GetMapping(value="/admin/stop/checkName", produces ="text/plain;charset=utf-8")
+	public ResponseEntity<?> checkName(String s_Name){
+	  
+		return ResponseEntity.ok(am.checkName(s_Name)); 
+		
+	}
+	
+	@GetMapping(value="/admin/stop/checkPosition", produces ="text/plain;charset=utf-8")
+	public ResponseEntity<?> checkPosition(int s_X, int s_Y){
+		System.out.println("s_X ="+s_X);
+		System.out.println("s_Y ="+s_Y);
+		
+		return ResponseEntity.ok(am.checkPosition(s_X, s_Y)); 
+		
+	}
+	
 }

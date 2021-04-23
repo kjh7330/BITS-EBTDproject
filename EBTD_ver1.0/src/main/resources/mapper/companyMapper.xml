@@ -24,4 +24,7 @@
   	<select id="accessUserState" resultType="int">
   		select c_state from c where c_username = #{c_username}
   	</select>
+  	<select id="checkId" resultType="String">
+  		select c_username from c where c_username = #{c_username}
+  	</select>
   </mapper>

@@ -14,7 +14,7 @@
 </select>
 
 <select id="getComment" parameterType="Integer" resultType="stop">
-	SELECT S_DETAIL FROM STOP WHERE S_NO = #{s_No}
+	SELECT * FROM STOP WHERE S_NO = #{s_No}
 </select>
 
 <select id="getStopConfirmList" resultType="sa">
@@ -25,15 +25,20 @@
 	SELECT * FROM STOP_APPLY WHERE SA_NO=#{sa_No}
 </select>
 
-<!-- <select id="checkStopList" resultType="stop">
+<select id="checkStopList" parameterType="String" resultType="stop">
 	SELECT * from STOP WHERE S_NAME=#{s_Name}
-</select> -->
+</select>
 
-<!-- <select id="checkPosition" resultType="stop">
-	SELECT * from S_X, S_Y WHERE S_X=#{s_X}, S_Y=#{s_Y}
-</select> -->
+<select id="checkPosition" parameterType="stop" resultType="stop">
+	SELECT S_NAME FROM STOP WHERE S_X=#{s_X} and S_Y=#{s_Y}
+</select> 
 
 <insert id="addStop" parameterType="stop">
-	INSERT INTO STOP VALUES(#{s_No}, #{t_Name}, #{s_Name}, #{s_X}, #{s_Y}, #{s_Detail})
+	INSERT INTO STOP VALUES(#{S_NO}, #{T_NAME}, #{S_NAME}, #{S_X}, #{S_Y}, #{S_DETAIL})
 </insert>
+
+<update id="addStopComment" parameterType="stop">
+	UPDATE STOP SET S_DETAIL=#{S_DETAIL} WHERE S_NO=#{S_NO}
+</update>
+
 </mapper>

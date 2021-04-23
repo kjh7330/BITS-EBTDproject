@@ -13,8 +13,8 @@ import com.ebtd.www.service.BusMM;
 
 @RestController
 @RequestMapping(value = "/company/bus")
-public class BusRestController {
-	private static final Logger logger = LoggerFactory.getLogger(BusController.class);
+public class CompanyBusRestController {
+	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
 	@Autowired
 	private BusMM bm;
 	ModelAndView mav;

@@ -32,7 +32,7 @@
 			location.href = 'company/companyindexForm';
 		});
 		$('#driver').click(function () {
-			location.href = 'driver/CompanySelectForm';
+			location.href = 'driver/getCompanyList';
 		});
 	</script>
 </body>

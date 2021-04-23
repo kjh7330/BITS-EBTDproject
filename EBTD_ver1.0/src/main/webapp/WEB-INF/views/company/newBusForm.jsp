@@ -70,6 +70,8 @@ body {
 }
 
 .modal_footer {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
 	padding: 10px 0;
 	font-size: 14px;
@@ -109,15 +111,18 @@ body {
 				<input id="mBusNum">
 				<p style="color: black;">동, 읍, 면 선택</p>
 				<select id="mTownSelect"></select>
-				<p style="color: black;">정류장 선택</p>
+				<p style="color: black;">출발 정류장 선택</p>
 				<select id="mStopSelect"></select>
 				<input type = "button" id = "stopConfi" value = "선택">
-			</div>
-			<div id = "busRouteSelect">
+				<p style = "color: black;">추천 정류장</p>
+				<select id="mRecommendStop"></select>
+				<input type = "button" id = "recommendConfi" value = "선택">
 				
 			</div>
+			<div id = "busRouteSelect">
+				<p style = "color: black;">버스 노선</p>
+			</div>
 			<div class="modal_footer">
-				<p style="color: black;">copyright by</p>
 			</div>
 		</div>
 	</div>
@@ -145,7 +150,7 @@ for(let i in tList) {
 $("#myBtn").on("click", function(){
 	  $.ajax({
 		  type : 'get',
-		  url : '/ebtd/ac/company/bus/busNumCheck',
+		  url : '/company/bus/busNumCheck',
 		  data : {'busNum' : $('#busNum').val()},
 		  dataType : 'html'
 	  }).done(function (data) {
@@ -195,16 +200,61 @@ $('#mTownSelect').on('change', function() {
 			$('#mStopSelect').append("<option value ='"+sName+"'>"+sName+"</option>");
 		}
 	}
-	/* let selectStop = $('#mStopSelect').val();
-	console.log(selectStop); */
 });
 //정류장 루트 짜기
 $('#stopConfi').on('click', function() {
 	let selectStop = $('#mStopSelect').val();
 	let stopRoute = $('.stopRoute').val();
+	let selectX;
+	let selectY;
 	console.log(selectStop);
+	//선택한 정류장 찍기
 	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+selectStop+"' readOnly>");
-	
+	//선택한 정류장의 좌표 가져오기
+	for(let i in sList) {
+		if(selectStop == sList[i]['s_NAME']) {
+			selectX = sList[i]['s_X'];
+			selectY = sList[i]['s_Y'];
+			};
+	};
+	console.log(selectX);
+	console.log(selectY);
+	//범위 안에 정류장 가져오기
+	let recommendStopName;
+	for(let i in sList) {
+		if(selectX-5 < sList[i]['s_X'] && sList[i]['s_X'] < selectX+5 && selectY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < selectY+5 && selectStop != sList[i]['s_NAME'] ) {
+			recommendStopName = sList[i]['s_NAME'];
+			$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+		};
+	};
+	/* for(let i in recommendStopName) {
+		$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	}; */
+	//$('#mRecommendStop').html('');
 });  
+$('#recommendConfi').on('click', function() {
+	let recommendSelect = $('#mRecommendStop').val();
+	//선택한 정류장 찍기
+	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+recommendSelect+"' readOnly>");
+	//select 박스 초기화
+	$('#mRecommendStop').html('');
+	//선택한 정류장 좌표 가져오기
+	for(let i in sList) {
+		if(recommendSelect == sList[i]['s_NAME']) {
+			recommendX = sList[i]['s_X'];
+			recommendY = sList[i]['s_Y'];
+			};
+	}
+	console.log(recommendX);
+	console.log(recommendY);
+	//범위 안에 정류장 가져오기
+	let recommendStopName;
+	for(let i in sList) {
+		if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5 && recommendSelect != sList[i]['s_NAME'] ) {
+			recommendStopName = sList[i]['s_NAME'];
+			$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+		};
+	};
+}); 
 </script>
 </html>

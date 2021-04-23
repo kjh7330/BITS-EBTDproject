@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DriverDAO 전용 Mapper : 기사 관련 sql문 명시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_CompanyDriverDao">
+	
+	<!-- 기사 리스트 조회 -->
+ 	<select id="getDriverList" resultType="driver" > 
+		SELECT * FROM DRIVER
+	</select>
+  
+	<!-- 기사 추가 -->
+  	<insert id="addDriver" parameterType="driver"> 
+		INSERT INTO DRIVER
+		VALUES (#{d_no},#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
+	</insert>  
+	
+</mapper>

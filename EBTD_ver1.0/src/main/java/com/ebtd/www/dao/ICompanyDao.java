@@ -13,5 +13,6 @@ public interface ICompanyDao {
 	//user name
 	public String accessUser(CompanyAliasBean cb);
 	public int accessUserState(String username);
-	public String getPwd(CompanyAliasBean cb);	
+	public String getPwd(CompanyAliasBean cb);
+	public String checkId(String c_username);	
 }
