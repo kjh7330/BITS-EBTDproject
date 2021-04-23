@@ -144,7 +144,7 @@
 								Obj[i].u_type = '시각';
 							} else Obj[i].u_type = '휠체어';	
 							console.log(Obj[i].u_type);
-				
+							
 							str += '<tr>';
 							str += '<th>' + (i + 1) + '</th>'
 							//아이디
@@ -165,9 +165,9 @@
 					}
 					
 				});	//ajax end 
-			}
+			}	//if end
 			
-		}); //시각or휠체어 click end
+		}); //시각or휠체어 change end
 	 
 		
 		//아이디 검색버튼 누르면 --> ajax 사용
