@@ -58,8 +58,33 @@ public class AdminUserMM {	//김아름
 		}else {
 			return "userSearchUserName 가져오기 실패";
 		}
+	}	//getUserSearchUserName end
+	
+	//Rest
+	//이용자 리스트에서 장애유형 선택하면
+	public String getUserSearchUType(String u_type) throws JsonProcessingException {
 		
-	}
+		ObjectMapper om = new ObjectMapper();
+		List<UserBean> uerInfoList = null;
+		int u_type2 = 3;
+		
+		if(u_type == "시각") {
+			u_type2 = 1;
+		}
+		if(u_type == "휠체어") {
+			u_type2 = 0;
+		}
+		uerInfoList = uDao.getUserSearchUType(u_type2);	// 디비 가서 가져오기
+		
+		//디비에서 가져온 데이터가 있으면
+		if( uerInfoList!=null) {
+			return om.writeValueAsString(uerInfoList); //List를 json으로 변환
+		}else {
+			return "userSearchUserName 가져오기 실패";
+		}
+	}	//getUserSearchUType end
+
+	
 	
 	//이용자 상세정보 보기
 	public ModelAndView getUserDetail(String u_userName) throws JsonProcessingException {
@@ -132,6 +157,7 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
 
 	
 

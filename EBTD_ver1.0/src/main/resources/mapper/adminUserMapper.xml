@@ -14,7 +14,10 @@
 	
 	<select id="getUserSearchUserName" resultType="user">
 		SELECT * FROM U WHERE U_USERNAME  LIKE '%'||#{u_userName}||'%'
-
+	</select>
+	
+	<select id="getUserSearchUType" resultType="user">
+		SELECT * FROM U WHERE U_TYPE=#{'u_type'}
 	</select>
 	
 	<select id="getUserDetail" resultType="user">

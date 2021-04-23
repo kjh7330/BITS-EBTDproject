@@ -18,6 +18,13 @@ public class AdminUserRestController {	//김아름
 
 	ModelAndView mav;
 	
+	//이용자 리스트에서 장애유형 선택하면
+		@GetMapping(value = "/getUserSearchUType", produces =  "text/plain;charset=utf-8")
+		public String getUserSearchUType(String u_type) throws JsonProcessingException {	
+			String uInfoList = aum.getUserSearchUType(u_type);
+			return uInfoList;		
+		}
+	
 	//이용자 리스트에서 아이디 검색하면
 	@GetMapping(value = "/getUserSearchUserName", produces =  "text/plain;charset=utf-8")
 	public String getUserSearchUserName(String u_userName) throws JsonProcessingException {	
