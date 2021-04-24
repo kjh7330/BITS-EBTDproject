@@ -7,32 +7,56 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-#table1{
+#stoptable{
 	width : 200px;
 	height : 200px;
 }
 </style>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 <div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 
-<table id="table1" border="1px solid black" style="color: black">
+<div id="inputForm"><input type="text" id="value" placeholder="정류장을 입력하세요." onkeyup="filter()"/></div>
+
+<br><br>
+
+<table id="stoptable" style="color: black">
 		
 </table>
 </body>
 
 <script type="text/javascript">
-console.log(${sList});
 let i=0;
-let str="<tr>"
+let str='';
 for(i; i < ${sList}.length; i++){
-	str+='<td><a href=/ebtd/ac/admin/stop/getStopDetail?s_No='+${sList}[i]["s_No"]+'>';
-	str+=${sList}[i]['s_Name']+'</a>';
+	str+='<tr class="line">';
+	str+='<td class="stopName"><a href=/admin/stop/getStopDetail?s_No='+${sList}[i]["s_NO"]+'>';
+	str+=${sList}[i]['s_NAME']+'</a>';
 	str+="</td>";
 	str+="</tr>";
-}
-$("#table1").append(str); 
+};
+$("#stoptable").append(str); 
+
+//정류장 검색기능
+function filter(){
+  let value/* 인풋창에 입력하는 데이터 */, stopName/* <tr>클래스명 */, line/* <td>클래스명 */, i;
+
+  value = document.getElementById("value").value.toUpperCase();
+  line = document.getElementsByClassName("line");
+
+  for(i=0;i<line.length;i++){
+    stopName = line[i].getElementsByClassName("stopName");
+    if(stopName[0].innerHTML.toUpperCase().indexOf(value) > -1){
+   	  line[i].style.display = "block";
+    }else{
+      line[i].style.display = "none";
+    }
+  }
+} 
 </script>
 
 </html>

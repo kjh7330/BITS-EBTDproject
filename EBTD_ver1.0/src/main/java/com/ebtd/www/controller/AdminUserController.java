@@ -1,12 +1,13 @@
 package com.ebtd.www.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.service.AdminUserMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @RequestMapping(value = "/admin/user")
 public class AdminUserController {	//김아름
 
+	private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
 	@Autowired 
 	private AdminUserMM aum;	//관리자 이용자 관리 서비스 클래스
 
@@ -44,7 +46,7 @@ public class AdminUserController {	//김아름
 	@GetMapping(value = "/getUserChart")
 	public ModelAndView getUserChart() {	
 		//List<UserBean> uList;
-		aum.getUserChart();	
+		//aum.getUserChart();	
 		return mav;	
 	}
 

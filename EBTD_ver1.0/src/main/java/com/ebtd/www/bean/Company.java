@@ -15,4 +15,8 @@ public class Company {
 	private String c_no; 		   // 사업장 등록번호 UQ - NN
 	private String c_imgextention; // 이미지 확장자
 	private int c_state; 		   // 승인상태 0:미승인 1:승인 2:반려 3:관리자
+
+	
+	private int v_count;		// 문의 횟수
+	//private String 			// 경고 횟수
 }

@@ -17,10 +17,43 @@
 		order by apde.ap_b_no , apde.apde_turn
 	</select>
 	<select id="getNewBusRouteList" resultType="ApplyBusHistory">
-		SELECT * FROM APPLY_BUS_HISTORY WHERE AP_STATE = 0
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME
+		FROM APPLY_BUS_HISTORY H
+		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
+		WHERE H.AP_STATE=0
+		ORDER BY H.AP_NO
+
+	</select>
+	<select id="getNewBusRouteDetail" resultType="ApplyBusHistory">
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, HD.AP_NO, HD.APDE_TURN, S.S_NO, S.S_NAME, S.T_NAME, C.C_USERNAME, C.C_NO
+		FROM APPLY_BUS_HISTORY H
+		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
+		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO=HD.AP_NO AND HD.AP_B_NO = H.AP_B_NO
+		JOIN STOP S ON HD.S_NO=S.S_NO
+		WHERE H.AP_NO=#{ap_no} AND H.AP_STATE=0
+		ORDER BY HD.AP_B_NO, HD.APDE_TURN
+	</select>
+	<select id="getNewBusNumber" resultType="ApplyBusHistory">
+		select ap_b_no from apply_bus_history where ap_no=#{ap_no}
 	</select>
 	<select id="getUpdateBusRouteList" resultType="ApplyBusHistory">
-		SELECT * FROM APPLY_BUS_HISTORY WHERE AP_STATE = 3
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME
+		FROM APPLY_BUS_HISTORY H
+		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
+		WHERE H.AP_STATE=3
+		ORDER BY H.AP_NO
+	</select>
+	<select id="getUpdateBusRouteDetail" resultType="ApplyBusHistory">
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, HD.AP_NO, HD.APDE_TURN, S.S_NO, S.S_NAME, S.T_NAME, C.C_USERNAME, C.C_NO
+		FROM APPLY_BUS_HISTORY H
+		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
+		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO=HD.AP_NO AND HD.AP_B_NO = H.AP_B_NO
+		JOIN STOP S ON HD.S_NO=S.S_NO
+		WHERE H.AP_NO=#{ap_no} AND H.AP_STATE=3
+		ORDER BY HD.AP_B_NO, HD.APDE_TURN
+	</select>
+	<select id="getUpdateBusNumber" resultType="ApplyBusHistory">
+		select ap_b_no from apply_bus_history where ap_no=#{ap_no}
 	</select>
 	<select id="getCompanyRequestRouteList" resultType="ApplyBusRoute">
 		SELECT C.C_NAME, H.AP_B_NO
@@ -42,7 +75,34 @@
 	<update id="setCompanyRequestReject" parameterType="Company"> <!-- resultType은 쓰면 안돼요~ -->
 		UPDATE COMPANY SET C_STATE=2 WHERE C_NAME=#{c_name}
 	</update>
-	<select id="checkCompanyRequestReject" resultType="Company">
-		SELECT * FROM COMPANY WHERE C_NAME=#{c_name} AND C_STATE = 2
+	<select id="getCompanyNameList" resultType="Company">
+		SELECT C_NAME FROM COMPANY
+	</select>
+	<select id="getCompanyDetail" resultType="Company">
+		SELECT C.C_NAME, C.C_NO, (select count(*) as v_count
+								  FROM VOC V
+								  JOIN COMPANY C ON C.C_USERNAME=V.C_USERNAME
+								  WHERE C.C_NAME = #{c_name})
+		FROM COMPANY C
+		JOIN VOC V ON C.C_USERNAME=V.C_USERNAME
+		WHERE C.C_NAME = #{c_name}
+	</select>
+	<select id="getCompanyApprovalList" resultType="ApplyBusHistory">
+		SELECT C.C_NAME, H.AP_DATE
+		FROM COMPANY C
+		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
+		WHERE H.AP_STATE = 1 OR H.AP_STATE = 3
+	</select>
+	<select id="getCompanyApprovalDetail" resultType="ApplyBusHistory">
+		SELECT 
+	</select>
+	<select id="getCompanyRejectList" resultType="ApplyBusHistory">
+		SELECT C.C_NAME, H.AP_DATE
+		FROM COMPANY C
+		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
+		WHERE H.AP_STATE = 2
+	</select>
+	<select id="getCompanyRejectDetail" resultType="ApplyBusHistory">
+	
 	</select>
 </mapper>

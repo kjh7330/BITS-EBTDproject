@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <!-- 김아름 -->
 <title>관리자 - 이용자 히스토리 보기</title>
+<style>
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
@@ -15,33 +17,24 @@
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 
+	<!-- 정렬에서 이용일, 장애유형 선택하면 상세에 그에 맞는 정보 선택가능하게 하기 -->
 	<div style="color: black">
-		<br> 정렬:<select id="selectSort">
-			<option>전체</option>
-			<option>이용일</option>
-			<option>버스회사</option>
-			<option>버스번호</option>
-			<option>출발지</option>
-			<option>목적지</option>
-			<option>장애유형</option>	
-			<option>아이디</option>	
+		<br> 정렬:<select id="selectSort" onchange="categoryChange(this);">
+			<option value="1">정렬기준을 선택해주세요</option>
+			<option value="2">이용일</option>
+			<option value="3">장애유형</option>	
+			<option value="4">아이디</option>
+			<option value="5">버스회사</option>
+			<option value="6">버스번호</option>
+			<option value="7">출발지</option>
+			<option value="8">목적지</option>
 		</select>
 		
 		<!-- selectSort에서 선택하면 그거에 맞춰서 선택할수있게 -->
-		상세:<select id="selectSortDetail">
-			<!-- 이용일 -->
-			<option>1주일</option>
-			<option>1개월</option>
-			<option>3개월</option>
-			<option>6개월</option>
-			<option>1년</option>
-			<!-- 장애유형 -->
-			<option>시각</option>
-			<option>휠체어</option>
-			
+		상세:<select id="selectSortDetail" name="selectSortDetail" style="width:120px; display:none">	
 		</select> 
 		<!-- 버스회사 버스번호 버스정류장 아이디 -->
-		아이디를 입력하세요: <input type="text" id="searchInput">
+		아이디를 입력하세요: <input type="text" id="searchInput" style="width:120px; display:none">
 		<button id="searchBtn">검색</button>
 	</div>
 
@@ -61,7 +54,7 @@
 				<th scope="col">유저아이디</th>
 			</tr>
 		</thead>
-		<tbody id="result">
+		<tbody id="userHistoryList">
 		</tbody>
 
 	</table>
@@ -95,9 +88,44 @@
 				str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 
 			}
+			$("#userHistoryList").empty();
+			$("#userHistoryList").append(str);
 			
-			$("#result").empty();
-			$("#result").append(str);
+			
+			//selectbox
+			function categoryChange(e){
+				
+				let detail_period = ["1주일", "1개월", "3개월", "6개월", "1년"];
+				let u_type = ["시각", "휠체어"];
+				let target = document.getElementById("selectSortDetail");
+				
+				$('#selectSortDetail').html("");
+				
+				if(e.value == "2"){		//이용일
+					let detail = detail_period;
+					
+					for (let x in detail) {
+						let opt = document.createElement("option");
+						opt.value = detail[x];
+						opt.innerHTML = detail[x];
+						target.appendChild(opt);
+					}	
+				}
+				if(e.value == "3"){ 		//장애유형
+					let detail = u_type;
+					
+					for (let x in detail) {
+						let opt = document.createElement("option");
+						opt.value = detail[x];
+						opt.innerHTML = detail[x];
+						target.appendChild(opt);
+					}	
+				}
+				$('#selectSortDetail').show();
+
+			} //function categoryChange end 
+			
+			
 			
 			
 			//검색버튼 누르면
@@ -111,7 +139,7 @@
 				}else if(){
 					
 				} */
-			});
+			}); //searchBtn click end
 		</script>
 
 
