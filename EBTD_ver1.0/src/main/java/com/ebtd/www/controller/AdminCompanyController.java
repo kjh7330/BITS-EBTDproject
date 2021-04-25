@@ -42,14 +42,26 @@ public class AdminCompanyController {
 	}
 	//회사 등록 신청 -> 반려하기
 	@PostMapping(value = "/admin/company/setCompanyRequestReject")
-	public ModelAndView setCompanyRequestReject(String c_name) {
-		mav=acm.setCompanyRequestReject(c_name);
+	public ModelAndView setCompanyRequestReject(String c_username) {
+		mav=acm.setCompanyRequestReject(c_username);
 		return mav;
 	}
 	//신규 노선 등록 신청 목록
 	@GetMapping(value = "/admin/company/getNewBusRouteList")
 	public ModelAndView getNewBusRouteList() {
 		mav=acm.getNewBusRouteList();
+		return mav;
+	}
+	//신규 노선 등록 -> 승인하기
+	@PostMapping(value = "/admin/company/setNewBusRouteApproval")
+	public ModelAndView setNewBusRouteApproval(String ap_b_no) {
+		mav=acm.setNewBusRouteApproval(ap_b_no);
+		return mav;
+	}
+	//신규 노선 등록  -> 반려하기
+	@PostMapping(value = "/admin/company/setNewBusRouteReject")
+	public ModelAndView setNewBusRouteReject(String ap_b_no, String ap_reject) {
+		mav=acm.setNewBusRouteReject(ap_b_no, ap_reject);
 		return mav;
 	}
 	//기존 노선 수정 신청 목록
@@ -60,20 +72,20 @@ public class AdminCompanyController {
 	}
 	//버스 회사 이름 목록
 	@GetMapping(value = "/admin/company/getCompanyNameList")
-	public ModelAndView getCompanyNameList() {
+	public ModelAndView getCompanyNameList() throws JsonProcessingException {
 		mav=acm.getCompanyNameList();
 		return mav;
 	}
 	//버스 회사 상세 정보 보기
 	@GetMapping(value = "/admin/company/getCompanyDetail")
-	public ModelAndView getCompanyDetail(String c_name) {
-		mav=acm.getCompanyDetail(c_name);
+	public ModelAndView getCompanyDetail(String c_username) {
+		mav=acm.getCompanyDetail(c_username);
 		return mav;
 	}
 	//버스 회사 고객 소리함 목록
 	@GetMapping(value = "/admin/company/getCompanyQuestionList")
-	public ModelAndView getCompanyQuestionList(String c_name) {
-		mav=acm.getCompanyQuestionList(c_name);
+	public ModelAndView getCompanyQuestionList(String c_username) {
+		mav=acm.getCompanyQuestionList(c_username);
 		return mav;
 	}
 	//버스 회사 승인 목록

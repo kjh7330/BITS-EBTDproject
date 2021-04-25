@@ -16,16 +16,53 @@
 		where ap.ap_state = 0 and c.c_name = #{c_name}
 		order by apde.ap_b_no , apde.apde_turn
 	</select>
+	<select id="getCompanyRequestRouteList" resultType="ApplyBusHistory">
+		SELECT C.C_NAME, H.AP_B_NO
+		FROM COMPANY C, APPLY_BUS_HISTORY H
+		WHERE C.C_USERNAME=H.C_USERNAME
+		AND C.C_NAME=#{c_name}
+	</select>
+	<update id="setCompanyRequestApproval" parameterType="Company"> <!-- resultType은 쓰면 안돼~~! -->
+		UPDATE COMPANY SET C_STATE=1 WHERE C_NAME=#{c_name}
+	</update>
+	
+ 	<delete id="setDeleteAllbus" parameterType="Company">
+		DELETE FROM ALLBUS AB WHERE EXISTS (SELECT 1 FROM BUS B WHERE B.B_NO=AB.B_NO AND B.C_USERNAME=#{c_username})
+	</delete>
+ 	<delete id="setDeleteBus" parameterType="Company">
+		DELETE FROM BUS WHERE C_USERNAME=#{c_username}
+	</delete>
+ 	<delete id="setDeleteApplybusHistorydetail" parameterType="Company">
+		DELETE FROM APPLY_BUS_HISTORY_DETAIL HD WHERE EXISTS (SELECT 1 FROM APPLY_BUS_HISTORY H WHERE HD.AP_B_NO=H.AP_B_NO AND H.C_USERNAME=#{c_username})
+	</delete>
+ 	<delete id="setDeleteApplybushistory" parameterType="Company">
+		DELETE FROM APPLY_BUS_HISTORY WHERE C_USERNAME=#{c_username})
+	</delete>
+ 	<delete id="setDeleteOfficialdocument" parameterType="Company">
+		DELETE FROM OFFICIAL_DOCUMENT WHERE C_USERNAME=#{c_username})
+	</delete>
+ 	<delete id="setDeleteCompany" parameterType="Company">
+		DELETE FROM COMPANY WHERE C_USERNAME=#{c_username})
+	</delete>
+	
 	<select id="getNewBusRouteList" resultType="ApplyBusHistory">
 		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME
 		FROM APPLY_BUS_HISTORY H
 		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
 		WHERE H.AP_STATE=0
 		ORDER BY H.AP_NO
-
 	</select>
 	<select id="getNewBusRouteDetail" resultType="ApplyBusHistory">
-		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, HD.AP_NO, HD.APDE_TURN, S.S_NO, S.S_NAME, S.T_NAME, C.C_USERNAME, C.C_NO
+		SELECT H.AP_B_NO, HD.APDE_TURN, S.S_NO, S.S_NAME, S.T_NAME
+		FROM APPLY_BUS_HISTORY H
+		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
+		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO=HD.AP_NO AND HD.AP_B_NO = H.AP_B_NO
+		JOIN STOP S ON HD.S_NO=S.S_NO
+		WHERE H.AP_B_NO=#{ap_b_no} AND H.AP_STATE=0
+		ORDER BY HD.AP_B_NO, HD.APDE_TURN
+	</select>
+	<select id="getNewBusOfficialDocument" resultType="ApplyBusHistory">
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME, C.C_NO
 		FROM APPLY_BUS_HISTORY H
 		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
 		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO=HD.AP_NO AND HD.AP_B_NO = H.AP_B_NO
@@ -36,6 +73,24 @@
 	<select id="getNewBusNumber" resultType="ApplyBusHistory">
 		select ap_b_no from apply_bus_history where ap_no=#{ap_no}
 	</select>
+	
+	<update id="setApplyBusHistoryChangeApproval" parameterType="ApplyBusHistory"> <!-- resultType은 쓰면 안돼~~! -->
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE=1 WHERE AP_B_NO=#{ap_b_no}
+	</update>
+	<update id="setAllBusChangeApproval" parameterType="ApplyBusHistory"> <!-- resultType은 쓰면 안돼~~! -->
+		UPDATE ALLBUS SET AB_STATE=1 WHERE B_NO=#{ap_b_no}
+	</update>
+	<insert id="setNewRouteBus" parameterType="ApplyBusHistory">
+		INSERT INTO ROUTE_BUS(R_TURN, B_NO, S_NO) 
+		SELECT APDE_TURN, AP_B_NO, S_NO FROM APPLY_BUS_HISTORY_DETAIL 
+		WHERE AP_B_NO=#{ap_b_no}
+	</insert>
+	
+	<update id="setApplyBusHistoryChangeReject" parameterType="ApplyBusHistory">
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 2, AP_REJECT = #{ap_reject} WHERE ap_b_no = #{ap_b_no}
+	</update>
+	
+	
 	<select id="getUpdateBusRouteList" resultType="ApplyBusHistory">
 		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME
 		FROM APPLY_BUS_HISTORY H
@@ -55,12 +110,6 @@
 	<select id="getUpdateBusNumber" resultType="ApplyBusHistory">
 		select ap_b_no from apply_bus_history where ap_no=#{ap_no}
 	</select>
-	<select id="getCompanyRequestRouteList" resultType="ApplyBusRoute">
-		SELECT C.C_NAME, H.AP_B_NO
-		FROM COMPANY C, APPLY_BUS_HISTORY H
-		WHERE C.C_USERNAME=H.C_USERNAME
-		AND C.C_NAME=#{c_name}
-	</select>
 	<select id="getApplyBusRouteDetail" resultType="ApplyBusHistory">
 		SELECT HD.APDE_TURN, HD.S_NO, S.S_NAME, S.T_NAME
 		FROM COMPANY C, APPLY_BUS_HISTORY H, APPLY_BUS_HISTORY_DETAIL HD, STOP S
@@ -69,31 +118,51 @@
 		AND HD.S_NO=S.S_NO
 		AND H.AP_B_NO=#{ap_b_no}
 	</select>
-	<update id="setCompanyRequestApproval" parameterType="Company"> <!-- resultType은 쓰면 안돼~~! -->
-		UPDATE COMPANY SET C_STATE=1 WHERE C_NAME=#{c_name}
-	</update>
-	<update id="setCompanyRequestReject" parameterType="Company"> <!-- resultType은 쓰면 안돼요~ -->
-		UPDATE COMPANY SET C_STATE=2 WHERE C_NAME=#{c_name}
-	</update>
+	
+	
 	<select id="getCompanyNameList" resultType="Company">
-		SELECT C_NAME FROM COMPANY
+		SELECT C_NAME, C_USERNAME FROM COMPANY WHERE C_STATE=1
 	</select>
-	<select id="getCompanyDetail" resultType="Company">
-		SELECT C.C_NAME, C.C_NO, (select count(*) as v_count
-								  FROM VOC V
-								  JOIN COMPANY C ON C.C_USERNAME=V.C_USERNAME
-								  WHERE C.C_NAME = #{c_name})
-		FROM COMPANY C
-		JOIN VOC V ON C.C_USERNAME=V.C_USERNAME
-		WHERE C.C_NAME = #{c_name}
+	<select id="getCompanyName" resultType="Company">
+		SELECT C_NAME, C_USERNAME FROM COMPANY WHERE C_USERNAME=#{c_username}
 	</select>
+	<select id="getBusDriverCount" resultType="Company">
+		SELECT AB.B_NO, COUNT(AB.B_NO) AS B_ALL_NUM, COUNT(AB.D_NO) AS D_NUM
+		FROM ALLBUS AB
+		JOIN BUS B ON AB.B_NO=B.B_NO
+		WHERE B.C_USERNAME=#{c_username}
+		GROUP BY AB.B_NO
+	</select>
+	<select id="getVocRecommendCount" resultType="Company">
+		SELECT COUNT(C_USERNAME) AS V_COUNT, COUNT(*) VOC_RECOMMEND 
+		FROM VOC WHERE C_USERNAME=#{c_username}
+	</select>
+	<select id="getLowfloorRegularCount" resultType="Company">
+		SELECT * FROM (SELECT AB.B_NO,
+					   COUNT(DECODE(AB_TYPE, '0', 1)) B_LOWFLOOR_NUM,
+					   COUNT(DECODE(AB_TYPE, '1', 1)) B_REGULAR_NUM
+					   FROM ALLBUS AB
+					   JOIN BUS B ON AB.B_NO=B.B_NO
+					   WHERE B.C_USERNAME=#{c_username}
+					   GROUP BY AB.B_NO)
+	</select>
+	
+	<select id="getCompanyQuestionList" resultType="Company">
+		SELECT V_NO, C_USERNAME, B_NO, V_TITLE, V_CONTENT, V_DATE, VOC_RECOMMEND 
+		FROM VOC 
+		WHERE C_USERNAME = #{c_username}
+	</select>
+	
 	<select id="getCompanyApprovalList" resultType="ApplyBusHistory">
-		SELECT C.C_NAME, H.AP_DATE
+		SELECT C.C_NAME, H.AP_DATE, H.AP_STATE
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
-		WHERE H.AP_STATE = 1 OR H.AP_STATE = 3
+		WHERE H.AP_STATE = 1 OR H.AP_STATE = 4
 	</select>
-	<select id="getCompanyApprovalDetail" resultType="ApplyBusHistory">
+	<select id="getCompanyApprovalDetail" resultType="Company">
+		SELECT 
+	</select>
+	<select id="getRouteApprovalDetail" resultType="ApplyBusHistory">
 		SELECT 
 	</select>
 	<select id="getCompanyRejectList" resultType="ApplyBusHistory">

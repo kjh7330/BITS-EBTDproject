@@ -401,9 +401,10 @@
              		<form action="setCompanyRequestReject" method="post">
 		                ${abList[0].c_name}(${abList[0].c_username})<br>
 		                를 반려하시겠습니까?<br><br>
-		        	    <input type="hidden" name="c_name" value="${abList[0].c_name}">
+		        	    <input type="hidden" name="c_username" value="${abList[0].c_username}">
 		        	    <input type="submit" value="반려">
-		        	    <input class="cancle" type="button" value="취소">
+		        	    <input class="cancle" type="button" value="취소"><br>
+		        	    <a style="font-size: 10px;">⚠️데이터가 삭제됩니다⚠️</a>
                		</form>
              	</p>
              </div>
