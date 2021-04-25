@@ -51,8 +51,8 @@ public class CompanyDriverController {
 
 	//기사 추가하기
 		@RequestMapping(value = "/company/addDriver")
-		public ModelAndView addDriver(DriverBean dr){
-			mav=dm.addDriver(dr);
+		public ModelAndView addDriver(DriverBean db){
+			mav=dm.addDriver(db);
 			
 			return mav;	
 		}

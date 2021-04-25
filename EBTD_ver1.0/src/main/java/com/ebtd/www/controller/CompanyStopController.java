@@ -36,6 +36,16 @@ public class CompanyStopController {
 		return mav; 
 
 	}
+	
+	//정류장 정보 상세보기 페이지 이동
+	@GetMapping(value = "/company/getStopDetail") 
+	public ModelAndView getStopDetail(Integer S_NO) throws JsonProcessingException { 
+		logger.info("정류장 정보 상세보기 페이지 이동"); 
+		
+		mav=sm.getStopDetail(S_NO);
+		return mav;
+
+	}
 
 	//정류장 신청 페이지 이동 
 	@GetMapping(value = "/company/addNewStopForm") 
@@ -63,7 +73,12 @@ public class CompanyStopController {
 
 	}
 
-
-
+	//정류장 신청정보 상세보기 페이지 이동
+		@GetMapping(value = "/company/getStopApplyDetail") 
+		public ModelAndView getStopApplyDetail(Integer sa_No) throws JsonProcessingException { 
+			logger.info("정류장 신청 정보 상세보기 페이지 이동"); 	
+			mav=sm.getStopApplyDetail(sa_No);
+			return mav;
+		}
 
 }

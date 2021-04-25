@@ -12,54 +12,54 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-	
-	
+
+
 	<table style="color: black">
 		<thead>
 			<tr>
-				<th>기사 번호</th>
-				<!-- <th>회사 이름</th> -->
-				<th>기사 이름</th>
-				<th>이미지</th>
-				<!-- <th>전화번호</th> -->
-				<!-- <th>입사일</th> -->
-				<!-- <th>버스번호</th> -->
+				<th>정류장 번호</th>
+				<th>동 이름</th>
+				<th>정류장 이름</th>
+ 				<th>X값</th>
+				<th>Y값</th>
+				<th>상세내용</th>
 			</tr>
 		</thead>
-		<tbody id="driverList">
+		<tbody id="stopDetail">
 		</tbody>
 	</table>
 
-	
+
 
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
 
 	</div>
+
 </body>
+
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
 let dList = ${dList};
 var html = '';
-
 console.log(dList);
-//기사 정보 가져오기
+
+
  for(let i = 0 ; i<dList.length; i++){
-	 
 	 html += '<tr>';
-	 html += '<td>'+dList[i].d_no+'</td>';
-//	 html += '<td>'+dList[i].c_userName+'</td>';
-	 html += '<td>'+dList[i].d_name+'</td>';
-	 html += '<td>'+dList[i].d_imgExtention+'</td>';
-//	 html += '<td>'+dList[i].d_phoneNum+'</td>';
-//	 html += '<td>'+dList[i].d_enterDate+'</td>';
-//	 html += '<td>'+dList[i].b_no+'</td>';
+	 html += '<td>'+dList[i].s_NO+'</td>';
+	 html += '<td>'+dList[i].t_NAME+'</td>';
+	 html += '<td>'+dList[i].s_NAME+'</td>';
+ 	 html += '<td>'+dList[i].s_X+'</td>';
+	 html += '<td>'+dList[i].s_Y+'</td>';
+	 html += '<td>'+dList[i].s_DETAIL+'</td>'; 
 	 html += '</tr>';
 	}
    
- $("#driverList").empty();
- $("#driverList").append(html);
+ $("#stopDetail").empty();
+ $("#stopDetail").append(html);
 
+	
 </script>
 </html>
