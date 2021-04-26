@@ -9,6 +9,11 @@
  	<select id="getStopList" resultType="stop" > 
 		SELECT * FROM STOP
 	</select>
+	
+	<!-- 정류장 상세내용 조회 -->
+ 	<select id="getStopDetail" resultType="stop" parameterType="Integer" > 
+		SELECT * FROM STOP WHERE S_NO = #{S_NO}
+	</select>
   
   	<!-- 정류장 등록 신청 -->
   	<insert id="addNewStop" parameterType="sa"> 
@@ -25,4 +30,19 @@
 	<select id="searchStop" resultType="stop" parameterType="String"> 
 	SELECT * FROM STOP WHERE S_NAME LIKE '%'||#{S_NAME}||'%'
 	</select> 
+	
+	<!-- 정류장 이름 중복 조회 -->
+ 	<select id="checkSaName" resultType="stop" parameterType="String" > 
+		SELECT * FROM STOP WHERE S_NAME = #{S_NAME}
+	</select>
+	
+	<!-- 정류장 위치 중복 조회 -->
+ 	<select id="checkSaPosition" resultType="stop" parameterType="Integer" > 
+		SELECT * FROM STOP WHERE S_X = #{S_X} AND S_Y = #{S_Y}
+	</select>
+	
+	<!-- 정류장신청 상세내용 조회 -->
+ 	<select id="getStopApplyDetail" resultType="sa" parameterType="Integer" >
+		SELECT * FROM STOP_APPLY WHERE sa_No = #{sa_No}
+	</select>
 </mapper>

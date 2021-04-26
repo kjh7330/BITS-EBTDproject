@@ -15,9 +15,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 public class CompanyStopController {
+<<<<<<< Updated upstream
 
 	private static final Logger logger = LoggerFactory.getLogger(CompanyStopController.class);
 
+=======
+	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
+>>>>>>> Stashed changes
 	@Autowired
 	private CompanyStopMM sm;
 	ModelAndView mav;
@@ -34,6 +38,16 @@ public class CompanyStopController {
 		logger.info("정류장 목록보기 페이지 이동"); 
 		mav=sm.getStopList();
 		return mav; 
+
+	}
+	
+	//정류장 정보 상세보기 페이지 이동
+	@GetMapping(value = "/company/getStopDetail") 
+	public ModelAndView getStopDetail(Integer S_NO) throws JsonProcessingException { 
+		logger.info("정류장 정보 상세보기 페이지 이동"); 
+		
+		mav=sm.getStopDetail(S_NO);
+		return mav;
 
 	}
 
@@ -63,7 +77,12 @@ public class CompanyStopController {
 
 	}
 
-
-
+	//정류장 신청정보 상세보기 페이지 이동
+		@GetMapping(value = "/company/getStopApplyDetail") 
+		public ModelAndView getStopApplyDetail(Integer sa_No) throws JsonProcessingException { 
+			logger.info("정류장 신청 정보 상세보기 페이지 이동"); 	
+			mav=sm.getStopApplyDetail(sa_No);
+			return mav;
+		}
 
 }

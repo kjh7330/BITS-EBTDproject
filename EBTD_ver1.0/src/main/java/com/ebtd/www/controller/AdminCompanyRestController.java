@@ -19,35 +19,29 @@ public class AdminCompanyRestController {
 	@Autowired
 	private AdminCompanyMM acm;
 
-	//신규 노선 등록 신청 목록 - 상세
+	//신규 노선 등록 신청 목록 - 노선보기
 	@GetMapping(value = "/admin/company/getNewBusRouteDetail")
-	public String getNewBusRouteDetail(String ap_no) throws JsonProcessingException {
-		System.out.println("여기얏!");
-		return acm.getNewBusRouteDetail(ap_no);
+	public String getNewBusRouteDetail(String ap_b_no) throws JsonProcessingException {
+		return acm.getNewBusRouteDetail(ap_b_no);
+	}
+	//신규 노선 등록 신청 목록 - 공문보기
+	@GetMapping(value = "/admin/company/getNewBusOfficialDocument")
+	public String getNewBusOfficialDocument(String ap_no) throws JsonProcessingException {
+		return acm.getNewBusOfficialDocument(ap_no);
 	}
 	//신규 노선 등록 신청 목록 - 상세 공문에서 버스번호만
 	@GetMapping(value = "/admin/company/getNewBusNumber")
 	public String getNewBusNumber(String ap_no) throws JsonProcessingException {
-		System.out.println("여기얏!");
 		return acm.getNewBusNumber(ap_no);
 	}
 	//노선 변경 신청 목록 - 상세
 	@GetMapping(value = "/admin/company/getUpdateBusRouteDetail")
 	public String getUpdateBusRouteDetail(String ap_no) throws JsonProcessingException {
-		System.out.println("여기얏!");
 		return acm.getUpdateBusRouteDetail(ap_no);
 	}
 	//노선 변경 신청 목록 - 상세 공문에서 버스번호만
 	@GetMapping(value = "/admin/company/getUpdateBusNumber")
 	public String getUpdateBusNumber(String ap_no) throws JsonProcessingException {
-		System.out.println("여기얏!");
 		return acm.getUpdateBusNumber(ap_no);
 	}
-	/*
-	@PostMapping(value = "/admin/company/setCompanyRequestApproval", produces = "application/json;charset=utf-8")
-	public ResponseEntity<?> setCompanyRequestApproval(String c_name) {
-		List<Company> cList = acm.setCompanyRequestApproval(c_name);
-		return ResponseEntity.ok(cList);
-	}
-	*/
 }

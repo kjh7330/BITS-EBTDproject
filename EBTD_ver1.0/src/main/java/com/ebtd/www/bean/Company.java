@@ -17,6 +17,20 @@ public class Company {
 	private int c_state; 		   // 승인상태 0:미승인 1:승인 2:반려 3:관리자
 
 	
-	private int v_count;		// 문의 횟수
-	//private String 			// 경고 횟수
+	private String b_no;    		// 버스 번호
+	private int b_all_num; 			// 총 버스수
+	private int d_num;				// 운전기사수
+
+	private int v_count;			// 총 문의수
+	private int voc_recommend;		// 총 추천수
+	
+	private int b_lowfloor_num;		// 저상버스수
+	private int b_regular_num;		// 일반버스수
+	
+	private int v_no;				// 문의글 번호
+	private int a_no;				// 답변일 번호
+	private String v_title;			// 문의글 제목
+	private String v_content;		// 문의글 내용
+	private String v_date;			// 문의글 작성일
+	
 }

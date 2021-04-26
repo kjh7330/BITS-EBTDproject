@@ -8,6 +8,6 @@ public interface I_CompanyDriverDao {
 
 	List<DriverBean> getDriverList();
 
-	boolean addDriver(DriverBean dr);
+	boolean addDriver(DriverBean db);
 
 }

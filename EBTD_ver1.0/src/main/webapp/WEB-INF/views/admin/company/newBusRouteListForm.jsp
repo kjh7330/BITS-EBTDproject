@@ -220,7 +220,7 @@
         			<input class="nameinput" value="${abn.ap_b_no}">
         		</td>
         		<td>
-        			<button id="myBtn${abn.ap_no}" class="cdetail-btn10">노선보기</button><!-- 신청번호를 넘겨! -->
+        			<button id="myBtn${abn.ap_b_no}" class="cdetail-btn10">노선보기</button><!-- 버스번호를 넘겨! -->
         		</td>
         		<td>
         			<button id="myBtn1${abn.ap_no}" class="cdetail-btn20">공문보기</button><!-- 신청번호를 넘겨! -->
@@ -296,12 +296,11 @@
     <div id="overlay4">
           <div id="myModal4" class="modal">
              <div class="modal_header">
-                <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서 (노선) </h5>
+                <h5 class="headerroute" style="margin-top:5px; margin-left:10px;"> 등록 신청 공문서 (노선) </h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content4">
              	<p style="color:black;">
-             	${abndList}
              		<table class="modal_table" style="font-weight: bold;">
 	        			<tr>
 							<table class="modal_table21" style="text-align: center">
@@ -320,15 +319,15 @@
         <div id="overlay2">
           <div id="myModal2" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;">${abnList[0].c_name} - 승인하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> - 승인하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content2">
              	<p style="color:black;"><br>
-             		<form action="setCompanyRequestApproval" method="post">
+             		<form action="setNewBusRouteApproval" method="post">
 		                <input type="text" class="approval" value="">번<br>
 		                을 승인하시겠습니까?<br><br>
-		                <input class="approval" type="hidden" name="ap_no" value="">
+		                <input class="approval" type="hidden" name="ap_b_no" value="">
 		        	    <input id="mcbtn1" type="submit" value="승인">
 		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
@@ -342,16 +341,17 @@
         <div id="overlay3">
           <div id="myModal3" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;">${abnList[0].c_name} - 반려하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> - 반려하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content3">
-             	<p style="color:black;"><br>
-             		<form action="setCompanyRequestReject" method="post">
+             	<p style="color:black;">
+             		<form action="setNewBusRouteReject" method="post">
 		                <input type="text" class="reject" value="">번<br>
 		                을 반려하시겠습니까?<br><br>
 		        	    <input class="reject" type="hidden" name="ap_no" value="">
-		        	    <input id="mcbtn1" type="submit" value="승인">
+		        	    반려사유: <input class="reject-reason" type="text" name="ap_reject" placeholder="입력하세요." style="height: 30px; border-width: 1px"><br><br>
+		        	    <input id="mcbtn1" type="submit" value="반려">
 		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
              	</p>
@@ -371,7 +371,7 @@
 		$(".cdetail-btn20").on("click", function() {
 			$.ajax({
 				type : 'get',
-				url : 'getNewBusRouteDetail',
+				url : 'getNewBusOfficialDocument',
 				dataType : 'json',
 				data : {
 					'ap_no' : $(this).attr('id').substring(6)
@@ -431,13 +431,13 @@
 				url : 'getNewBusNumber',
 				dataType : 'json',
 				data : {
-					'ap_no' : $(this).attr('id').substring(5)
+					'ap_no' : $(this).attr('id').substring(6)
 				},
 				success : function(data) {
 					console.log(data);
 			
 				/*버스 번호 넣기*/
-				
+				$('.modal_table22').html('');
 				let mt2 = '';
 				for(i in data){
 					mt2 += '<tr><td>';
@@ -447,6 +447,8 @@
 				}
 				$('.modal_table22').append(mt2);
 				
+				
+				
 				}
 			});
 		}); 
@@ -454,7 +456,7 @@
 			
 		$(".cdetail-btn30").on("click", function() {
 			let apno = $(this).attr('id').substring(5);
-			
+			console.log(apno);
 			$(".approval").val(apno);
 			$("#overlay2").css({visibility : "visible",	opacity : 1	});
 			$("#myModal2").css({display : "inline"});
@@ -473,7 +475,7 @@
 				url : 'getNewBusRouteDetail',
 				dataType : 'json',
 				data : {
-					'ap_no' : $(this).attr('id').substring(5)
+					'ap_b_no' : $(this).attr('id').substring(5)
 				},
 				success : function(data) {
 					console.log(data);

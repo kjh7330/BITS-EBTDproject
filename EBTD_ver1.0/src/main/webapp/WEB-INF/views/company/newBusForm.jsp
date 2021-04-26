@@ -115,8 +115,11 @@ body {
 				<select id="mStopSelect"></select>
 				<input type = "button" id = "stopConfi" value = "선택">
 				<p style = "color: black;">추천 정류장</p>
+<<<<<<< Updated upstream
 				<select id="mRecommendStop"></select>
 				<input type = "button" id = "recommendConfi" value = "선택">
+=======
+>>>>>>> Stashed changes
 				
 			</div>
 			<div id = "busRouteSelect">

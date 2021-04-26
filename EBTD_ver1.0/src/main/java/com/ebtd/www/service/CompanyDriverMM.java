@@ -50,10 +50,10 @@ public class CompanyDriverMM {
 	}
 	
 	//기사 추가
-	public ModelAndView addDriver(DriverBean dr) {
+	public ModelAndView addDriver(DriverBean db) {
 		mav = new ModelAndView();
 		String view = null;
-		boolean b= dDao.addDriver(dr);
+		boolean b= dDao.addDriver(db);
 		//System.out.println(b);
 		if(b) {
 			System.out.println("기사 추가 성공");
