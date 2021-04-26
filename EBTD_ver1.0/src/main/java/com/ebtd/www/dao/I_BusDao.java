@@ -16,6 +16,7 @@ public interface I_BusDao {
 
 	int busNumCheck(String busNum);
 
+	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
 	/* List<BusInfo> addNewBus(HttpSession session); */
 
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ebtd.www.dao.IUserIdDao">
+  
+  	<select id="userCheckId" resultType="String">
+  		select u_username from u where u_username = #{u_username}
+  	</select>
+  	
+  	<select id="userCheckNo" resultType="String">
+  		select U_DISABLEDNO from u where U_DISABLEDNO = #{u_disableno}
+  	</select>
+  	
+  	<insert id="userJoin" parameterType="user_ch">
+  		INSERT INTO U(U_USERNAME, U_DISABLEDNO, U_NAME, U_PASSWORD, U_USERPHONENUM, U_TYPE, U_ADDRESS)
+  		VALUES (#{u_username}, #{u_disable_no},#{u_name},#{u_password}, #{u_userphonenum}, #{u_type}, #{u_address})
+  	</insert>
+  	
+  	
+  	<select id="existUsername" resultType="boolean">
+  		select count(u_username) from u where u_username = #{u_username}
+  	</select>
+  	
+  	<select id="accessUserState" resultType="int">
+  		select u_state from u where u_username = #{u_username}
+  	</select>
+  	
+  	<select id="getPwd" resultType="String">
+  		select u_password from u where u_username = #{u_username}
+  	</select>
+  </mapper>
