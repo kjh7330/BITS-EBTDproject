@@ -21,7 +21,6 @@
 	<br>
 	<br>
 
-
 	<table>
 		<tr>
 			<td><input id="nnext_on_blind" value=0></td>
