@@ -6,28 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-<!-- <div style="color: black; text-align: center">
-		정류장 번호 또는 이름 입력<br> <input id="search">&nbsp;
-		정류장 정보 입력하는 input 박스
-		<button onclick="searchStop()">조회</button>
-	</div>
- -->
-	<table style="color: black">
+
+	<table class="table table-striped" style="color: black">
 		<thead>
 			<tr>
 				<th>신청 번호</th>
 				<th>회사이름</th>
 				<th>동 이름</th>
 				<th>정류장 이름</th>
-<!--  				<th>X값</th>
-				<th>Y값</th> 
-				<th>신청사유</th> -->
 				<th>신청상태</th>
 			</tr>
 		</thead>
@@ -59,12 +55,12 @@ var html = '';
 	 html += '<td>'+nList[i].sa_Y+'</td>'; //Y값 */
 /* 	 html += '<td>'+nList[i].sa_Reason+'</td>'; //신청사유 */
 	 //신청상태(0, 1, 2, 3)에 따라 상태 나타내기
-	 if(nList[i].sa_Status==0) nList[i].sa_Status='대기'; 
-	 else if (nList[i].sa_Status==1) nList[i].sa_Status='승인';
-	 else if (nList[i].sa_Status==2) nList[i].sa_Status='반려';
-	 else if (nList[i].sa_Status==3) nList[i].sa_Status='수정';
+	 if(nList[i].sa_State==0) nList[i].sa_State='대기'; 
+	 else if (nList[i].sa_State==1) nList[i].sa_State='승인';
+	 else if (nList[i].sa_State==2) nList[i].sa_State='반려';
+	 else if (nList[i].sa_State==3) nList[i].sa_State='수정';
 	 html += '<td>'+'<a href=/company/getStopApplyDetail?sa_No='+nList[i].sa_No+'>';
-	 html += nList[i].sa_Status+'</a>'; //신청 상태
+	 html += nList[i].sa_State+'</a>'; //신청 상태
 	 html += '</tr>';
 
  }

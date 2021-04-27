@@ -13,49 +13,58 @@
 </head>
 
 <body>
-<div class="container">
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-
-		<div style="color: black; text-align: center">
-			정류장 이름 검색 <input id="search" name="search">
-			<!-- <select>
-				<option value="all">전체</option>
-				<option value="stopNumber">정류장 번호</option>
-				<option value="stopName">정류장 이름</option>
-			</select> <input id="search" name="search">&nbsp; -->
-			<button onclick="searchStop()">조회</button>
-		</div>
-
+	
+	
 	<table class="table table-striped" style="color: black">
 		<thead>
 			<tr>
-				<th>정류장 번호</th>
-				<th>동 이름</th>
-				<th>정류장 이름</th>
- 				<!-- <th>X값</th>
-				<th>Y값</th>
-				<th>상세내용</th>  -->
+				<th>기사 번호</th>
+				<th>회사 이름</th>
+				<th>기사 이름</th>
+				<th>이미지</th>
+				<th>전화번호</th>
+				<th>입사일</th>
+				<th>버스번호</th>
 			</tr>
 		</thead>
-		<tbody id="stopList">
+		<tbody id="driverDetail">
 		</tbody>
+		<a href="/company/updateDriverForm">정보 수정하기</a>
 	</table>
 
-
+	
 
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
 
 	</div>
-</div>
 </body>
-
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
+let rList = ${rList};
+var html = '';
 
-	
+console.log(rList);
+//기사 상세정보 가져오기
+ for(let i = 0 ; i<rList.length; i++){
+	 
+	 html += '<tr>';
+	 html += '<td>'+rList[i].d_no+'</td>';
+	 html += '<td>'+rList[i].c_userName+'</td>';
+	 html += '<td>'+rList[i].d_name+'</td>';
+	 html += '<td>'+rList[i].d_imgExtention+'</td>';
+	 html += '<td>'+rList[i].d_phoneNum+'</td>';
+	 html += '<td>'+rList[i].d_enterDate+'</td>';
+	 html += '<td>'+rList[i].b_no+'</td>';
+	 html += '</tr>';
+	}
+   
+ $("#driverDetail").empty();
+ $("#driverDetail").append(html);
+
 </script>
 </html>
