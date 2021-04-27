@@ -99,19 +99,19 @@
 <header>
         <div class="container">
             <div class="headertitle">
-                <img src="resources/image/mainlogo.png" alt="EBTD메인로고" />&nbsp;
+                <img src="/resources/image/mainlogo.png" alt="EBTD메인로고" />&nbsp;
             </div>
         </div>
     </header>
     <section class="mainview">
       	
-        <form action="user/loginAccess" name="login" method="post" onsubmit="return check()">
+        <form action="/user/loginAccess" name="login" method="post" onsubmit="return check()">
         <table class="logintable">
             <tr id="inputid">
                 <td class="tabletitle">
                     ID : 
                 </td>
-                <td colspan="3" ><input id="username" name="c_username" type="text" style="border-radius: 8px"/></td>
+                <td colspan="3" ><input id="username" name="u_username" type="text" style="border-radius: 8px"/></td>
                 <td rowspan="2">
                 <button id="logbtn">Login</button> 
                 </td>
@@ -121,7 +121,7 @@
                 <td class="tabletitle">
                     PW : 
                 </td>
-                <td colspan="3"><input id="password" name="c_password" type="password" style="border-radius: 8px"/></td>
+                <td colspan="3"><input id="password" name="u_password" type="password" style="border-radius: 8px"/></td>
             </tr>
         </table>  
 		</form>
@@ -133,7 +133,7 @@
     <footer>
         <div class="footer-container">
             <div>
-                <img src="resources/image/teamlogo.png" alt="BITS로고"/>
+                <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
                 김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁

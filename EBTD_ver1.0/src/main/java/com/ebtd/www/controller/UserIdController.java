@@ -56,23 +56,29 @@ public class UserIdController {
 		}return mav;
 		
 	}
-	@PostMapping(value = "/wheel/login")
+	@PostMapping(value = "/loginAccess")
 	public ModelAndView login(UserBean_ch ub, HttpSession session) {
 		
-		mav = uIdmm.wheelLogin(ub,session);
+		mav = uIdmm.login(ub,session);
 		System.out.println(session.getAttribute("u_username"));
 		return mav;
 	}
-	
+	@RequestMapping(value = "/loginForm")
+	public String loginForm(HttpSession session) {		
+		String view = null;
+		if(session.getAttribute("u_username")==null) {view = "user/loginForm";}
+		else if(session.getAttribute("u_type").equals(0)) {view = "wheel/mainForm";}
+		else if(session.getAttribute("u_type").equals(1)) {view = "blind/mainForm";}
+		return view;
+	}
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {		
+		session.invalidate();
+		
+		String view = "redirect:/user/loginForm";
+		return view;
+	}
 }
-
-
-
-
-
-
-
-
 
 
 

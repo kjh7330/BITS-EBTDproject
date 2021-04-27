@@ -54,15 +54,17 @@ public class UserIdMM {
 		//암호화 모듈 등록
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		//bean에 암호화된 패스워드 등록
+		System.out.println(ub.getU_password());
 		ub.setU_password(pwdEncoder.encode(ub.getU_password()));
-		
+		System.out.println(ub.getU_password());
 		System.out.println("wheelUserJoinResult");
+		
 		
 		//userJoin으로 insert문 실행 후
 		boolean flag = uIdDao.userJoin(ub);
 		if(flag) {
 			//성공시 
-			view = "redirect:/wheel/loginForm";
+			view = "redirect:/user/loginForm";
 		}else {
 			//실패시
 			view = "redirect:/wheel/wheelJoin";
@@ -71,12 +73,13 @@ public class UserIdMM {
 		return mav;
 	}
 
-	public ModelAndView wheelLogin(UserBean_ch ub, HttpSession session) {
+	public ModelAndView login(UserBean_ch ub, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
 		//company DB에 일치하는 아이디 확인
-		
+		System.out.println("username = " + ub.getU_username());
 		if(!uIdDao.existUsername(ub)) {
+			System.out.println("1");
 			//일치하는 아이디 없을 시 로그인창으로 이동 후 msg출력
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
 			mav.setViewName("redirect:/user/loginForm");
@@ -87,8 +90,11 @@ public class UserIdMM {
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();		
 				//패스워드 일치 확인
 		String dbPwd = uIdDao.getPwd(ub);
+		System.out.println(ub.getU_password());
+		System.out.println(dbPwd);
 		if(!pwdEncoder.matches(ub.getU_password(), dbPwd)) {
-			mav.addObject("msg", "일치하는 아이디가 습니다.");
+			System.out.println("2");
+			mav.addObject("msg", "일치하는 아이디가 없습니다.");
 			mav.setViewName("redirect:/user/loginForm");
 			return mav;
 		}
@@ -97,15 +103,19 @@ public class UserIdMM {
 		//아이디 및 pw 일치 확인 후 username 정보 입력 (없으면 null)
 		String username = ub.getU_username();
 		if(username!=null) {
+			System.out.println("3");
 			//일치하는 정보 있을시 userState 정보 가저옴 (1 - 승인, 3 - admin계정)			
 			int u_type = uIdDao.accessUserState(username);
 			System.out.println(u_type);
 			if(u_type==0){
+				System.out.println("4");
 				//휠체어 유저인 경우
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
 				view = "redirect:/wheel/mainForm";
 			}else if(u_type==1) {
+				System.out.println("5");
+				//시각장애인 유저인 경우
 				view = "redirect:/blind/mainForm";
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
@@ -113,7 +123,7 @@ public class UserIdMM {
 		}else {
 			// 비밀번호가 틀린경우
 			mav.addObject("msg", "비밀번호를 확인해주세요");
-			view = "redirect:wheel/loginForm";
+			view = "redirect:user/loginForm";
 		}mav.setViewName(view);
 		return mav;
 	}
