@@ -16,12 +16,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 public class CompanyStopController {
 
-<<<<<<< HEAD
 	private static final Logger logger = LoggerFactory.getLogger(CompanyStopController.class);
-=======
-	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
 
->>>>>>> d1b0ba71a15449dcd8f78c788d1308d2898a2fb5
 
 	@Autowired
 	private CompanyStopMM sm;
