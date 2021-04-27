@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-=======
 //import com.ebtd.www.exception.CommonException;
 import com.ebtd.www.common.Paging;
->>>>>>> ad5e0129ccd976be110eaf794489ee1cf919345e
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.dao.I_CompanyStopDao;
@@ -31,20 +28,17 @@ public class CompanyStopMM {
 		ObjectMapper om =new ObjectMapper(); 
 
 		List<StopBean> sList = null;
-<<<<<<< HEAD
 
 		sList = sDao.getStopList(); 
 
-=======
 		
-		pageNum = (pageNum==null)? 1 : pageNum;
-		
-		if(pageNum<=0) {
-			//throw new CommonException("잘못된 페이지번호 입니다.");
-		}
-		
-		sList = sDao.getStopList(pageNum); 
->>>>>>> ad5e0129ccd976be110eaf794489ee1cf919345e
+//	  	pageNum = (pageNum==null)? 1 : pageNum;
+//		
+//		if(pageNum<=0) {
+//			//throw new CommonException("잘못된 페이지번호 입니다.");
+//		}
+//		
+//		sList = sDao.getStopList(pageNum); //황원혁이 주석처리함 04-27
 		if(sList!=null && sList.size()!=0) { 
 			//ObjectMapper를 사용해서 리스트를 json으로 변환 
 			mav.addObject("sList",om.writeValueAsString(sList));
