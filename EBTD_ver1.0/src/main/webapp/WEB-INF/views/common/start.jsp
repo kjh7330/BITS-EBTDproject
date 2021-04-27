@@ -13,7 +13,8 @@
 
 	<button id = "login">로그인</button>
 	<button id = "admin">관리자</button>
-	<button id = "user">유저</button>
+	<button id = "userjoin">유저 회원가입</button>
+	<button id = "userlogin">유저 로그인</button>
 	<button id = "company">회사</button>
 	<button id = "driver">기사</button>
 
@@ -25,8 +26,11 @@
 	$('#admin').click(function () {
 			location.href = 'admin';
 		});
-		$('#user').click(function () {
+		$('#userjoin').click(function () {
 			location.href = 'user/joinForm';
+		});
+		$('#userlogin').click(function () {
+			location.href = 'user/loginForm';
 		});
 		$('#company').click(function () {
 			location.href = 'company/companyindexForm';
