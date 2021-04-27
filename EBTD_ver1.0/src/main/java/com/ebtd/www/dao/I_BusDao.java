@@ -16,7 +16,22 @@ public interface I_BusDao {
 
 	int busNumCheck(String busNum);
 
+<<<<<<< HEAD
 	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
+=======
+	int applyNewBusRoute(ApplyBusHistory BusBean);
+
+	int applyNewBusRouteDetail(ApplyBusHistory BusBean);
+
+	int addNewMotorNumber(BusBean bb);
+
+	int getApplyNumber(ApplyBusHistory apb);
+
+	int addBusAndCompany(ApplyBusHistory busBean);
+
+	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
+	/* List<BusInfo> addNewBus(HttpSession session); */
+>>>>>>> d1b0ba71a15449dcd8f78c788d1308d2898a2fb5
 	/* List<BusInfo> addNewBus(HttpSession session); */
 
 }

@@ -81,7 +81,13 @@ public class IdMM {
 			}else if(c_state==1) {
 				//승인 완료된 회사일시
 				/*회사 메인 설정 완료시 수정 부탁드립니다.*/
+<<<<<<< HEAD
 				view = "admin/company/companyindex";
+=======
+
+				view = "/company/companyindex";
+
+>>>>>>> d1b0ba71a15449dcd8f78c788d1308d2898a2fb5
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
 			}else if(c_state==3) {
