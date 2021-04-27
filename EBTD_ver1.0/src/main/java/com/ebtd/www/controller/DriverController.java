@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +29,10 @@ public class DriverController {
 	@Autowired
 	DriverMM dm;
 	
+	@PostMapping(value = "/test", produces = "application/json;charset=utf-8")
+	public String data_test () throws JsonProcessingException{
+		return "forward:/driver/testForm";
+	}
 	
 	@GetMapping(value = "/getCompanyList", produces = "application/json;charset=utf-8")
 	public ModelAndView getCompanyList () throws JsonProcessingException{
@@ -47,6 +52,11 @@ public class DriverController {
 	}
 
 	
+	@GetMapping(value = "/testForm")
+	public String testForm(HttpSession ss, String d_name) {
+		ss.setAttribute("d_name", d_name);
+		return "join";//.jsp
+	}
 	@GetMapping(value = "/DriverMainForm")
 	public String driverMainForm(HttpSession ss, String d_name) {
 		ss.setAttribute("d_name", d_name);

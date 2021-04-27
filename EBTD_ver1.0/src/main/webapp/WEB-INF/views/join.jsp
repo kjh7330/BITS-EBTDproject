@@ -150,7 +150,7 @@
 			<img alt="logo" src="resources/image/mainlogo.png">
 		</div>
 		<div id='div_contents'>
-			<form action="joinAccess" method="post">
+			<form action="/driver/test" method="post">
 				<div id=''>
 					<table id='table_contents'>
 						<tr>
@@ -217,7 +217,7 @@
 						<tr>
 							<td class='title' />
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id='#submit'>회원가입</button>
+								<button id='submit'>회원가입</button>
 							</td>
 						</tr>
 					</table>
@@ -233,7 +233,17 @@
 	</div>
 	<div class="dr_modal">
 		<div class="dr_modal_content" title="클릭하면 창이 닫힙니다.">
-			혜지가 줄거임ㅋㅋ루삥빵뽕
+			기사 번호 : <input type="text" id="d_no" name="d_no"><br>
+			회사 이름 : <input type="text" id="c_userName" name="c_userName"><br>
+			기사 이름 : <input type="text" id="d_name" name="d_name"><br>
+			사진 : <input type="file" id="d_imgExtention" name="d_imgExtention">
+					<input type="reset" id="reset" value="파일선택 취소"><br>
+					<input type="hidden" id="fileCheck" name="fileCheck" value="0">
+			핸드폰 번호 : <input type="text" id="p_phoneNum" name="p_phoneNum">
+			입사일 : <input type="text" id="d_enterDate" name="d_enterDate"><br>
+			운행노선 : <input type="text" id="b_no" name="b_no"><br>
+      
+			<input type="submit" value="추가하기" >   
 		</div>
 	</div>
 
@@ -254,11 +264,11 @@
    $('#add_driver_column').click(function () {
       $(".dr_modal").fadeIn();
    });
-   $(".bus_modal").click(function(){ 
-      $(".bus_modal").fadeOut(); 
+   $(".bus_modal").click(function(e){
+	   if($('.bus_modal').is(e.target))	$(".bus_modal").fadeOut(); 
    });
-   $(".dr_modal").click(function(){
-      $(".dr_modal").fadeOut();
+   $(".dr_modal").click(function(e){
+	   if($('.dr_modal').is(e.target))	$(".dr_modal").fadeOut(); 
    });
    $('#del_new_bus').click(function () {
       $('#table_contents').children().children().children().last().remove();

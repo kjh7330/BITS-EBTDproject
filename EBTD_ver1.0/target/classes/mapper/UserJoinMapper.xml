@@ -25,18 +25,10 @@
   	</select>
   	
   	<select id="accessUserState" resultType="int">
-<<<<<<< HEAD
-  		select u_state from u where u_username = #{u_username}
-=======
   		select u_type from u where u_username = #{u_username}
->>>>>>> d1b0ba71a15449dcd8f78c788d1308d2898a2fb5
   	</select>
   	
   	<select id="getPwd" resultType="String">
   		select u_password from u where u_username = #{u_username}
   	</select>
-<<<<<<< HEAD
   </mapper>
-=======
-  </mapper>
->>>>>>> d1b0ba71a15449dcd8f78c788d1308d2898a2fb5

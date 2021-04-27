@@ -25,7 +25,7 @@
   	</select>
   	
   	<select id="accessUserState" resultType="int">
-  		select u_state from u where u_username = #{u_username}
+  		select u_type from u where u_username = #{u_username}
   	</select>
   	
   	<select id="getPwd" resultType="String">
