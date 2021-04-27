@@ -19,27 +19,27 @@
 	<button id="driver">기사</button>
 
 	<script type="text/javascript">
-	$('#login').click(function () {
-		location.href = 'loginForm';
-	});	
-	
-	$('#admin').click(function () {
+		$('#login').click(function () {
+			location.href = 'loginForm';
+		});	
+		$('#admin').click(function () {
 			location.href = 'admin';
 		});
-	$('#user').click(function () {
-		location.href = 'user/joinForm';
-	$('#userjoin').click(function () {
-		location.href = 'user/joinForm';
-	});
-	$('#userlogin').click(function () {
-		location.href = 'user/loginForm';
-	});
-	$('#company').click(function () {
-		location.href = 'company/companyindexForm';
-	});
-	$('#driver').click(function () {
-		location.href = 'driver/getCompanyList';
-	});
+		$('#user').click(function () {
+			location.href = 'user/joinForm';
+		});
+		$('#userjoin').click(function () {
+			location.href = 'user/joinForm';
+		});
+		$('#userlogin').click(function () {
+			location.href = 'user/loginForm';
+		});
+		$('#company').click(function () {
+			location.href = 'company/companyindexForm';
+		});
+		$('#driver').click(function () {
+			location.href = 'driver/getCompanyList';
+		});
 	</script>
 </body>
 </html>
