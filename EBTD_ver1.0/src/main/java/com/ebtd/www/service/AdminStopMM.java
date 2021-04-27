@@ -1,8 +1,10 @@
 package com.ebtd.www.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,7 +79,6 @@ public class AdminStopMM {
 		String view = null;
 		saList=sDao.getStopConfirmList();
 		ObjectMapper om = new ObjectMapper();
-		System.out.println(saList);
 		if(saList!=null && saList.size() != 0) {
 			mav.addObject("saList", om.writeValueAsString(saList));
 			view = "admin/stop/stopConfirmListForm";//.jsp
@@ -88,15 +89,13 @@ public class AdminStopMM {
 		return mav;
 	}
 	//정류장 신청리스트 상세정보 불러오기
-	public ModelAndView getStopConfirmDetail(Integer sa_No) throws JsonProcessingException {
+	public ModelAndView getStopConfirmDetail(Integer sa_No) {
 		mav = new ModelAndView();
 		List<StopApplyBean> saList = null;
 		String view = null;
-		
 		saList=sDao.getStopConfirmDetail(sa_No);
-		ObjectMapper om = new ObjectMapper();
 		if(saList!=null && saList.size() != 0) {
-			mav.addObject("saList", om.writeValueAsString(saList));
+			mav.addObject("saList", saList);
 			view = "admin/stop/stopConfirmDetailForm";//.jsp
 		}else {
 			view = "/admin";
@@ -117,11 +116,28 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
+	
+	public ModelAndView stopList() {
+		mav = new ModelAndView();
+		List<StopBean> sList = null;
+		String view = null;
+		
+		sList=sDao.stopList();
+		
+		if(sList!=null && sList.size() != 0) {
+			mav.addObject("sList", sList);
+			view = "admin/stop/addStopForm";//.jsp
+		}else {
+			view = "/admin";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
 
 	//정류장 이름 중복체크
 	public String checkName(String s_Name) {
 		StopBean sb = sDao.checkStopList(s_Name);
-		System.out.println(sb);
 		if(sb!=null) {
 			return "사용 불가능 합니다.";
 		}
@@ -131,11 +147,72 @@ public class AdminStopMM {
 	//정류장 위치 중복체크
 	public String checkPosition(int s_X, int s_Y) {
 		StopBean sb = new StopBean();
+		System.out.println("s_X = " + s_X);
+		System.out.println("s_Y = " + s_Y);
+		if(	s_X <= 100&&s_Y<=100 ) {
 		sb.setS_X(s_X);
 		sb.setS_Y(s_Y);
 		sb = sDao.checkPosition(sb);
 		if(sb!=null) {
-			return "사용 불가능 합니다.";
+			return "해당 위치에 정류장이 있습니다.";
 		}
-		return "사용 가능 합니다.";	}
+			return "사용 가능 합니다.";	
+		}
+		return "좌표를 벗어났습니다.";
+	}
+	
+	//정류장 승인 버튼 클릭시 state 값 0-->1 , 정류장 리스트에 추가
+	public ModelAndView setStopRequestApproval(Map<String, Object> saList) {
+		mav = new ModelAndView();
+		String view = null;
+		int s_No = sDao.getStopNo(saList);
+		saList.put("s_No", s_No);
+		
+		if(sDao.approvalAddStop(saList)) {
+			sDao.setStopRequestApproval(saList.get("sa_No"));
+			view="redirect:/admin/stop/getStopConfirmList";
+		}else {
+			view="redirect:/admin/stop/getStopConfirmList";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	//정류장 반려 버튼 클릭시 state 값 0-->2
+	public ModelAndView setStopRequestReject(Integer sa_No) {
+		mav = new ModelAndView();
+		String view = null;
+		if(sDao.setStopRequestReject(sa_No)!=0) {
+			view="redirect:/admin/stop/getStopConfirmList";
+		}else {
+			view="redirect:/admin";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public ModelAndView getOfficialDocumentResult(){
+		mav = new ModelAndView();
+		List<StopApplyBean> saList = null;
+		String view = null;
+		
+		saList=sDao.getOfficialDocumentResult();
+		
+		if(saList!=null && saList.size() != 0) {
+			mav.addObject("saList", saList);
+			view = "/admin/stop/officialDocumentResultForm";//.jsp
+		}else {
+			view = "/admin/stop/officialDocumentResultForm";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public String checkPosition(String t_Name) {
+		String s_No = sDao.checkStopNo(t_Name);
+		
+		return s_No;
+	}
+
+
 }

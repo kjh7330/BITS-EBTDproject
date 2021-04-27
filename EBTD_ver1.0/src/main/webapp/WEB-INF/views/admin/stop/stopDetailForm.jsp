@@ -49,10 +49,7 @@ let str="<tr>"
 	str+='<td>정류장 이름</td><td>'+${sList}[i]["s_NAME"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
-	str+='<td>x축</td><td>'+${sList}[i]["s_X"]+'</td>';
-	str+="</tr>";
-	str+="<tr>"
-	str+='<td>y축</td><td>'+${sList}[i]["s_Y"]+'</td>';
+	str+='<td>위치</td><td>'+${sList}[i]["s_X"]+', '+${sList}[i]["s_Y"]+'</td>';
 	str+="</tr>";
 	str+="<tr>"
 	str+='<td>상세정보</td><td id="stopDetail">';
