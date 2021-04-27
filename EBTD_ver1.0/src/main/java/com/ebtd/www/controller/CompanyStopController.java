@@ -15,13 +15,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 public class CompanyStopController {
-<<<<<<< Updated upstream
 
 	private static final Logger logger = LoggerFactory.getLogger(CompanyStopController.class);
 
-=======
-	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
->>>>>>> Stashed changes
 	@Autowired
 	private CompanyStopMM sm;
 	ModelAndView mav;
