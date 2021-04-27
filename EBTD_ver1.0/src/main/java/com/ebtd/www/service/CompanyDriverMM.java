@@ -30,13 +30,12 @@ public class CompanyDriverMM {
 		List<DriverBean> dList = null;
 
 		dList = dDao.getDriverList(); 
-		//System.out.println("@@@@@@@@@@@@");
-		//System.out.println(dList);
+		
 		if(dList!=null && dList.size()!=0) { 
 			//ObjectMapper를 사용해서 리스트를 json으로 변환 
 			mav.addObject("dList",om.writeValueAsString(dList));
 			view = "company/driverListForm";
-			//System.out.println(dList);
+			System.out.println(dList);
 			//System.out.println(sList.get(0).getS_name());
 			System.out.println("기사 정보 가져오기 성공"); 
 			mav.setViewName(view); 
@@ -44,35 +43,6 @@ public class CompanyDriverMM {
 		else { 
 			view = "company/companyindex";
 			System.out.println("기사 정보 가져오기 실패"); 
-			mav.setViewName(view);
-
-		}
-		return mav; 
-	}
-	
-	//기사정보 상세보기
-	public ModelAndView getDriverDetail(int d_no) throws JsonProcessingException {
-		mav = new ModelAndView(); 
-		String view=null; 
-
-		ObjectMapper om =new ObjectMapper(); 
-
-		List<DriverBean> rList = null;
-
-		rList = dDao.getDriverDetail(d_no); 
-		System.out.println("@@@@@@@@@@@@");
-		
-		if(rList!=null && rList.size()!=0) { 
-			//ObjectMapper를 사용해서 리스트를 json으로 변환 
-			mav.addObject("rList",om.writeValueAsString(rList));
-			view = "company/driverDetailForm";
-			System.out.println("기사 상세정보 가져오기 성공"); 
-			//System.out.println(rList);
-			mav.setViewName(view); 
-		} 
-		else { 
-			view = "company/driverListForm";
-			System.out.println("기사 상세정보 가져오기 실패"); 
 			mav.setViewName(view);
 
 		}
@@ -95,8 +65,6 @@ public class CompanyDriverMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
-	
 	
 
 }

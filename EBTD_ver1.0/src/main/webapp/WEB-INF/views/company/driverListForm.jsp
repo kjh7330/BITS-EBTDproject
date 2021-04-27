@@ -6,10 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +14,7 @@
 	</div>
 	
 	
-	<table class="table table-striped" style="color: black">
+	<table style="color: black">
 		<thead>
 			<tr>
 				<th>기사 번호</th>
@@ -54,8 +50,6 @@ console.log(dList);
 	 html += '<tr>';
 	 html += '<td>'+dList[i].d_no+'</td>';
 //	 html += '<td>'+dList[i].c_userName+'</td>';
-	/*  html += '<td>'+'<a href=/company/getDriverDetail?d_no='+dList[i].d_no+'>';
-	 html += dList[i].d_name+'</a>'; */
 	 html += '<td>'+dList[i].d_name+'</td>';
 	 html += '<td>'+dList[i].d_imgExtention+'</td>';
 //	 html += '<td>'+dList[i].d_phoneNum+'</td>';

@@ -41,15 +41,6 @@ public class CompanyDriverController {
 
 	}
 	
-	//기사 상세보기 페이지 이동 
-		@GetMapping(value = "/company/getDriverDetail") 
-		public ModelAndView getDriverDetail(Integer d_no) throws JsonProcessingException { 
-			logger.info("기사 목록보기 페이지 이동"); 
-			mav=dm.getDriverDetail(d_no);
-			return mav; 
-
-		}
-	
 	//기사 추가 페이지 이동 
 		@GetMapping(value = "/company/addDriverForm") 
 		public String addDriverForm() { 

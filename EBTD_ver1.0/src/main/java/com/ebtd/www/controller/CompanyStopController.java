@@ -1,8 +1,6 @@
 package com.ebtd.www.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 public class CompanyStopController {
 
+<<<<<<< HEAD
+	private static final Logger logger = LoggerFactory.getLogger(CompanyBusController.class);
+=======
 	private static final Logger logger = LoggerFactory.getLogger(CompanyStopController.class);
-
+>>>>>>> 59cf6c027f3916a76f45f2246455e705c92825ad
 
 	@Autowired
 	private CompanyStopMM sm;
@@ -33,9 +34,9 @@ public class CompanyStopController {
 
 	//정류장 목록보기 페이지 이동 
 	@GetMapping(value = "/company/getStopList") 
-	public ModelAndView getStopList(Integer pageNum, HttpServletRequest req) throws JsonProcessingException { 
+	public ModelAndView getStopList() throws JsonProcessingException { 
 		logger.info("정류장 목록보기 페이지 이동"); 
-		mav=sm.getStopList(pageNum);
+		mav=sm.getStopList();
 		return mav; 
 
 	}
@@ -62,6 +63,7 @@ public class CompanyStopController {
 	@RequestMapping(value = "/company/addNewStop")
 	public ModelAndView addNewStop(StopApplyBean sa){
 		mav=sm.addNewStop(sa);
+
 		return mav;	
 	}
 
