@@ -13,7 +13,7 @@
 
 	아이디 : <input name = "u_username"  id = "u_username" required minlength="3"/><div class="check_font" id="id_check"></div>
 	비밀번호 : <input name = "u_password" id = "u_password" minlength="4"/> <br>
-	비밀번호 확인 : <input name = "u_password" id = "u_password2"/> <br>
+	비밀번호 확인 : <input id = "u_password2"/> <br>
 	이름 : <input name = "u_name"/> <br>
 	장애 등록 번호 : <input id='u_disable_no' name = "u_disable_no" minlength="6" maxlength="6" required="required"/><br><div class="check_font" id="no_check"></div>
 	핸드폰 번호 : <input id = "u_userphonenum" name="u_userphonenum" placeholder="특수문자(-) 없이 입력해주세요" required minlength="11" maxlength="11"> <br>
@@ -21,13 +21,15 @@
 	상세 주소 : <input id = "AddressArr2"> <br/>
 	<div class="check_font" id="addr_check"></div>
 	<input type="hidden" id='u_address' name = "u_address" >
+	
+	<div id='guardDiv'></div>
 	</form>
-<!-- 	<div id='guardDiv' hidden="display:none">
+ 	
 		보호자 이름 : <input name = 'u_guardname'><br>
 		보호자 핸드폰 번호 : <input name = 'u_guardphonenum'><br>
 		보호자 관계 : <input name = 'u_guardrelation'><br>
-	</div>
- -->	<button id='submitCheckBtn' disabled="disabled">회원가입</button>
+	
+ 	<button id='submitCheckBtn' disabled="disabled">회원가입</button>
 </body>
 
 <script type="text/javascript">
