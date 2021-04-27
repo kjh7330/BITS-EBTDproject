@@ -8,12 +8,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 #stoptable{
-	width : 100%;
+	width : 99.9%;
 	height : 200px;
 }
-td{
+th{
 	text-align: center;
+	width: 33.3%;
 	}
+.stopName{
+	width : 33.3%;
+}
 </style>
 <script type="text/javascript">
 
@@ -28,11 +32,14 @@ td{
 <br><br>
 
 <table id="stoptable" style="color: black" border="1px solid black">
+	<thead>
 	<tr>
-		<td>정류장 번호</td>
-		<td>정류장 이름</td>
-		<td>동 이름</td>	
+		<th>정류장 번호</th>
+		<th>정류장 이름</th>
+		<th>동 이름</th>	
 	</tr>
+	</thead>
+	
 </table>
 </body>
 
@@ -64,7 +71,7 @@ function filter(){
   for(i=0;i<line.length;i++){
     stopName = line[i].getElementsByClassName("stopName");
     if(stopName[0].innerHTML.toUpperCase().indexOf(value) > -1){
-   	  line[i].style.display = "visible";
+   	  line[i].style.display='';
     }else{
       line[i].style.display = "none";
     }

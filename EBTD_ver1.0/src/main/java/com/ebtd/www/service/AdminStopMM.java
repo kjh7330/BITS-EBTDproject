@@ -117,6 +117,7 @@ public class AdminStopMM {
 		return mav;
 	}
 	
+	//정류장 추가 - 동 이름 불러오기
 	public ModelAndView stopList() {
 		mav = new ModelAndView();
 		List<StopBean> sList = null;
@@ -133,7 +134,12 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	//해당 동네 정류장 마지막번호 + 1 불러오기
+	public String checkPosition(String t_Name) {
+		String s_No = sDao.checkStopNo(t_Name);
+		
+		return s_No;
+	}
 
 	//정류장 이름 중복체크
 	public String checkName(String s_Name) {
@@ -190,7 +196,8 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	
+	//승인 반려 결재내역 불러오기
 	public ModelAndView getOfficialDocumentResult(){
 		mav = new ModelAndView();
 		List<StopApplyBean> saList = null;
@@ -207,12 +214,5 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
-	public String checkPosition(String t_Name) {
-		String s_No = sDao.checkStopNo(t_Name);
-		
-		return s_No;
-	}
-
 
 }
