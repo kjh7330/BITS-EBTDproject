@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.exception.CommonException;
+//import com.ebtd.www.exception.CommonException;
 import com.ebtd.www.common.Paging;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
@@ -32,7 +32,7 @@ public class CompanyStopMM {
 		pageNum = (pageNum==null)? 1 : pageNum;
 		
 		if(pageNum<=0) {
-			throw new CommonException("잘못된 페이지번호 입니다.");
+			//throw new CommonException("잘못된 페이지번호 입니다.");
 		}
 		
 		sList = sDao.getStopList(pageNum); 

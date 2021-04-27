@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.service.AdminStopMM;
 
@@ -31,5 +32,12 @@ public class AdminStopRestController {
 		return ResponseEntity.ok(am.checkPosition(s_X, s_Y)); 
 		
 	}
+	
+	@GetMapping(value = "/admin/stop/checkStopNo", produces="text/plain;charser=utf-8")
+	public String stopList(String t_Name){
+
+		return am.checkPosition(t_Name); 
+	}
+	
 	
 }

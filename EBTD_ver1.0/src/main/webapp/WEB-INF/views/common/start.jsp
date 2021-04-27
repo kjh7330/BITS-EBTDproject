@@ -26,13 +26,8 @@
 	$('#admin').click(function () {
 			location.href = 'admin';
 		});
-<<<<<<< HEAD
-		$('#user').click(function () {
-
-=======
 		$('#userjoin').click(function () {
 			location.href = 'user/joinForm';
->>>>>>> 63356cee1a2ee0b5774c6ed6a52a60a6d21546a6
 		});
 		$('#userlogin').click(function () {
 			location.href = 'user/loginForm';

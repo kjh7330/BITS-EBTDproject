@@ -15,7 +15,7 @@
 		
 </table>
 
-<form action="addStopForm"><input type="submit" value="정류장 등록"></form>
+<form action="stopList"><input type="submit" value="정류장 등록"></form>
 </body>
 <script type="text/javascript">
 console.log(${saList});

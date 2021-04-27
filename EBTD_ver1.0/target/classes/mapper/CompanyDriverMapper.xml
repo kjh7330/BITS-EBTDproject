@@ -9,11 +9,16 @@
  	<select id="getDriverList" resultType="driver" > 
 		SELECT * FROM DRIVER
 	</select>
+	
+	<!-- 기사 상세정보 조회 -->
+ 	<select id="getDriverDetail" resultType="driver" parameterType="Integer" > 
+		SELECT * FROM DRIVER WHERE d_no = #{d_no}
+	</select>
   
 	<!-- 기사 추가 -->
-  	<insert id="addDriver" parameterType="driver"> 
+<!--    	<insert id="addDriver" parameterType="driver"> 
 		INSERT INTO DRIVER
 		VALUES (#{d_no},#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
-	</insert>  
+	</insert>    -->
 	
 </mapper>

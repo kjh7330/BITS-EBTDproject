@@ -16,9 +16,12 @@
 	</select>
   
   	<!-- 정류장 등록 신청 -->
-  	<insert id="addNewStop" parameterType="sa"> 
-		INSERT INTO STOP_APPLY
-		VALUES(#{sa_X},#{sa_Y},#{sa_Name},#{t_Name},#{c_UserName},#{sa_Reason},#{sa_Status},#{sa_No},DEFAULT,#{sa_Disreason})
+  	<insert id="addNewStop"> 
+  		<selectKey resultType="int" order="BEFORE" >
+			SELECT SA_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO STOP_APPLY(SA_X,SA_Y,SA_NAME,T_NAME,C_USERNAME,SA_REASON,SA_STATE,SA_NO,SA_DATE)
+		VALUES(#{sa_X},#{sa_Y},#{sa_Name},#{t_Name},#{c_UserName},#{sa_Reason},#{sa_State},SA_NO_SEQ.NEXTVAL,DEFAULT)
 	</insert>  
 	
 	<!-- 정류장 등록 내역 조회 -->
@@ -37,7 +40,7 @@
 	</select>
 	
 	<!-- 정류장 위치 중복 조회 -->
- 	<select id="checkSaPosition" resultType="stop" parameterType="Integer" > 
+ 	<select id="checkSaPosition" resultType="stop" parameterType="Map" > 
 		SELECT * FROM STOP WHERE S_X = #{S_X} AND S_Y = #{S_Y}
 	</select>
 	

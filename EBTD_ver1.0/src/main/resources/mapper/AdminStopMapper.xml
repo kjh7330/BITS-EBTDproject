@@ -6,7 +6,7 @@
 <mapper namespace="com.ebtd.www.dao.I_AdminStopDao">
 
 <select id="getStopList" resultType="stop">
-	SELECT * FROM STOP
+	SELECT * FROM STOP ORDER BY S_NO ASC
 </select>
 
 <select id="getStopDetail" parameterType="Integer" resultType="stop">
@@ -18,8 +18,8 @@
 </select>
 
 <select id="getStopConfirmList" resultType="sa">
-	SELECT * FROM STOP_APPLY
-</select>
+	SELECT * FROM STOP_APPLY WHERE SA_STATE = 0
+</select>	
 
 <select id="getStopConfirmDetail" parameterType="Integer" resultType="sa">
 	SELECT * FROM STOP_APPLY WHERE SA_NO=#{sa_No}
@@ -33,6 +33,10 @@
 	SELECT S_NAME FROM STOP WHERE S_X=#{s_X} and S_Y=#{s_Y}
 </select> 
 
+<select id="stopList" resultType="stop">
+	SELECT DISTINCT T_NAME FROM S
+</select>
+
 <insert id="addStop" parameterType="stop">
 	INSERT INTO STOP VALUES(#{S_NO}, #{T_NAME}, #{S_NAME}, #{S_X}, #{S_Y}, #{S_DETAIL})
 </insert>
@@ -41,4 +45,27 @@
 	UPDATE STOP SET S_DETAIL=#{S_DETAIL} WHERE S_NO=#{S_NO}
 </update>
 
+<update id="setStopRequestReject" parameterType="Integer">
+	UPDATE STOP_APPLY SET SA_STATE=2 WHERE SA_NO=#{sa_No}
+</update>
+
+<select id="getStopNo" parameterType="Map" resultType="int">
+	SELECT MAX(S_NO)+1 AS S_NO FROM S WHERE T_NAME=#{t_Name}
+</select>
+
+<insert id="approvalAddStop" parameterType="Map">
+	INSERT INTO STOP VALUES(#{s_No}, #{t_Name}, #{sa_Name}, #{sa_X}, #{sa_Y}, null)
+</insert>
+
+<update id="setStopRequestApproval" parameterType="Map">
+	UPDATE STOP_APPLY SET SA_STATE=1 WHERE SA_NO=#{sa_No}
+</update>
+
+<select id="getOfficialDocumentResult" resultType="sa">
+	SELECT * FROM STOP_APPLY WHERE SA_STATE=1 OR SA_STATE=2
+</select>
+
+<select id="checkStopNo" parameterType="String" resultType="String">
+	SELECT MAX(S_NO)+1 AS S_NO FROM S WHERE T_NAME=#{t_Name}
+</select>
 </mapper>
