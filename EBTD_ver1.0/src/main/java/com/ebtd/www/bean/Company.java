@@ -33,4 +33,5 @@ public class Company {
 	private String v_content;		// 문의글 내용
 	private String v_date;			// 문의글 작성일
 	
+	private String where;			// 조회기간
 }

@@ -346,11 +346,12 @@
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content3">
-             	<p style="color:black;"><br>
-             		<form action="setCompanyRequestReject" method="post">
+             	<p style="color:black;">
+             		<form action="setUpdateBusRouteReject" method="post">
 		                <input type="text" class="reject" value="">번<br>
 		                을 반려하시겠습니까?<br><br>
-		        	    <input class="reject" type="hidden" name="ap_no" value="">
+		        	    <input class="reject" type="hidden" name="ap_b_no" value="">
+		        	    반려사유: <input class="reject-reason" type="text" name="ap_reject" placeholder="입력하세요." style="height: 30px; border-width: 1px"><br><br>
 		        	    <input id="mcbtn1" type="submit" value="반려">
 		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
