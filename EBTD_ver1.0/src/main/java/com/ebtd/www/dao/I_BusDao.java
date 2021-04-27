@@ -28,6 +28,8 @@ public interface I_BusDao {
 
 	int addBusAndCompany(ApplyBusHistory busBean);
 
+	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
+	/* List<BusInfo> addNewBus(HttpSession session); */
 	/* List<BusInfo> addNewBus(HttpSession session); */
 
 }
