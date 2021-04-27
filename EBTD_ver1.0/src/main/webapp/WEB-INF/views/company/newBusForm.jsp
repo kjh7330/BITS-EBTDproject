@@ -42,6 +42,7 @@ body {
 	visibility: hidden;
 	opacity: 0;
 	transition: all 0.5s ease;
+	color : black;
 }
 
 /* modal box */
@@ -108,23 +109,36 @@ body {
 				<span class="close">&times;</span>
 			</div>
 			<div class="modal_content" style="text-align: center;">
-				<input id="mBusNum">
 				<p style="color: black;">동, 읍, 면 선택</p>
 				<select id="mTownSelect"></select>
 				<p style="color: black;">출발 정류장 선택</p>
 				<select id="mStopSelect"></select>
 				<input type = "button" id = "stopConfi" value = "선택">
 				<p style = "color: black;">추천 정류장</p>
-<<<<<<< Updated upstream
 				<select id="mRecommendStop"></select>
 				<input type = "button" id = "recommendConfi" value = "선택">
-=======
->>>>>>> Stashed changes
 				
 			</div>
+			<form id = "routeForm" action="/company/applyNewBusRoute" method = "post">
 			<div id = "busRouteSelect">
-				<p style = "color: black;">버스 노선</p>
+				<p style = "color: black;">버스 노선</p> <input type = "text" id = "stopCount" name = "stopCount">개 정류장
+				<input id="mBusNum" name= "busNum">번 버스 <br/>
 			</div>
+				운행 버스 배차
+				<table id="dispatch">
+					<tr>
+						<td>차량번호 :</td>
+						<td><input type = "text" class = "motorNumber" name = "motorNumber1"></td>
+						<td><select name = "lowFloor1">
+							<option value = "일반">일반</option>
+							<option value = "저상">저상</option>
+						</select></td>
+						<td><input type = "button" value = "추가" id = "add"></td>
+					</tr>
+				</table>
+				총 버스 갯수 :<input id="motorCount" type = "text" name= "motorCount">
+				<input id="submitRoute" type = "submit">
+			</form>
 			<div class="modal_footer">
 			</div>
 		</div>
@@ -141,9 +155,12 @@ body {
 <script>
 let tList = ${tList};
 let sList = ${sList};
+var startX;
+var startY;
 let tName;
 console.log(sList);
 console.log(tList);
+var j = 1;
 
 for(let i in tList) {
 	let tName = tList[i]['t_NAME'];
@@ -210,9 +227,17 @@ $('#stopConfi').on('click', function() {
 	let stopRoute = $('.stopRoute').val();
 	let selectX;
 	let selectY;
+	let selectStopNumber
 	console.log(selectStop);
+	//선택한 정류장 번호 가져오기
+	for(let i in sList) {
+		if(selectStop == sList[i]['s_NAME']) {
+			selectStopNumber = sList[i]['s_NO'];
+		};
+	};
 	//선택한 정류장 찍기
-	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+selectStop+"' readOnly>");
+	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+j+" : "+selectStop+"' readOnly>");
+	$('#busRouteSelect').append("<input type = 'text' class = 'stopRouteNum' name = 'stopRouteNum"+j+"' value = '"+selectStopNumber+"' readOnly>");
 	//선택한 정류장의 좌표 가져오기
 	for(let i in sList) {
 		if(selectStop == sList[i]['s_NAME']) {
@@ -221,24 +246,35 @@ $('#stopConfi').on('click', function() {
 			};
 	};
 	console.log(selectX);
-	console.log(selectY);
 	//범위 안에 정류장 가져오기
-	let recommendStopName;
+	var recommendStopName;
 	for(let i in sList) {
 		if(selectX-5 < sList[i]['s_X'] && sList[i]['s_X'] < selectX+5 && selectY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < selectY+5 && selectStop != sList[i]['s_NAME'] ) {
 			recommendStopName = sList[i]['s_NAME'];
 			$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
 		};
 	};
-	/* for(let i in recommendStopName) {
-		$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
-	}; */
-	//$('#mRecommendStop').html('');
+	//출발 정류장 셀렉박스 비활성화
+	const btn = document.getElementById('stopConfi');
+	btn.disabled = 'disabled';
+	startX = selectX;
+	startY = selectY;
+	j++;
 });  
+//추천 정류장 선택 버튼 클릭 
 $('#recommendConfi').on('click', function() {
-	let recommendSelect = $('#mRecommendStop').val();
+	var recommendSelect = $('#mRecommendStop').val();
+	let recommendStopNumber;
+	//선택한 정류장 정류장 번호 가져오기
+	for(let i in sList) {
+		if(recommendSelect == sList[i]['s_NAME']) {
+			recommendStopNumber = sList[i]['s_NO'];
+		};	
+	};
 	//선택한 정류장 찍기
-	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+recommendSelect+"' readOnly>");
+	$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '"+j+" : "+recommendSelect+"' readOnly>");
+	$('#busRouteSelect').append("<input type = 'text' class = 'stopRouteNum' name = 'stopRouteNum"+j+"' value = '"+recommendStopNumber+"' readOnly>");
+	document.getElementById('stopCount').value= j;
 	//select 박스 초기화
 	$('#mRecommendStop').html('');
 	//선택한 정류장 좌표 가져오기
@@ -247,17 +283,111 @@ $('#recommendConfi').on('click', function() {
 			recommendX = sList[i]['s_X'];
 			recommendY = sList[i]['s_Y'];
 			};
-	}
-	console.log(recommendX);
-	console.log(recommendY);
-	//범위 안에 정류장 가져오기
-	let recommendStopName;
-	for(let i in sList) {
-		if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5 && recommendSelect != sList[i]['s_NAME'] ) {
-			recommendStopName = sList[i]['s_NAME'];
-			$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
-		};
 	};
+	console.log("재시작된 전역변수"+startX);
+	//범위 안에 선택 할 정류장 가져오기
+	var recommendStopName;
+	console.log(startX, startY);
+	console.log(recommendX, recommendY);
+	//x축 +, y축 + 인 경우
+	if(startX < recommendX && startY < recommendY) {
+		console.log("x축 +, y축 + 인 경우");
+		for(let i in sList) {
+			if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+10)||(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			};
+		};//for문 end
+	}//if문 end
+	//x축 +, y축 - 인 경우
+	else if(startX < recommendX && recommendY < startY) {
+		console.log("x축 +, y축 - 인 경우");
+		for(let i in sList) {
+			 if((recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY-5)) {
+				 recommendStopName = sList[i]['s_NAME'];
+					$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");	
+				}
+		}//for문 end
+	}// if문 end
+	//x축 -, y축 - 인 경우
+	else if(recommendX < startX && recommendY < startY) {
+		console.log("x축 -, y축 - 인 경우");
+		for(let i in sList) {
+			if((recommendX-5< sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && sList[i]['s_Y'] < recommendY && recommendY-5 < sList[i]['s_Y'])||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && sList[i]['s_Y'] < recommendY+5 && recommendY < sList[i]['s_Y'])) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end 
+	}// if문 end 
+	//x축 -, y축 + 인 경우 
+	else if(recommendX < startX && startY < recommendY) {
+		console.log("x축 -, y축 + 인 경우");
+		for(let i in sList) {
+			if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end
+	}//if문 end
+	//x축 0, y축 + 인 경우
+	else if(recommendX==startX && startY < recommendY) {
+		console.log("x축 0, y축 + 인 경우");
+		for(let i in sList) {
+			if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end
+	}//if문 end
+	//x축 0, y축 - 인 경우
+	else if(recommendX==startX && recommendY < startY) {
+		console.log("x축 0, y축 - 인 경우");
+		for(let i in sList) {
+			if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end 
+	}//if문 end
+	//x축 +, y축 0 인 경우
+	else if(startX<recommendX && recommendY==startY) {
+		console.log("x축 +, y축 0 인 경우");
+		for(let i in sList) {
+			if(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end
+	}//if문 end
+	//x축 -, y축 0 인 경우
+	else if(startX<recommendX && recommendY==startY) {
+		console.log("x축 -, y축 0 인 경우");
+		for(let i in sList) {
+			if(recommend-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
+				recommendStopName = sList[i]['s_NAME'];
+				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+			}
+		}//for문 end
+		
+	}//if문 end
+	startX = recommendX;
+	startY = recommendY;
+	console.log("재설정된 전역변수"+startX, startY);
+	j++;
 }); 
+
+var h = 2;
+var k = 2;
+$('#add').on('click', function() {
+	$('#dispatch').append("<tr><td>차량번호 :</td><td><input type = 'text' class = 'motorNumber' name = 'motorNumber"+h+"'></td><td><select name = 'lowFloor"+h+"'><option value='일반'>일반</option><option value='저상'>저상</option></select></td></tr>");
+	document.getElementById("motorCount").value = k;
+	h++;
+	k++;
+});
+$('#submitRoute').on('click', function(){
+	h=2;
+	k=1;
+});
+
 </script>
 </html>

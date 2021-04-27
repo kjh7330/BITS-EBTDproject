@@ -16,9 +16,26 @@
 	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
 	</select>
 	
-	<select id="getTownNameList" resultType="String">
-	SELECT t_name FROM T
+	<select id="getApplyNumber" resultType="int" parameterType="com.ebtd.www.bean.ApplyBusHistory">
+	SELECT AP_NO FROM APPLY_BUS_HISTORY WHERE AP_B_NO = #{ap_b_no}
 	</select>
 	
+	<insert id="applyNewBusRoute" parameterType="com.ebtd.www.bean.ApplyBusHistory">
+	<selectKey resultType="int" order="BEFORE" >
+	SELECT SEQ_AP_NO.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 0)
+	</insert>
+	
+	<insert id="addBusAndCompany" parameterType="com.ebtd.www.bean.ApplyBusHistory">
+	INSERT INTO BUS(B_NO, C_USERNAME) VALUES(#{ap_b_no}, #{c_username})
+	</insert>
 
+	<insert id="applyNewBusRouteDetail" parameterType="com.ebtd.www.bean.ApplyBusHistory">
+	INSERT INTO APPLY_BUS_HISTORY_DETAIL(AP_NO, AP_B_NO, APDE_TURN, S_NO) VALUES(#{ap_no}, #{ap_b_no}, #{apde_turn}, #{s_no})
+	</insert>
+	
+	<insert id="addNewMotorNumber" parameterType="bus">
+	INSERT INTO ALLBUS(AB_NO, B_NO, AB_TYPE, AB_STATE) VALUES(#{motorNumber}, #{busNumber}, #{busType}, 0)
+	</insert>
 </mapper>

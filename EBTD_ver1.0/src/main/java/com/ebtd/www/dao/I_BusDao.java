@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.TownBean;
+import com.ebtd.www.bean.ApplyBusHistory;
+import com.ebtd.www.bean.BusBean;
 
 public interface I_BusDao {
 
@@ -16,7 +18,16 @@ public interface I_BusDao {
 
 	int busNumCheck(String busNum);
 
-	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
+	int applyNewBusRoute(ApplyBusHistory BusBean);
+
+	int applyNewBusRouteDetail(ApplyBusHistory BusBean);
+
+	int addNewMotorNumber(BusBean bb);
+
+	int getApplyNumber(ApplyBusHistory apb);
+
+	int addBusAndCompany(ApplyBusHistory busBean);
+
 	/* List<BusInfo> addNewBus(HttpSession session); */
 
 }

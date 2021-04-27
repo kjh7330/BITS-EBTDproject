@@ -40,9 +40,51 @@ public class CompanyBusController {
 	
 	@GetMapping(value = "/newBusForm")
 	public ModelAndView newBusForm() throws JsonProcessingException { //신규 노선 등록 신청 페이지 이동
-		System.out.println("URL");
 		mav = new ModelAndView();
 		mav = bm.getStopInfoList();
+		mav.setViewName("company/newBusForm");
+		return mav;
+	}
+	@RequestMapping(value = "/mainForm")
+	public ModelAndView mainForm() throws JsonProcessingException { //신규 노선 등록 신청 페이지 이동
+		System.out.println("URL");
+		mav.setViewName("/company/companyindex");
+		return mav;
+	}
+	
+	@PostMapping(value = "/applyNewBusRoute") //신규 노선 정보 요청하기
+	public ModelAndView applyNewBusRoute(@RequestParam Map busRoute, Model model, HttpSession session) {
+		model.addAttribute("busNum", busRoute.get("busNum"));
+		Object id = session.getAttribute("c_username");
+		Object busNum = model.getAttribute("busNum");
+		mav = new ModelAndView();
+		System.out.println("버스넘버는"+model.getAttribute("busNum"));
+		System.out.println("세션은"+session.getAttribute("c_username"));
+		mav = bm.applyNewBusRoute(id, busNum);
+		mav = bm.applyNewBusRouteDetail(busRoute, model); //순서 바꿔야함 밑이랑
+		mav = bm.addBusNumber(busRoute, model);
+		mav.setViewName("redirect:/company/mainForm");
+		return mav;
+	}
+	@GetMapping(value = "/existBusUpdateForm")
+	public ModelAndView existBusUpdateForm() throws JsonProcessingException { //기존 노선 변경 페이지 이동
+		mav = new ModelAndView();
+		mav = bm.getStopInfoList();
+		mav.setViewName("company/existBusUpdateForm");
+		return mav;
+	}
+	@PostMapping(value = "/applyUpdateBusRoute")
+	public ModelAndView applyUpdateBusRoute(@RequestParam Map busRoute, Model model, HttpSession session) {
+		model.addAttribute("busNum", busRoute.get("busNum"));
+		Object id = session.getAttribute("c_username");
+		Object busNum = model.getAttribute("busNum");
+		mav = new ModelAndView();
+		System.out.println("버스넘버는"+model.getAttribute("busNum"));
+		System.out.println("세션은"+session.getAttribute("c_username"));
+		mav = bm.applyNewBusRoute(id, busNum);
+		mav = bm.applyNewBusRouteDetail(busRoute, model); //순서 바꿔야함 밑이랑
+		mav = bm.addBusNumber(busRoute, model);
+		mav.setViewName("redirect:/company/mainForm");
 		return mav;
 	}
 }
