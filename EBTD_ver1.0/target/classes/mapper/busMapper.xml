@@ -15,5 +15,10 @@
 	<select id="busNumCheck" resultType = "int" parameterType="String">
 	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
 	</select>
+	
+	<select id="getTownNameList" resultType="String">
+	SELECT t_name FROM T
+	</select>
+	
 
 </mapper>

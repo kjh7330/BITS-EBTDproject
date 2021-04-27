@@ -17,23 +17,11 @@ public class IdMM {
 	//companyDao 주입
 	@Autowired
 	private ICompanyDao cDao;
-	//공통 MM 주입
-//	@Autowired
-//	private CommonMM cmMM;
-	@Autowired
-	private AdminCompanyController acc;
-	
 	
 	//모델앤 뷰 필드화
 	ModelAndView mav = null;
 	
-//	public ModelAndView joinResult(CompanyBean cb) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	public ModelAndView joinAccess(CompanyAliasBean cb) {
-		System.out.println("idMM");
 		mav = new ModelAndView();
 		String view = null;	
 		
@@ -93,7 +81,7 @@ public class IdMM {
 			}else if(c_state==1) {
 				//승인 완료된 회사일시
 				/*회사 메인 설정 완료시 수정 부탁드립니다.*/
-//				view = "admin/company/companyindex";
+				view = "admin/company/companyindex";
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
 			}else if(c_state==3) {
