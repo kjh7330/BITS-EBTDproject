@@ -41,6 +41,8 @@ public class AdminUserController {	//김아름
 		mav = aum.getUserHistoryList();	
 		return mav;		
 	}
+	
+
 
 	//이용자 통계 가져오고 성공하면 페이지 이동
 	@GetMapping(value = "/getUserChart")

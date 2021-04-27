@@ -20,6 +20,9 @@ public interface I_AdminUserDao {
 
 	List<UserReserveHistoryBean> getUserHistoryList();
 
+	List<UserReserveHistoryBean> getUserHistoryDateList(int period);
+
+
 
 
 

@@ -33,5 +33,12 @@ public class AdminUserRestController {	//김아름
 		String uInfoList = aum.getUserSearchUserName(u_userName);
 		return uInfoList;		
 	}
-
+	
+	//이용자 히스토리 조건:이용일 검색해서 리스트 가져오고 성공하면 페이지 이동
+	@GetMapping(value = "/getUserHistoryDateList", produces =  "text/plain;charset=utf-8")		//보내주는 애랑 이름 같아야함
+	public String getUserHistoryDateList(String urh_date) throws JsonProcessingException {	
+		
+		return aum.getUserHistoryDateList(urh_date);		
+	}
+	
 }

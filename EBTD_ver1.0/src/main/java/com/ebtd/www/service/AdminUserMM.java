@@ -66,12 +66,14 @@ public class AdminUserMM {	//김아름
 		
 		ObjectMapper om = new ObjectMapper();
 		List<UserBean> uerInfoList = null;
-		int u_type2 = 3;
+		int u_type2 = 10;
 		
-		if(u_type == "시각") {
+		System.out.println("u_type = " + u_type); //시각
+		
+		if(u_type.equals("시각")) {	//1
 			u_type2 = 1;
 		}
-		if(u_type == "휠체어") {
+		if(u_type.equals("휠체어")) {	//0
 			u_type2 = 0;
 		}
 		uerInfoList = uDao.getUserSearchUType(u_type2);	// 디비 가서 가져오기
@@ -109,7 +111,8 @@ public class AdminUserMM {	//김아름
 		return mav;
 	} //getUserDetail end
 
-	//이용자 히스토리 가져오기
+	
+	//이용자 히스토리 : 전체 가져오기
 	public ModelAndView getUserHistoryList() throws JsonProcessingException {
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
@@ -120,6 +123,7 @@ public class AdminUserMM {	//김아름
 		//디비에서 가져온 데이터가 있으면
 		if( (urhList!=null) && (urhList.size()!= 0) ) {
 			mav.addObject("urhList", om.writeValueAsString(urhList));
+			System.out.println(urhList);
 			//잭슨으로 데이터-->json으로 변환
 			view = "/admin/user/userHistoryListForm";//.jsp
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
@@ -131,10 +135,35 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserHistoryList end
+	
+	
+	//이용자 히스토리 : 이용일 기간 검색
+	public String getUserHistoryDateList(String select) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		List<UserReserveHistoryBean> urhList = null;
+		int period = 0;
+ 
+		if(select.equals("1주일")) {
+			period = 7;
+		}else if(select.equals("1개월")) {
+			period = 30;
+		}else if(select.equals("3개월")) {
+			period = 90;
+		}else if(select.equals("6개월")) {
+			period = 180;
+		}else if(select.equals("1년")) {
+			period = 365;
+		}
+		urhList = uDao.getUserHistoryDateList(period);	//디비 가서 정보 가져오기
+			//디비에서 가져온 데이터가 있으면
+			return om.writeValueAsString(urhList);
+	}
+	
 
 	//이용자 차트 보기
 	public Object getUserChart() {
-		
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
@@ -157,11 +186,8 @@ public class AdminUserMM {	//김아름
 		return mav;
 	}	//getUserChart end
 
-
 	
 
 
 
-
-
-}
+} //AdminUserMM

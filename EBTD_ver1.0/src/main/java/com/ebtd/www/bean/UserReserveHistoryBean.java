@@ -16,6 +16,9 @@ public class UserReserveHistoryBean {
 	private String urh_date;	//이용일시
 	private int s_nostart; //출발 정류장(fk)
 	private int s_nolast;  //도착 정류장(fk)
-	private int urh_status;	//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+	private int urh_state;	//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+	private int u_type;	//장애유형 시각:1, 휠체어:0
+	
+
 
 }
