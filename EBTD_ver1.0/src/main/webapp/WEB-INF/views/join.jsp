@@ -217,11 +217,6 @@
 	let column_idx = 0;
 	make_new_bus_table(column_idx);
 	$('#btn_area').css('width','300px');
-	$('#add_new_bus').click(function () {
-		make_new_bus_table(column_idx);
-		$('.title').css('text-align','right').css;
-	});
-	$('#del_new_bus').css('display','none');
 	
 	$('#add_driver_column').click(function () {
 		$(".dr_modal").fadeIn();
@@ -232,6 +227,13 @@
 	$(".dr_modal").click(function(){
 		$(".dr_modal").fadeOut();
 	});
+
+	
+	$('#add_new_bus').click(function () {
+		make_new_bus_table(column_idx);
+		$('.title').css('text-align','right').css;
+	});
+	$('#del_new_bus').css('display','none');
 	$('#del_new_bus').click(function () {
 		$('#table_contents').children().children().children().last().remove();
 		$('#table_contents').children().children().children().last().remove();
@@ -279,7 +281,6 @@
 		$('#bus_no').css('width','150px');
 		$('.del_btn').css('text-align','right');
 		if(table_idx >= 1)	$('#del_new_bus').css('display','inline');
-		console.log(table_idx);
 	}
 	
 	$('.title').css('text-align','right').css('vertical-align','top');
