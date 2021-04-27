@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -14,7 +18,7 @@
 	</div>
 
 
-	<table style="color: black">
+	<table class="table table-striped" style="color: black">
 		<thead>
 			<tr>
 				<th>신청 번호</th>
@@ -55,11 +59,11 @@ var html = '';
 	 html += '<td>'+aList[i].sa_Y+'</td>'; //Y값 
  	 html += '<td>'+aList[i].sa_Reason+'</td>'; //신청사유 
 	 //신청상태(0, 1, 2, 3)에 따라 상태 나타내기
-	 if(aList[i].sa_Status==0) aList[i].sa_Status='대기'; 
-	 else if (aList[i].sa_Status==1) aList[i].sa_Status='승인';
-	 else if (aList[i].sa_Status==2) aList[i].sa_Status='반려';
-	 else if (aList[i].sa_Status==3) aList[i].sa_Status='수정';
-	 html += '<td>'+aList[i].sa_Status+'</td>';
+	 if(aList[i].sa_State==0) aList[i].sa_State='대기'; 
+	 else if (aList[i].sa_State==1) aList[i].sa_State='승인';
+	 else if (aList[i].sa_State==2) aList[i].sa_State='반려';
+	 else if (aList[i].sa_State==3) aList[i].sa_State='수정';
+	 html += '<td>'+aList[i].sa_State+'</td>';
 	 html += '</tr>';
 
  }

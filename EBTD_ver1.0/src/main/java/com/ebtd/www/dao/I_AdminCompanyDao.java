@@ -1,6 +1,7 @@
 package com.ebtd.www.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.ApplyBusRoute;
@@ -9,14 +10,15 @@ import com.ebtd.www.bean.Company;
 public interface I_AdminCompanyDao {
 
 	List<Company> getCompanyRequestList();
-
+	
 	List<ApplyBusHistory> getCompanyRequestDetail(String c_name);
-
+	
 	List<ApplyBusHistory> getCompanyRequestRouteList(String c_name);
-
+	
 	boolean setCompanyRequestApproval(String c_name);
-
+	
 	//DELETE 트랜잭션
+	List<ApplyBusHistory> getUsernameInBus(String c_username);
 	void setDeleteAllbus(String c_username);
 	void setDeleteBus(String c_username);
 	void setDeleteApplybusHistorydetail(String c_username);
@@ -25,9 +27,9 @@ public interface I_AdminCompanyDao {
 	void setDeleteCompany(String c_username);
 
 	List<ApplyBusHistory> getNewBusRouteList();
-
+	
 	List<ApplyBusHistory> getNewBusRouteDetail(String ap_b_no);
-
+	
 	List<ApplyBusHistory> getNewBusOfficialDocument(String ap_no);
 	
 	List<ApplyBusHistory> getNewBusNumber(String ap_no);
@@ -37,13 +39,19 @@ public interface I_AdminCompanyDao {
 	void setAllBusChangeApproval(String ap_b_no);
 	void setNewRouteBus(String ap_b_no);
 
-	void setApplyBusHistoryChangeReject(String ap_b_no, String ap_reject);
+	void setApplyBusHistoryChange2Reject(Map<String, Object> cMap);
+	void setDeleteAllbus2(Map<String, Object> cMap);
+	void setDeleteBus2(Map<String, Object> cMap);
 
 	List<ApplyBusHistory> getUpdateBusRouteList();
 
 	List<ApplyBusHistory> getUpdateBusRouteDetail(String ap_no);
 
+	List<ApplyBusHistory> getUpdateBusOfficialDocument(String ap_no);
+
 	List<ApplyBusHistory> getUpdateBusNumber(String ap_no);
+
+	void setApplyBusHistoryChange5Reject(Map<String, Object> cMap);
 
 	List<Company> getCompanyNameList();
 	
@@ -53,7 +61,7 @@ public interface I_AdminCompanyDao {
 	List<Company> getBusDriverCount(String c_username);
 	List<Company> getLowfloorRegularCount(String c_username);
 
-	List<Company> getCompanyQuestionList();
+	List<Company> getCompanyQuestionList(String c_username);
 
 	List<ApplyBusHistory> getCompanyApprovalList();
 
@@ -64,6 +72,10 @@ public interface I_AdminCompanyDao {
 	List<ApplyBusHistory> getCompanyRejectList();
 
 	List<ApplyBusHistory> getCompanyRejectDetail();
+
+
+
+
 
 
 
