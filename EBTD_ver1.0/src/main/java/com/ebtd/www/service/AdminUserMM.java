@@ -159,6 +159,7 @@ public class AdminUserMM {	//김아름
 			//디비에서 가져온 데이터가 있으면
 			return om.writeValueAsString(urhList);
 	}
+	
 	//Rest
 	//이용자 히스토리 : 아이디 검색
 	public String getUserHistoryUserName(String u_userName) throws JsonProcessingException {
@@ -175,6 +176,21 @@ public class AdminUserMM {	//김아름
 		}
 	}	//getUserHistoryUsername end
 	
+	//Rest
+	//이용자 히스토리 : 버스번호 검색
+	public String getUserHistoryBusNum(String b_no) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getUserHistoryBusNum(b_no);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "userSearchUserName 가져오기 실패";
+		}
+	}
 
 	//이용자 차트 보기
 	public Object getUserChart() {
@@ -199,6 +215,8 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
+	
 
 	
 

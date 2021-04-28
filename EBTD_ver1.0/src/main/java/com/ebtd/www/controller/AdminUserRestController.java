@@ -48,5 +48,12 @@ public class AdminUserRestController {	//김아름
 		return aum.getUserHistoryUserName(u_userName);		
 	}
 	
+	//이용자 히스토리 조건:버스번호 검색
+		@GetMapping(value = "/getUserHistoryBusNum", produces =  "text/plain;charset=utf-8")
+		public String getUserHistoryBusNum(String b_no) throws JsonProcessingException {	
+			
+			return aum.getUserHistoryBusNum(b_no);		
+		}
+	
 	
 }

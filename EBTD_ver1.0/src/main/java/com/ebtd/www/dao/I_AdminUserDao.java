@@ -24,7 +24,10 @@ public interface I_AdminUserDao {
 	List<UserReserveHistoryBean> getUserHistoryDateList(int period); 
 
 	//유저히스토리에서 이용일 검색 ajax
-	List<UserReserveHistoryBean> getUserHistoryUserName(String u_userName); 
+	List<UserReserveHistoryBean> getUserHistoryUserName(String u_userName);
+
+	//유저히스토리에서 버스번호 검색 ajax
+	List<UserReserveHistoryBean> getUserHistoryBusNum(String b_no); 
 
 
 
