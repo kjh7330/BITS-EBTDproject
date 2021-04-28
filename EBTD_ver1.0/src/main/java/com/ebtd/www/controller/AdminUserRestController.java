@@ -34,11 +34,19 @@ public class AdminUserRestController {	//김아름
 		return uInfoList;		
 	}
 	
-	//이용자 히스토리 조건:이용일 검색해서 리스트 가져오고 성공하면 페이지 이동
-	@GetMapping(value = "/getUserHistoryDateList", produces =  "text/plain;charset=utf-8")		//보내주는 애랑 이름 같아야함
+	//이용자 히스토리 조건:이용일 검색
+	@GetMapping(value = "/getUserHistoryDateList", produces =  "text/plain;charset=utf-8")		
 	public String getUserHistoryDateList(String urh_date) throws JsonProcessingException {	
-		
+										//보내주는 애랑 이름 같아야함
 		return aum.getUserHistoryDateList(urh_date);		
 	}
+	
+	//이용자 히스토리 조건:아이디 검색
+	@GetMapping(value = "/getUserHistoryUserName", produces =  "text/plain;charset=utf-8")
+	public String getUserHistoryUserName(String u_userName) throws JsonProcessingException {	
+		
+		return aum.getUserHistoryUserName(u_userName);		
+	}
+	
 	
 }

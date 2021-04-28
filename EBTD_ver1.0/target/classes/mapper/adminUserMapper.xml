@@ -39,7 +39,13 @@
  		WHERE URH_DATE BETWEEN SYSDATE-#{period} AND SYSDATE
 	</select>
 	
-	
+	<select id="getUserHistoryUserName" resultType="userReserveHistory">
+		SELECT URH.URH_NO, URH.U_USERNAME, URH.B_NO,B.C_USERNAME, URH.URH_DATE, URH.S_NOSTART, URH.S_NOLAST,URH.URH_STATE, U.U_TYPE
+		FROM URH 
+		LEFT JOIN B ON URH.B_NO = B.B_NO
+		LEFT JOIN U ON U.U_USERNAME = URH.U_USERNAME
+ 		WHERE U.U_USERNAME  LIKE '%'||#{u_userName}||'%'
+ 	</select>
 	
 
 </mapper>

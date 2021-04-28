@@ -136,12 +136,11 @@ public class AdminUserMM {	//김아름
 		return mav;
 	}	//getUserHistoryList end
 	
-	
+	//Rest
 	//이용자 히스토리 : 이용일 기간 검색
 	public String getUserHistoryDateList(String select) throws JsonProcessingException {
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
-		String view = null;
 		List<UserReserveHistoryBean> urhList = null;
 		int period = 0;
  
@@ -160,6 +159,21 @@ public class AdminUserMM {	//김아름
 			//디비에서 가져온 데이터가 있으면
 			return om.writeValueAsString(urhList);
 	}
+	//Rest
+	//이용자 히스토리 : 아이디 검색
+	public String getUserHistoryUserName(String u_userName) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getUserHistoryUserName(u_userName);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "userSearchUserName 가져오기 실패";
+		}
+	}	//getUserHistoryUsername end
 	
 
 	//이용자 차트 보기
@@ -185,6 +199,8 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
+	
 
 	
 
