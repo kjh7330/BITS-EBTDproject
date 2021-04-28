@@ -1,6 +1,7 @@
 package com.ebtd.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.Wh_BusBean;
@@ -30,8 +32,10 @@ public class DriverController {
 	DriverMM dm;
 	
 	@PostMapping(value = "/test", produces = "application/json;charset=utf-8")
-	public String data_test () throws JsonProcessingException{
-		return "forward:/driver/testForm";
+	public String data_test (@RequestParam Map<String, Object> data) throws JsonProcessingException{
+		
+		System.out.println(data);
+		return "redirect:/driver/testForm";
 	}
 	
 	@GetMapping(value = "/getCompanyList", produces = "application/json;charset=utf-8")
@@ -55,27 +59,27 @@ public class DriverController {
 	@GetMapping(value = "/testForm")
 	public String testForm(HttpSession ss, String d_name) {
 		ss.setAttribute("d_name", d_name);
-		return "join";//.jsp
+		return "/join";//.jsp
 	}
 	@GetMapping(value = "/DriverMainForm")
 	public String driverMainForm(HttpSession ss, String d_name) {
 		ss.setAttribute("d_name", d_name);
-		return "driver/DriverMainForm";//.jsp
+		return "/driver/DriverMainForm";//.jsp
 	}
 	@GetMapping(value = "/startForm")
 	public String startForm() {
-		return "common/start";//.jsp
+		return "/common/start";//.jsp
 	}
 	@GetMapping(value = "/CompanySelectForm")
 	public String companySelectForm() {
-		return "driver/CompanySelectForm";//.jsp
+		return "/driver/CompanySelectForm";//.jsp
 	}
 	@GetMapping(value = "/BusSelectForm")
 	public String busSelectForm() {
-		return "driver/BusSelectForm";//.jsp
+		return "/driver/BusSelectForm";//.jsp
 	}
 	@GetMapping(value = "/DriverSelectForm")
 	public String driverSelectForm() {
-		return "driver/DriverSelectForm";//.jsp
+		return "/driver/DriverSelectForm";//.jsp
 	}
 }

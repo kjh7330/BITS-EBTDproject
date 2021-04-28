@@ -28,9 +28,6 @@
 		$('#user').click(function () {
 			location.href = 'user/joinForm';
 		});
-		$('#userjoin').click(function () {
-			location.href = 'user/joinForm';
-		});
 		$('#userlogin').click(function () {
 			location.href = 'user/loginForm';
 		});

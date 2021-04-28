@@ -126,7 +126,7 @@
         </table>  
 		</form>
         <div id="newcompany">
-        	<form action="joinForm" method="get"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
+        	<form action="/driver/test" method="post"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
         </div>
         
     </section>
@@ -135,7 +135,7 @@
             <div>
                 <img src="resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
-            <div>
+            <div> 
                 김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
             </div>
         </div>
