@@ -355,7 +355,44 @@
 							break;
 							
 						case "5":	//버스회사
-							
+							$.ajax({
+								url : "/admin/user/getUserHistoryCompanyName",
+								data : { 'c_userName' : input },
+								dataType : 'json',
+							}).done(function(data){
+								console.log(data);
+								let urhList = data;
+								let str = "";
+					
+								for (let i = 0; i < urhList.length; i++) {
+									//0,1을 --> 휠체어, 시각으로 바꾸어 출력
+									if (urhList[i].u_type == 0) {
+										urhList[i].u_type = '휠체어';
+									} else urhList[i].u_type = '시각';
+									
+									//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+									if (urhList[i].urh_state == 2) {
+										urhList[i].urh_state = '취소';
+									} else if(urhList[i].urh_state == 3)
+										urhList[i].urh_state = '완료';
+						
+									str += '<tr>';
+									str += '<th>' + (i+1) + '</th>' //NO
+									str += '<td>' + urhList[i].urh_no + '</td>';  //예약번호
+									str += '<td>' + urhList[i].urh_date + '</td>'; //이용일
+									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
+									str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+									str += '<td>' + urhList[i].s_nostart + '</td>'; //출발지
+									str += '<td>' + urhList[i].s_nolast + '</td>'; //목적지
+									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
+									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+									str += '<td>' + urhList[i].urh_state + '</td>';	 //이용상태
+								}
+								$("#userHistoryList").empty();
+								$("#userHistoryList").append(str);
+							}).fail(function(err){
+								console.log(err,"!!!!!!!!!!");
+							});
 							break;
 						
 						case "6":	//버스번호

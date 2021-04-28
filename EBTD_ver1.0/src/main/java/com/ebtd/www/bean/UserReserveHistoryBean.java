@@ -12,7 +12,7 @@ public class UserReserveHistoryBean {
 	private int urh_no; //예약번호(pk)
 	private String u_userName; //id(fk)
 	private String b_no;	//버스번호(fk)
-	private String c_name;	//버스회사
+	private String c_userName;	//버스회사
 	private String urh_date;	//이용일시
 	private int s_nostart; //출발 정류장(fk)
 	private int s_nolast;  //도착 정류장(fk)
