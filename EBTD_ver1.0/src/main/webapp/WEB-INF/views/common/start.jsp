@@ -22,12 +22,12 @@
 	$('#login').click(function () {
 		location.href = 'loginForm';
 	});	
-	
 	$('#admin').click(function () {
-			location.href = 'admin';
-		});
+		location.href = 'admin';
+	});
 	$('#user').click(function () {
 		location.href = 'user/joinForm';
+	});
 	$('#userjoin').click(function () {
 		location.href = 'user/joinForm';
 	});
