@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 김아름 -->
+<!-- UserBookmarkDAO 전용 Mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_UserBookmarkDao">
+
+	                <!-- mybatis-config.xml에 별칭설정 or Bean에 @Alias("bookmark") -->
+	<select id="getBookmarkList" resultType="bookmark">
+		SELECT * FROM UB WHERE U_USERNAME=#{u_userName}
+	</select>
+	
+	
+</mapper>
