@@ -73,7 +73,7 @@
 
 </body>
 <script type="text/javascript">
-//유효성 검사(아직 작업중)
+//유효성 검사
 	$('#addStop').submit(function () {
 		if($('#checkNo').val() == ''){
 			alert('동을 선택하세요.');

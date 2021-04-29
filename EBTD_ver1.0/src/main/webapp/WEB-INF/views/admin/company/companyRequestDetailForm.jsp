@@ -18,7 +18,7 @@
         .modal_content2 input { border:none; 
                     font-size:15px; 
                     background:#f44336;
-                    color:#f9f9f9; 
+                    color:#f9f9f9; f9eb99
                     padding:8px 16px; }
         .modal_content3 input { border:none; 
                     font-size:18px; 
@@ -148,6 +148,7 @@
         .cdetail-content{
             text-align: center;
         	border: none;
+        	width: 600px;
         }
         .cdetail-content:focus{
 			outline:none;
@@ -211,7 +212,7 @@
         	<tr>
         		<td>
         			<div class="cdetail-content"><br>
-        			<table style="margin-left: 190px;">
+        			<table style="margin-left: 165px; width: 243px;">
         				<tr>
         					<td>신청 번호 : </td><td>${abList[0].ap_no}</td>
         				</tr>
@@ -219,18 +220,27 @@
         					<td>회사 이름 : </td><td>${abList[0].c_name}</td>
         				</tr>
         				<tr>
+        					<td>승인 상태 : </td><td>미승인</td>
+        				</tr>
+        			</table>
+        			<c:choose>
+        			<c:when test="${empty abrList}">
+        			
+        			</c:when>
+        			<c:when test="${not empty abrList}">
+        			<table class="businfotable" style="margin-left: 190px;">
+        				<tr>
         					<td>버스 번호 : </td><td><button id="myBtn10" class="cdetail-btn10">노선상세보기</button></td>
         				</tr>
-        					<c:forEach var="abr" items="${abrList}">
+        				<c:forEach var="abr" items="${abrList}">
         				<tr>
         					<td><input class="busnumber" value=" - " readonly></td>
         					<td><input class="busnumber" value="${abr.ap_b_no}" readonly></td>
         				</tr>
-        					</c:forEach>
-        				<tr>
-        					<td>승인 상태 : </td><td>미승인</td>
-        				</tr>
+        				</c:forEach>
         			</table>
+        			</c:when>
+        			</c:choose>
         			</div>
         		</td>
 			</tr>

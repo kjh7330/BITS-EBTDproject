@@ -1,10 +1,13 @@
 package com.ebtd.www.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.service.AdminCompanyMM;
@@ -22,6 +25,8 @@ public class AdminCompanyController {
 	public String getMain() {
 		return "/admin/mainForm";  //.jsp
 	}
+	
+	/* ---------- [회사 관리] - [회사 등록 승인] ---------- */
 	//회사 등록 신청 목록 페이지
 	@GetMapping(value = "/admin/company/getCompanyRequestList")
 	public ModelAndView getCompanyRequestList() {
@@ -46,6 +51,8 @@ public class AdminCompanyController {
 		mav=acm.setCompanyRequestReject(c_username);
 		return mav;
 	}
+	
+	/* ---------- [회사 관리] - [신규 노선 등록] ---------- */
 	//신규 노선 등록 신청 목록
 	@GetMapping(value = "/admin/company/getNewBusRouteList")
 	public ModelAndView getNewBusRouteList() {
@@ -60,16 +67,32 @@ public class AdminCompanyController {
 	}
 	//신규 노선 등록  -> 반려하기
 	@PostMapping(value = "/admin/company/setNewBusRouteReject")
-	public ModelAndView setNewBusRouteReject(String ap_b_no, String ap_reject) {
-		mav=acm.setNewBusRouteReject(ap_b_no, ap_reject);
+	public ModelAndView setNewBusRouteReject(@RequestParam Map<String, Object>cMap) {
+		mav=acm.setNewBusRouteReject(cMap);
 		return mav;
 	}
-	//기존 노선 수정 신청 목록
+	
+	/* ---------- [회사 관리] - [기존 노선 변경] ---------- */
+	//버스 노선 변경 신청 목록
 	@GetMapping(value = "/admin/company/getUpdateBusRouteList")
 	public ModelAndView getUpdateBusRouteList() {
 		mav=acm.getUpdateBusRouteList();
 		return mav;
 	}
+	//버스 노선 변경 -> 승인하기
+	@PostMapping(value = "/admin/company/setUpdateBusRouteApproval")
+	public ModelAndView setUpdateBusRouteApproval(String ap_b_no) {
+		mav=acm.setUpdateBusRouteApproval(ap_b_no);
+		return mav;
+	}
+	//버스 노선 변경  -> 반려하기
+	@PostMapping(value = "/admin/company/setUpdateBusRouteReject")
+	public ModelAndView setUpdateBusRouteReject(@RequestParam Map<String, Object>cMap) {
+		mav=acm.setUpdateBusRouteReject(cMap);
+		return mav;
+	}
+	
+	
 	//버스 회사 이름 목록
 	@GetMapping(value = "/admin/company/getCompanyNameList")
 	public ModelAndView getCompanyNameList() throws JsonProcessingException {
@@ -90,26 +113,26 @@ public class AdminCompanyController {
 	}
 	//버스 회사 승인 목록
 	@GetMapping(value = "/admin/company/getCompanyApprovalList")
-	public ModelAndView getCompanyApprovalList() {
+	public ModelAndView getCompanyApprovalList() throws JsonProcessingException {
 		mav=acm.getCompanyApprovalList();
 		return mav;
 	}
 	//버스 회사 승인 목록 - 상세
 	@GetMapping(value = "/admin/company/getCompanyApprovalDetail")
-	public ModelAndView getCompanyApprovalDetail() {
-		mav=acm.getCompanyApprovalDetail();
+	public ModelAndView getCompanyApprovalDetail(String ap_no) throws JsonProcessingException {
+		mav=acm.getCompanyApprovalDetail(ap_no);
 		return mav;
 	}
 	//버스 회사 반려 목록
 	@GetMapping(value = "/admin/company/getCompanyRejectList")
-	public ModelAndView getCompanyRejectList() {
+	public ModelAndView getCompanyRejectList() throws JsonProcessingException {
 		mav=acm.getCompanyRejectList();
 		return mav;
 	}
 	//버스 회사 반려 목록 - 상세
 	@GetMapping(value = "/admin/company/getCompanyRejectDetail")
-	public ModelAndView getCompanyRejectDetail() {
-		mav=acm.getCompanyRejectDetail();
+	public ModelAndView getCompanyRejectDetail(String ap_no) throws JsonProcessingException {
+		mav=acm.getCompanyRejectDetail(ap_no);
 		return mav;
 	}
 	

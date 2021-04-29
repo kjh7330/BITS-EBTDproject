@@ -13,15 +13,16 @@
 
 	<table id="table1" border="1px solid black" style="color: black;text-align:center;">
 	<tr>
-		<td>신청회사</td>
-		<td>위치</td>
-		<td>동 이름</td>
-		<td>신청일</td>
-		<td>상태(1.승인 2.반려 3.대기)</td>
+		<th>신청회사</th>
+		<th>정류장 이름</th>
+		<th>위치</th>
+		<th>동 이름</th>
+		<th>신청일</th>
+		<th>상태(1.승인 2.반려)</th>
 	</tr>
 	<c:forEach var="sa" items="${saList}">
 		<tr>
-			<td>${sa.c_UserName}</td><td>( ${sa.sa_X}, ${sa.sa_Y} )</td><td>${sa.t_Name}</td><td>${sa.sa_Date}</td><td>${sa.sa_State}</td>
+			<td>${sa.c_UserName}</td><td>${sa.sa_Name}</td><td>( ${sa.sa_X}, ${sa.sa_Y} )</td><td>${sa.t_Name}</td><td>${sa.sa_Date}</td><td>${sa.sa_State}</td>
 		</tr>
 	</c:forEach>
 	</table>

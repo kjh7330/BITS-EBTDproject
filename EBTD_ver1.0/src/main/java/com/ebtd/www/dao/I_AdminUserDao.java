@@ -20,7 +20,19 @@ public interface I_AdminUserDao {
 
 	List<UserReserveHistoryBean> getUserHistoryList();
 
+	//유저히스토리에서 이용일 검색 ajax
+	List<UserReserveHistoryBean> getUserHistoryDateList(int period); 
 
+	//유저히스토리에서 이용일 검색 ajax
+	List<UserReserveHistoryBean> getUserHistoryUserName(String u_userName);
+
+	//유저히스토리에서 회사명 검색 ajax
+	List<UserReserveHistoryBean> getUserHistoryCompanyName(String c_userName); 
+		
+	//유저히스토리에서 버스번호 검색 ajax
+	List<UserReserveHistoryBean> getUserHistoryBusNum(String b_no);
+
+	
 
 
 

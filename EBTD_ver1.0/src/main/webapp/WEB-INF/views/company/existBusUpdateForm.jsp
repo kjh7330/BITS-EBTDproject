@@ -124,19 +124,6 @@ body {
 				<p style = "color: black;">버스 노선</p> <input type = "text" id = "stopCount" name = "stopCount">개 정류장
 				<input id="mBusNum" name= "busNum">번 버스 <br/>
 			</div>
-				운행 버스 배차
-				<table id="dispatch">
-					<tr>
-						<td>차량번호 :</td>
-						<td><input type = "text" class = "motorNumber" name = "motorNumber1"></td>
-						<td><select name = "lowFloor1">
-							<option value = "일반">일반</option>
-							<option value = "저상">저상</option>
-						</select></td>
-						<td><input type = "button" value = "추가" id = "add"></td>
-					</tr>
-				</table>
-				총 버스 갯수 :<input id="motorCount" type = "text" name= "motorCount">
 				<input id="submitRoute" type = "submit">
 			</form>
 			<div class="modal_footer">
@@ -170,17 +157,17 @@ for(let i in tList) {
 $("#myBtn").on("click", function(){
 	  $.ajax({
 		  type : 'get',
-		  url : '/company/bus/busNumCheck',
+		  url : '/company/bus/existBusNumCheck',
 		  data : {'busNum' : $('#busNum').val()},
 		  dataType : 'html'
 	  }).done(function (data) {
 		  if($('#busNum').val()!='') {
-		  	if(data==0){
+		  	if(data==1){
 			 	 document.getElementById('mBusNum').value = $('#busNum').val();
 			 	 $("#overlay").css({ visibility:"visible", opacity:1 });
 	         	 $("#myModal").css({ display: "inline"});
-		  	} else if(data!=0) {
-			 	 alert("중복된 버스번호입니다.");
+		  	} else if(data!=1) {
+			 	 alert("없는 버스번호입니다.");
 		 	 }
 		  } else {
 			  alert("노선번호를 입력하세요.");
@@ -376,18 +363,7 @@ $('#recommendConfi').on('click', function() {
 	j++;
 }); 
 
-var h = 2;
-var k = 2;
-$('#add').on('click', function() {
-	$('#dispatch').append("<tr><td>차량번호 :</td><td><input type = 'text' class = 'motorNumber' name = 'motorNumber"+h+"'></td><td><select name = 'lowFloor"+h+"'><option value='일반'>일반</option><option value='저상'>저상</option></select></td></tr>");
-	document.getElementById("motorCount").value = k;
-	h++;
-	k++;
-});
-$('#submitRoute').on('click', function(){
-	h=2;
-	k=1;
-});
+
 
 </script>
 </html>

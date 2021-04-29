@@ -27,5 +27,12 @@ public class CompanyBusRestController {
 
 		return checkResult;
 	}
+	
+	@GetMapping(value = "/existBusNumCheck")
+	public int existBusNumCheck(String busNum) {
+		System.out.println("ajax 통신 성공");
+		int checkResult = bm.existBusNumCheck(busNum);
+		return checkResult;
+	}
 
 }

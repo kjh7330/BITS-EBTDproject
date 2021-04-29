@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.common.Paging;
+import com.ebtd.www.exception.CommonException;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.dao.I_AdminStopDao;
@@ -21,24 +23,42 @@ public class AdminStopMM {
 	private I_AdminStopDao sDao;
 	
 	ModelAndView mav;
-	
+
 	//정류장 리스트 보기 후 페이지 이동
-	public ModelAndView getStopList() throws JsonProcessingException {
+	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException {
 		mav = new ModelAndView();
 		List<StopBean> sList = null;
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
 		
-		sList=sDao.getStopList();
+		pageNum = (pageNum==null)? 1 : pageNum;
+		
+		if(pageNum<=0) {
+			throw new CommonException("잘못된 페이지 번호 입니다.");
+		}
+		
+		sList=sDao.getStopList(pageNum);
 		
 		if(sList!=null && sList.size() != 0) {
 			mav.addObject("sList", om.writeValueAsString(sList));
+			mav.addObject("paging", getPaging(pageNum));
 			view = "/admin/stop/stopListForm";//.jsp
 		}else {
 			view = "/admin";
 		}
 		mav.setViewName(view);
 		return mav;
+	}
+	
+	private String getPaging(Integer pageNum) {
+		int maxNum = sDao.getStopCount();
+		int listCount = 15;
+		int pageCount = 10;
+		
+		String getStopList = "getStopList";  //url
+		Paging paging= new Paging(maxNum, pageNum, listCount, pageCount, getStopList);
+		
+		return paging.makeHtmlPaging();	//<이전><a hef=3 4>"<다음>"
 	}
 	
 	//정류장 상세정보 보기
@@ -117,6 +137,7 @@ public class AdminStopMM {
 		return mav;
 	}
 	
+	//정류장 추가 - 동 이름 불러오기
 	public ModelAndView stopList() {
 		mav = new ModelAndView();
 		List<StopBean> sList = null;
@@ -133,7 +154,12 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	//해당 동네 정류장 마지막번호 + 1 불러오기
+	public String checkPosition(String t_Name) {
+		String s_No = sDao.checkStopNo(t_Name);
+		
+		return s_No;
+	}
 
 	//정류장 이름 중복체크
 	public String checkName(String s_Name) {
@@ -190,7 +216,8 @@ public class AdminStopMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	
+	//승인 반려 결재내역 불러오기
 	public ModelAndView getOfficialDocumentResult(){
 		mav = new ModelAndView();
 		List<StopApplyBean> saList = null;
@@ -208,11 +235,16 @@ public class AdminStopMM {
 		return mav;
 	}
 
-	public String checkPosition(String t_Name) {
-		String s_No = sDao.checkStopNo(t_Name);
+	public String searchStop(String search) throws JsonProcessingException{
+		List<StopBean> sList = null;
+		ObjectMapper om = new ObjectMapper();
 		
-		return s_No;
+		sList=sDao.searchStop(search);
+		if( sList != null) {
+			return om.writeValueAsString(sList);
+		}else {
+			return "가져오기 실패";
+		}
 	}
-
 
 }

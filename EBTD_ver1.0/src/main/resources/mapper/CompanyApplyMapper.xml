@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- I_AppyComfirmDAO 전용 Mapper : 버스요청 관련 sql문 명시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_ApplyConfirmDao">
+	<select id="getNewApplyConfirm" resultType="com.ebtd.www.bean.CompanyApplyListBean" parameterType="String">
+	SELECT ap_b_no, ap_date, ap_state, ap_reject FROM (SELECT * FROM apply_bus_history where ap_state in (0, 1, 2)) WHERE c_username = #{id}
+	</select>
+	
+	<select id="getUpdateApplyConfirm" resultType="com.ebtd.www.bean.CompanyApplyListBean" parameterType="String">
+	SELECT ap_b_no, ap_date, ap_state, ap_reject FROM (SELECT * FROM apply_bus_history where ap_state in (3, 4, 5)) WHERE c_username = #{id}
+	</select>
+</mapper>

@@ -44,9 +44,11 @@
 				</tr>
 				<c:forEach var="bd" items="${bdCountList}">
 				<c:forEach var="lr" items="${lrCountList}">
+				<c:if test="${bd.b_no eq lr.b_no}">
 				<tr>
-					<td>${lr.b_no}</td><td>${bd.b_all_num}</td><td>${lr.b_lowfloor_num}</td><td>${lr.b_regular_num}</td><td>${bd.d_num}</td>
+					<td>${bd.b_no}</td><td>${bd.b_all_num}</td><td>${lr.b_lowfloor_num}</td><td>${lr.b_regular_num}</td><td>${bd.d_num}</td>
 				</tr>
+				</c:if>
 				</c:forEach>
 				</c:forEach>
 			</table>

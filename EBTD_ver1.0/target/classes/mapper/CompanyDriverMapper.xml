@@ -15,10 +15,22 @@
 		SELECT * FROM DRIVER WHERE d_no = #{d_no}
 	</select>
   
+	
 	<!-- 기사 추가 -->
-<!--    	<insert id="addDriver" parameterType="driver"> 
-		INSERT INTO DRIVER
-		VALUES (#{d_no},#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
-	</insert>    -->
+	<insert id="addDriver" parameterType="driver"> 
+  		<selectKey resultType="int" order="BEFORE" >
+			SELECT SEQ_D_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DRIVER(D_NO, C_USERNAME, D_NAME, D_IMGEXTENTION, D_PHONENUM, D_ENTERDATE, B_NO)
+		VALUES(SEQ_D_NO.NEXTVAL,#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
+	</insert>  
+	 
+	  
+ 
+	 
+	<!-- 해당회사 노선 조회 -->
+ 	<select id="getCompanyBusList" resultType="companyBus" parameterType="String"> 
+		SELECT B_NO FROM BUS WHERE C_USERNAME = #{C_USERNAME}
+	</select>
 	
 </mapper>

@@ -31,8 +31,8 @@ public class AdminStopController {
 	
 	//정류장 전체 리스트 불러오기
 	@GetMapping(value = "/admin/stop/getStopList")
-	public ModelAndView getStopList() throws JsonProcessingException {
-		mav=am.getStopList();
+	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException {
+		mav=am.getStopList(pageNum);
 		return mav; 
 	}
 	

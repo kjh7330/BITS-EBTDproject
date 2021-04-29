@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.ebtd.www.bean.ApplyBusHistory;
-import com.ebtd.www.bean.BusBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.TownBean;
+import com.ebtd.www.bean.ApplyBusHistory;
+import com.ebtd.www.bean.BusBean;
 
 public interface I_BusDao {
 
@@ -29,6 +29,9 @@ public interface I_BusDao {
 	int addBusAndCompany(ApplyBusHistory busBean);
 
 	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
-	/* List<BusInfo> addNewBus(HttpSession session); */
+
+	int existBusNumCheck(String busNum);
+	
+	int applyUpdateBusRoute(ApplyBusHistory busBean);
 
 }

@@ -220,10 +220,10 @@
                 <button class="dropbtn">노선 관리</button>
                 <div class="dropdown-content">
                     <div class="menudetail"><a href="/company/newBusForm">새로운 노선 등록 신청</a></div>
-                    <div class="menudetail"><a href="#">기존 노선 변경 신청</a></div>
+                    <div class="menudetail"><a href="/company/existBusUpdateForm">기존 노선 변경 신청</a></div>
                     <div class="menudetail"><a href="#">노선 변경 및 등록 신청 내역 확인</a></div>
-                    <div class="menudetail"><a class="/company/adetail" href="#">&nbsp;&nbsp;- 신규 신청 내역</a></div>
-                    <div class="menudetail"><a class="/company/adetail" href="#">&nbsp;&nbsp;- 변경 신청 내역</a></div>
+                    <div class="menudetail"><a class="/company/adetail" href="/company/newApplyForm">&nbsp;&nbsp;- 신규 신청 내역</a></div>
+                    <div class="menudetail"><a class="/company/adetail" href="/company/updateApplyForm">&nbsp;&nbsp;- 변경 신청 내역</a></div>
                 </div>
             </div>
             <div class="navline">

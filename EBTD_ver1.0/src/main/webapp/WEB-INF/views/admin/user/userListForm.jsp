@@ -44,7 +44,6 @@
 			아이디를 입력하세요: <input type="text" id="secrchInputUserName">
 			<button id="searchBtn">검색</button>
 		</div>
-
 		<br>
 	</div>
 
@@ -68,14 +67,14 @@
 		//이용자 리스트 출력
 		let uList = ${uList};
 		let str = "";
-		//console.log(uList[0].u_userName);
+		
 
 		for (let i = 0; i < uList.length; i++) {
 			//0,1을 --> 휠체어, 시각으로 바꾸어 출력
 			if (uList[i].u_type == 0) {
-				uList[i].u_type = '시각';
-			} else
 				uList[i].u_type = '휠체어';
+			} else
+				uList[i].u_type = '시각';
 
 			str += '<tr>';
 			str += '<th>' + (i + 1) + '</th>'
@@ -99,8 +98,6 @@
 			//let selectUType = $('#u_type').val();
 			//console.log(selectUType);	//장애유형
 
-			//만약 정렬에 장애유형을 클릭했다면
-			//밸류가 장애유형이면 인데, 왜 맞게 작동할까...?
 			if (e.value == '장애유형') {
 				//상세를 보여줘라
 				$('#selectSortDetail').show();
@@ -121,28 +118,30 @@
 		//정렬상세에서 시각or휠체어 클릭하면 --> ajax 사용
 		$('#selectSortUType').change(function(){
 			
-			let selectSortUType = $('#selectSortUType').val();
+			var selectSortUType = $('#selectSortUType').val();
 			console.log(selectSortUType);
-			
 			//장애유형을 선택해주세요를 선택한 경우
 			if( selectSortUType == "장애유형을 선택해주세요" ){
 				alert("장애유형을 선택해주세요");
-				
 			//시각이나 휠체어를 선택한 경우
-			}else if( selectSortUType == "시각" || selectSortUType == "휠체어" ){
+			}else if(selectSortUType=="시각"||selectSortUType=="휠체어"){
+				console.log("통신111");
 				$.ajax({
-					url: '/admin/user/getUserSearchUType='+selectSortUType, //필수입력값
-					type: 'Get',
-					dataType: 'json', //통신 결과로 넘어올 데이터 종류
+					url: '/admin/user/getUserSearchUType?u_type='+selectSortUType, //필수입력값
+					type: 'get',
+					//dataType: 'json', //통신 결과로 넘어올 데이터 종류
 					success: function(data){ //통신 성공시 호출해야하는 함수 지정
+						console.log("ajax통신 성공 - 장애유형");
+						console.log(data);
 						let Obj = JSON.parse(data);	//문자열을 Json 객체로 변환
 						console.log(Obj);
+						str = "";
 						
 						for (let i = 0; i < Obj.length; i++){
 							//0,1을 --> 휠체어, 시각으로 바꾸어 출력
-							if (Obj[i].u_type == 0) {
-								Obj[i].u_type = '시각';
-							} else Obj[i].u_type = '휠체어';	
+							if (Obj[i].u_type === 0) {
+								Obj[i].u_type = '휠체어';
+							} else Obj[i].u_type = '시각';	
 							console.log(Obj[i].u_type);
 							
 							str += '<tr>';
@@ -158,9 +157,10 @@
 							str += "</tr>";
 						$("#result").empty();
 						$("#result").append(str);
-						}
+						} //for end
 					},
 					fail: function(err){
+						console.log("ajax통신 fail - 장애유형");
 						console.log(err);
 					}
 					
@@ -189,15 +189,15 @@
 					url: '/admin/user/getUserSearchUserName?u_userName='+inputUserName,
 					type: 'Get',
 					success: function(data){
-						
+						console.log("ajax통신 성공 - 아이디");
 						let Obj = JSON.parse(data);	//문자열을 Json 객체로 변환
 						console.log(Obj);
 						
 						for (let i = 0; i < Obj.length; i++){
 							//0,1을 --> 휠체어, 시각으로 바꾸어 출력
 							if (Obj[i].u_type == 0) {
-								Obj[i].u_type = '시각';
-							} else Obj[i].u_type = '휠체어';	
+								Obj[i].u_type = '휠체어';
+							} else Obj[i].u_type = '시각';	
 							console.log(Obj[i].u_type);
 				
 							str += '<tr>';

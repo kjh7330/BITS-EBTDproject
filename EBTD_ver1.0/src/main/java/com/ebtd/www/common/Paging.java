@@ -5,14 +5,14 @@ public class Paging {
 	private int pageNum; 		// 현재 페이지 번호
 	private int listCount; 		// 페이지당 나타낼 글의 갯수
 	private int pageCount;   	// 페이지그룹당 페이지 갯수
-	private String boardName; 	// 게시판의 종류
+	private String stopList; 	
 
-	public Paging(int maxNum, int pageNum, int listCount, int pageCount, String boardName) {
+	public Paging(int maxNum, int pageNum, int listCount, int pageCount, String stopList) {
 		this.maxNum = maxNum;
 		this.pageNum = pageNum;
 		this.listCount = listCount;
 		this.pageCount = pageCount;
-		this.boardName = boardName;
+		this.stopList = stopList;
 	}
 
 	
@@ -27,10 +27,11 @@ public class Paging {
 		// 현재 페이지가 속해 있는 그룹 번호
 		int currentGroup = (pageNum % pageCount > 0)
 				? pageNum/pageCount+1 : pageNum/pageCount;
-		return makeHtml(currentGroup, totalPage, boardName);
+		
+		return makeHtml(currentGroup, totalPage, stopList);
 	}
 
-	private String makeHtml(int currentGroup, int totalPage, String boardName) {
+	private String makeHtml(int currentGroup, int totalPage, String stopList) {
 		StringBuffer sb = new StringBuffer();
 		//현재그룹의 시작 페이지 번호
 		int start = (currentGroup * pageCount) 
@@ -41,14 +42,14 @@ public class Paging {
 				: currentGroup * pageCount;
 
 		if (start != 1) {
-			sb.append("<a href='"+boardName+"?pageNum=" + (start -1) + "'>");
+			sb.append("<a href='"+stopList+"?pageNum=" + (start -1) + "'>");
 			sb.append("[이전]");
 			sb.append("</a>");
 		}
 
 		for (int i = start; i <= end; i++) {
 			if (pageNum != i) { //현재 페이지가 아닌 경우 링크처리
-				sb.append("<a href='"+boardName+"?pageNum=" + i + "'>");
+				sb.append("<a href='"+stopList+"?pageNum=" + i + "'>");
 				sb.append(" [ ");
 				sb.append(i);
 				sb.append(" ] ");
@@ -62,7 +63,7 @@ public class Paging {
 			}
 		}
 		if (end != totalPage) {
-			sb.append("<a href='"+boardName+"?pageNum=" + (end + 1) + "'>");
+			sb.append("<a href='"+stopList+"?pageNum=" + (end + 1) + "'>");
 			sb.append("[다음]");
 			sb.append("</a>");
 		}

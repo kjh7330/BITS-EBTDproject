@@ -119,6 +119,9 @@
 <td>신청회사</td><td>${saList[0].c_UserName}</td>
 </tr>
 <tr>
+<td>정류장 이름</td><td>${saList[0].sa_Name}</td>
+</tr>
+<tr>
 <td>위치</td><td>( ${saList[0].sa_X}, ${saList[0].sa_Y} )</td>
 </tr>
 <tr>
@@ -261,7 +264,7 @@
 </body>
 
 <script>
-
+console.log(${saList});
 // 모달창 열기 이벤트
 $("#myBtn").on("click", function(){
         $("#overlay").css({ visibility:"visible", opacity:1 });

@@ -5,8 +5,14 @@
 
 <mapper namespace="com.ebtd.www.dao.I_AdminStopDao">
 
-<select id="getStopList" resultType="stop">
-	SELECT * FROM STOP ORDER BY S_NO ASC
+<select id="getStopList" parameterType="Integer" resultType="stop">
+		<![CDATA[
+			SELECT * FROM (
+			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
+			FROM S
+			WHERE ROWNUM<=#{pageNum}*15)
+			WHERE RN>=#{pageNum}*15-14
+		]]>
 </select>
 
 <select id="getStopDetail" parameterType="Integer" resultType="stop">
@@ -68,4 +74,9 @@
 <select id="checkStopNo" parameterType="String" resultType="String">
 	SELECT MAX(S_NO)+1 AS S_NO FROM S WHERE T_NAME=#{t_Name}
 </select>
+
+<select id="searchStop" parameterType="String" resultType="stop">
+	SELECT * FROM S WHERE S_NAME LIKE '%'||#{search}||'%'
+</select>
+
 </mapper>
