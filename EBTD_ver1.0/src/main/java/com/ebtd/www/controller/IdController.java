@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ebtd.www.bean.CompanyAliasBean;
 import com.ebtd.www.service.IdMM;
 
-//로그인 및 회원가입에 관한 컨트롤러 입니다.
+//관리자 - 로그인 및 회원가입에 관한 컨트롤러 입니다.
 //담당자 - 이충호
 @Controller
 public class IdController {
@@ -45,7 +45,7 @@ public class IdController {
 		String view = null;
 		
 		if(session.getAttribute("id")==null) {view = "join";}
-		else {view = "admin/mainForm";}
+		else {view = "/admin/mainForm";}
 		
 		mav.setViewName(view);
 		return mav;

@@ -155,10 +155,10 @@
                     </tr>
                     <tr>
                         <!--아래 아이콘이 CSS효과가 안먹어서 태그에 넣음!-->
-                        <form id="joinWheel" action="wheel/join">
+                        <form id="joinWheel" action="/user/wheel/join">
                         	<td class="otherbtn3"><input class="otherbtn1" type="button"><i class="fas fa-wheelchair" style="position: absolute; color: black; font-size: 100px; left: 90px; padding-top:42px;"></i></td>
                         </form>
-                        <form id="joinBlind" action="blind/join">
+                        <form id="joinBlind" action="/user/blind/join">
                         	<td class="otherbtn4"><input class="otherbtn2" type="button"><i class="fas fa-blind" style="position: absolute; color: black; font-size: 100px; left: 290px; padding-top:42px;"></i></td>
                         </form>
                     </tr>

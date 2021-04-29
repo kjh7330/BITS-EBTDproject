@@ -67,7 +67,7 @@ public class UserIdMM {
 			view = "redirect:/user/loginForm";
 		}else {
 			//실패시
-			view = "redirect:/wheel/wheelJoin";
+			view = "redirect:/user/wheel/wheelJoin";
 		}mav.setViewName(view);
 		
 		return mav;
@@ -112,11 +112,11 @@ public class UserIdMM {
 				//휠체어 유저인 경우
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
-				view = "redirect:/wheel/mainForm";
+				view = "redirect:/user/wheel/mainForm";
 			}else if(u_type==1) {
 				System.out.println("5");
 				//시각장애인 유저인 경우
-				view = "redirect:/blind/mainForm";
+				view = "redirect:/user/blind/mainForm";
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
 			}			

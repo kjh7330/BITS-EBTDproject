@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 @RequestMapping(value="/user")
-public class UserIdController {
+public class UserIdController {	//유저 - 로그인, 회원가입
 	@Autowired
 	private UserIdMM uIdmm;
 		
@@ -32,8 +32,8 @@ public class UserIdController {
 		//쿠키 확인 후 시각장애인일 경우 바로 이동
 		/**/
 		//세션에 아이디가 없을 경우만 Login으로 이동
-		if(session.getAttribute("u_username")==null) {view = "user/joinSelectType";}
-		else {view = "wheel/mainForm";}
+		if(session.getAttribute("u_username")==null) {view = "/user/joinSelectType";}
+		else {view = "/user/wheel/mainForm";}
 		
 		return view;
 	}
@@ -41,7 +41,7 @@ public class UserIdController {
 	@RequestMapping(value = "/wheel/join")
 	public ModelAndView wheelJoinForm() throws JsonProcessingException {
 		mav = uIdmm.getTownList();
-		mav.setViewName("wheel/wheelJoin");
+		mav.setViewName("/user/wheel/wheelJoin");
 		return mav;
 	}
 	//wheel/joinAccess
@@ -66,9 +66,9 @@ public class UserIdController {
 	@RequestMapping(value = "/loginForm")
 	public String loginForm(HttpSession session) {		
 		String view = null;
-		if(session.getAttribute("u_username")==null) {view = "user/loginForm";}
-		else if(session.getAttribute("u_type").equals(0)) {view = "wheel/mainForm";}
-		else if(session.getAttribute("u_type").equals(1)) {view = "blind/mainForm";}
+		if(session.getAttribute("u_username")==null) {view = "/user/loginForm";}
+		else if(session.getAttribute("u_type").equals(0)) {view = "/user/wheel/mainForm";}
+		else if(session.getAttribute("u_type").equals(1)) {view = "/user/blind/mainForm";}
 		return view;
 	}
 	@RequestMapping(value = "/logout")

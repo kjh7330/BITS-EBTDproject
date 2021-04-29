@@ -11,7 +11,7 @@ import com.ebtd.www.service.IdMM;
 import com.ebtd.www.service.UserIdMM;
 
 @Controller
-public class IdRestController {
+public class IdRestController {	//관리자 전용
 	
 	@Autowired
 	private IdMM idmm;
