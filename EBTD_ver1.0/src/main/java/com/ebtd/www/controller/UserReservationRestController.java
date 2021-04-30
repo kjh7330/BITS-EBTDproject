@@ -23,13 +23,13 @@ public class UserReservationRestController {
 	private UserReservationMM urm;
 	
 	
-	@GetMapping(value="/wheel/busList", produces ="text/plain;charset=utf-8")
+	@GetMapping(value="/busList", produces ="text/plain;charset=utf-8")
 	public String busList() throws JsonProcessingException{
 		String busList = urm.busList();
 		return busList; 
 	}
 	
-	@GetMapping(value="/wheel/stopList", produces ="text/plain;charset=utf-8")
+	@GetMapping(value="/stopList", produces ="text/plain;charset=utf-8")
 	public String stopList() throws JsonProcessingException{
 		String stopList = urm.stopList();
 		return stopList; 

@@ -28,7 +28,7 @@
 	<main class="mypageBtn">
 	<button onclick="location.href='#'">이용 내역</button>
 	<button onclick="location.href='#'">고객 소리함</button>
-	<button onclick="location.href='/user/wheel/getUserMyInfo'">내 정보 확인</button>
+	<button onclick="location.href='/user/getUserMyInfo'">내 정보 확인</button>
 	
 	</main>
 			
