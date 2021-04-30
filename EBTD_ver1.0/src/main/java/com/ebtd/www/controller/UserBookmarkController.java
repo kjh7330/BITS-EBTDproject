@@ -24,9 +24,7 @@ public class UserBookmarkController {	//김아름
 
 	//유저(휠체어+시각)의 즐겨찾기 가져오고 성공하면 페이지 이동
 	@GetMapping(value = "/getBookmarkList")
-	public ModelAndView getBookmarkList(HttpSession session) throws JsonProcessingException {	
-		System.out.println(session.getAttribute("u_username"));
-		mav = ubm.getBookmarkList(session);	
+	public ModelAndView getBookmarkList(HttpSession session) throws JsonProcessingException {			mav = ubm.getBookmarkList(session);	
 		return mav;		
 	}
 

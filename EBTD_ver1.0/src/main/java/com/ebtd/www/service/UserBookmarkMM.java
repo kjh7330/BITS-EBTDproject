@@ -29,13 +29,15 @@ public class UserBookmarkMM {	//김아름
 		List<UserBookmarkBean> uBookList = null;
 		
 		String u_userName = session.getAttribute("u_username").toString();
-		System.out.println(u_userName);
+		System.out.println("세션에서 꺼낸 u_username = " + u_userName);
 		uBookList = uBookDao.getBookmarkList(u_userName);	//즐겨찾기 리스트 디비 가서 가져오기
+		System.out.println("디비에서 가져온 즐겨찾기 리스트 = " + uBookList);
+
 		//디비에서 가져온 데이터가 있으면
 		if( (uBookList!=null) && (uBookList.size()!= 0) ) {
 			mav.addObject("uBookList", om.writeValueAsString(uBookList));
 			//잭슨으로 데이터-->json으로 변환
-			view = "/user/wheel/wheelBookmarkForm";//.jsp
+			view = "/user/wheel/wheelBookmarkListForm";//.jsp
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {

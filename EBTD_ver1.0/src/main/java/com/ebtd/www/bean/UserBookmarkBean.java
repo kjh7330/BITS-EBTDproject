@@ -12,8 +12,10 @@ public class UserBookmarkBean {
 	private String u_userName; //id(pk)(fk)
 	private int s_nostart; //출발 정류장(fk)
 	private int s_nolast;  //도착 정류장(fk)
-	private int ab_no; //버스번호(fk)
+	private String b_no; //버스번호(fk)
 	private String ub_alias;	//별칭
 	
+	private String s_nameStart; //출발 정류장 이름
+	private String s_nameLast;  //도착 정류장 이름
 
 }

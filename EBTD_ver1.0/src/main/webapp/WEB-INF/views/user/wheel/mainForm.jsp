@@ -232,7 +232,7 @@
         <div class="mainbtn">
             <button>예약하기</button>
             <button>예약확인</button>
-            <button>즐겨찾기</button>
+            <button type="button" onclick="location.href='/user/getBookmarkList' ">즐겨찾기</button>
             <button>마이페이지</button>
         </div>
     </main>
