@@ -35,7 +35,7 @@
     <footer>
         <div class="footer-container">
             <div>
-                <img src="./resources/image/teamlogo.png" alt="BITS로고"/>
+                <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
                 김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁

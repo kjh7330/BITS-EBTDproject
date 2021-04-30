@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_UserReservationDao">
+	
+	<select id="getBusList" resultType="bus_wh">
+		SELECT * FROM BUS
+	</select>
+
+	<select id="getStopList" resultType="stop">
+		SELECT S_NO, S_NAME FROM STOP
+	</select>
+</mapper>

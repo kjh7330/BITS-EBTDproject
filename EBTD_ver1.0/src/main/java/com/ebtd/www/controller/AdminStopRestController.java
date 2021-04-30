@@ -38,14 +38,13 @@ public class AdminStopRestController {
 	
 	@GetMapping(value = "/admin/stop/checkStopNo", produces="text/plain;charser=utf-8")
 	public String stopList(String t_Name){
-		
-		
 		return am.checkPosition(t_Name); 
 	}
 	
 	@GetMapping(value="/admin/stop/search", produces ="text/plain;charset=utf-8")
 	public String search(String search) throws JsonProcessingException{
 		String sList = am.searchStop(search);
+		
 		return sList;
 	}
 	
