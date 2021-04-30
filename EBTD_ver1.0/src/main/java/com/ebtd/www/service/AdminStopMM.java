@@ -238,7 +238,6 @@ public class AdminStopMM {
 	public String searchStop(String search) throws JsonProcessingException{
 		List<StopBean> sList = null;
 		ObjectMapper om = new ObjectMapper();
-		
 		sList=sDao.searchStop(search);
 		if( sList != null) {
 			return om.writeValueAsString(sList);
