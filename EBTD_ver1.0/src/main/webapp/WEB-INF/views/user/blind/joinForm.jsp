@@ -129,7 +129,7 @@
     <section class="main">
         <div class="mainview">
             <form action="/user/wheel/joinAccess" method="post" id="joinFrm">
-            <input type="hidden" value="0" name = "u_type">
+            <input type="hidden" value="1" name = "u_type">
                 <table class="formtable">
                     <!-- <tr>
                         <td class="titlename" colspan="4">회원가입</td>
@@ -294,10 +294,12 @@ $(document).ready(function(){
     $("#u_guardphonenum").blur(function(){
     	var num2 = $("#u_guardphonenum").val();
     	blur2(num2)
+     	console.log('ㅎㅇ');
     });
     $("#u_guardphonenum").click(function(){
     	var num2 = $("#u_guardphonenum").val();
     	focus2(num2);
+    	console.log('ㅎㅇ2');
     });
     function focus2(num2) {
     	num2 = num2.replace(/[^0-9]/g, '');
@@ -321,6 +323,8 @@ $(document).ready(function(){
 $('#submitCheckBtn').click(function () { 
 	if($('#u_password').val != $('#u_password2').val){return 0;}
 	chkValue();
+		
+	
 });
 
 function chkValue() {
@@ -360,8 +364,6 @@ function chkValue() {
 	 
 	var $townList = ${townList};
 	console.log($townList);	
-	
-	//주소 select 에 option값 추가
 	for (i in $townList){
 		$('#AddressArr').append("<option value="+$townList[i]+">"+$townList[i]+"</option>");
 		console.log($townList[i]);

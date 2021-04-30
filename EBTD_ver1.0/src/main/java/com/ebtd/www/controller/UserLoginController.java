@@ -28,8 +28,20 @@ public class UserLoginController { //휠체어의 페이지이동
 		
 		return view;
 	}
+	@RequestMapping(value = "/blind/join")
+	public String blindJoinForm(HttpSession session) {
+		String view;
+		//쿠키 확인 후 시각장애인일 경우 바로 이동
+		/**/
+		//세션에 아이디가 없을 경우만 Login으로 이동
+		if(session.getAttribute("u_username")!=null) {view = "user/loginForm";}
+		else {view = "/user/blind/joinForm";}
+		
+		return view;
+	}
+	
 	@RequestMapping(value = "/wheel/mainForm")
-	public String mainForm(HttpSession session) {
+	public String WheelMainForm(HttpSession session) {
 		String view;
 		//쿠키 확인 후 시각장애인일 경우 바로 이동
 		/**/
@@ -37,6 +49,18 @@ public class UserLoginController { //휠체어의 페이지이동
 		//세션에 아이디가 없을 경우만 Login으로 이동
 		if(session.getAttribute("u_username")==null) {view = "user/loginForm";}
 		else {view = "/user/wheel/mainForm";}
+		
+		return view;
+	}
+	@RequestMapping(value = "/blind/mainForm")
+	public String BlindMainForm(HttpSession session) {
+		String view;
+		//쿠키 확인 후 시각장애인일 경우 바로 이동
+		/**/
+		//쿠키 확인 후 시각장애인일 경우 바로 이동
+		//세션에 아이디가 없을 경우만 Login으로 이동
+		if(session.getAttribute("u_username")==null) {view = "user/loginForm";}
+		else {view = "/user/blind/mainForm";}
 		
 		return view;
 	}

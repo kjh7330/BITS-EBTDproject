@@ -48,8 +48,8 @@ public class IdMM {
 
 		mav = new ModelAndView();
 		String view = null;
-		//company DB에 일치하는 아이디 확인
 		
+		//company DB에 일치하는 아이디 확인
 		if(!cDao.existUsername(cb)) {
 			//일치하는 아이디 없을 시 로그인창으로 이동 후 msg출력
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
@@ -59,7 +59,8 @@ public class IdMM {
 		}
 		//암호화 모듈 사용해 들어온 비밀번호 암호화
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();		
-				//패스워드 일치 확인
+
+		//패스워드 일치 확인
 		String dbPwd = cDao.getPwd(cb);
 		if(!pwdEncoder.matches(cb.getC_password(), dbPwd)) {
 			mav.addObject("msg", "일치하는 아이디가 습니다.");
@@ -80,7 +81,6 @@ public class IdMM {
 				view = "redirect:loginForm";
 			}else if(c_state==1) {
 				//승인 완료된 회사일시
-				/*회사 메인 설정 완료시 수정 부탁드립니다.*/
 				view = "/company/companyindex";
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
@@ -90,7 +90,6 @@ public class IdMM {
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
 			}
-			
 		}else {
 			// 비밀번호가 틀린경우
 			mav.addObject("msg", "비밀번호를 확인해주세요");
@@ -101,7 +100,7 @@ public class IdMM {
 	}
 
 	public int checkId(String c_username) {
-
+		//아이디 있을경우 1, 아닐시 0
 		return (cDao.checkId(c_username)!=null)?1:0;
 	}
 	

@@ -15,8 +15,8 @@
   	</select>
   	
   	<insert id="userJoin" parameterType="user_ch">
-  		INSERT INTO U(U_USERNAME, U_DISABLEDNO, U_NAME, U_PASSWORD, U_USERPHONENUM, U_TYPE, U_ADDRESS)
-  		VALUES (#{u_username}, #{u_disable_no},#{u_name},#{u_password}, #{u_userphonenum}, #{u_type}, #{u_address})
+  		INSERT INTO U(U_USERNAME, U_DISABLEDNO, U_NAME, U_PASSWORD, U_USERPHONENUM, U_TYPE, U_ADDRESS, U_GUARDNAME, U_GUARDPHONENUM, U_GUARDRELATION)
+  		VALUES (#{u_username}, #{u_disable_no},#{u_name},#{u_password}, #{u_userphonenum}, #{u_type}, #{u_address}, #{u_guardname}, #{u_guardphonenum}, #{u_guardrelation})
   	</insert>
   	
   	

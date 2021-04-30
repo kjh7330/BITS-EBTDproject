@@ -113,6 +113,13 @@
 			str += uBookList[i].s_nameStart;
 			str += uBookList[i].s_nameLast;
 			str += '</a>';
+			
+			<main class="mypageBtn">
+			<button onclick="location.href='#'">이용 내역</button>
+			<button onclick="location.href='#'">고객 소리함</button>
+			<button onclick="location.href='/user/wheel/getUserMyInfo'">내 정보 확인</button>
+			
+			</main>
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 
@@ -137,6 +144,7 @@
 		    }
 		});
 		<!--     모달 스크립트 여기까지~!     -->
+		
 		
 		//즐겨찾기 클릭
 		function bookOneClick(){ 	// 모달창 열기 이벤트

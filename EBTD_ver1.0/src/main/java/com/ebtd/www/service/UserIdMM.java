@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,9 @@ public class UserIdMM {
 		mav = new ModelAndView();
 		om = new ObjectMapper();
 		
+		//현재 있는 town의 name값을 가져옴
 		ArrayList<String> townListArr = bDao.getTownNameList();
+		//townList로 출력
 		mav.addObject("townList", om.writeValueAsString(townListArr));
 		
 		return mav;
@@ -56,6 +60,7 @@ public class UserIdMM {
 		//bean에 암호화된 패스워드 등록
 		System.out.println(ub.getU_password());
 		ub.setU_password(pwdEncoder.encode(ub.getU_password()));
+		
 		System.out.println(ub.getU_password());
 		System.out.println("wheelUserJoinResult");
 		
@@ -73,7 +78,7 @@ public class UserIdMM {
 		return mav;
 	}
 
-	public ModelAndView login(UserBean_ch ub, HttpSession session) {
+	public ModelAndView login(UserBean_ch ub, HttpSession session, HttpServletResponse response) {
 		mav = new ModelAndView();
 		String view = null;
 		//company DB에 일치하는 아이디 확인
@@ -88,7 +93,7 @@ public class UserIdMM {
 		}
 		//암호화 모듈 사용해 들어온 비밀번호 암호화
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();		
-				//패스워드 일치 확인
+		//패스워드 일치 확인
 		String dbPwd = uIdDao.getPwd(ub);
 		System.out.println(ub.getU_password());
 		System.out.println(dbPwd);
@@ -104,7 +109,7 @@ public class UserIdMM {
 		String username = ub.getU_username();
 		if(username!=null) {
 			System.out.println("3");
-			//일치하는 정보 있을시 userState 정보 가저옴 (1 - 승인, 3 - admin계정)			
+			//일치하는 정보 있을시 userState 정보 가저옴 (1 - 블라인드, 0 - 휠체어)			
 			int u_type = uIdDao.accessUserState(username);
 			System.out.println(u_type);
 			if(u_type==0){
@@ -125,6 +130,23 @@ public class UserIdMM {
 			mav.addObject("msg", "비밀번호를 확인해주세요");
 			view = "redirect:user/loginForm";
 		}mav.setViewName(view);
+        String u_type = session.getAttribute("u_type")+"";
+        Cookie userNameCookie = new Cookie("u_username", username);
+        Cookie TypeCookie = new Cookie("u_type", u_type);
+        
+        if (session.getAttribute("u_username")!=null) {
+            response.addCookie(userNameCookie);
+            response.addCookie(TypeCookie);
+            System.out.println("3단계-쿠키 아이디저장 O");
+            // 쿠키 확인
+            // System.out.println("Service check" + cookie);
+        } else {
+            System.out.println("3단계-쿠키 아이디저장 X");
+            userNameCookie.setMaxAge(0);
+            TypeCookie.setMaxAge(0);
+            response.addCookie(userNameCookie);
+            response.addCookie(TypeCookie);
+        }
 		return mav;
 	}
 }
