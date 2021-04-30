@@ -9,4 +9,7 @@
 		SELECT * FROM BUS
 	</select>
 
+	<select id="getStopList" resultType="stop">
+		SELECT S_NO, S_NAME FROM STOP
+	</select>
 </mapper>
