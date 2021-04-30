@@ -56,6 +56,7 @@
         }
         .navline{
             margin-left: 10px;
+            margin-top: 3px;
             font-size: 30px;
             color: #0C3D6A;
             background-color: lightgray;
@@ -88,7 +89,7 @@
         }
         .menu_bg { 
             width: 450px;
-            height: 530px;
+            height: 90vh;
             position: absolute;
             top:80px;
             left:0px;
@@ -101,7 +102,7 @@
             top:0px;
             left:0px;
             width:100%;
-            height: 100%;
+            height: 100vh;
             background-color:#DDD;
         }
 		.menu > div {
@@ -109,19 +110,21 @@
         }
         .mainmenu{
             font: bold;
-            font-size: 28px;
+            font-size: 30px;
+            font-weight: bold;
         }
         .mainmenu:hover{
             background-color: gray;
         }
         .menu {
             text-align: center;
-            font-size: 18px;
+            font-size: 20px;
         }
         .menu a{
             text-decoration: none;
             font: bold;
             color: #0C3D6A;
+            cursor: pointer;
         }
         .menudetail:hover {
             background-color: gray;
@@ -174,31 +177,37 @@
 <body>
     <header>
         <div class="container">
-            <div class="headertitle">&nbsp;<img src="./resources/image/mainlogo.png" alt="EBTD메인로고"/></div>
+            <div class="headertitle">&nbsp;<a style="text-decoration: none;" href="/user/wheel/mainForm"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고"/></a></div>
         </div>
         <nav class="navdiv">
             <div class="dropdown">
-                <button class="navline" onclick="ShowMenu()"><i class="fas fa-bars"></i></button>
+                <button class="navline" onclick="ShowMenu()"><i style="cursor: pointer;" class="fas fa-bars"></i></button>
                 <div class="menu_bg">
                     <div class="menu"> <!--dropdown-content-->
-                        <div  style="width: 96%; height: 13px; text-align: right" onclick="HideMenu()">닫기</div>
-                        <div class="mainmenu"><a>예약하기</a></div>
-                        <div class="menudetail"><a href="#">- 버스 검색</a></div>
-                        <div class="menudetail"><a href="#">- 정류장 검색</a></div>
-                        <div class="mainmenu"><a>예약확인</a></div>
-                        <div class="mainmenu"><a>즐겨찾기</a></div>
-                        <div class="mainmenu"><a>마이페이지</a></div>
-                        <div class="menudetail"><a href="#">- 이용내역</a></div>
-                        <div class="menudetail"><a href="#">- 고객소리함</a></div>
-                        <div class="menudetail"><a href="#">- 내 정보 확인</a></div>
-                        <div class="menudetail"><a href="#">- 로그아웃</a></div>
+                        <div  style="width: 96%; height: 13px; text-align: right" onclick="HideMenu()"><a>닫기</a></div>
+                        <br><br>
+                        <div class="mainmenu"><a href="/user/wheel/getBusList">예약하기</a></div>
+                        <div class="menudetail"><a href="/user/wheel/getBusList">- 버스 검색</a></div>
+                        <div class="menudetail"><a href="/user/wheel/getStopList">- 정류장 검색</a></div>
+                        <div class="mainmenu"><a href="/user/wheel/getReservationInfo">예약확인</a></div>
+                        <div class="mainmenu"><a href="/user/wheel/getBookmarkList">즐겨찾기</a></div>
+                        <div class="mainmenu"><a href="/user/wheel/myPage">마이페이지</a></div>
+                        <div class="menudetail"><a href="/user/wheel/getReservationHistoryList">- 이용내역</a></div>
+                        <div class="menudetail"><a href="/user/wheel/getMyQuestionList">- 고객소리함</a></div>
+                        <div class="menudetail"><a href="/user/wheel/getUserMyInfo">- 내 정보 확인</a></div>
+                        <div class="menudetail" id="logout"><a>- 로그아웃</a></div>
                     </div>
                 </div>
             </div>
             <div class="navcontent">
-                <p>하성운</p>님 환영합니다~!
+                <p>${sessionScope.u_username}</p>님 환영합니다😊
             </div>
         </nav>
     </header>
 </body>
+<script type="text/javascript">
+$('#logout').click(function () {
+	location.href = '/user/logout';
+});
+</script>
 </html>
