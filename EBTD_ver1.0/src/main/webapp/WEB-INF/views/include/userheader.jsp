@@ -177,7 +177,7 @@
 <body>
     <header>
         <div class="container">
-            <div class="headertitle">&nbsp;<a style="text-decoration: none;" href="/user/wheel/mainForm"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고"/></a></div>
+            <div class="headertitle">&nbsp;<a style="text-decoration: none;" href="/user/loginForm"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고"/></a></div>
         </div>
         <nav class="navdiv">
             <div class="dropdown">
@@ -186,15 +186,15 @@
                     <div class="menu"> <!--dropdown-content-->
                         <div  style="width: 96%; height: 13px; text-align: right" onclick="HideMenu()"><a>닫기</a></div>
                         <br><br>
-                        <div class="mainmenu"><a href="/user/wheel/getBusList">예약하기</a></div>
-                        <div class="menudetail"><a href="/user/wheel/getBusList">- 버스 검색</a></div>
-                        <div class="menudetail"><a href="/user/wheel/getStopList">- 정류장 검색</a></div>
-                        <div class="mainmenu"><a href="/user/wheel/getReservationInfo">예약확인</a></div>
-                        <div class="mainmenu"><a href="/user/wheel/getBookmarkList">즐겨찾기</a></div>
-                        <div class="mainmenu"><a href="/user/wheel/myPage">마이페이지</a></div>
-                        <div class="menudetail"><a href="/user/wheel/getReservationHistoryList">- 이용내역</a></div>
-                        <div class="menudetail"><a href="/user/wheel/getMyQuestionList">- 고객소리함</a></div>
-                        <div class="menudetail"><a href="/user/wheel/getUserMyInfo">- 내 정보 확인</a></div>
+                        <div class="mainmenu"><a href="/user/getBusList">예약하기</a></div>
+                        <div class="menudetail"><a href="/user/getBusList">- 버스 검색</a></div>
+                        <div class="menudetail"><a href="/user/getStopList">- 정류장 검색</a></div>
+                        <div class="mainmenu"><a href="/user/getReservationInfo">예약확인</a></div>
+                        <div class="mainmenu"><a href="/user/getBookmarkList">즐겨찾기</a></div>
+                        <div class="mainmenu"><a href="/user/myPage">마이페이지</a></div>
+                        <div class="menudetail"><a href="/user/getReservationHistoryList">- 이용내역</a></div>
+                        <div class="menudetail"><a href="/user/getMyQuestionList">- 고객소리함</a></div>
+                        <div class="menudetail"><a href="/user/getUserMyInfo">- 내 정보 확인</a></div>
                         <div class="menudetail" id="logout"><a>- 로그아웃</a></div>
                     </div>
                 </div>

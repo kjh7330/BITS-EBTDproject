@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- I_UserMypageDao 전용 Mapper : 유저 마이페이지 관련 SQL문 -->
+<mapper namespace="com.ebtd.www.dao.I_UserMypageDao">
+	<select id="getUserMyInfo" parameterType="String" resultType="user">
+		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
+	</select>
+	<update id="setUserMyInfo" parameterType="User">
+		UPDATE USERLIST SET U_USERNAME=#{u_userName}, U_NAME=#{u_name}, U_USERPHONENUM=#{u_userphonenum}, U_ADDRESS=#{u_address}, U_GUARDNAME=#{u_guardname}, U_GUARDPHONENUM=#{u_guardphonenum}, U_GUARDRELATION=#{u_guardrelation} WHERE U_USERNAME=#{u_userName}
+	</update>
+</mapper>

@@ -18,19 +18,19 @@ public class UserReservationController {
 	
 	ModelAndView mav;
 	//전체 버스 출력
-	@GetMapping(value = "/wheel/getBusList")
+	@GetMapping(value = "/getBusList")
 	public ModelAndView getBusList() throws JsonProcessingException {
 		mav=urm.getBusList();
 		return mav;
 	}
 	//전체 정류장 출력
-	@GetMapping(value = "/wheel/getStopList")
+	@GetMapping(value = "/getStopList")
 	public ModelAndView getStopList() throws JsonProcessingException {
 		mav=urm.getStopList();
 		return mav;
 	}
 	//버스 노선 상세
-	@GetMapping(value = "/wheel/getBusDetail")
+	@GetMapping(value = "/getBusDetail")
 	public ModelAndView getBusDetail(String b_No) {
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++"+b_No);
 		mav=urm.getBusDetail();

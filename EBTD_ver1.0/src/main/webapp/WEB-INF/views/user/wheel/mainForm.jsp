@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>메인페이지</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -65,10 +65,10 @@
             <input type="text" value="예약 내용을 불러오세요" readonly>
         </div>
         <div class="mainbtn">
-            <button onclick="location.href='/user/wheel/getBusList'">예약하기</button>
-            <button onclick="location.href='/user/wheel/getReservationInfo'">예약확인</button>
-            <button onclick="location.href='/user/wheel/getBookmarkList' ">즐겨찾기</button>
-            <button onclick="location.href='/user/wheel/myPage'">마이페이지</button>
+            <button onclick="location.href='/user/getBusList'">예약하기</button>
+            <button onclick="location.href='/user/getReservationInfo'">예약확인</button>
+            <button onclick="location.href='/user/getBookmarkList' ">즐겨찾기</button>
+            <button onclick="location.href='/user/myPage'">마이페이지</button>
         </div>
     </main>
     <div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
