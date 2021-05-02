@@ -26,8 +26,8 @@
 	<div id="userheader"><%@ include file="/WEB-INF/views/include/userheader.jsp"%></div>
 			
 	<main class="mypageBtn">
-	<button onclick="location.href='#'">이용 내역</button>
-	<button onclick="location.href='#'">고객 소리함</button>
+	<button onclick="location.href='/user/getReservationHistoryList'">이용 내역</button>
+	<button onclick="location.href='/user/getMyQuestionList'">고객 소리함</button>
 	<button onclick="location.href='/user/getUserMyInfo'">내 정보 확인</button>
 	
 	</main>

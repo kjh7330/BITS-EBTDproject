@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 정보 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 	.main-container{
@@ -99,7 +99,8 @@
 </table>
 </div>
 <div class="btndiv">
-<input class="tablebtn1" type="submit" value="수정">&nbsp;&nbsp;&nbsp;<a href="/user/wheel/mainForm"><input class="tablebtn2" type="text" value="취소"></a>
+<input type="hidden" name="u_type" value="${mi.u_type}">
+<input class="tablebtn1" type="submit" value="수정">&nbsp;&nbsp;&nbsp;<a href="/user/myPage"><input class="tablebtn2" type="text" value="취소"></a>
 </div>
 </form>
 </c:forEach>

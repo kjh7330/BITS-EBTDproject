@@ -4,10 +4,37 @@
 
 <!-- I_UserMypageDao 전용 Mapper : 유저 마이페이지 관련 SQL문 -->
 <mapper namespace="com.ebtd.www.dao.I_UserMypageDao">
+	<select id="getReservationHistoryList" resultType="bookmark">
+		SELECT * FROM USER_RESERVE_HISTORY WHERE U_USERNAME = #{u_username}
+	</select>
 	<select id="getUserMyInfo" parameterType="String" resultType="user">
 		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
 	</select>
 	<update id="setUserMyInfo" parameterType="User">
 		UPDATE USERLIST SET U_USERNAME=#{u_userName}, U_NAME=#{u_name}, U_USERPHONENUM=#{u_userphonenum}, U_ADDRESS=#{u_address}, U_GUARDNAME=#{u_guardname}, U_GUARDPHONENUM=#{u_guardphonenum}, U_GUARDRELATION=#{u_guardrelation} WHERE U_USERNAME=#{u_userName}
 	</update>
+	<insert id="setMyQuestionWrite" parameterType="VocBean">
+		INSERT INTO VOC VALUES((SELECT NVL(MAX(V_NO)+1,0) FROM VOC), 
+							   (SELECT C_USERNAME FROM BUS WHERE B_NO=#{b_no}), #{b_no}, 
+							   #{u_username}, #{v_title}, #{v_content}, SYSDATE, '', #{voc_recommend})
+	</insert>
+	<select id="getMyQuestionList" resultType="VocBean">
+		SELECT V.*, U.U_TYPE, VA.A_NO
+		FROM VOC V
+		JOIN USERLIST U ON V.U_USERNAME=U.U_USERNAME
+		JOIN VOC_TO_ANSWER VA ON V.V_NO=VA.V_NO
+		WHERE V.U_USERNAME = ${u_username}
+		ORDER BY V.V_NO, VA.A_NO
+	</select>
+	<select id="getReservationBusNum" resultType="userReserveHistory">
+		SELECT DISTINCT B_NO FROM USERPRESERVE_HISTORY WHERE = #{u_username}
+	</select>
+	<select id="getMyQuestionDetail" resultType="VocBean">
+		SELECT V.*, U.U_TYPE, VA.A_NO
+		FROM VOC V
+		JOIN USERLIST U ON V.U_USERNAME=U.U_USERNAME
+		JOIN VOC_TO_ANSWER VA ON V.V_NO=VA.V_NO
+		WHERE V.V_NO = ${v_no}
+		ORDER BY V.V_NO, VA.A_NO
+	</select>
 </mapper>
