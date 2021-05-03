@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- I_CompanyUserDao 전용 Mapper : 이용내역 관련 sql문 명시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ebtd.www.dao.I_CompanyUserDao">
+	<select id="getUserHistory" resultType="userReserveHistory" parameterType="String">
+	SELECT H.URH_NO, H.U_USERNAME, H.S_NOSTART, H.S_NOLAST, H.B_NO, H.URH_DATE, U.U_TYPE FROM
+	USER_RESERVE_HISTORY H JOIN BUS B ON H.B_NO=B.B_NO
+	JOIN USERLIST U ON H.U_USERNAME=U.U_USERNAME
+	WHERE C_USERNAME=#{id} AND URH_STATE=3
+	</select>
+</mapper>

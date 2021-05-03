@@ -157,6 +157,7 @@ let tList = ${tList};
 let sList = ${sList};
 var startX;
 var startY;
+var dup_check = 0;
 let tName;
 console.log(sList);
 console.log(tList);
@@ -295,7 +296,15 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+10)||(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ) {
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			};
 		};//for문 end
 	}//if문 end
@@ -305,17 +314,33 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			 if((recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY-5)) {
 				 recommendStopName = sList[i]['s_NAME'];
-					$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");	
+				 for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ) {
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;	
 				}
 		}//for문 end
-	}// if문 end
+	}
 	//x축 -, y축 - 인 경우
 	else if(recommendX < startX && recommendY < startY) {
 		console.log("x축 -, y축 - 인 경우");
 		for(let i in sList) {
 			if((recommendX-5< sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && sList[i]['s_Y'] < recommendY && recommendY-5 < sList[i]['s_Y'])||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && sList[i]['s_Y'] < recommendY+5 && recommendY < sList[i]['s_Y'])) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ) {
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			}
 		}//for문 end 
 	}// if문 end 
@@ -325,7 +350,15 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ){
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			}
 		}//for문 end
 	}//if문 end
@@ -335,7 +368,15 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ){
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			}
 		}//for문 end
 	}//if문 end
@@ -345,7 +386,15 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ) {
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			}
 		}//for문 end 
 	}//if문 end
@@ -355,7 +404,15 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ){
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
 			}
 		}//for문 end
 	}//if문 end
@@ -365,8 +422,16 @@ $('#recommendConfi').on('click', function() {
 		for(let i in sList) {
 			if(recommend-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
 				recommendStopName = sList[i]['s_NAME'];
-				$('#mRecommendStop').append("<option id = 'mRecommendSelectBox' value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
-			}
+				for(data of $('.stopRouteNum') )
+	                  if(sList[i]['s_NO'] == $(data).val())  {
+	                     console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+	                     dup_check = 1;
+	                  }
+	               if( dup_check == 0 ) {
+	            	   $('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+	               }
+	               dup_check = 0;
+			};
 		}//for문 end
 		
 	}//if문 end

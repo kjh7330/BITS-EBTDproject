@@ -254,8 +254,8 @@
                 <button class="dropbtn">고객 센터</button>
                 <div class="dropdown-content">
                     <div class="menudetail"><a href="#">현재 탑승 인원</a></div>
-                    <div class="menudetail"><a href="#">당사 이용자 히스토리</a></div>
-                    <div class="menudetail"><a href="#">전체 이용자 추이</a></div>
+                    <div class="menudetail"><a href="/company/user/history">당사 이용자 히스토리</a></div>
+                    <div class="menudetail"><a href="/company/user/total">전체 이용자 추이</a></div>
                     <div class="menudetail"><a href="#">이용자 문의</a></div>
                 </div>
             </div>
