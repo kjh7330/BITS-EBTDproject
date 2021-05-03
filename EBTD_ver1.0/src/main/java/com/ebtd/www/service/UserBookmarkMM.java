@@ -36,6 +36,7 @@ public class UserBookmarkMM {	//김아름
 		//디비에서 가져온 데이터가 있으면
 		if( (uBookList!=null) && (uBookList.size()!= 0) ) {
 			mav.addObject("uBookList", om.writeValueAsString(uBookList));
+			//mav.addObject("uBookList2", uBookList);
 			//잭슨으로 데이터-->json으로 변환
 			view = "/user/wheel/wheelBookmarkListForm";//.jsp
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
