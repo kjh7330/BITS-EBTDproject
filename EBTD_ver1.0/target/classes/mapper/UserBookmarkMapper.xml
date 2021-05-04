@@ -14,6 +14,17 @@
 		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
 		WHERE U_USERNAME=#{u_userName}
 	</select>
+	
+	<delete id="deleteBookmark">
+        DELETE FROM UB
+        WHERE UB_NO = #{ub_no}
+    </delete>
+    
+    <insert id="insertBookmark">
+    	<!-- 시퀀스 -->
+        INSERT INTO UB VALUES(
+    	'aaa','111113',45004,45068,'80','만화방에서 아름이네')
+    </insert>
 
 	
 	

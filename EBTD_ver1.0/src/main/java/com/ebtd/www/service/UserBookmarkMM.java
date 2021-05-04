@@ -47,8 +47,18 @@ public class UserBookmarkMM {	//김아름
 		}
 		mav.setViewName(view);
 		return mav;
-		
 			
-	} //getWheelBookmarkList end
+	} //getBookmarkList end
+
+	
+	//즐겨찾기 삭제
+	public void deleteBookmark(String ub_no) {
+		uBookDao.deleteBookmark(ub_no);	//디비에 즐겨찾기 삭제하러
+	} //deleteBookmark end
+
+	//즐겨찾기 추가
+	public void insertBookmark(String ub_no) {
+		uBookDao.insertBookmark(ub_no);	//디비에 즐겨찾기 추가하러
+	} //insertBookmark end
 		
 } //UserBookmarkMM class end

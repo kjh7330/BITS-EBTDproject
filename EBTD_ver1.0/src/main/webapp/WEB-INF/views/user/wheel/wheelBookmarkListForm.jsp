@@ -29,13 +29,13 @@
 	font-size: 14pt;
 	color: black; /* width:50px; */
 	padding-top: 15px; /* margin: 20px; */
-	border: 1px solid;
+	border: 0.2px solid;
 }
 
 .starIcon { /* 폰트어썸 별 */
 	color: yellow;
-	font-size: 30px;
-	border: 1px solid black;
+	font-size: 20px;
+	/* border: 0.3px solid black; */
 }
 /*   모달css랑 스크립트, 버튼html 복사해서 쓰세요~!   */
 /*   스크립트는 맨 아래쪽에 있음   */
@@ -129,7 +129,7 @@ body {
 
 	<!-- 즐겨찾기 리스트 -->
 	<div id="booklist"></div>
-
+	
 	<!-- 모달 -->
 	<div id="overlay">
 		<div id="myModal" class="modal">
@@ -156,10 +156,13 @@ body {
 		let uBookList = ${uBookList};
 		let str = '';
 		console.log(uBookList);
-
-		for(let i = 0; i < uBookList.length; i++){
-			str += '<div class="starIcon"><i class="fas fa-splotch"></i></div>'; //폰트어썸 별
-			str += '<div class="bookList" >';
+		let i = 0;
+		for(i = 0; i < uBookList.length; i++){
+			str += '<div class="totalBookList">'
+			str += '<div class="starIcon"><span class="fa-stack fa-lg"><i class="far fa-star fa-stack-2x"></i><i  class="fas fa-star" id="star'+i+'"></i></span></div>'; //폰트어썸 꽉찬별
+			console.log( $('#star'+i) );
+			str += '<div class="bookList">';
+			str += '<input type="text" class="ub_no" value="'+uBookList[i].ub_no+'">'
 			str += uBookList[i].ub_alias +'<br>';	//별칭
 			//str += '<a href="#">';
 			str += '['+ uBookList[i].b_no +'] ';	//버스번호	
@@ -168,7 +171,7 @@ body {
 			str += '-->';
 			str += uBookList[i].s_nameLast;			//도착정류장
 			//console.log(i);
-			str += '</div>';
+			str += '</div></div>';
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 
@@ -192,12 +195,12 @@ body {
 		        $("#overlay").css({ visibility:"hidden", opacity:0 });
 		    }
 		});
-		<!--     모달 스크립트 여기까지~!     -->
 		
 		//취소버튼 누를 시 모달창 닫기
 		$('#modalOutBtn').click(function modalOut(){
 			$("#overlay").css({ visibility:"hidden", opacity:0 });
 		});
+		<!--     모달 스크립트 여기까지~!     -->
 		
 		//즐겨찾기 클릭
 		$('.bookList').click(function (){ 	// 모달창 열기 이벤트
@@ -208,7 +211,49 @@ body {
 			$('#modalBookDeail').empty();
 			$('#modalBookDeail').append(p); 
 		});
+		
+		//별 클릭
+		$('.starIcon').click(function(){
+			//console.log( $('.starIcon').parent().children('.bookList').html() );
+			console.log( $(this).parent().children('.bookList').children('.ub_no').val() );
+			
+			//off star
+			if( $(this).children().children().last().css("color") == "rgb(255, 255, 0)" ){ 
+				$(this).children().children().last().css("color", "white");
+				
+				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
+				$.ajax({
+					type: 'post',
+					url : "/user/deleteBookmark",
+					data : { 'ub_no' : ub_no },
+					dataType : 'json',
+				}).done(function(data){
+					console.log(data);
+	
+				}).fail(function(err){
+					console.log(err,"!!!!!!!!!!");
+				});
+			}else		//on star
+				$(this).children().children().last().css("color", "rgb(255, 255, 0)"); 
+			
+				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
+				/* $.ajax({
+					type: 'post',
+					url : "/user/insertBookmark",
+				 	data : { 'ub_no' : ub_no },
+					dataType : 'json',
+				}).done(function(data){
+					console.log(data);
+					let ubList = data;
+					let str = ""; */
+	
+				/* }).fail(function(err){
+					console.log(err,"!!!!!!!!!!");
+				});  */
 
+		}); //별클릭 이벤트 end
+		
+		
 	</script>
 
 
