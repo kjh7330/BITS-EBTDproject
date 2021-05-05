@@ -22,14 +22,14 @@ public class UserBookmarkRestController {
 	
 	//즐겨찾기 별 색깔 없애면
 	@PostMapping(value = "/deleteBookmark", produces =  "text/plain;charset=utf-8")
-	public void deleteBookmark(String ub_no) throws JsonProcessingException {	
-		ubm.deleteBookmark(ub_no);	
+	public String deleteBookmark(String ub_no) throws JsonProcessingException {	
+		return ubm.deleteBookmark(ub_no);	
 	}
 	
 	//즐겨찾기 별 색깔 생기면
 	@PostMapping(value = "/insertBookmark", produces =  "text/plain;charset=utf-8")
-	public void insertBookmark(String ub_no) throws JsonProcessingException {	
-		ubm.insertBookmark(ub_no);
+	public String insertBookmark(String ub_no, String u_userName, String b_no, int s_noStart, int s_noLast, String ub_alias) throws JsonProcessingException {	
+		return ubm.insertBookmark(ub_no, u_userName, b_no, s_noStart, s_noLast, ub_alias);
 					
 	}
 }

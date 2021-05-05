@@ -52,13 +52,25 @@ public class UserBookmarkMM {	//김아름
 
 	
 	//즐겨찾기 삭제
-	public void deleteBookmark(String ub_no) {
+	public String deleteBookmark(String ub_no) {
 		uBookDao.deleteBookmark(ub_no);	//디비에 즐겨찾기 삭제하러
+		
+		return "삭제완료";
 	} //deleteBookmark end
 
 	//즐겨찾기 추가
-	public void insertBookmark(String ub_no) {
-		uBookDao.insertBookmark(ub_no);	//디비에 즐겨찾기 추가하러
+	public String insertBookmark(String ub_no, String u_userName, String b_no, int s_noStart, int s_noLast, String ub_alias) {
+		UserBookmarkBean uBookmark = new UserBookmarkBean();
+		uBookmark.setUb_no(ub_no);
+		uBookmark.setU_userName(u_userName);
+		uBookmark.setB_no(b_no);
+		uBookmark.setS_noStart(s_noStart);
+		uBookmark.setS_noLast(s_noLast);
+		uBookmark.setUb_alias(ub_alias);
+		
+		uBookDao.insertBookmark(uBookmark);	//디비에 즐겨찾기 추가하러
+		
+		return "저장완료";
 	} //insertBookmark end
 		
 } //UserBookmarkMM class end

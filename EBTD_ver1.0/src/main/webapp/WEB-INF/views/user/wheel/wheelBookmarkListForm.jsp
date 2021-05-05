@@ -14,29 +14,47 @@
 </head>
 
 <style>
-#booklist { /* 즐겨찾기 전체 div */
-	height: 90px;
-	text-align: center;
-	font-size: 14pt;
-	color: black; /* width: 300px */
-	padding-top: 15px;
-	margin: 20px;
-}
+	#booklist { /* 즐겨찾기 전체 div */
+		height: 90px;
+		text-align: center;
+		font-size: 14pt;
+		color: black; /* width: 300px */
+		padding-top: 15px;
+		margin: 20px;
+	}
+	
+	.bookList { /* 즐겨찾기 개인 div */
+		height: 90px;
+		text-align: center;
+		font-size: 14pt;
+		color: black; /* width:50px; */
+		padding-top: 15px; /* margin: 20px; */
+		border: 0.2px solid;
+	}
+	
+	.starIcon { /* 폰트어썸 별 */
+		color: yellow;
+		font-size: 20px;
+		/* border: 0.3px solid black; */
+	}
+	
+	.ub_no{
+		display : none;
+	}
+	
+	.u_userName{
+		display : none;
+	}
+	
+	.s_noStart{
+		display : none;
+	}
+	
+	.s_noLast{
+		display : none;
+	}
 
-.bookList { /* 즐겨찾기 개인 div */
-	height: 90px;
-	text-align: center;
-	font-size: 14pt;
-	color: black; /* width:50px; */
-	padding-top: 15px; /* margin: 20px; */
-	border: 0.2px solid;
-}
 
-.starIcon { /* 폰트어썸 별 */
-	color: yellow;
-	font-size: 20px;
-	/* border: 0.3px solid black; */
-}
 /*   모달css랑 스크립트, 버튼html 복사해서 쓰세요~!   */
 /*   스크립트는 맨 아래쪽에 있음   */
 /*   모달 버튼은 스크립트 위에 있음   */
@@ -122,6 +140,7 @@ body {
 	cursor: pointer;
 }
 /*   모달css여기까지~!   */
+
 </style>
 <body>
 	<div id="userheader"><%@ include
@@ -129,7 +148,7 @@ body {
 
 	<!-- 즐겨찾기 리스트 -->
 	<div id="booklist"></div>
-	
+
 	<!-- 모달 -->
 	<div id="overlay">
 		<div id="myModal" class="modal">
@@ -155,28 +174,28 @@ body {
 <script type="text/javascript">
 		let uBookList = ${uBookList};
 		let str = '';
-		console.log(uBookList);
+		//console.log(uBookList);
 		let i = 0;
 		for(i = 0; i < uBookList.length; i++){
-			str += '<div class="totalBookList">'
+			str += '<div class="totalBookList" overflow="auto">'
 			str += '<div class="starIcon"><span class="fa-stack fa-lg"><i class="far fa-star fa-stack-2x"></i><i  class="fas fa-star" id="star'+i+'"></i></span></div>'; //폰트어썸 꽉찬별
-			console.log( $('#star'+i) );
+			//console.log( $('#star'+i) );
 			str += '<div class="bookList">';
-			str += '<input type="text" class="ub_no" value="'+uBookList[i].ub_no+'">'
-			str += uBookList[i].ub_alias +'<br>';	//별칭
-			//str += '<a href="#">';
-			str += '['+ uBookList[i].b_no +'] ';	//버스번호	
-			//str += '</a>';
-			str += uBookList[i].s_nameStart;		//출발정류장
+			str += '<input type="text" class="ub_no" value="'+uBookList[i].ub_no+'">'	//즐겨찾기 번호
+			str += '<input type="text" class="ub_alias" value="'+uBookList[i].ub_alias+'">'	//별칭
+			str += '<input type="text" class="b_no" value="'+uBookList[i].b_no+'">'	//버스번호
+			str += '<input type="text" class="s_nameStart" value="'+uBookList[i].s_nameStart+'">'	//출발정류장
 			str += '-->';
-			str += uBookList[i].s_nameLast;			//도착정류장
-			//console.log(i);
+			str += '<input type="text" class="s_nameLast" value="'+uBookList[i].s_nameLast+'">'	//도착정류장
+			
+			str += '<input type="text" class="u_userName" value="'+uBookList[i].u_userName+'">'	//아이디
+			str += '<input type="text" class="s_noStart" value="'+uBookList[i].s_noStart+'">'	//도착정류장ID
+			str += '<input type="text" class="s_noLast" value="'+uBookList[i].s_noLast+'">'	//도착정류장ID
 			str += '</div></div>';
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 
 		
-		 
 		<!--     모달 스크립트만 가져가세요~!    -->
 		  // 모달창 닫기 이벤트 
 		  $(".close").on("click", function(){
@@ -214,11 +233,9 @@ body {
 		
 		//별 클릭
 		$('.starIcon').click(function(){
-			//console.log( $('.starIcon').parent().children('.bookList').html() );
-			console.log( $(this).parent().children('.bookList').children('.ub_no').val() );
-			
 			//off star
 			if( $(this).children().children().last().css("color") == "rgb(255, 255, 0)" ){ 
+				console.log("별이 켜진 상태에서 클릭");
 				$(this).children().children().last().css("color", "white");
 				
 				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
@@ -226,30 +243,41 @@ body {
 					type: 'post',
 					url : "/user/deleteBookmark",
 					data : { 'ub_no' : ub_no },
-					dataType : 'json',
+					dataType : 'html'
+				}).done(function(data){
+					console.log(data);
+				}).fail(function(err){
+					console.log(err,"!!!!!!!!!!");
+				});
+			}else{		//on star
+				$(this).children().children().last().css("color", "rgb(255, 255, 0)"); 
+				
+				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
+				let u_userName = $(this).parent().children('.bookList').children('.u_userName').val();
+				let s_noStart = $(this).parent().children('.bookList').children('.s_noStart').val();
+				let s_noLast = $(this).parent().children('.bookList').children('.s_noLast').val();
+				let b_no = $(this).parent().children('.bookList').children('.b_no').val();
+				let ub_alias = $(this).parent().children('.bookList').children('.ub_alias').val();
+
+				$.ajax({
+					type: 'post',
+					url : "/user/insertBookmark",
+				 	data : 	{ 
+				 				'ub_no' : ub_no,
+				 				'u_userName' : u_userName,
+				 				'b_no' : b_no,
+				 				's_noStart' : s_noStart,
+				 				's_noLast' : s_noLast,
+				 				'ub_alias' : ub_alias
+				 			},
+					dataType : 'html'
 				}).done(function(data){
 					console.log(data);
 	
 				}).fail(function(err){
 					console.log(err,"!!!!!!!!!!");
 				});
-			}else		//on star
-				$(this).children().children().last().css("color", "rgb(255, 255, 0)"); 
-			
-				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
-				/* $.ajax({
-					type: 'post',
-					url : "/user/insertBookmark",
-				 	data : { 'ub_no' : ub_no },
-					dataType : 'json',
-				}).done(function(data){
-					console.log(data);
-					let ubList = data;
-					let str = ""; */
-	
-				/* }).fail(function(err){
-					console.log(err,"!!!!!!!!!!");
-				});  */
+			}
 
 		}); //별클릭 이벤트 end
 		

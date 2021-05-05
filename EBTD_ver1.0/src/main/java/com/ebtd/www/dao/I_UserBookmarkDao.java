@@ -10,5 +10,5 @@ public interface I_UserBookmarkDao {
 
 	void deleteBookmark(String ub_no);
 
-	void insertBookmark(String ub_no);
+	void insertBookmark(UserBookmarkBean uBookmark);
 }
