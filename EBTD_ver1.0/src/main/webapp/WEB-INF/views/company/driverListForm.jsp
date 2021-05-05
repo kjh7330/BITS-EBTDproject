@@ -25,9 +25,10 @@
 				<!-- <th>회사 이름</th> -->
 				<th>기사 이름</th>
 				<th>이미지</th>
-				<!-- <th>전화번호</th> -->
-				<!-- <th>입사일</th> -->
-				<!-- <th>버스번호</th> -->
+				<th>전화번호</th>
+				<th>입사일</th> 
+				<th>노선번호</th>
+				<th>수정하기</th>
 			</tr>
 		</thead>
 		<tbody id="driverList">
@@ -47,20 +48,20 @@
 let dList = ${dList};
 var html = '';
 
-console.log(dList);
+//console.log(dList);
 //기사 정보 가져오기
  for(let i = 0 ; i<dList.length; i++){
 	 
 	 html += '<tr>';
 	 html += '<td>'+dList[i].d_no+'</td>';
 //	 html += '<td>'+dList[i].c_userName+'</td>';
-	/*  html += '<td>'+'<a href=/company/getDriverDetail?d_no='+dList[i].d_no+'>';
-	 html += dList[i].d_name+'</a>'; */
 	 html += '<td>'+dList[i].d_name+'</td>';
 	 html += '<td>'+dList[i].d_imgExtention+'</td>';
-//	 html += '<td>'+dList[i].d_phoneNum+'</td>';
-//	 html += '<td>'+dList[i].d_enterDate+'</td>';
-//	 html += '<td>'+dList[i].b_no+'</td>';
+	 html += '<td>'+dList[i].d_phoneNum+'</td>';
+	 html += '<td>'+dList[i].d_enterDate+'</td>';
+	 html += '<td>'+dList[i].b_no+'</td>';
+	 html += '<td>'+'<a href=/company/getDriverDetail?d_no='+dList[i].d_no+'>';
+	 html += "수정"+'</a>';
 	 html += '</tr>';
 	}
    

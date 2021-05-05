@@ -29,7 +29,7 @@ public interface I_CompanyStopDao {
 	List<StopBean> getStopApplyDetail(Integer sa_No);
 
 	@Select("SELECT COUNT(*) FROM stop")
-	int getBoardCount();
+	int getStopCount();
 
 	
 }

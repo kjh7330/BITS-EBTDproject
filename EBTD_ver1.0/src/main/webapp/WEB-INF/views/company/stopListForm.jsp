@@ -29,8 +29,11 @@
 		</div>
 
 	
-	<div align="center">${paging}</div>
-	<table class="table table-striped" style="color: black">
+	<div align="center">
+	${paging}
+	</div>
+	
+	<table class="table table-striped" style="color: black">  
 		<thead>
 			<tr>
 				<th>정류장 번호</th>
@@ -59,6 +62,7 @@
 <script type="text/javascript">
 let sList = ${sList};
 var html = '';
+
 //console.log(sList);
 
  for(let i = 0 ; i<sList.length; i++){
@@ -90,9 +94,7 @@ var html = '';
 				//alert('검색성공');
 				var html = '';
 				
-				//console.log(data);
-				//console.log(data[0].s_NO);
-				//console.log(data[0].t_NAME);
+
 				
 				for(let i = 0 ; i<data.length; i++){
 					 html += '<tr>';

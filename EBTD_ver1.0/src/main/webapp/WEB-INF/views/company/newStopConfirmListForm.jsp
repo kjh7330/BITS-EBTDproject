@@ -21,7 +21,7 @@
 		<thead>
 			<tr>
 				<th>신청 번호</th>
-				<th>회사이름</th>
+				<!-- <th>회사이름</th> -->
 				<th>동 이름</th>
 				<th>정류장 이름</th>
 				<th>신청상태</th>
@@ -48,7 +48,7 @@ var html = '';
 	 
 	 html += '<tr>';
 	 html += '<td>'+nList[i].sa_No+'</td>'; //신청 번호
-	 html += '<td>'+nList[i].c_UserName+'</td>'; //회사 아이디
+	 /* html += '<td>'+nList[i].c_UserName+'</td>'; //회사 아이디 */
 	 html += '<td>'+nList[i].t_Name+'</td>'; //동 이름
 	 html += '<td>'+nList[i].sa_Name+'</td>'; //정류장 이름
 /* 	 html += '<td>'+nList[i].sa_X+'</td>'; //X값

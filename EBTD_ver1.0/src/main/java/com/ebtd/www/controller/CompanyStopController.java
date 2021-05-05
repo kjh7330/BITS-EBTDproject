@@ -34,7 +34,7 @@ public class CompanyStopController {
 
 	//정류장 목록보기 페이지 이동 
 	@GetMapping(value = "/company/getStopList") 
-	public ModelAndView getStopList(Integer pageNum, HttpServletRequest req) throws JsonProcessingException { 
+	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException { 
 		logger.info("정류장 목록보기 페이지 이동"); 
 		mav=sm.getStopList(pageNum);
 		return mav; 

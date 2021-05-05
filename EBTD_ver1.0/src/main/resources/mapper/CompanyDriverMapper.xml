@@ -6,8 +6,8 @@
 <mapper namespace="com.ebtd.www.dao.I_CompanyDriverDao">
 	
 	<!-- 기사 리스트 조회 -->
- 	<select id="getDriverList" resultType="driver" > 
-		SELECT * FROM DRIVER
+ 	<select id="getDriverList" resultType="driver" parameterType="String"> 
+		SELECT * FROM DRIVER WHERE c_username = #{c_userName}
 	</select>
 	
 	<!-- 기사 상세정보 조회 -->
@@ -25,12 +25,14 @@
 		VALUES(SEQ_D_NO.NEXTVAL,#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
 	</insert>  
 	 
-	  
- 
-	 
 	<!-- 해당회사 노선 조회 -->
  	<select id="getCompanyBusList" resultType="companyBus" parameterType="String"> 
 		SELECT B_NO FROM BUS WHERE C_USERNAME = #{C_USERNAME}
 	</select>
+	
+	<!-- 기사정보 수정 -->
+	<update id="updateDriver" parameterType="driver"> 
+		UPDATE DRIVER SET d_phoneNum = #{d_phoneNum} , b_no = #{b_no} WHERE d_no = #{d_no}
+	</update>
 	
 </mapper>

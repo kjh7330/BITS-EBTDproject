@@ -6,11 +6,16 @@
 <mapper namespace="com.ebtd.www.dao.I_CompanyStopDao">
 
 
-	<!-- 정류장 리스트 조회 --> <!-- 페이징 하려면 바꿔야함 -->
- 	<select id="getStopList" parameterType="Integer" resultType="stop" > 
-		SELECT * FROM STOP
+	<!-- 정류장 리스트 조회 -->
+	<select id="getStopList" parameterType="Integer" resultType="stop">
+		<![CDATA[
+			SELECT * FROM (
+			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
+			FROM S
+			WHERE ROWNUM<=#{pageNum}*15)
+			WHERE RN>=#{pageNum}*15-14
+		]]>
 	</select>
-	
 	<!-- 정류장 상세내용 조회 -->
  	<select id="getStopDetail" resultType="stop" parameterType="Integer" > 
 		SELECT * FROM STOP WHERE S_NO = #{S_NO}

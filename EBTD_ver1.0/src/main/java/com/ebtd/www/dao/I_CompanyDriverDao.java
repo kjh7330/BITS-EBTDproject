@@ -11,15 +11,17 @@ import com.ebtd.www.bean.DriverBean;
 
 public interface I_CompanyDriverDao {
 
-	List<DriverBean> getDriverList();
+	List<DriverBean> getDriverList(String c_username);
 
 	boolean addDriver(DriverBean db);
 
-	List<DriverBean> getDriverDetail(int d_no);
+	DriverBean getDriverDetail(int d_no);
 
 	boolean fileInsert(Map<String, String> fMap);
 
 	LinkedList<CompanyBusBean> getCompanyBusList(String C_USERNAME);
+
+	boolean updateDriver(DriverBean db);
 
 
 }
