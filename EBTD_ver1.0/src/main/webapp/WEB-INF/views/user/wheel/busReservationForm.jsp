@@ -34,7 +34,7 @@ let str='';
 for(i; i<${bList}.length; i++){
 	str+='<tr class="line">';
 	
-	str+='<td class="info"><a href=/user/wheel/getBusDetail?b_No='+${bList}[i]["b_no"]+'>'
+	str+='<td class="info"><a href=/user/getBusDetail?b_No='+${bList}[i]["b_no"]+'>'
 	str+=${bList}[i]['b_no']+'</a></td>'
 
 	str+="</tr>";
@@ -71,7 +71,7 @@ $('#busBtn').click(function(){
 					
 					str+='<tr class="line">';
 					
-					str+='<td class="info"><a href=/user/wheel/getBusDetail?b_No='+Obj[i]["b_no"]+'>'
+					str+='<td class="info"><a href=/user/getBusDetail?b_No='+Obj[i]["b_no"]+'>'
 					
 					str+=Obj[i]['b_no']+'</a></td>'
 
@@ -102,7 +102,7 @@ $('#stopBtn').click(function(){
 				
 				str+='<tr class="line">';
 				
-				str+='<td class="info"><a href=/user/wheel/getStopDetail?s_No='+Obj[i]["s_NO"]+'>'
+				str+='<td class="info"><a href=/user/getStopDetail?s_No='+Obj[i]["s_NO"]+'>'
 				
 				str+=Obj[i]['s_NAME']+'</a></td>'
 

@@ -6,10 +6,24 @@
 <mapper namespace="com.ebtd.www.dao.I_UserReservationDao">
 	
 	<select id="getBusList" resultType="bus_wh">
-		SELECT * FROM BUS
+		SELECT DISTINCT B_NO FROM BUS B JOIN AP AP
+		ON B.C_USERNAME = AP.C_USERNAME
+		WHERE AP_STATE IN ( 1 , 4 )
+		ORDER BY B_NO ASC
 	</select>
 
 	<select id="getStopList" resultType="stop">
 		SELECT S_NO, S_NAME FROM STOP
 	</select>
+	
+	<select id="getBusDetail" parameterType="String" resultType="stop_wh">
+		SELECT RB.R_TURN, RB.B_NO, RB.S_NO, S.S_NAME FROM ROUTE_BUS RB JOIN STOP S
+		ON RB.S_NO = S.S_NO
+		WHERE B_NO = #{b_No}
+		ORDER BY R_TURN ASC
+	</select>
+	
+	<insert id="reservation" parameterType="reservation">
+		INSERT INTO USER_RESERVE VALUES(#{ur_no}, #{u_username}, #{s_nostart}, #{s_nolast}, #{b_no}, SYSDATE, 0) 
+	</insert>
 </mapper>

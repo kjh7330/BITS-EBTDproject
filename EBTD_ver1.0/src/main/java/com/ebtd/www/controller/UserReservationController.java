@@ -1,11 +1,15 @@
 package com.ebtd.www.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.UserReservation;
 import com.ebtd.www.service.UserReservationMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -31,17 +35,25 @@ public class UserReservationController {
 	}
 	//버스 노선 상세
 	@GetMapping(value = "/getBusDetail")
-	public ModelAndView getBusDetail(String b_No) {
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++"+b_No);
-		mav=urm.getBusDetail();
+	public ModelAndView getBusDetail(String b_No) throws JsonProcessingException {
+		mav=urm.getBusDetail(b_No);
 		return mav;
 	}
 	//정류장 상세(정류장에 서는 버스들)
-	@GetMapping(value = "/wheel/getStopDetail")
+	@GetMapping(value = "/getStopDetail")
 	public ModelAndView getStopDetail(int s_No) {
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++"+s_No);
-		mav=urm.getBusDetail();
+		mav=urm.getStopDetail(s_No);
 		return mav;
 	}
-
+	@PostMapping(value = "/reservation")
+	public ModelAndView reservation(UserReservation ur, HttpSession session) {
+		
+		mav = urm.reservation(ur, session);
+		return mav;
+	}
+	@GetMapping(value = "/reservationPopUp")
+	public String reservationPopUp() {
+		return "/user/ReservationPopUp";
+	}
 }

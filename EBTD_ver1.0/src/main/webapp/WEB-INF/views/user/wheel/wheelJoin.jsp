@@ -141,11 +141,11 @@
                     </tr>
                     <tr>
                         <td class="tabletitle">P W :</td>
-                        <td colspan="2"><input class="input" name = "u_password" id = "u_password" minlength="4"/></td>
+                        <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">P W2 :</td>
-                        <td colspan="2"><input class="input" id = "u_password2"/></td>
+                        <td colspan="2"><input type="password" class="input" id = "u_password2"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">이름 :</td>
