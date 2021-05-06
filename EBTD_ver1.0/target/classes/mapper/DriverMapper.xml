@@ -1,34 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- DriverDAO 전용 Mapper : 게시판 관련 sql문 명시 -->
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- DriverDAO 전용 Mapper : 게시판 관련 sql문 명시 --> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.ebtd.www.dao.DriverDao">
 
 	<select id = "getCompanyList" resultType = "company_wh">
-		select * from c 
+		select * from c where c_state = 1
 	</select>
+	
 	<select id = "getBusList" resultType = "bus_wh">
-		select b.*, ab.ab_no, ab.ab_type from b b join ab ab on b.b_no = ab.b_no where b.c_username = #{c_username}
+		select b.*, ab.ab_no, ab.ab_type 
+		from b b join ab ab 
+		on b.b_no = ab.b_no join (select max(ap_no), ap_b_no, ap_state from ap group by ap_b_no, ap_state) ap 
+		on b.b_no = ap.ap_b_no 
+		where b.c_username = #{c_username} and ( ap.ap_state = 1 or ap.ap_state = 4 ) 
 	</select>
+	
 	<select id = "getDriverList" resultType = "driver_wh">
 		select d.* from ab ab join d d on ab.b_no = d.b_no where ab.ab_no = #{ab_no}
 	</select>
+	
 	<select id = "getBusRouteList" resultType = "stop_wh">
 		select rb.*, s.s_name from rb rb join s s on rb.s_no = s.s_no where b_no = #{b_no} order by rb.r_turn
 	</select>
+	
 	<select id="refresh" resultType = "reserve_wh">
 		select ur.ur_no, u.u_type, ur.ur_date, rb.r_turn ur_start_turn, rb2.r_turn ur_last_turn
 		from ur ur left 
 		join rb rb  on ur.s_nostart  = rb.s_no 
-		join rb rb2 on ur.s_nolast   = rb2.s_no
-		join u  u   on ur.u_username = u.u_username
-		where ur_status = 1 and rb.b_no = #{b_no} and rb2.b_no = #{b_no}
+		join rb rb2 on ur.s_nolast   = rb2.s_no 
+		join u  u   on ur.u_username = u.u_username 
+		where ur_state = 0 and rb.b_no = #{b_no} and rb2.b_no = #{b_no} 
+	</select>
+	
+	<select id = "carNumberDupCheck" resultType = "int">
+		select count(ab_no) from ab where ab_no = #{ab_no} 
 	</select>
 	
 	<update id="updateBus">
-		update ab set r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no}
+		update ab set r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no} 
 	</update>
+	<update id="on">
+		update ur set ur_state = 0 where ur_no = #{dt} 
+	</update>
+	<update id="out">
+		update ur set ur_state = 0 where ur_no = #{dt} 
+	</update>
+	
+	
 </mapper>
 
 

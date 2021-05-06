@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Alias("company_wh")
 @Data
 @Accessors(chain = true)
-public class Wh_CompanyBean {
+public class DriverCompanyBean {
 	private String c_username;
 	private String c_name;
 	private int c_state;

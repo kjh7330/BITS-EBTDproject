@@ -11,8 +11,10 @@ import lombok.experimental.Accessors;
 public class CompanyAliasBean {
 	
 	 private String c_username;
-	 private String c_name;
 	 private String c_password;
+	 
+	 
+	 private String c_name;
 	 private String c_no;
 	 private String c_imgextention;
 	 

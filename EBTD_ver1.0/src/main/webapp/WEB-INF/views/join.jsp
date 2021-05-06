@@ -40,7 +40,7 @@
 	html {
 		background-color: #0C3D6A;
 	}
-	body *{
+	body {
 		border : 0px;
 	}
 	img {
@@ -147,7 +147,7 @@
 		text-align : center;
 	}
 	.bus_modal, .dr_modal {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 100%;
 		background: rgba(70, 70, 70, 0.8);
@@ -208,7 +208,7 @@
 <body>
 	<div id = 'div_all'>
 		<div id='div_contents'>
-			<form action="/driver/test" method="post">
+			<form action="/company/main/join" method="post" id = 'mainform'>
 				<div id=''>
 					<table id='table_contents'>
 						<tr>
@@ -226,7 +226,7 @@
 							<td class='title'>업체명 :</td>
 							<td><input name="c_username" id="c_username" />
 							<td class='title'>&nbsp;사업자 등록번호 :</td>
-							<td><input name="c_no" /></td>
+							<td><input name="c_no" id="c_no"/>
 						</tr>
 						<tr>
 							<td/>
@@ -287,18 +287,36 @@
 						<tr>
 							<td class='title_width' />
 							<td>
-								<button id='submit'>업체 등록 신청</button>
 							</td>
 						</tr>
 					</table>
 				</div>
 			</form>
+			<button id='submit_btn' type = 'button'>업체 등록 신청</button>
 		</div>
 	</div>
 
 	<div class="bus_modal">
-		<div class="bus_modal_content" title="클릭하면 창이 닫힙니다.">
-			주한이형이 줄거임ㅋㅋ루삥빵뽕
+		<div class="bus_modal_content">
+			<div class="modal_header">
+				<p style="color: black; text-align: center;">새로운 노선 등록 신청</p>
+			</div>
+			<div class="modal_content" style="text-align: center;">
+				<p style="color: black;">동, 읍, 면 선택</p>
+				<select id="mTownSelect"></select>
+				<p style="color: black;">차고지 선택</p>
+				<select id="mStopSelect">
+					<option selected = true>동, 읍, 면을 먼저 선택해주세요.</option>
+				</select>
+				<p style = "color: black;">다음 추천 정류장</p>
+				<select id="mRecommendStop">
+					<option selected = true>차고지를 먼저 선택해주세요.</option>
+				</select>
+				<input type = "button" id = "recommendConfi" value = "선택">
+				
+			</div>
+			<div id = "busRouteSelect"></div>
+			<button type = 'button' id="add_Route">노선 추가 완료</button>
 		</div>
 	</div>
 	<div class="dr_modal">
@@ -306,7 +324,7 @@
 			<h2 id = 'dr_title' style = 'text-align : center;' >기사 등록</h2>
 			<table id = 'add_driver_table'>
 			<tr>
-				<td><br></td> 
+				<td><br></td>
 			</tr>
 				<tr>
 					<td class = 'title'>기사 이름 : </td>
@@ -344,7 +362,76 @@
 </body>
 
 <script type="text/javascript">
-   
+
+	$('#submit_btn').click(function (){
+		if( $('#c_username').val() == '' ){
+			alert("업체명을 입력해주세요");
+			return;
+		}
+		if( $('#c_no').val() == '' ){
+			alert("사업자 등록번호를 입력해주세요");
+			return;
+		}
+		if( $('#pw').val() == '' ){
+			alert("비밀번호를 입력해주세요");
+			return;
+		}
+		if( $('#pw_check').val() == '' ){
+			alert("비밀번호 확인을 입력해주세요");
+			return;
+		}
+		if( $('#pw').val() != $('#pw_check').val() ){
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+			return;
+		}
+		let check = 1;
+		let check_stop = 1;
+		idx--;
+		for( data of $('.new_bus') )	$('#mainform').append("<input name = 'new_line_car_size_" + check++ + "' value = '" + $(data).find('.car_no').length + "' style = ' display : none; '>");			
+		for( data of $('.s_no') )		$('#mainform').append("<input name = 'new_line_stop_size_" + check_stop++ + "' value = '" + $(data).find('.car_no').length + "' style = ' display : none; '>");			
+		
+		$('#mainform').append("<input name = 'new_line_size' value = '" + table_idx + "'style = ' display : none; '>");
+		$('#mainform').append("<input name = 'driver_cnt' value = '" + idx + "'style = ' display : none; '>");
+		
+		
+		for( data of $('#mainform').find('input') ){
+			console.log( $(data).attr('name') + ' = ' + $(data).val());
+		}
+		for( data of $('#mainform').find('select') ){
+			console.log( $(data).attr('name') + ' = ' + $(data).val());
+		}
+		
+		$('form').trigger('submit');
+	});
+	
+	let car_idx = 0;
+	$('#add_Route').click(function () { // 버스 노선 하나씩 다 정하고 난 뒤 노선 등록 버튼 눌렀을때
+		let tx = '';
+		car_idx++;
+		let stop_idx = 0;
+		for( child of $('.stopRouteNum') ){
+			console.log(access_idx + '번째 신청 버스입니다.' + access_bus_no +'번 버스의 ' + $(child).attr('id').substring(11) + '번째 정류장 번호는 ' + $(child).val());
+			
+			tx += '<input class = "s_no'+access_idx+'" name = "s_no_' + access_idx + '_' + $(child).attr('id').substring(11) + '" value = "' + $(child).val() + '" style = " display : none; ">';
+			stop_idx++;
+		}	
+		tx +='<input class = "s_no_size_' + access_idx + '" name = "s_no_size_' + access_idx + '" value = "' + stop_idx + '" style = " display : none; ">';
+		$('.s_no'+access_idx+'').remove();
+		$('.s_no_size_'+access_idx+'').remove();
+		$('#mainform').append(tx);
+		/*		
+				for( child of $('.stopRouteNum') )	
+				access_idx : 해당 노선 등록 칸이 몇번째 칸인지
+				access_bus_no : 해당 노선 등록의 버스 번호가 무엇인지				name = 'b_no'
+				$(child).attr('id').substring(11) : 해당 버스의 정류장 순서 	name = 'apde_turn'
+				$(child).val() : 해당 순서의 정류장 번호						name = 's_no'
+		*/
+		$(".bus_modal").fadeOut();
+	});
+	
+	let new_line = {};
+	let new_lines = {};
+
 	let table_idx = 0;
 	let column_idx = 0;
 	make_new_bus_table(column_idx);
@@ -368,7 +455,7 @@
 		$('#bus_sel').html(tx);
 	});
 	
-	let idx = 0; 
+	let idx = 1;  
 	$('#add_driver_btn').click(function () {
 		if( $('#d_name').val() == '' ){
 			alert('이름 입력!');
@@ -400,8 +487,20 @@
 			$(this).parent().parent().remove();
 			idx--;
 		});
-		idx++;
 		$(".dr_modal").fadeOut(); 
+		
+		tx = '';
+		tx += '<input name = "d_name_' + idx + '" value = ' + $('#d_name').val()  + ' style = " display : none; ">';
+		tx += '<input name = "d_phoneNum_' + idx + '" value = ' + $('#d_phoneNum').val() + ' style = "display : none;">';
+		tx += '<input name = "d_enterDate_' + idx + '" value = ' + $('#d_enterDate').val() + ' style = "display : none;">';
+		tx += '<input name = "d_b_no_' + idx + '" value = ' + $('#bus_sel').val() + ' style = "display : none;">';
+		$('#mainform').append(tx);
+		idx++;
+		
+		$('#bus_sel').val('');
+		$('#d_name').val('');
+		$('#d_phoneNum').val('');
+		$('#d_enterDate').val('');
 	});
 	
 	$(".bus_modal").click(function(e){
@@ -420,11 +519,11 @@
 		table_idx++; 
 		column_idx++;
 		let tx = "<table id = 'table_" + table_idx + "' class = 'new_bus'><tr>";   
-		tx += "<td> &nbsp;노선 " + table_idx + "</td><td><input style = 'width : 100px;' id = 'bus_no_" + table_idx + "'></td><td><button style = 'margin-top : 2px;' id = 'choice_" + table_idx + "' type = 'button'>노선 선택</button></td></tr>";
+		tx += "<td> &nbsp;노선 " + table_idx + "</td><td><input name = 'bus_no_" + table_idx + "' style = 'width : 100px;' id = 'bus_no_" + table_idx + "' class = 'bus_no'></td><td><button class = 'dup_check_btn' style = 'margin-top : 2px;' id = 'choice_" + table_idx + "' type = 'button'>노선 선택</button></td></tr>";
 		tx += "<tr>";
 		tx += "<td></td><td>차량번호</td>";
 		tx += "<td>버스종류</td><td><button id = 'add_column_"+table_idx +"_" + column_idx+"' class = 'add_column' type = 'button'>+</button></td></tr><tr>";
-		tx += "<td></td><td><input class = 'bus_no' style = 'width : 100px;' name = 'bus_no_"+table_idx +"_" + column_idx+"'></td>";
+		tx += "<td></td><td><input style = 'width : 100px;' id = 'car_no_"+table_idx +"_" + column_idx+"' name = 'car_no_"+table_idx +"_" + column_idx+"' class = 'car_no'></td>";
 		tx += "<td><select style = 'width : 85px;'class = 'sel_low' name = 'is_low_"+table_idx +"_" + column_idx+"'>";
 		tx += "<option value = 0 selected = true >일반버스</option><option value = 1>저상버스</option>"
 		tx += "</select></td></tr>";
@@ -435,27 +534,121 @@
 			$(this).css('background-color','#ff8c20');
 		},function() {
 			$(this).css('background-color','#ffbc7d');
-		}).click(function () {
-			$(".bus_modal").fadeIn();
+		});
+		
+		$('#car_no_'+table_idx +"_" + column_idx+'').focusout(function () {
+			let check_idx = 0;
+			let $this = $(this);
+			for( data of $('.car_no') )	if ( ( $(this).val() != '' ) && ( $(this).val() == $(data).val() ) )	check_idx++;
+			if( check_idx > 1 ){
+				alert('등록하시려는 차량번호 중 중복되는 차량번호가 이미 존재합니다.');
+				$(this).val('');
+				$(this).focus();
+				
+				return;
+			}
+			if( $(this).val() != ''){
+				$.ajax({
+					url : "/company/main/carNumberDupCheck",
+					data : {ab_no : $(this).val()},
+					dataType : 'html'
+				}).done(function (data) {
+					if(data > 0){
+						$($this).val('').focus();
+						alert('등록하시려는 차량번호는 타 업체에서 이미 사용중입니다.');
+					}
+					else	console.log('사용가능 비동기');
+					
+				}).fail(function (err) {
+					console.log(err,'!!!!!!!');
+				});
+			}
+		});
+		
+		$("#choice_" + table_idx + '').on("click", function(){
+			$('#mTownSelect option:eq(0)').prop("selected",true);
+			$('#mStopSelect').html("<option value ='' selected = true>동, 읍, 면을 먼저 선택해주세요.</option>");
+			$('#mRecommendStop').html("<option value = '' selected = true>차고지를 먼저 선택해주세요.</option>");
+			$('#busRouteSelect').html('');
+			access_idx = $(this).attr('id').substring(7);
+			access_bus_no = $('#bus_no_' + access_idx + '').val();
+			
+			let check_idx = 0;
+			
+			for( data of $('.bus_no') )	if( access_bus_no == $(data).val() && $(data).val() !='' )	check_idx++;
+				
+			if(check_idx > 1){
+				alert('등록하시려는 버스번호 중 중복되는 버스번호가 이미 존재합니다.');
+				$('#bus_no_'+ access_idx +'').val('');
+				$('#bus_no_'+ access_idx +'').focus();
+				return;
+			}
+			
+			$.ajax({
+				type : 'get',
+				url : '/company/bus/busNumCheck',
+				data : {'busNum' : $('#bus_no_' + access_idx + '').val()},
+				dataType : 'html'
+			}).done(function (data) {
+				if($('#bus_no_' + access_idx + '').val() != '') {
+					if(data==0){
+						$('#mBusNum').val($('#busNum').val());
+						$(".bus_modal").fadeIn();
+						//$("#overlay").css({ visibility:"visible", opacity:1 });
+						//$("#myModal").css({ display: "inline"});
+				  	} else if(data!=0) {
+					 	alert("타 업체에 이미 등록된 버스번호입니다.");
+					 	$('#bus_no_' + access_idx + '').val('');
+						$('#bus_no_'+ access_idx +'').focus();
+				 	}
+				} else {
+					alert("노선번호를 입력하세요.");
+				}
+			}).fail(function (err) {
+				alert(err,"!!!!!!!!!!!!");
+			});
 		});
 		
 		$('#add_column_'+table_idx +'_'+column_idx+'').click(function () {
 			column_idx++;
-			let text = "<tr><td></td><td><input style = 'width : 100px;' class = 'bus_no'></td>";
-			text += "<td><select style = 'width : 85px;' class = 'sel_low' name = 'is_low_"+table_idx +"_" + column_idx+"'>";
+			let text = "<tr><td></td><td><input style = 'width : 100px;'  id = 'car_no_" + $(this).attr('id').split('_')[2] + "_" + column_idx+"' name = 'car_no_" + $(this).attr('id').split('_')[2] + "_" + column_idx+"' class = 'car_no'></td>";
+			text += "<td><select style = 'width : 85px;' class = 'sel_low' name = 'is_low_" + $(this).attr('id').split('_')[2] + "_" + column_idx+"'>";
 			text += "<option value = 0 selected = true >일반버스</option><option value = 1>저상버스</option>";
-			text += "</select></td><td><button type = 'button' class = 'del_column' id = 'del_column_"+table_idx +"_" + column_idx+"'>-</button></td></tr>";
+			text += "</select></td><td><button type = 'button' class = 'del_column' id = 'del_column_" + $(this).attr('id').split('_')[2] +"_" + column_idx+"'>-</button></td></tr>";
 			$(this).parent().parent().parent().append(text);
-			$('#del_column_'+table_idx +'_'+ column_idx+'').click(function () {
-				if($(this).parent().parent().parent().children().length > 3)
-					$(this).parent().parent().remove();
-				else   alert('버스번호는 최소 하나 이상 입력 하셔야 합니다.');
+			$('#car_no_'+table_idx +"_" + column_idx+'').focusout(function () {
+				let check_idx = 0;
+				let $this = $(this);
+				for( data of $('.car_no') )	if ( ( $(this).val() != '' ) && ( $(this).val() == $(data).val() ) )	check_idx++;
+				if( check_idx > 1 ){
+					alert('등록하시려는 차량번호 중 중복되는 차량번호가 이미 존재합니다.');
+					$(this).val('');
+					$(this).focus();
+				}
+				if( $(this).val() != ''){
+					$.ajax({
+						url : "/company/main/carNumberDupCheck",
+						data : {ab_no : $(this).val()},
+						dataType : 'html'
+					}).done(function (data) {
+						if(data > 0){
+							alert('등록하시려는 차량번호는 타 업체에서 이미 사용중입니다.');
+							$($this).val('').focus();
+						}
+						else	console.log('사용가능 비동기');
+						
+					}).fail(function (err) {
+						console.log(err,'!!!!!!!');
+					});
+				}
+			});
+			$('#del_column_' + $(this).attr('id').split('_')[2] +'_'+ column_idx+'').click(function () {
+				column_idx--;				
+				$(this).parent().parent().remove();
 			});
 		});
 		$('#del_column_'+table_idx +'_'+column_idx+'').click(function () {
-			if($(this).parent().parent().parent().children().length > 3)
 				$(this).parent().parent().remove();
-			else   alert('버스번호는 최소 하나 이상 입력 하셔야 합니다.');
 		});
 		$('#bus_no').css('width','150px');
 		$('.del_btn').css('text-align','right');
@@ -467,7 +660,6 @@
 	$('#id_check').css('color','#b5b3b3').css('font-size', '10px');
 	
 	let pw_check = 0;
-	
 	
 	$('#pw_check').blur(function () { 
 		if($(this).val() != '')
@@ -523,6 +715,7 @@
 							$('#id_check').text("아이디는 문자, 숫자를 조합해, 4~20자리 입니다.");
 							$('#id_check').css('color', 'red'); 
 							$("#reg_submit").attr("disabled", true);
+							$('#c_username').val('');
 						}
 					}
 				},error : function(err) {
@@ -530,32 +723,310 @@
 				}
 			});
 		}
-	});   //중복확인 end
-   
+	});   //중복확인 end @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+/*    function replaceAll(str, searchStr, replaceStr) {
+		return str.split(searchStr).join(replaceStr);
+   	}
+    $("#c_no").blur(function(){
+       
+//	   let num = $("#u_disabled_no").val().replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+	   let num = $("#u_disabled_no").val();
+	   num = num.replaceAll(num,' ','');
+	   var tmp = 
+	   tmp += num.substr(0, 3);
+	   tmp += '-';
+	   tmp += num.substr(3, 5);
+	   tmp += '-';
+	   tmp += num.substr(5,10);
+	   $("#c_no").val(tmp);
+    });
+    $("#c_no").click(function(){
+       var num = $("#c_no").val();
+	   num = num.replace(/[^0-9]/g, '');
+	   $("#c_no").val(num);
+    });*/
+    	 
+
+
+
+	
+	let tList = ${tList};
+	let sList = ${sList};
+	var startX;
+	var startY;
+	let tName;
+	var j = 1;
+	let dup_check = 0;
+	
+	$('#mTownSelect').append("<option value ='' selected = true>동 선택</option>");
+	
+	for(let i in tList) {
+	let tName = tList[i]['t_NAME'];
+		$('#mTownSelect').append("<option value ='"+tName+"'>"+tName+"</option>");
+	}
+	// 모달창 열기 이벤트
+	let access_idx;
+	
+
+	  // 모달창 닫기 이벤트 
+	 $(document).on("click", function(e){  
+	    if( $("#overlay").is(e.target) ) {
+	        $("#overlay").css({ visibility:"hidden", opacity:0 });
+	    }
+	  });
+
+	  // esc 누를시 모달창 닫기
+	  $(document).keydown(function(event) {
+	    if ( event.keyCode == 27 || event.which == 27 ) {
+	        $("#overlay").css({ visibility:"hidden", opacity:0 });
+	    }
+	});
+	//동,읍,면 선택 시 해당 지역의 정류장 리스트 불러오기
+	$('#mTownSelect').on('change', function() {	
+		
+		let townSelect = $('#mTownSelect').val();
+		$('#busRouteSelect').html('');
+		if( $(this).val() == ''){
+			$('#mStopSelect').html("<option value ='' selected = true>동, 읍, 면을 먼저 선택해주세요.</option>");
+			$('#mRecommendStop').html("<option value ='' selected = true>차고지를 먼저 선택해주세요.</option>")
+		}
+		else						$('#mStopSelect').html("<option selected = true>차고지 선택</option>");
+		
+		for (let i in sList) {
+			if(sList[i]['t_NAME'] == townSelect) {
+				$('#mStopSelect').append("<option value ='"+sList[i]['s_NAME']+"'>"+sList[i]['s_NAME']+"</option>");
+			}
+		}
+		
+		
+	});
+	//정류장 루트 짜기
+	let check = 0;
+	$('#mStopSelect').on('change', function() {
+		let selectStop = $('#mStopSelect').val();
+		let stopRoute = $('.stopRoute').val();
+		$('#busRouteSelect').html('');
+		let selectX;
+		let selectY;
+		let selectStopNumber;
+		j = 1;
+		//선택한 정류장 번호 가져오기
+		$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '" + j + " : " + $('#mStopSelect').val() + "' readOnly id = 'route_" + table_idx + "_" + j + "'>");
+		for(let i in sList){
+			if($('#mStopSelect').val() == sList[i]['s_NAME'] && $('#mTownSelect').val() == sList[i]['t_NAME']) {
+				$('#busRouteSelect').append("<input type = 'text' class = 'stopRouteNum' value = '" + sList[i]['s_NO'] + "' readOnly id = 'route_no_" + table_idx + "_" + j + "'><br>");
+			}
+		}
+		//선택한 정류장 찍기
+		//선택한 정류장의 좌표 가져오기
+		for(let i in sList) {
+			if(selectStop == sList[i]['s_NAME']) {
+				selectX = sList[i]['s_X'];
+				selectY = sList[i]['s_Y'];
+			}
+		};
+		//범위 안에 정류장 가져오기
+		$('#mRecommendStop').html("<option value = 0 selected = true>다음 정류장을 선택해주세요.</option>");
+		for(let i in sList) {
+			if(selectX-5 < sList[i]['s_X'] && sList[i]['s_X'] < selectX+5 && selectY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < selectY+5 && selectStop != sList[i]['s_NAME'] ) {
+				for(data of $('.stopRouteNum') )
+					if(sList[i]['s_NO'] == $(data).val())  {
+						console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+						dup_check = 1;
+					}
+				if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+sList[i]['s_NAME']+"'>"+sList[i]['s_NAME']+"</option>");
+				dup_check = 0;
+				check = 1;
+			};
+		};
+		//출발 정류장 셀렉박스 비활성화
+		startX = selectX;
+		startY = selectY;
+		j++;
+	});  
+
+
+	//추천 정류장 선택 버튼 클릭 
+	$('#recommendConfi').on('click', function() {
+		var recommendSelect = $('#mRecommendStop').val();
+		let recommendStopNumber;
+		//선택한 정류장 정류장 번호 가져오기
+		if( $("#mRecommendStop option:selected").val() == 0 ){
+			alert( $('#mRecommendStop option:selected').html() );
+			
+			return;
+		}
+		for(let i in sList) {
+			if(recommendSelect == sList[i]['s_NAME']) {
+				recommendStopNumber = sList[i]['s_NO'];
+			};	
+		};
+		//선택한 정류장 찍기
+		$('#busRouteSelect').append("<input type = 'text' class = 'stopRoute' value = '" + j + " : "+recommendSelect+"' readOnly id = 'route_" + table_idx + "_" + j + "'>");
+		$('#busRouteSelect').append("<input type = 'text' class = 'stopRouteNum'  value = '"+recommendStopNumber+"' readOnly id = 'route_no_" + table_idx + "_" + j + "'><br>");
+		$('#stopCount').val(j);
+		//select 박스 초기화
+		$('#mRecommendStop').html('');
+		if( check == 0 )	$('#mRecommendStop').html("<option value = 0 selected = true>추천 정류장이 없습니다.</option>");
+		else				$('#mRecommendStop').html("<option value = 0 selected = true>다음 정류장을 선택해주세요.</option>");
+		check = 0;
+		//선택한 정류장 좌표 가져오기
+		for(let i in sList) {
+			if(recommendSelect == sList[i]['s_NAME']) {
+				recommendX = sList[i]['s_X'];
+				recommendY = sList[i]['s_Y'];
+				};
+		};
+		//범위 안에 선택 할 정류장 가져오기
+		var recommendStopName;
+		//x축 +, y축 + 인 경우
+		if(startX < recommendX && startY < recommendY) {
+			for(let i in sList) {
+				if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+10)||(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+					
+					
+				};
+			};//for문 end
+		}//if문 end
+		//x축 +, y축 - 인 경우
+		else if(startX < recommendX && recommendY < startY) {
+			for(let i in sList) {
+				 if((recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY-5)) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;	
+					check = 1;
+					}
+			}//for문 end
+		}// if문 end
+		//x축 -, y축 - 인 경우
+		else if(recommendX < startX && recommendY < startY) {
+			for(let i in sList) {
+				if((recommendX-5< sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && sList[i]['s_Y'] < recommendY && recommendY-5 < sList[i]['s_Y'])||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && sList[i]['s_Y'] < recommendY+5 && recommendY < sList[i]['s_Y'])) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end 
+		}// if문 end 
+		//x축 -, y축 + 인 경우 
+		else if(recommendX < startX && startY < recommendY) {
+			for(let i in sList) {
+				if((recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY)||(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5)) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end
+		}//if문 end
+		//x축 0, y축 + 인 경우
+		else if(recommendX==startX && startY < recommendY) {
+			for(let i in sList) {
+				if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end
+		}//if문 end
+		//x축 0, y축 - 인 경우
+		else if(recommendX==startX && recommendY < startY) {
+			for(let i in sList) {
+				if(recommendX-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end 
+		}//if문 end
+		//x축 +, y축 0 인 경우
+		else if(startX<recommendX && recommendY==startY) {
+			for(let i in sList) {
+				if(recommendX < sList[i]['s_X'] && sList[i]['s_X'] < recommendX+5 && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end
+		}//if문 end
+		//x축 -, y축 0 인 경우
+		else if(startX<recommendX && recommendY==startY) {
+			for(let i in sList) {
+				if(recommend-5 < sList[i]['s_X'] && sList[i]['s_X'] < recommendX && recommendY-5 < sList[i]['s_Y'] && sList[i]['s_Y'] < recommendY+5) {
+					recommendStopName = sList[i]['s_NAME'];
+					for(data of $('.stopRouteNum') )
+						if(sList[i]['s_NO'] == $(data).val())  {
+							console.log('중복 정류장은 너굴맨이 처리했으니 안심하라구!');
+							dup_check = 1;
+						}
+					if( dup_check == 0 )	$('#mRecommendStop').append("<option value ='"+recommendStopName+"'>"+recommendStopName+"</option>");
+					dup_check = 0;
+					check = 1;
+				}
+			}//for문 end
+			
+		}//if문 end
+		startX = recommendX;
+		startY = recommendY;
+		j++;
+	}); 
+
+	var h = 2;
+	var k = 2;
+	$('#add').on('click', function() {
+		$('#dispatch').append("<tr><td>차량번호 :</td><td><input type = 'text' class = 'motorNumber' name = 'motorNumber"+h+"'></td><td><select name = 'lowFloor"+h+"'><option value='일반'>일반</option><option value='저상'>저상</option></select></td></tr>");
+		$("#motorCount").val(k);
+		h++;
+		k++;
+	});
+	$('#submitRoute').on('click', function(){
+		h=2;
+		k=1;
+	});
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -96,6 +96,11 @@
 			let cycle_check = 0;
 			let cnt = 0; 
 			let test = [];
+			let on_cnt = 0;
+			let out_cnt = 0;
+			let on_data = [];
+			let out_data = [];
+			let name;
 			let refresh = setInterval(function name() {
 				$.ajax({
 					url : 'refresh',
@@ -231,6 +236,7 @@
 						
 						if( first_check == 0 )
 							if(up){
+								console.log("퍼첵 실행됌");
 								if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
 									if( r_list[idx]['u_type'] == 0 )	{
 										cur_on_blind_cnt++;
@@ -262,23 +268,62 @@
 									else								next_out_wheel_cnt++;
 								
 							}
-					
 						for(jdx in test){
 							if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] )
-								if(r_list[idx]['ur_no'] == test[jdx]['ur_no']) 
-									if(r_list[idx]['up'] == up ){
-										console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
+								if(r_list[idx]['ur_no'] == test[jdx]['ur_no'])
+									if( ( (i == s_list.length-1) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
+										//console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
 										test.splice(jdx, 1);
+										out_data[out_cnt] = r_list[idx]['ur_no'];
+										out_cnt++;
 										cnt--;
 									}
+							
+							if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
+								if(r_list[idx]['ur_no'] == test[jdx]['ur_no'])
+									if(r_list[idx]['up'] == up ) {
+										//console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 올라 탐!');
+										on_data[on_cnt] = r_list[idx]['ur_no'];
+										on_cnt++;
+									}
 						}
+						
 					}// for each end
 					
-					for(idx in test){
+					if(out_cnt > 0)
+						$.ajax({
+							url : '/driver/out',
+							data : {"data" : out_data},
+							dataType : 'html'
+						}).done(function (data) {
+							for(dt of data)	{
+								for( idx in out_data ){
+									if(out_data[idx] == dt)		out_data.splice(idx, 1);
+								}
+							}
+							out_cnt = 0;
+						}).fail(function (err) {
+							console.log(err,'!!!!!');
+						});
+					if(on_cnt > 0)
+						$.ajax({
+							url : '/driver/on',
+							data : {"data" : on_data},
+							dataType : 'html'
+						}).done(function (data) {
+							for(dt of data)	{
+								for( idx in on_data ){
+									if(on_data[idx] == dt)		on_data.splice(idx, 1);
+								}
+							}
+							on_cnt = 0;
+						}).fail(function (err) {
+							console.log(err,'!!!!!');
+						});
+					/*for(idx in test){
 						console.log(test[idx]['ur_no'],'번 예약손님 탑승중');
-						console.log('--');
 					}
-					console.log('------------');
+					console.log('------------');*/
 					all_blind += cur_on_blind_cnt - cur_out_blind_cnt;
 					all_wheel += cur_on_wheel_cnt - cur_out_wheel_cnt;
 					
@@ -320,6 +365,20 @@
 							all_wheel = 0;
 							$('#all_blind').val(0);
 							$('#all_wheel').val(0);
+							$('#cur_on_blind').val(0);
+							$('#cur_on_wheel').val(0);
+							$('#next_on_blind').val(0);
+							$('#next_on_wheel').val(0);
+							$('#nnext_on_blind').val(0);
+							$('#nnext_on_wheel').val(0);
+							
+							$('#cur_out_blind').val(0);
+							$('#cur_out_wheel').val(0);
+							$('#next_out_blind').val(0);
+							$('#next_out_wheel').val(0);
+							$('#nnext_out_blind').val(0);
+							$('#nnext_out_wheel').val(0);
+							
 						}
 						$.ajax({
 							url : 'refresh',
@@ -356,7 +415,7 @@
 			}, 2000);
 		});
 		$('#change').click(function () {
-			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}';
+			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';
 		});
 		console.log(${ab_no});
 		

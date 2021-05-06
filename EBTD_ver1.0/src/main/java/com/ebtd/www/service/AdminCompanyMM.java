@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.ApplyBusRoute;
 import com.ebtd.www.bean.Company;
-import com.ebtd.www.bean.Wh_StopBean;
+import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.dao.I_AdminCompanyDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

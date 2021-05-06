@@ -3,6 +3,7 @@ package com.ebtd.www.bean;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+
 @Data //Getter AND Setter by Lombok
 @Accessors(chain = true)
 public class ApplyBusHistory {
@@ -21,5 +22,4 @@ public class ApplyBusHistory {
 	private int c_state;	   // 회사 승인상태 0:미승인 1:승인 2:반려 3:수정
 	private int ap_state;	   // 버스 승인상태 0:미승인 1:승인 2:반려 3:수정
 	private String ap_reject;  // 반려 사유
-	
 }

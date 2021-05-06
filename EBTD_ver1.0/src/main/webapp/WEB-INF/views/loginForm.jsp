@@ -126,7 +126,7 @@
         </table>  
 		</form>
         <div id="newcompany">
-        	<form action="/driver/test" method="post"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
+        	<form action="/company/main/getRecommandedStopList" method="get"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
         </div>
         
     </section>
@@ -143,6 +143,7 @@
 </body>
 
 <script>
+
 	function check() {
 		if($("#username").val() != ''&& $("#password").val() != ''){return true;}
 			alert('아이디 혹은 비밀번호를 확인해주세요');

@@ -1,6 +1,7 @@
 package com.ebtd.www.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.BusBean;
-import com.ebtd.www.bean.Wh_ReserveBean;
+import com.ebtd.www.bean.DriverReserveBean;
 import com.ebtd.www.service.DriverMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -32,8 +33,20 @@ public class DriverRestController {
 	DriverMM dm;
 	
 	@GetMapping(value = "/refresh", produces = "application/json;charset=utf-8")
-	public List<Wh_ReserveBean> refresh (String car, boolean go, String wheel, String blind,  HttpSession ss) throws JsonProcessingException{
+	public List<DriverReserveBean> refresh (String car, boolean go, String wheel, String blind,  HttpSession ss) throws JsonProcessingException{
 		return dm.refresh(car, go, wheel, blind, ss);
+	}
+	
+	@GetMapping(value = "/on", produces = "application/json;charset=utf-8")
+	public List<String> on (@RequestParam(value="data[]") List<String> data ){
+		
+		return dm.on(data);
+	}
+	
+	@GetMapping(value = "/out", produces = "application/json;charset=utf-8")
+	public List<String> out (@RequestParam( value="data[]") List<String> data ) {
+		
+		return dm.out(data);
 	}
 	
 }

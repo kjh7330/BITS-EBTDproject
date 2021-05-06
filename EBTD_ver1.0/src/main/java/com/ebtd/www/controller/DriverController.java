@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.Wh_BusBean;
-import com.ebtd.www.bean.Wh_CompanyBean;
+import com.ebtd.www.bean.DriverBusBean;
+import com.ebtd.www.bean.DriverCompanyBean;
 import com.ebtd.www.service.DriverMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,13 +30,6 @@ public class DriverController {
 	
 	@Autowired
 	DriverMM dm;
-	
-	@PostMapping(value = "/test", produces = "application/json;charset=utf-8")
-	public String data_test (@RequestParam Map<String, Object> data) throws JsonProcessingException{
-		
-		System.out.println(data);
-		return "redirect:/driver/testForm";
-	}
 	
 	@GetMapping(value = "/getCompanyList", produces = "application/json;charset=utf-8")
 	public ModelAndView getCompanyList () throws JsonProcessingException{
@@ -54,13 +47,7 @@ public class DriverController {
 	public ModelAndView getBusRouteList(String d_name, String d_no, HttpSession ss) throws JsonProcessingException {
 		return dm.getBusRouteList(d_name, d_no, ss);
 	}
-
 	
-	@GetMapping(value = "/testForm")
-	public String testForm(HttpSession ss, String d_name) {
-		ss.setAttribute("d_name", d_name);
-		return "/join";//.jsp
-	}
 	@GetMapping(value = "/DriverMainForm")
 	public String driverMainForm(HttpSession ss, String d_name) {
 		ss.setAttribute("d_name", d_name);
