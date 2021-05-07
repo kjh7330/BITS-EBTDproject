@@ -13,6 +13,7 @@
 
 	.maindiv{
 		color: black;
+		text-align: center;
 	}
     footer{
         position: fixed;
@@ -38,88 +39,107 @@
     	border:none;
     	cursor: pointer;
     }
+    .mainbtn{
+    	width: 350px;
+    	height: 150px;
+    	font-size: 50px;
+    	margin-top: 95px;
+    	background-color: #0C3D6A;
+    	color: #f9eb99;
+    	border-radius: 15px;
+    	cursor: pointer;
+    }
 
 </style>
 </head>
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
 <div class="maindiv">
-<p>${sessionScope.u_username}</p>님 환영합니다~!
+ 	<div class="menudetail" id="logout"><a>로그아웃</a></div>
 	
-	시각 - 메인
-	
-	<div class="menudetail" id="logout"><a>로그아웃</a></div>
-	
-	<div>
-
-
-	</div>
+		<button id="mbtn1" class="mainbtn" onclick="location.href='#'">즐겨찾기</button>
+		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
 	
 </div>
 
 <footer>
      <div class="footer-container">
-         	<button class="footerbtn" ondblclick="dbClick1()" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
-         	<button class="footerbtn" ondblclick="dbClick2()" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
-         	<button class="footerbtn" ondblclick="dbClick3()" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
+         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
+         	<button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
+         	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
      </div>
 </footer>
 <script>
+		//
+		
+		$('#btn1').click(function(){
+			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
+			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}
+		});
+		
+		$('#btn2').click(function(){
+			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
+				//location.href = '/user/???';
+				console.log("아직 페이지 이동할 곳이 없음!")
+			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+				location.href = '/user/myPage';
+			}
+		});
+		$('#btn3').click(function(){
+			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
+					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}
+		});
 		//버튼 두번 클릭 혹은 롱 클릭
 		let timer;
 		let istrue = false;
 		function mouseDown1(){
-			istrue1 = true;
 			timer1 = setTimeout(function(){holding1();},2000);
 		}
+		function mouseUp1(){
+			clearTimeout(timer1);
+		}
 		function holding1(){
-			if(timer1)
-				clearTimeout(timer1);
-			if(istrue1){
-				alert('holding');
-			}
+			alert('이전페이지가 없음!!');
+			//location.href = '/user/???';
 		}
 		function mouseDown2(){
-			istrue2 = true;
 			timer2 = setTimeout(function(){holding2();},2000);
 		}
-		function holding2(){
-			if(timer2)
-				clearTimeout(timer2);
-			if(istrue2){
-				alert('holding');
-			}
+		function mouseUp2(){
+			clearTimeout(timer2);
 		}
+		/* function holding2(){
+			alert('holding');
+		} */
 		function mouseDown3(){
-			istrue3 = true;
 			timer3 = setTimeout(function(){holding3();},2000);
 		}
-		function holding3(){
-			if(timer3)
-				clearTimeout(timer3);
-			if(istrue3){
-				alert('holding');
-			}
-		}
-		
-		function mouseUp1(){
-			istrue = false;
-		}
-		function mouseUp2(){
-			istrue = false;
-		}
 		function mouseUp3(){
-			istrue = false;
+			clearTimeout(timer3);
 		}
-		function dbClick1(){
-			alert('double click');
-		}
-		function dbClick2(){
-			alert('double click');
-		}
-		function dbClick3(){
-			alert('double click');
-		}
+		/* function holding3(){
+			location.href = '/user/loginForm';
+		} */
 		
 $('#logout').click(function () {
 	location.href = '/user/logout';

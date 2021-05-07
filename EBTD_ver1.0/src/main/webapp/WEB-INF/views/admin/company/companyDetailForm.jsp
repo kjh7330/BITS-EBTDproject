@@ -9,8 +9,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		#main-container{
+			position: absolute;
+			top: 13%;
+            left: 50%;
+            transform: translate(-50%,10%);
 			color: black;
 			text-align: center;
+		}
+		.maindivinput{
+			border: none;
+			border-radius: 15px;
+			text-align: center;
+			background-color: #c4ff0e;
+			height: 80px;
+			width: 400px;
+			font-size: 30px;
+		}
+		.maintable1{
+			width: 600px;
+		}
+		.maintable2{
+			margin-top: 20px;
+			width: 600px;
+			border: 1px solid black;
+		
+		}
+		tr, td{
+			border: 1px solid black;
+			font-size: 20px;
+		}
+		td{
+			height: 40px;
+		}
+		.btn{
+			width: 150px;
+			height: 50px;
+			text-align: center;
+			margin-top: 30px;
+			
 		}
 
     </style>
@@ -23,8 +59,8 @@
 			<input type="text" class="maindivinput" value="버스 회사 상세 정보" readonly><br>
 		</div><br>
 		<div class="main-info">
-			<table>
-				<tr>
+			<table class="maintable1">
+				<tr style="background-color: lightgray;">
 					<td>회사명 : </td><td>${cName.c_name}</td>
 				</tr>
 				<c:forEach var="vr" items="${vrCountList}">
@@ -38,8 +74,8 @@
 			</table>
 		</div>
 		<div class="maindivtable">
-			<table>
-				<tr>
+			<table class="maintable2">
+				<tr style="background-color: lightgray;">
 					<td>운행노선</td><td>인가대수</td><td>저상버스</td><td>일반버스</td><td>기사수</td>
 				</tr>
 				<c:forEach var="bd" items="${bdCountList}">
@@ -55,7 +91,7 @@
 		</div>
 		<div>
 			<a href="/admin/company/getCompanyQuestionList?c_username=${cName.c_username}">
-			<input type="button" value="고객소리함">
+			<input class="btn" type="button" style="font-size: 20px;background-color: #c4ff0e;" value="고객소리함">
 			</a>
 		</div>
 	</div>

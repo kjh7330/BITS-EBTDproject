@@ -22,12 +22,12 @@ public class UserMypageController {
 	ModelAndView mav;
 	//마이페이지 하위 메뉴 이동 페이지
 	@RequestMapping(value = "/user/myPage")
-	public String getMypage(HttpSession session) {
-		String view;
-		if(session.getAttribute("u_username")!=null) {
-			  view = "/user/wheel/myPageForm";}
-		else {view = "/user/wheel/mainForm";}
-		return view;
+	public ModelAndView getMypage(HttpSession session) {
+		String u_username = (String) session.getAttribute("u_username");
+		if(u_username != null) {
+			mav = umm.getMypage(u_username);
+		}
+		return mav;
 	}
 	//마이페이지 - 이용 내역
 	@GetMapping(value = "/user/getReservationHistoryList")
@@ -45,8 +45,10 @@ public class UserMypageController {
 	}
 	//마이페이지 - 고객 소리함 - 작성 페이지 이동
 	@GetMapping(value = "/user/getMyQuestionWrite")
-	public String getMyQuestionWrite() {
-		return "/user/wheel/myQuestionWriteForm";
+	public ModelAndView getMyQuestionWrite(HttpSession session) {
+		String u_username = (String) session.getAttribute("u_username");
+		mav = umm.getMyQuestionWrite(u_username);
+		return mav;
 	}
 	//마이페이지 - 고객 소리함 - 작성 하기
 	@PostMapping(value ="/user/setMyQuestionWrite")

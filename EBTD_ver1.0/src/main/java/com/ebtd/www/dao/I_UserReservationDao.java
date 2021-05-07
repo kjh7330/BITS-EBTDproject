@@ -6,7 +6,7 @@ import java.util.List;
 import com.ebtd.www.bean.BusBean;
 import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.bean.StopBean;
-import com.ebtd.www.bean.UserReservation;
+import com.ebtd.www.bean.UserReservationBean;
 
 
 public interface I_UserReservationDao {
@@ -17,6 +17,6 @@ public interface I_UserReservationDao {
 
 	List<DriverStopBean> getBusDetail(String b_No);
 
-	boolean reservation(UserReservation ur);
+	boolean reservation(UserReservationBean ur);
 
 }

@@ -8,14 +8,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
-/* 	        display: flex;
-	        left: 50%;
-	        flex-direction: column;
-            align-items: center; /*세로 가운데 정렬*/
-         /*   justify-content: center; /*가로 가운데 정렬*/
-         /*   height: 75vh;
-            text-align: center; 
-*/
 		    position: absolute;
 		    top: 13%;
             left: 50%;
@@ -23,7 +15,20 @@
 			color: black;
 			width: 700px;
             text-align: center;
-            height:	1000px;
+            height:	100%;
+		}
+		.maininput{
+			border: none;
+			background-color: pink;
+			font-size: 30px;
+			width: 400px;
+			height: 80px;
+			text-align: center;
+			margin-bottom: 20px;
+			border-radius: 10px;
+		}
+		.maininput:focus{
+			outline:none;
 		}
 		.maintable1, .maintable2{
 			border: none;
@@ -32,6 +37,10 @@
             width: 700px;
             background-color: pink;
             font-size: 18px;
+		}
+		.maintable1{
+			font-size: 20px;
+			height: 50px;
 		}
 		.maintable3{
 			border: none;
@@ -55,14 +64,12 @@
 
 <div class="main-container">
 	<div>
-		<input value="노선 승인 상세" readonly>
+		<input class="maininput" value="노선 반려 상세" readonly>
 	</div>
 	
 	<table class="maintable1"></table>
 	<br>
 	
-	<table class="maintable2"></table>
-	<br>
 	<table class="maintable2"></table>
 	<br>
 	<table class="maintable3"></table>
@@ -92,9 +99,9 @@
 	$('.maintable2').html('');
 	let apple = '';
 		apple += '<tr>';
-		apple += '<td>순번</td>';
-		apple += '<td>정류장번호</td>';
-		apple += '<td>정류장이름</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">순번</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">정류장번호</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">정류장이름</td>';
 		apple += '</tr>';
 	for(i in rList){
 		apple += '<tr>';

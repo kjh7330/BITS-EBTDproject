@@ -18,7 +18,7 @@
         .modal_content2 input { border:none; 
                     font-size:15px; 
                     background:#f44336;
-                    color:#f9f9f9; f9eb99
+                    color:#f9f9f9;
                     padding:8px 16px; }
         .modal_content3 input { border:none; 
                     font-size:18px; 
@@ -139,6 +139,9 @@
             background-color: #f9eb99;
             height: 50px;
             font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            font-size: 20px;
         }
         .cdetail{
             text-align: center;
@@ -291,15 +294,12 @@
 	        	    	<td>3. 신청내용</td>
 	        	    </tr>
 	        	    <tr>
-	        	    	<td> - 신청 번호 : ${abList[0].ap_no}</td>
+	        	    	<td> - 공문 번호 : ${abList[0].ap_od_no}-${abList[0].ap_no}</td>
 	        	    	<td> - 신청일 : ${abList[0].ap_date}</td>
 	        		</tr>
              		<tr>
 	                	<td> - 회사 이름 : ${abList[0].c_name}</td>
 	                	<td> - 사업장 등록 번호 : ${abList[0].c_no}</td>
-	                </tr>
-	                <tr>
-	                	<td colspan="2"> - 신청 아이디 : ${abList[0].c_username}</td>
 	                </tr>
 	        		<tr>
 	        			<td colspan="2"> - 버스 번호: </td>

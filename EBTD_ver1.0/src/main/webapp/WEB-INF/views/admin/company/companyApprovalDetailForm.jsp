@@ -17,12 +17,24 @@
             text-align: center;
             height: 100%;
 		}
+		.maininput{
+			border: none;
+			background-color: pink;
+			font-size: 30px;
+			width: 400px;
+			height: 80px;
+			text-align: center;
+			margin-bottom: 20px;
+			border-radius: 10px;
+		}
+		.maininput:focus{
+			outline:none;
+		}
 		.maintable1, .maintable2{
 			border: none;
-            border-radius: 8px;
             text-align: center;
             width: 700px;
-            background-color: pink;
+            background-color: skyblue;
             height: 50px;
             font-size: 18px;
 		}
@@ -37,7 +49,7 @@
 
 <div class="main-container">
 	<div>
-		<input value="노선 승인 상세" readonly>
+		<input class="maininput" value="노선 승인 상세" readonly>
 	</div>
 	<table class="maintable1">
 	
@@ -67,9 +79,9 @@
 	$('.maintable2').html('');
 	let apple = '';
 		apple += '<tr>';
-		apple += '<td>순번</td>';
-		apple += '<td>정류장번호</td>';
-		apple += '<td>정류장이름</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:pink;">순번</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:pink;">정류장번호</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:pink;">정류장이름</td>';
 		apple += '</tr>';
 	for(i in aList){
 		apple += '<tr>';

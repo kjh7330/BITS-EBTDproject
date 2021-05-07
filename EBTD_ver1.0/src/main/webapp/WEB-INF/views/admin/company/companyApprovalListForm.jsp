@@ -18,6 +18,19 @@
             text-align: center;
             height: 100%;
 		}
+		.maininput{
+			border: none;
+			background-color: pink;
+			font-size: 30px;
+			width: 400px;
+			height: 80px;
+			text-align: center;
+			margin-bottom: 20px;
+			border-radius: 10px;
+		}
+		.maininput:focus{
+			outline:none;
+		}
 		.maintable{
 			border: none;
             border-radius: 8px;
@@ -37,7 +50,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
 <div class="main-container"><br>
-	<div><input value="노선 승인 내역" readonly></div>
+	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div>
 		정렬:
 		<select id="category1" onchange="fnCtg()">
@@ -45,7 +58,7 @@
 			<option value="c_name">회사명</option>
 			<option value="ap_state">승인종류</option>
 			<option value="ap_date">승인일자</option>
-		</select>
+		</select>&nbsp;&nbsp;&nbsp;
 		정렬기간:
 		<select id="category2" onchange="fnCtg()">
 			<option value="1" selected>전체</option>
@@ -69,12 +82,12 @@
 	for(i in baList){
 		all += '<tr>';
 		all += '<td>' + baList[i]["c_name"] + '</td>';
-		all += '<td><a href=/admin/company/getCompanyApprovalDetail?ap_no='+baList[i]["ap_no"]+' style="text-decoration: none;">';
+		all += '<td><a href=/admin/company/getCompanyApprovalDetail?ap_no='+baList[i]["ap_no"]+'&ap_b_no='+baList[i]["ap_b_no"]+' style="text-decoration: none;">';
 		all += baList[i]["ap_b_no"] +'번</td>';
 		all += '<td>' + baList[i]["ap_date"] + '</td>';
 			let state = baList[i]["ap_state"];
-			 	if	   (state == 1){ all += '<td>등록 승인</td>'; }
-			 	else if(state == 4){ all += '<td>변경 승인</td>'; 	}
+			 	if	   (state == 1){ all += '<td style="color: blue">등록 승인</td>'; }
+			 	else if(state == 4){ all += '<td style="color: green">변경 승인</td>'; 	}
 			all += '</tr>';
 	}
 	$('.maintable').append(all);
@@ -125,7 +138,7 @@
 				c_name += '<td>' + baList[i]["ap_date"] + '</td>';
 					let state = baList[i]["ap_state"];
 				 	if	   (state == 1){ c_name += '<td style="color: blue;">등록 승인</td>'; }
-				 	else if(state == 4){ c_name += '<td style="color: blue;">변경 승인</td>'; 	}
+				 	else if(state == 4){ c_name += '<td style="color: green;">변경 승인</td>'; 	}
 				c_name += '</tr>';
 			}
 		}

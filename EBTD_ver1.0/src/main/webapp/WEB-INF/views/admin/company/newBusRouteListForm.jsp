@@ -139,6 +139,9 @@
             background-color: #f9eb99;
             height: 50px;
             font-weight: bold;
+            font-size: 20px;
+            border-radius: 10px;
+            border: none;
         }
         .cdetail{
             text-align: center;
@@ -319,13 +322,13 @@
         <div id="overlay2">
           <div id="myModal2" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;"> - 승인하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> 신규 노선 승인하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content2">
              	<p style="color:black;"><br>
              		<form action="setNewBusRouteApproval" method="post">
-		                <input type="text" class="approval" value="">번<br>
+		                <input type="text" class="approval" value="" readonly>번<br>
 		                을 승인하시겠습니까?<br><br>
 		                <input class="approval" type="hidden" name="ap_b_no" value="">
 		        	    <input id="mcbtn1" type="submit" value="승인">
@@ -341,13 +344,13 @@
         <div id="overlay3">
           <div id="myModal3" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;"> - 반려하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> 신규 노선 반려하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content3">
              	<p style="color:black;">
              		<form action="setNewBusRouteReject" method="post">
-		                <input type="text" class="reject" value="">번<br>
+		                <input type="text" class="reject" value="" readonly>번<br>
 		                을 반려하시겠습니까?<br><br>
 		        	    <input class="reject" type="hidden" name="ap_b_no" value="">
 		        	    반려사유: <input class="reject-reason" type="text" name="ap_reject" placeholder="입력하세요." style="height: 30px; border-width: 1px"><br><br>
@@ -402,7 +405,7 @@
 					$('.modal_table8').html('');
 					let mt = '';
 					mt += '<tr>';
-					mt += '<td> - 신청 번호 : ' + data[0]["ap_no"] + '</td>';
+					mt += '<td> - 공문 번호 : ' + data[0]["ap_od_no"]+-data[0]["ap_no"] + '</td>';
 					mt += '<td> - 신청일 : ' + data[0]["ap_date"] + '</td>';
 	        		mt += '</tr>';
 	        		mt += '<tr>';
@@ -410,20 +413,15 @@
 	        		mt += '<td> - 사업장 등록 번호 : ' + data[0]["c_no"] + '</td>';
 	        		mt += '</tr>';
 	        		mt += '<tr>';
-	        		mt += '<td colspan="2"> - 신청 아이디 : ' + data[0]["c_username"] + '</td>';
-	        		mt += '</tr>';
-	        		mt += '<tr>';
 	        		mt += '<td colspan="2"> - 버스 번호: </td>';
 	        		mt += '</tr>';
         			$('.modal_table8').append(mt);
-        			
  					
 				},
 				error : function(err) {
 					console.log(err,'@@@@');
 		
 				}
-
 			});
 			
 			$.ajax({
@@ -447,8 +445,6 @@
 				}
 				$('.modal_table22').append(mt2);
 				
-				
-				
 				}
 			});
 		}); 
@@ -456,14 +452,12 @@
 			
 		$(".cdetail-btn30").on("click", function() {
 			let apno = $(this).attr('id').substring(5);
-			console.log(apno);
 			$(".approval").val(apno);
 			$("#overlay2").css({visibility : "visible",	opacity : 1	});
 			$("#myModal2").css({display : "inline"});
 		});
 		$(".cdetail-btn40").on("click", function() {
 			let apno = $(this).attr('id').substring(5);
-			
 			$(".reject").val(apno);
 			$("#overlay3").css({visibility : "visible", opacity : 1	});
 			$("#myModal3").css({display : "inline"});

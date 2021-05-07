@@ -11,11 +11,11 @@
  
     <style>
         .company-container{
-            width: 600px;
+            width: 800px;
             color: black;
             position: absolute;
             left: 50%;
-            transform: translate(-50%,10%);
+            transform: translate(-50%,25%);
         }
         .ctile{
             text-align: center;
@@ -24,7 +24,9 @@
             background-color: #f9eb99;
             font-size: 20px;
             font-weight: bold;
-            height: 50px
+            height: 50px;
+            border-radius: 10px;
+            border: none;
         }
         .ccount{
             text-align: right;
@@ -36,6 +38,8 @@
             background-color: lightgray;
             margin-bottom: 10px;
             font-weight: bold;
+            border-radius: 10px;
+            border: none;
         }
         .cbtn:hover{
         	background-color: #f9eb99;

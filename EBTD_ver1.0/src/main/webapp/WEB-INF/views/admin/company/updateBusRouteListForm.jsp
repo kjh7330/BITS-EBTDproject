@@ -11,8 +11,7 @@
 
 /*   모달 CSS   */
         /* reset */
-        .company-body { position: absolute;
-        				height:100%;}
+        .company-body { height:100%;}
         h2, p, div, h3 { margin:0; padding:0 }
 
         /* modal trigger */
@@ -128,7 +127,6 @@
             width: 800px;
             color: black;
             left: 50%;
-            bottom: 0;
             transform: translate(-50%,10%);
         }
         .cdate{
@@ -141,6 +139,9 @@
             background-color: #f9eb99;
             height: 50px;
             font-weight: bold;
+            font-size:20px;
+            border-radius: 10px;
+            border: none;
         }
         .cdetail{
             text-align: center;
@@ -207,7 +208,6 @@
 </head>
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
-<h1>나와랏</h1>
 <div class="company-body">
     <div class="company-container">
         <input class="cname" type="text" value="버스 노선 변경 신청 리스트" readonly>
@@ -324,7 +324,7 @@
         <div id="overlay2">
           <div id="myModal2" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;"> - 승인하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> 기존 노선 승인하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content2">
@@ -346,7 +346,7 @@
         <div id="overlay3">
           <div id="myModal3" class="modal">
              <div class="modal_header">
-                <h5 style="margin-left:10px;margin-top:5px;"> - 반려하기</h5>
+                <h5 style="margin-left:10px;margin-top:5px;"> 기존 노선 반려하기</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content3">
@@ -408,15 +408,12 @@
 					$('.modal_table8').html('');
 					let mt = '';
 					mt += '<tr>';
-					mt += '<td> - 신청 번호 : ' + data[0]["ap_no"] + '</td>';
+					mt += '<td> - 공문 번호 : ' + data[0]["ap_od_no"]+-data[0]["ap_no"] + '</td>';
 					mt += '<td> - 신청일 : ' + data[0]["ap_date"] + '</td>';
 	        		mt += '</tr>';
 	        		mt += '<tr>';
 	        		mt += '<td> - 회사 이름 : ' + data[0]["c_name"] + '</td>';
 	        		mt += '<td> - 사업장 등록 번호 : ' + data[0]["c_no"] + '</td>';
-	        		mt += '</tr>';
-	        		mt += '<tr>';
-	        		mt += '<td colspan="2"> - 신청 아이디 : ' + data[0]["c_username"] + '</td>';
 	        		mt += '</tr>';
 	        		mt += '<tr>';
 	        		mt += '<td colspan="2"> - 버스 번호: </td>';
