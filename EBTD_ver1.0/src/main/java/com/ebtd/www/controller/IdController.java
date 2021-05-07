@@ -50,19 +50,6 @@ public class IdController {
 		mav.setViewName(view);
 		return mav;
 	}
-	
-	@PostMapping(value = "/joinAccess")
-	public ModelAndView joinResult(CompanyAliasBean cb, HttpSession session) {
-		System.out.println("회원가입 등록");
-		//회원가입 service이동
-		mav = idmm.joinAccess(cb);
-		
-		if(mav!=null) {return mav;}
-		else {joinForm(session);
-		
-		}return mav;
-		
-	}
 	@PostMapping(value = "/login")
 	public ModelAndView login(CompanyAliasBean cb, HttpSession session) {
 		

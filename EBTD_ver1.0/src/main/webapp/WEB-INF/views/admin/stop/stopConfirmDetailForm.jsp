@@ -264,7 +264,7 @@
 </body>
 
 <script>
-console.log(${saList});
+
 // 모달창 열기 이벤트
 $("#myBtn").on("click", function(){
         $("#overlay").css({ visibility:"visible", opacity:1 });

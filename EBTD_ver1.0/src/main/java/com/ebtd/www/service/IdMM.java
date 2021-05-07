@@ -21,28 +21,6 @@ public class IdMM {
 	//모델앤 뷰 필드화
 	ModelAndView mav = null;
 	
-	public ModelAndView joinAccess(CompanyAliasBean cb) {
-		mav = new ModelAndView();
-		String view = null;	
-		
-		
-		//암호화 모듈 등록
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		//bean에 암호화된 패스워드 등록
-		cb.setC_password(pwdEncoder.encode(cb.getC_password()));
-		
-		//companyJoin으로 insert문 실행 후
-		boolean flag = cDao.companyJoin(cb);
-		if(flag) {
-			//성공시 
-			view = "redirect:loginForm";
-		}else {
-			//실패시
-			view = "redirect:joinForm";
-		}mav.setViewName(view);
-		
-		return mav;
-	}
 
 	public ModelAndView login(CompanyAliasBean cb, HttpSession session) {
 
@@ -63,7 +41,7 @@ public class IdMM {
 		//패스워드 일치 확인
 		String dbPwd = cDao.getPwd(cb);
 		if(!pwdEncoder.matches(cb.getC_password(), dbPwd)) {
-			mav.addObject("msg", "일치하는 아이디가 습니다.");
+			mav.addObject("msg", "비밀번호 일치하지않음.");
 			mav.setViewName("redirect:loginForm");
 			return mav;
 		}
@@ -78,7 +56,7 @@ public class IdMM {
 			if(c_state==0||c_state==2){
 				//거절 상태 혹은 대기상태시
 				mav.addObject("msg", "승인 확인 부탁드립니다.");
-				view = "redirect:loginForm";
+				view = "redirect:/loginForm";
 			}else if(c_state==1) {
 				//승인 완료된 회사일시
 				view = "/company/companyindex";
@@ -86,16 +64,17 @@ public class IdMM {
 				session.setAttribute("c_state", c_state);
 			}else if(c_state==3) {
 				//상태가 admin 일 경우
-				view = "redirect:admin";
+				view = "redirect:/admin";
 				session.setAttribute("c_username", username);
 				session.setAttribute("c_state", c_state);
 			}
 		}else {
 			// 비밀번호가 틀린경우
 			mav.addObject("msg", "비밀번호를 확인해주세요");
-			view = "redirect:loginForm";
+			view = "redirect:/loginForm";
 			return mav;
 		}mav.setViewName(view);
+		
 		return mav;
 	}
 
@@ -103,5 +82,6 @@ public class IdMM {
 		//아이디 있을경우 1, 아닐시 0
 		return (cDao.checkId(c_username)!=null)?1:0;
 	}
+
 	
 }

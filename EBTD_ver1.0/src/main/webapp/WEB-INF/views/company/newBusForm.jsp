@@ -262,6 +262,8 @@ $('#stopConfi').on('click', function() {
 	startY = selectY;
 	j++;
 });  
+
+
 //추천 정류장 선택 버튼 클릭 
 $('#recommendConfi').on('click', function() {
 	var recommendSelect = $('#mRecommendStop').val();

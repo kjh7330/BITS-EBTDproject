@@ -95,8 +95,6 @@ public class CompanyBusController {
 		mav.setViewName("company/existBusUpdateForm");
 		return mav;
 	}
-	
-	
 	@PostMapping(value = "/applyUpdateBusRoute") //기존 노선 정보 변경 요청하기
 	public ModelAndView applyUpdateBusRoute(@RequestParam Map busRoute, Model model, HttpSession session) {
 		model.addAttribute("busNum", busRoute.get("busNum"));

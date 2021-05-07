@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ebtd.www.service.IdMM;
 import com.ebtd.www.service.UserIdMM;
 
-@Controller
+@RestController
 public class IdRestController {	//관리자 전용
 	
 	@Autowired
@@ -37,6 +38,7 @@ public class IdRestController {	//관리자 전용
 	public int UserCheckDisNo(@RequestParam("u_disableno") String u_disableno) {
 		return uIdmm.userCheckNo(u_disableno);
 	}
+	
 
 
 }

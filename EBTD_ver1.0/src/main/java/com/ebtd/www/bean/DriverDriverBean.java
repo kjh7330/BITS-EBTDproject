@@ -1,6 +1,7 @@
 package com.ebtd.www.bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -8,15 +9,15 @@ import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-@Alias("bus_wh")
+@Alias("driver_wh")
 @Data
 @Accessors(chain = true)
-public class Wh_BusBean {
-	private String b_no;
+public class DriverDriverBean {
+	private int d_no;
 	private String c_username;
-	private int ab_no;
-	private int ab_wheel_cnt;
-	private int ab_blind_cnt;
-	private int ab_type;
+	private String d_name;
+	private String d_imgextention;
+	private String d_phonenum;
+	private Date d_enterdate;
+	private String b_no;
 }

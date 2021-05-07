@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.Wh_ReserveBean;
+import com.ebtd.www.bean.DriverReserveBean;
 import com.ebtd.www.dao.DriverDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +59,7 @@ public class DriverMM {
 		return mav;
 	}
 
-	public List<Wh_ReserveBean> refresh(String car, boolean go, String wheel, String blind, HttpSession ss) {
+	public List<DriverReserveBean> refresh(String car, boolean go, String wheel, String blind, HttpSession ss) {
 		Map<String, Object> bm = new HashMap();
 		bm.put("ab_no", ss.getAttribute("ab_no").toString());
 		bm.put("wheel", wheel);
@@ -75,7 +75,7 @@ public class DriverMM {
 			
 		dd.updateBus(bm); // 버스 위치 업데이트
 		
-		List<Wh_ReserveBean> rl = dd.refresh(ss.getAttribute("b_no").toString());					// 예약 정보 가져오기
+		List<DriverReserveBean> rl = dd.refresh(ss.getAttribute("b_no").toString());					// 예약 정보 가져오기
 																								//이용 완료 고객 예약 데이터 삭제
 		for( int i = 0 ; i < rl.size() ; i++ ) {
 			if(ss.getAttribute("b_type").equals("0") && rl.get(i).getU_type() == 1 )	rl.remove(i--);
@@ -85,5 +85,16 @@ public class DriverMM {
 		}
 		
 		return rl;
+	}
+
+	public List<String> on(List<String> data) {
+		for(String dt : data)	dd.on(dt);
+		
+		return data;
+	}
+
+	public List<String> out(List<String> data) {
+		for(String dt : data)	dd.out(dt);		
+		return data;
 	}
 }

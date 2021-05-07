@@ -1,13 +1,18 @@
 package com.ebtd.www.service;
 
 import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.BusBean;
+import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.bean.StopBean;
+import com.ebtd.www.bean.UserReservation;
 import com.ebtd.www.dao.I_UserReservationDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,14 +86,42 @@ public class UserReservationMM {
 		}
 	}
 	//작업중
-	public ModelAndView getBusDetail() {
-		
+	public ModelAndView getBusDetail(String b_No) throws JsonProcessingException {
+		List<DriverStopBean> brList = null;
+		String view = null;
+		ObjectMapper om = new ObjectMapper();		
+		brList = urDao.getBusDetail(b_No);
+		System.out.println("5498749844854"+brList);
+		if(brList!=null || brList.size()!=0) {
+			mav.addObject("brList", om.writeValueAsString(brList));
+			view = "/user/wheel/busReservationDetailForm";
+		}else {
+			view = "user/getBusList";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+	//정류장 작업중
+	public ModelAndView getStopDetail(int s_No) {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	//작업중
-	public ModelAndView getStopDetail() {
+	
+	//예약하기
+	public ModelAndView reservation(UserReservation ur, HttpSession session) {
+		mav = new ModelAndView();
+		String view = null;
+		String u_username = session.getAttribute("u_username").toString();
+		System.out.println("+++++++++++++++++++++++++++"+u_username);
 		
-		return null;
+		ur.setU_username(u_username);
+		if(urDao.reservation(ur)) {
+			view="redirect:/user/getBusList"; 
+		}else {
+			view="redirect:user/loginForm";
+		}
+		mav.setViewName(view);
+		return mav;
 	}
 
 

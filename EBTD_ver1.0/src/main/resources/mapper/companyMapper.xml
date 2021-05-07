@@ -5,11 +5,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.ebtd.www.dao.ICompanyDao">
-  	<insert id="companyJoin" parameterType="companyBean">
-  		INSERT INTO C( C_USERNAME, C_NAME, C_PASSWORD, C_NO, C_IMGEXTENTION, C_STATE)
-  			  VALUES (#{c_username},#{c_name},#{c_password},#{c_no},DEFAULT,DEFAULT)
-  	</insert>
   	
+	<insert id="companyJoin" parameterType = 'company_join_wh'>
+		insert into c values (#{c_username}, #{c_username}, #{c_password}, #{c_no}, null, 0)
+	</insert>  	
+	
+	<insert id="official_document_insert" parameterType = 'company_join_wh'>
+		insert into od values(#{c_username}, #{od_no})
+	</insert>
+	
+	<insert id="bus_insert" parameterType = 'company_join_wh'>
+		insert into b values(#{b_no}, #{c_username})
+	</insert>
+	
+	<insert id="apply_insert" parameterType = 'company_join_wh'>
+		insert into ap values(#{ap_no}, #{b_no}, #{c_username}, sysdate, 0, null, 100002, null)
+	</insert>
+	
+	<insert id="apply_detail_insert" parameterType = 'company_join_wh'>
+		insert into apde values(#{ap_no}, #{b_no}, #{apde_turn}, #{s_no})
+	</insert>
+	
+	<insert id="all_bus_insert" parameterType = 'company_join_wh'>
+		insert into ab values( #{ab_no}, #{b_no}, null, null, 0, 0, #{ab_type}, 0, null )
+	</insert>
+	
+	<insert id="driver_insert" parameterType = 'company_join_wh'>
+		insert into d values ( #{d_no}, #{c_username}, #{d_name}, null, #{d_phonenum}, #{d_enterdate}, #{d_b_no} )
+	</insert>
+	
+	<update id="update_od_no" parameterType = 'company_join_wh'>
+		update od set od_no = #{od_no}
+	</update>
+	
+	<select id="get_ap_no" resultType = 'integer'>
+		select max(ap_no)+1 from ap
+	</select>
+	
+	<select id="get_d_no" resultType = 'int'>
+		select max(d_no)+1 from d
+	</select>
+	
   	<select id="getPwd" resultType="String">
   		select c_password from c where c_username = #{c_username}
   	</select>
@@ -27,4 +63,7 @@
   	<select id="checkId" resultType="String">
   		select c_username from c where c_username = #{c_username}
   	</select>
+  	
+  	
+  	
   </mapper>

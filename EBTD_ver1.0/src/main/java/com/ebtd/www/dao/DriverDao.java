@@ -5,24 +5,30 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.ebtd.www.bean.Wh_BusBean;
-import com.ebtd.www.bean.Wh_CompanyBean;
-import com.ebtd.www.bean.Wh_DriverBean;
-import com.ebtd.www.bean.Wh_ReserveBean;
-import com.ebtd.www.bean.Wh_StopBean;
+import com.ebtd.www.bean.DriverBusBean;
+import com.ebtd.www.bean.DriverCompanyBean;
+import com.ebtd.www.bean.DriverDriverBean;
+import com.ebtd.www.bean.DriverReserveBean;
+import com.ebtd.www.bean.DriverStopBean;
 
 
 public interface DriverDao {
 	
-	public List<Wh_CompanyBean> getCompanyList();
+	public List<DriverCompanyBean> getCompanyList();
 	
-	public List<Wh_BusBean> getBusList(String c_username);
+	public List<DriverBusBean> getBusList(String c_username);
 
-	public List<Wh_DriverBean> getDriverList(String ab_no);
+	public List<DriverDriverBean> getDriverList(String ab_no);
 
-	public List<Wh_StopBean> getBusRouteList(String b_no);
+	public List<DriverStopBean> getBusRouteList(String b_no);
 
-	public List<Wh_ReserveBean> refresh(String b_no);
+	public List<DriverReserveBean> refresh(String b_no);
 
 	public void updateBus(Map<String, Object> bm);
+	
+	int carNumberDupCheck(int ab_no);
+
+	public void on(String dt);
+
+	public void out(String dt);
 }

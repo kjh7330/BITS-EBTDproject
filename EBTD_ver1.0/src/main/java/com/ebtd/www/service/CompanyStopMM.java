@@ -54,9 +54,9 @@ public class CompanyStopMM {
 	
 	//페이징
 	private String getPaging(Integer pageNum) {
-		int maxNum = sDao.getBoardCount(); //전체 정류장 수
-		int listCount = 20;
-		int pageCount = 5;
+		int maxNum = sDao.getStopCount(); //전체 정류장 수
+		int listCount = 15;
+		int pageCount = 10;
 		String boardName = "getStopList"; //url
 		Paging paging = new Paging(maxNum, pageNum, listCount, pageCount, boardName);
 		return paging.makeHtmlPaging(); //"<이전><a href=3 4><다음>"
@@ -162,12 +162,14 @@ public class CompanyStopMM {
 	
 	//정류장 위치 중복조회
 	public String checkSaPosition(int S_X, int S_Y) {
-		//System.out.println(S_X);
-		//System.out.println(S_Y);
+		
+		
 		//파라미터 2개를 map에 담음(myBatis에서 파라미터 2개 안먹음)
 		Map map = new HashMap();
 		map.put("S_X", S_X);
 		map.put("S_Y", S_Y);
+		//System.out.println(S_X);
+		//System.out.println(S_Y);
 		StopBean sb = null;
 		sb = sDao.checkSaPosition(map);	
 		if(sb != null) { //검색 결과가 있다면		

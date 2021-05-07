@@ -53,29 +53,6 @@
   </form>
 </div>	
 	
-	
-	
-
-<%-- 	<div style="color: black; text-align: center">
-		<form action="/company/addNewStop" method="post">
-		    신청 회사 : <input type="text" id="c_UserName" name="c_UserName" value="${sessionScope.c_name}" readonly><br>
-			정류장 이름 : <input type="text" id="sa_Name" name="sa_Name">
-			<div class="checkSaName" id="checkSaName"></div>
-			<!-- 정류장 이름 중복시 나타남 -->
-			주소 : <input type="text" id="sa_X" name="sa_X" placeholder="X값">
-			<input type="text" id="sa_Y" name="sa_Y" placeholder="Y값"><br>
-			<div class="checkSaPosition" id="checkSaPosition"></div>
-			동 이름 : <input type="text" id="t_Name" name="t_Name" readonly><br>
-
-			신청사유 : <input type="text" id="sa_Reason" name="sa_Reason" value=""><br>
-			<input type="hidden" id="sa_State" name="sa_State" value="0"><br>
-			<!--  신청상태 : -->
-			<!-- 신청시 기본값 0(대기) -->
-			<input type="submit" id="addSubmit" value="신청하기" onClick=addNewStop()>
-		</form>
-	</div>
- --%>
-
 
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
@@ -86,13 +63,12 @@
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
-//신청일 오늘날짜로 설정
-//document.getElementById('sa_Date').valueAsDate = new Date();
+
+
 
 //정류장 이름 중복검사
 $("#sa_Name").blur(function() {
 		var sa_Name = $('#sa_Name').val(); //입력한 정류장 이름
-		if(sa_Name != ''){
 		$.ajax({
 			url : '/company/checkSaName?S_NAME=' + sa_Name,
 			type : 'get',
@@ -109,16 +85,17 @@ $("#sa_Name").blur(function() {
 					else {
 						$("#checkSaName").text("사용가능한 정류장 입니다");
 						$("#checkSaName").css("color", "blue");
-						$("#addSubmit").attr("disabled", false); //submit 활성화
+						//$("#addSubmit").attr("disabled", false); //submit 활성화
 					} 
 				}, error : function(err) {
 						console.log("정류장 이름 검사 실패");
 						//$("#addSubmit").attr("disabled", true); //submit 비활성화
 					}
 				}); //ajax End
-			} //if End
+				
+				if(sa_Name=='')$("#addSubmit").attr("disabled", true);
 		}); //blur End 
-		//정류장 위치 중복검사
+	//정류장 위치 중복검사
 		$("#sa_X").blur(function() {
 				var sa_X = $('#sa_X').val(); //입력한 X값
 				var sa_Y = $('#sa_Y').val(); //입력한 Y값
@@ -137,9 +114,9 @@ $("#sa_Name").blur(function() {
 							}
 							//정류장 위치 중복 아닐시		
 							else {
-								if(sa_X>100 || sa_Y>100) {alert('정류장 좌표 최대값은 100입니다.'); $("#t_Name").val(""); 
-								$("#sa_X").val(""); $("#sa_Y").val(""); $("#checkSaPosition").hide();}
-								else if(0 <= sa_X  && sa_X <= 33 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
+								//if(sa_X>100 || sa_Y>100) {alert('정류장 좌표 최대값은 100입니다.'); $("#t_Name").val(""); 
+								//$("#sa_X").val(""); $("#sa_Y").val(""); $("#checkSaPosition").hide();}
+								if(0 <= sa_X  && sa_X <= 33 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 								else if(34 <= sa_X && sa_X <= 66 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학2동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}                     
 								else if(67 <= sa_X && sa_X <= 100 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학3동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 								else if(0 <= sa_X && sa_X <= 33 && 34 <= sa_Y && sa_Y <= 66) {$("#t_Name").val("송도1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
@@ -161,7 +138,7 @@ $("#sa_Name").blur(function() {
  $("#sa_Y").blur(function() {
 		var sa_X = $('#sa_X').val(); //입력한 X값
 		var sa_Y = $('#sa_Y').val(); //입력한 Y값
-		if(sa_X>100 || sa_Y>100) alert('정류장 좌표 최대값은 100입니다.');
+		//if(sa_X>100 || sa_Y>100) alert('정류장 좌표 최대값은 100입니다.');
 		$.ajax({
 			url : '/company/checkSaPosition?',
 			type : 'get',
@@ -197,6 +174,16 @@ $("#sa_Name").blur(function() {
 			}); //ajax End
 		}); //blur End   
 
+ 
+	 //var sa_Name = $('#sa_Name').val();
+	 //var sa_X = $('#sa_X').val(); //입력한 X값
+	// var sa_Y = $('#sa_Y').val(); //입력한 Y값
+	// if(sa_Name =='' || sa_X =='' || sa_Y =='') $("#addSubmit").attr("disabled", true); //submit 비활성화 
+	// else $("#addSubmit").attr("disabled", false); //submit 활성화
+	 
+ 
+
+		
 function addNewStop(){
 	alert('정류장 신청 완료');
 } 
