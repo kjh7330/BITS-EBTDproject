@@ -16,7 +16,7 @@ public class UserReservationBean {
 	private String u_username;
 	private int s_nostart;
 	private int s_nolast;
-	private int b_no;
+	private String b_no;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Timestamp ur_date;
 	private int ur_state;
