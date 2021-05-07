@@ -21,14 +21,33 @@ public class UserMypageMM {
 	private I_UserMypageDao umDao;
 	
 	ModelAndView mav;
+	//회원아이디로 휠체어유저인지 시각장애인유저인지 확인하기
+	public ModelAndView getMypage(String u_username) {
+		mav = new ModelAndView();
+		String view = null;
+		UserBean ub = umDao.getMypage(u_username);
+		mav.addObject("ub", ub);
+		if(ub.getU_type() == 1) {
+			view = "user/blind/myPageForm";
+		}else if(ub.getU_type() == 0) {
+			view = "user/wheel/myPageForm";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
 	//이용 내역 리스트 가져오기
 	public ModelAndView getReservationHistoryList(String u_username) {
 		mav = new ModelAndView();
 		String view = null;
 		List<UserBookmarkBean> ubList = null;
-		//ubList = umDao.getReservationHistoryList(u_username);
-		//mav.addObject("ubList", ubList);
-		view = "user/wheel/reservationHistoryListForm";
+		UserBean ub = umDao.getMypage(u_username);
+		ubList = umDao.getReservationHistoryList(u_username);
+		mav.addObject("ubList", ubList);
+		if(ub.getU_type()==1) {
+			view = "user/blind/reservationHistoryListForm";
+		}else if(ub.getU_type()==0) { //휠체어
+			view = "user/wheel/reservationHistoryListForm";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
@@ -36,14 +55,27 @@ public class UserMypageMM {
 	public ModelAndView getMyQuestionList(String u_username) {
 		mav = new ModelAndView();
 		String view = null;
-		List<VocBean> vList = null;
-		//vList = umDao.getMyQuestionList(u_username);
-		//mav.addObject("vList", vList);
-		//if(vList.get(0).getU_type()==0) { //휠체어
-			view="user/wheel/myQuestionListForm";
-		//}else if(vList.get(0).getU_type()==1) {
-		//	view="user/wheel/myQuestionListForm"; //시각
-		//}
+		List<VocBean> vList = umDao.getMyQuestionList(u_username);
+		mav.addObject("vList", vList);
+		if(vList.get(0).getU_type()==1) { //시각
+			view="user/blind/myQuestionListForm";
+		}else if(vList.get(0).getU_type()==0) {
+			view="user/wheel/myQuestionListForm"; //휠체어
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+	//고객 소리함 - 작성하기 페이지 이동
+	public ModelAndView getMyQuestionWrite(String u_username) {
+		mav = new ModelAndView();
+		String view = null;
+		UserBean ub = umDao.getMypage(u_username);
+		mav.addObject("ub", ub);
+		if(ub.getU_type() == 1) {
+			view = "user/blind/myQuestionWriteForm";
+		}else if(ub.getU_type() == 0) {
+			view = "user/wheel/myQuestionWriteForm";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
@@ -60,7 +92,7 @@ public class UserMypageMM {
 		mav = new ModelAndView();
 		String view = null;
 		umDao.setMyQuestionWrite(vb);
-		view="user/wheel/userMyInfoForm";
+		view="user/getMyQuestionList"; //리스트로 다시 이동
 		mav.setViewName(view);
 		return mav;
 	}
@@ -71,7 +103,11 @@ public class UserMypageMM {
 		List<VocBean> vList = null;
 		//vList = umDao.getMyQuestionDetail(v_no);
 		//mav.addObject("vList", vList);
-		view="user/wheel/myQuestionDetailForm";
+		//if(vList.get(0).getU_type()==1) { //시각
+			view="user/blind/myQuestionDetailForm";
+		//}else if(vList.get(0).getU_type()==0) { //휠체어
+		//	view="user/wheel/myQuestionDetailForm";
+		//}
 		mav.setViewName(view);
 		return mav;
 	}
@@ -82,9 +118,9 @@ public class UserMypageMM {
 		List<UserBean> miList = null;
 		miList = umDao.getUserMyInfo(u_username);
 		mav.addObject("miList", miList);
-		if(miList.get(0).getU_type()==0) { // 휠체어 유저
-			view="user/wheel/userMyInfoForm";
-		}else if(miList.get(0).getU_type()==1) { // 시각 장애인 유저
+		if(miList.get(0).getU_type()==1) { //시각
+			view="user/blind/userMyInfoForm";
+		}else if(miList.get(0).getU_type()==0) { //휠체어
 			view="user/wheel/userMyInfoForm";
 		}
 		mav.setViewName(view);

@@ -13,19 +13,15 @@ import com.ebtd.www.bean.VocBean;
 
 public interface I_UserMypageDao {
 
+	UserBean getMypage(String u_username);
 	List<UserBookmarkBean> getReservationHistoryList(String u_username);
-
 	List<VocBean> getMyQuestionList(String u_username);
-	
 	List<UserReserveHistoryBean> getReservationBusNum(String u_username);
-
 	void setMyQuestionWrite(VocBean vb);
-
 	List<VocBean> getMyQuestionDetail(String v_no);
-
 	List<UserBean> getUserMyInfo(String u_username);
-
 	void setUserMyInfo(UserBean ub);
+
 
 
 

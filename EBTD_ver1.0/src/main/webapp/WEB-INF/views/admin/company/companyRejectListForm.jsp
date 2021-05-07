@@ -9,14 +9,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
-		     position: fixed;
+		     position: absolute;
 	 	    top: 10%;
             left: 50%;
-       /*      transform: translate(-50%,10%);
-		 */	color: black;
+            transform: translate(-50%,10%);
+		 	color: black;
 			width: 700px;
             text-align: center;
             height: 100%;
+		}
+		.maininput{
+			border: none;
+			background-color: pink;
+			font-size: 30px;
+			width: 400px;
+			height: 80px;
+			text-align: center;
+			margin-bottom: 20px;
+			border-radius: 10px;
+		}
+		.maininput:focus{
+			outline:none;
 		}
 		.maintable{
 			border: none;
@@ -37,7 +50,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
 <div class="main-container"><br>
-	<div><input value="노선 승인 내역" readonly></div>
+	<div><input class="maininput" value="노선 반려 내역" readonly></div>
 	<div>
 		정렬:
 		<select id="category1" onchange="fnCtg()">
@@ -45,7 +58,7 @@
 			<option value="c_name">회사명</option>
 			<option value="ap_state">승인종류</option>
 			<option value="ap_date">승인일자</option>
-		</select>
+		</select>&nbsp;&nbsp;&nbsp;
 		정렬기간:
 		<select id="category2" onchange="fnCtg()">
 			<option value="1" selected>전체</option>
@@ -73,7 +86,7 @@
 		all += baList[i]["ap_b_no"] +'번</td>';
 		all += '<td>' + baList[i]["ap_date"] + '</td>';
 			let state = baList[i]["ap_state"];
-		 	if	   (state == 2){ all += '<td>등록 반려</td>'; }
+		 	if	   (state == 2){ all += '<td style="color: red">등록 반려</td>'; }
 		all += '</tr>';
 	}
 	$('.maintable').append(all);
@@ -125,7 +138,7 @@
 				c_name += baList[i]["ap_b_no"] +'번</td>';
 				c_name += '<td>' + baList[i]["ap_date"] + '</td>';
 					let state = baList[i]["ap_state"];
-				 	if	   (state == 2){ c_name += '<td>등록 반려</td>'; }
+				 	if	   (state == 2){ c_name += '<td style="color: red">등록 반려</td>'; }
 				c_name += '</tr>';
 			}
 		}
