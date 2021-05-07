@@ -140,11 +140,19 @@
                         <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
                     </tr>
                     <tr>
+<<<<<<< Updated upstream
                         <td class="tabletitle">P W :</td>
                         <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">P W2 :</td>
+=======
+                        <td class="tabletitle">비밀번호 :</td>
+                        <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tabletitle">비밀번호 확인 :</td>
+>>>>>>> Stashed changes
                         <td colspan="2"><input type="password" class="input" id = "u_password2"/></td>
                     </tr>
                     <tr>
@@ -202,7 +210,7 @@
 
                     <tr>
                     <td> <div  id="addr_check"></div> </td>
-                        <td colspan="4"><button id="logbtn" class="loginbtn" >Login</button> </td>
+                        <td colspan="4"><button id="logbtn" class="loginbtn" >JOIN</button> </td>
                     </tr>
                     
                 </table>
@@ -216,7 +224,7 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁, 이민성
             </div>
         </div>
     </footer>
@@ -227,6 +235,18 @@
 <script>
 let guardianFlag = false;
 var tx =""
+//비밀번호 check
+
+$('#u_password2').blur(function() {
+	if($('#u_password').val() != $('#u_password2').val()) {
+		if($('#u_password').val()!='') {
+				alert("비밀번호가 일치하지 않습니다.");
+				$('#u_password2').val('')
+				$('#u_password2').focus();
+			};		
+		};
+		
+	});
 
 //보호자 input 생성용 but안씀
 $('#guardAdd').click(function () {
@@ -362,7 +382,7 @@ function chkValue() {
 	console.log($townList);	
 	
 	//주소 select 에 option값 추가
-	for (i in $townList){
+	for (var i in $townList){
 		$('#AddressArr').append("<option value="+$townList[i]+">"+$townList[i]+"</option>");
 		console.log($townList[i]);
 	}

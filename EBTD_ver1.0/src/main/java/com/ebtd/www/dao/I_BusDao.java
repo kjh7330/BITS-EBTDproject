@@ -11,6 +11,7 @@ import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.TownBean;
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.BusBean;
+import com.ebtd.www.bean.CompanyCheckBean;
 
 public interface I_BusDao {
 
@@ -32,7 +33,7 @@ public interface I_BusDao {
 
 	ArrayList<String> getTownNameList(); // town name가져오기(이충호)
 
-	int existBusNumCheck(String busNum);
+	Integer existBusNumCheck(CompanyCheckBean cb);
 	
 	int applyUpdateBusRoute(ApplyBusHistory busBean);
 

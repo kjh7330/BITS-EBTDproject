@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.UserReservation;
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.dao.I_UserReservationInfoDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +24,7 @@ public class UserReservaionInfoMM {	//김아름
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
-		UserReservation uReserveBean = null; //UserReserveBean 으로 바꿔줘야함 - 재구 빈
+		UserReservationBean uReserveBean = null; //UserReserveBean 으로 바꿔줘야함 - 재구 빈
 		
 		String u_userName = session.getAttribute("u_username").toString();
 		System.out.println("세션에서 꺼낸 u_username = " + u_userName);

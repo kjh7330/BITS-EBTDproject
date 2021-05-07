@@ -10,4 +10,16 @@
 	JOIN USERLIST U ON H.U_USERNAME=U.U_USERNAME
 	WHERE C_USERNAME=#{id} AND URH_STATE=3
 	</select>
+	<select id="getUserTownWheelCount" resultType="int" parameterType="String">
+	SELECT COUNT(*) FROM U WHERE U_ADDRESS LIKE '%'||#{tName}||'%' AND U_TYPE = 0
+	</select>
+	<select id="getUserTownBlindCount" resultType="int" parameterType="String">
+	SELECT COUNT(*) FROM U WHERE U_ADDRESS LIKE '%'||#{tName}||'%' AND U_TYPE = 1
+	</select>
+	<select id="getAllWheelCount" resultType="int">
+	SELECT COUNT(*) FROM U WHERE U_TYPE = 0
+	</select>
+	<select id="getAllBlindCount" resultType="int">
+	SELECT COUNT(*) FROM U WHERE U_TYPE = 1
+	</select>
 </mapper>
