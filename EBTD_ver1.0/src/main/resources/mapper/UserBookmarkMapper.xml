@@ -8,13 +8,27 @@
 
 	                <!-- mybatis-config.xml에 별칭설정 or Bean에 @Alias("bookmark") -->
 	<select id="getBookmarkList" resultType="bookmark">
-		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME s_nameStart, S2.S_NAME s_nameLast, UB.B_NO, UB.UB_ALIAS
+		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME s_nameStart, S2.S_NAME s_nameLast, UB.B_NO, UB.UB_ALIAS, UB.s_nostart, UB.s_noLAST 
 		FROM UB
 		JOIN S S1 ON UB.S_NOSTART = S1.S_NO 
 		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
 		WHERE U_USERNAME=#{u_userName}
 	</select>
+	
+	<!-- 즐겨찾기 삭제 -->
+	<delete id="deleteBookmark">
+        DELETE FROM UB
+        WHERE UB_NO = #{ub_no}
+    </delete>
+    
+    <!-- 즐겨찾기 리스트에서 별 색깔 채우면 추가-->
+    <insert id="insertBookmark" parameterType="bookmark">
+    	<!-- 시퀀스 -->
+    	<!-- <selectKey resultType="int" order="BEFORE">
+    		SELECT SEQ_D_NO.NEXTVAL FROM DUAL
+  		</selectKey> -->
+        INSERT INTO UB(u_userName, ub_no, s_noStart, s_noLast, b_no, ub_alias)
+    	VALUES(#{u_userName}, #{ub_no}, #{s_noStart},#{s_noLast},#{b_no},#{ub_alias})
+    </insert>
 
-	
-	
 </mapper>

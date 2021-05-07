@@ -36,6 +36,7 @@ public class UserBookmarkMM {	//김아름
 		//디비에서 가져온 데이터가 있으면
 		if( (uBookList!=null) && (uBookList.size()!= 0) ) {
 			mav.addObject("uBookList", om.writeValueAsString(uBookList));
+			//mav.addObject("uBookList2", uBookList);
 			//잭슨으로 데이터-->json으로 변환
 			view = "/user/wheel/wheelBookmarkListForm";//.jsp
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
@@ -46,8 +47,30 @@ public class UserBookmarkMM {	//김아름
 		}
 		mav.setViewName(view);
 		return mav;
-		
 			
-	} //getWheelBookmarkList end
+	} //getBookmarkList end
+
+	
+	//즐겨찾기 삭제
+	public String deleteBookmark(String ub_no) {
+		uBookDao.deleteBookmark(ub_no);	//디비에 즐겨찾기 삭제하러
+		
+		return "삭제완료";
+	} //deleteBookmark end
+
+	//즐겨찾기 추가
+	public String insertBookmark(String ub_no, String u_userName, String b_no, int s_noStart, int s_noLast, String ub_alias) {
+		UserBookmarkBean uBookmark = new UserBookmarkBean();
+		uBookmark.setUb_no(ub_no);
+		uBookmark.setU_userName(u_userName);
+		uBookmark.setB_no(b_no);
+		uBookmark.setS_noStart(s_noStart);
+		uBookmark.setS_noLast(s_noLast);
+		uBookmark.setUb_alias(ub_alias);
+		
+		uBookDao.insertBookmark(uBookmark);	//디비에 즐겨찾기 추가하러
+		
+		return "저장완료";
+	} //insertBookmark end
 		
 } //UserBookmarkMM class end

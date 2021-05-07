@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.service.UserBookmarkMM;
+import com.ebtd.www.service.UserReservaionInfoMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserBookmarkController {	//김아름
+public class UserReservaionInfoController {	//김아름
+
 	private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
 	@Autowired 
-	private UserBookmarkMM ubm;	//유저의 즐겨찾기 관리 서비스 클래스
+	private UserReservaionInfoMM urim;	
 
 	ModelAndView mav;
 
-	//유저(휠체어+시각)의 즐겨찾기 가져오고 성공하면 페이지 이동
-	@GetMapping(value = "/getBookmarkList")
-	public ModelAndView getBookmarkList(HttpSession session) throws JsonProcessingException {			
-			mav = ubm.getBookmarkList(session);	
-		return mav;		
+	//예약 확인 - 예약내역 가져오기
+	@GetMapping(value = "/getReservationInfo")
+	public ModelAndView getReservationInfo(HttpSession session) throws JsonProcessingException {			
+		mav = urim.getReservationInfo(session);	
+	return mav;		
 	}
-
 }
