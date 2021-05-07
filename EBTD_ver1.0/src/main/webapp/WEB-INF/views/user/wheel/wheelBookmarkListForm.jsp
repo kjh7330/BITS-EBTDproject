@@ -158,9 +158,9 @@ body {
 			</div>
 			<div class="modal_content">
 				<p style="color: black">
-				<form name="userBookmark" id="userBookmarkForm" action="/user/reservation" method="post">
+				<!-- <form name="userBookmark" id="userBookmarkForm" action="/user/reservation" method="post">
 					
-				</form>
+				</form> -->
 				
 				<button type="submit" id="reservationBtn">예약</button>
 				<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
@@ -295,11 +295,11 @@ body {
 			
 			console.log($(this).parent().children('#userBookmarkForm').children('.ub_no').val());
 			
-			if(ub_no != ''){
+			/* if(ub_no != ''){
 				$('form').trigger('submit');
 			}else{
 				console.log("즐겨찾기 값이 없습니다.");
-			}
+			} */
 		});
 		
 	</script>
