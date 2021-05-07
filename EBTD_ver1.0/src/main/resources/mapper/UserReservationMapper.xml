@@ -24,6 +24,6 @@
 	</select>
 	
 	<insert id="reservation" parameterType="reservation">
-		INSERT INTO USER_RESERVE VALUES(#{ur_no}, #{u_username}, #{s_nostart}, #{s_nolast}, #{b_no}, SYSDATE, 0) 
+		INSERT INTO USER_RESERVE VALUES(SEQ_UR_NO.NEXTVAL, #{u_username}, #{s_nostart}, #{s_nolast}, #{b_no}, SYSDATE, 0) 
 	</insert>
 </mapper>

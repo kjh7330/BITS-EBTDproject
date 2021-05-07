@@ -9,8 +9,8 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 
-#table{
-	width: 99%;
+#routetable{
+	width: 100%;
 }
 #bustitle{
 	text-align: center;
@@ -48,19 +48,20 @@
 </head>
 
 <body>
-<form action="/user/reservation" id="reservation" method="post">
 	<div id="userheader"><%@ include file="/WEB-INF/views/include/userheader.jsp"%></div>
+	<form action="/user/reservation" id="reservation" method="post">
+	
 		<div id="bustitle"></div>
 		<div id="stopinfo" style="text-align: center;"><span id="startstop"></span> <-> <span id="laststop"></span></div>
 	
-	<table id="table" style="border: 1px solid black">
+	<table id="routetable" style="border: 1px solid black">
 		<tr>
-		<td><div class="inputValue" id="startValue">출발지 : <input id = "s_namestart" name="s_namestart" type="text" readonly='readonly' ></div></td>
+		<td><div class="inputValue" id="startValue">출발지 : <input id = "s_namestart" type="text" readonly='readonly'><input id="s_nostart" name="s_nostart" style="display: none;"></div></td>
 		<td colspan="1" rowspan="2"><input type="button" id="Btn" value="예약" style="height: 50px"></td>
 		<td></td>
 		</tr>
 		<tr>
-		<td><div class="inputValue" id="lastValue">목적지 : <input id = "s_namelast" name="s_namelast" type="text" readonly='readonly'></div></td>
+		<td><div class="inputValue" id="lastValue">목적지 : <input id = "s_namelast" type="text" readonly='readonly'><input id="s_nolast" name="s_nolast" style="display: none;"></div></td>
 		</tr>
 	</table>
 	<br>	
@@ -84,7 +85,8 @@ let str='';
 for (i; i<${brList}.length; i++){
 	str+='<tr id="stop">';
 	
-	str+='<td class="stopList">'+${brList}[i]["s_name"]+'</td>';
+	str+='<td class="stopList">'+${brList}[i]["s_name"]+'<br>';
+	str+=${brList}[i]["s_no"]+'</td>';
 	
 	str+='<td class = "div_td">';
 	
@@ -92,7 +94,7 @@ for (i; i<${brList}.length; i++){
 	
 	str+='</td>';
 	
-	str+='</tr>';
+	str+='</tr>'; 
 };
 $("#busRoute").append(str);
 
@@ -110,24 +112,28 @@ $(".stopList").click(function () {
 $(".start").click(function () {
 	let start = '';
 	start = $(this).parent().parent().parent().children('.stopList').text();
-	console.log(start);
-	$('#s_namestart').val(start);
+	$('#s_namestart').val(start.substring(0, start.length-5));
+	$('#s_nostart').val(start.substring(start.length-5));
+	
+	console.log($('#s_namestart').val());
+	console.log($('#s_nostart').val());
 });
 $(".last").click(function () {
 	let last = '';
 	last = $(this).parent().parent().parent().children('.stopList').text();
-	console.log(last);
-	$('#s_namelast').val(last);
+	$('#s_namelast').val(last.substring(0, last.length-5));
+	$('#s_nolast').val(last.substring(last.length-5));
+	
+	console.log($('#s_namelast').val());
+	console.log($('#s_nolast').val());
 });
 
-$(function(){
+$("#Btn").click(function() {
 	if($('#s_namestart').val()!=''&&$('#s_namelast').val()!=''){
-		window.open('/views/user/ReservationPopUp.jsp', 'ReservationPopUp', 'width=400', 'height=400')
-	}
-	else{
-		return false;
+		$('form').trigger('submit');
+	}else{
+		console.log("입력이나 해 충호야");
 	}
 });
-
 </script>
 </html>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ebtd.www.bean.BusBean;
 import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.bean.StopBean;
-import com.ebtd.www.bean.UserReservation;
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.dao.I_UserReservationDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -108,7 +108,7 @@ public class UserReservationMM {
 	}
 	
 	//예약하기
-	public ModelAndView reservation(UserReservation ur, HttpSession session) {
+	public ModelAndView reservation(UserReservationBean ur, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
 		String u_username = session.getAttribute("u_username").toString();

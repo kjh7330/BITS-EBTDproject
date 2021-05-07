@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebtd.www.bean.UserReservation;
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.service.UserReservationMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -47,7 +47,7 @@ public class UserReservationController {
 		return mav;
 	}
 	@PostMapping(value = "/reservation")
-	public ModelAndView reservation(UserReservation ur, HttpSession session) {
+	public ModelAndView reservation(UserReservationBean ur, HttpSession session) {
 		
 		mav = urm.reservation(ur, session);
 		return mav;
