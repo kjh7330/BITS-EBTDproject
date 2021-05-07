@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 
-@Alias("userReservationHistory")
+@Alias("userReserveHistory")
 @Data	//싹 다 만들어줌-롬복 기능 중 게터 세터 투스트링 이퀄스 해쉬코드 활용 가능
 public class UserReserveHistoryBean {
 

@@ -158,8 +158,11 @@ body {
 			</div>
 			<div class="modal_content">
 				<p style="color: black">
-				<div id="modalBookDeail"></div>
-				<button id="reservationBtn">예약</button>
+				<form name="userBookmark" id="userBookmarkForm" action="/user/reservation" method="post">
+					
+				</form>
+				
+				<button type="submit" id="reservationBtn">예약</button>
 				<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
 				<button id="modalOutBtn">취소</button>
 				</p>
@@ -283,14 +286,20 @@ body {
 		
 		//예약 버튼 누르면
 		$('#reservationBtn').click(function(){
-			let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
-			let u_userName = $(this).parent().children('.bookList').children('.u_userName').val();
-			let s_noStart = $(this).parent().children('.bookList').children('.s_noStart').val();
-			let s_noLast = $(this).parent().children('.bookList').children('.s_noLast').val();
-			let b_no = $(this).parent().children('.bookList').children('.b_no').val();
-			let ub_alias = $(this).parent().children('.bookList').children('.ub_alias').val();
+			let ub_no = $(this).parent().children('#userBookmarkForm').children('.ub_no').val();
+			let u_userName = $(this).parent().children('#userBookmarkForm').children('.u_userName').val();
+			let s_noStart = $(this).parent().children('#userBookmarkForm').children('.s_noStart').val();
+			let s_noLast = $(this).parent().children('#userBookmarkForm').children('.s_noLast').val();
+			let b_no = $(this).parent().children('#userBookmarkForm').children('.b_no').val();
+			let ub_alias = $(this).parent().children('#userBookmarkForm').children('.ub_alias').val();
 			
-			console.log($(this).parent().children('.bookList').children('.ub_no').val());
+			console.log($(this).parent().children('#userBookmarkForm').children('.ub_no').val());
+			
+			if(ub_no != ''){
+				$('form').trigger('submit');
+			}else{
+				console.log("즐겨찾기 값이 없습니다.");
+			}
 		});
 		
 	</script>

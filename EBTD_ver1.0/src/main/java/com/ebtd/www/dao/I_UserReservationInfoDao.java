@@ -1,11 +1,11 @@
 package com.ebtd.www.dao;
 
-import com.ebtd.www.bean.UserReserveHistoryBean;
+import com.ebtd.www.bean.UserReservation;
 
 public interface I_UserReservationInfoDao {
 	
 	//UserReserveBean 으로 바꿔줘야함 - 재구 
-	UserReserveHistoryBean getReservationInfo(String u_userName);
+	UserReservation getReservationInfo(String u_userName);
 		
 	
 
