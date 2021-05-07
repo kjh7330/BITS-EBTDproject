@@ -159,7 +159,7 @@ body {
 			<div class="modal_content">
 				<p style="color: black">
 				<div id="modalBookDeail"></div>
-				<button onclick="location.href='#">예약</button>
+				<button id="reservationBtn">예약</button>
 				<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
 				<button id="modalOutBtn">취소</button>
 				</p>
@@ -171,7 +171,7 @@ body {
 			file="/WEB-INF/views/include/userfooter.jsp"%></div>
 </body>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		let uBookList = ${uBookList};
 		let str = '';
 		//console.log(uBookList);
@@ -277,10 +277,21 @@ body {
 				}).fail(function(err){
 					console.log(err,"!!!!!!!!!!");
 				});
-			}
-
+			} //else end
 		}); //별클릭 이벤트 end
 		
+		
+		//예약 버튼 누르면
+		$('#reservationBtn').click(function(){
+			let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
+			let u_userName = $(this).parent().children('.bookList').children('.u_userName').val();
+			let s_noStart = $(this).parent().children('.bookList').children('.s_noStart').val();
+			let s_noLast = $(this).parent().children('.bookList').children('.s_noLast').val();
+			let b_no = $(this).parent().children('.bookList').children('.b_no').val();
+			let ub_alias = $(this).parent().children('.bookList').children('.ub_alias').val();
+			
+			console.log($(this).parent().children('.bookList').children('.ub_no').val());
+		});
 		
 	</script>
 
