@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.BusBean;
+import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.UserReservation;
-import com.ebtd.www.bean.Wh_StopBean;
 import com.ebtd.www.dao.I_UserReservationDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -87,7 +87,7 @@ public class UserReservationMM {
 	}
 	//작업중
 	public ModelAndView getBusDetail(String b_No) throws JsonProcessingException {
-		List<Wh_StopBean> brList = null;
+		List<DriverStopBean> brList = null;
 		String view = null;
 		ObjectMapper om = new ObjectMapper();		
 		brList = urDao.getBusDetail(b_No);
