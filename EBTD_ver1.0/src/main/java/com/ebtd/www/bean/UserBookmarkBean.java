@@ -9,13 +9,13 @@ import lombok.Data;
 public class UserBookmarkBean {
 	
 	private String ub_no; //즐겨찾기번호(pk)
-	private String u_userName; //id(pk)(fk)
-	private int s_noStart; //출발 정류장(fk)
-	private int s_noLast;  //도착 정류장(fk)
+	private String u_username; //id(pk)(fk)
+	private int s_nostart; //출발 정류장(fk)
+	private int s_nolast;  //도착 정류장(fk)
 	private String b_no; //버스번호(fk)
 	private String ub_alias;	//별칭
 	
-	private String s_nameStart; //출발 정류장 이름
-	private String s_nameLast;  //도착 정류장 이름
+	private String s_namestart; //출발 정류장 이름
+	private String s_namelast;  //도착 정류장 이름
 
 }

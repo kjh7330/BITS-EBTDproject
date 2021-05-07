@@ -1,11 +1,12 @@
 package com.ebtd.www.dao;
 
+import java.util.List;
+
 import com.ebtd.www.bean.UserReservationBean;
 
 public interface I_UserReservationInfoDao {
 	
-	//UserReserveBean 으로 바꿔줘야함 - 재구 
-	UserReservationBean getReservationInfo(String u_userName);
+	List<UserReservationBean> getReservationInfo(String u_username);
 		
 	
 

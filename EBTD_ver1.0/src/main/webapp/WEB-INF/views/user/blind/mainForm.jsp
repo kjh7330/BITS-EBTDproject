@@ -57,7 +57,7 @@
 <div class="maindiv">
  	<div class="menudetail" id="logout"><a>로그아웃</a></div>
 	
-		<button id="mbtn1" class="mainbtn" onclick="location.href='#'">즐겨찾기</button>
+		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
 	
 </div>

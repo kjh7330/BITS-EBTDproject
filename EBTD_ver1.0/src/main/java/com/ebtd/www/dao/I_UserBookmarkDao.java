@@ -6,7 +6,7 @@ import com.ebtd.www.bean.UserBookmarkBean;
 
 public interface I_UserBookmarkDao {
 
-	List<UserBookmarkBean> getBookmarkList(String u_userName);
+	List<UserBookmarkBean> getBookmarkList(String u_username);
 
 	void deleteBookmark(String ub_no);
 

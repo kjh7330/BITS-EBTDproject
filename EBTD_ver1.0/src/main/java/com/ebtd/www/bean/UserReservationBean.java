@@ -16,11 +16,13 @@ public class UserReservationBean {
 	private String u_username;
 	private int s_nostart;
 	private int s_nolast;
-	private int b_no;
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private String b_no;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp ur_date;
+	@JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+	private Timestamp ur_time;
 	private int ur_state;
 	
-	private String s_nameStart; //출발 정류장 이름
-	private String s_nameLast;  //도착 정류장 이름
+	private String s_namestart; //출발 정류장 이름
+	private String s_namelast;  //도착 정류장 이름
 }

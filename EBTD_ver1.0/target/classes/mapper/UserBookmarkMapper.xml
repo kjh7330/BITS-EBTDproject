@@ -12,7 +12,7 @@
 		FROM UB
 		JOIN S S1 ON UB.S_NOSTART = S1.S_NO 
 		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
-		WHERE U_USERNAME=#{u_userName}
+		WHERE U_USERNAME=#{u_username}
 	</select>
 	
 	<!-- 즐겨찾기 삭제 -->
@@ -27,8 +27,8 @@
     	<!-- <selectKey resultType="int" order="BEFORE">
     		SELECT SEQ_D_NO.NEXTVAL FROM DUAL
   		</selectKey> -->
-        INSERT INTO UB(u_userName, ub_no, s_noStart, s_noLast, b_no, ub_alias)
-    	VALUES(#{u_userName}, #{ub_no}, #{s_noStart},#{s_noLast},#{b_no},#{ub_alias})
+        INSERT INTO UB(u_userName, ub_no, s_nostart, s_nolast, b_no, ub_alias)
+    	VALUES(#{u_username}, #{ub_no}, #{s_nostart},#{s_nolast},#{b_no},#{ub_alias})
     </insert>
 
 </mapper>

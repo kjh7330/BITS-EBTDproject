@@ -8,7 +8,19 @@
 
 	<!-- 예약내역 가져오기 -->
 	<select id="getReservationInfo" resultType="reservation">
-		SELECT * FROM UR WHERE U_USERNAME=#{u_userName}
+		SELECT UR.UR_NO, 
+				UR.U_USERNAME, 
+				UR.S_NOSTART, 
+				S1.S_NAME S_NAMESTART, 
+				UR.S_NOLAST, 
+				S2.S_NAME S_NAMELAST,
+				UR.B_NO, 
+				UR.UR_DATE,
+				UR.UR_STATE 
+		FROM UR 
+		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
+		JOIN S S2 ON UR.S_NOLAST=S2.S_NO
+		WHERE U_USERNAME=#{u_username}
 	</select>
-
+	
 </mapper>
