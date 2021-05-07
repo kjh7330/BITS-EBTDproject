@@ -119,8 +119,8 @@ public class AdminCompanyController {
 	}
 	//버스 회사 승인 목록 - 상세
 	@GetMapping(value = "/admin/company/getCompanyApprovalDetail")
-	public ModelAndView getCompanyApprovalDetail(String ap_no) throws JsonProcessingException {
-		mav=acm.getCompanyApprovalDetail(ap_no);
+	public ModelAndView getCompanyApprovalDetail(int ap_no, String ap_b_no) throws JsonProcessingException {
+		mav=acm.getCompanyApprovalDetail(ap_no, ap_b_no);
 		return mav;
 	}
 	//버스 회사 반려 목록

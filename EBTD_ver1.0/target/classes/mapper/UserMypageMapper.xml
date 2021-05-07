@@ -4,6 +4,10 @@
 
 <!-- I_UserMypageDao 전용 Mapper : 유저 마이페이지 관련 SQL문 -->
 <mapper namespace="com.ebtd.www.dao.I_UserMypageDao">
+
+	<select id="getMypage" resultType="user">
+		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
+	</select>
 	<select id="getReservationHistoryList" resultType="bookmark">
 		SELECT * FROM USER_RESERVE_HISTORY WHERE U_USERNAME = #{u_username}
 	</select>
@@ -23,11 +27,11 @@
 		FROM VOC V
 		JOIN USERLIST U ON V.U_USERNAME=U.U_USERNAME
 		JOIN VOC_TO_ANSWER VA ON V.V_NO=VA.V_NO
-		WHERE V.U_USERNAME = ${u_username}
+		WHERE V.U_USERNAME = #{u_username}
 		ORDER BY V.V_NO, VA.A_NO
 	</select>
 	<select id="getReservationBusNum" resultType="userReserveHistory">
-		SELECT DISTINCT B_NO FROM USERPRESERVE_HISTORY WHERE = #{u_username}
+		SELECT DISTINCT B_NO FROM USERPRESERVE_HISTORY WHERE U_USERNAME = #{u_username}
 	</select>
 	<select id="getMyQuestionDetail" resultType="VocBean">
 		SELECT V.*, U.U_TYPE, VA.A_NO

@@ -10,9 +10,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.ApplyBusHistory;
-import com.ebtd.www.bean.ApplyBusRoute;
 import com.ebtd.www.bean.Company;
-import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.dao.I_AdminCompanyDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,12 +57,17 @@ public class AdminCompanyMM {
 		cDao.setCompanyRequestApproval(c_name);
 		cList = cDao.getCompanyRequestList();
 		System.out.println(cList);//
-		for(int i=0; i<cList.size();i++) {
-			if(cList.get(i).getC_name() == c_name && cList.get(i).getC_state()==1) {
-				view="admin/mainForm";
-			}else {
-				mav.addObject("cList", cList);
-				view="redirect:/admin/company/getCompanyRequestList";
+		if(cList == null) {
+			mav.addObject("cList", cList);
+			view="redirect:/admin/company/getCompanyRequestList";
+		}else {		
+			for(int i=0; i<cList.size();i++) {
+				if(cList.get(i).getC_name() == c_name && cList.get(i).getC_state()==1) {
+					view="admin/mainForm";
+				}else {
+					mav.addObject("cList", cList);
+					view="redirect:/admin/company/getCompanyRequestList";
+				}
 			}
 		}
 		mav.setViewName(view);
@@ -78,9 +81,10 @@ public class AdminCompanyMM {
 		List<Company> cList = null;
 		List<ApplyBusHistory> abList = null;
 		try {
-		//DELETE 순서 : ALLBUS -> BUS -> APPLY_BUS_HISTORY_DETAIL -> APPLY_BUS_HISTORY -> OFFICIAL_DOCUMENT -> COMPANY
+		//DELETE 순서 : DRIVER -> ALLBUS -> BUS -> APPLY_BUS_HISTORY_DETAIL -> APPLY_BUS_HISTORY -> OFFICIAL_DOCUMENT -> COMPANY
 			abList = cDao.getUsernameInBus(c_username);
 			if(abList != null) {
+				cDao.setDeleteDriver(c_username);
 				cDao.setDeleteAllbus(c_username);
 				cDao.setDeleteBus(c_username);
 				cDao.setDeleteApplybusHistorydetail(c_username);
@@ -115,12 +119,8 @@ public class AdminCompanyMM {
 		String view=null;
 		List<ApplyBusHistory> abnList = null;
 		abnList = cDao.getNewBusRouteList();
-		if(abnList!=null && abnList.size()!=0) {
-			mav.addObject("abnList",abnList);
-			view="admin/company/newBusRouteListForm";
-		}else {
-			view="admin/mainForm";
-		}
+		mav.addObject("abnList",abnList);
+		view="admin/company/newBusRouteListForm";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -169,13 +169,18 @@ public class AdminCompanyMM {
 		}
 		cList = cDao.getNewBusRouteList();
 		System.out.println(cList);//
-		for(int i=0; i<cList.size();i++) {
-			if(cList.get(i).getAp_b_no() == ap_b_no) {
-				view="admin/mainForm";
-				System.out.println("신규버스 등록 실패! 쿠구구궁");
-			}else {
-				mav.addObject("cList", cList);
-				view="redirect:/admin/company/getNewBusRouteList";
+		if(cList == null) {
+			mav.addObject("cList", cList);
+			view="redirect:/admin/company/getNewBusRouteList";
+		}else {
+			for(int i=0; i<cList.size();i++) {
+				if(cList.get(i).getAp_b_no() == ap_b_no) {
+					view="admin/mainForm";
+					System.out.println("신규버스 등록 실패! 쿠구구궁");
+				}else {
+					mav.addObject("cList", cList);
+					view="redirect:/admin/company/getNewBusRouteList";
+				}
 			}
 		}
 		mav.setViewName(view);
@@ -361,12 +366,15 @@ public class AdminCompanyMM {
 		return mav;
 	}
 	//승인 상세 내역 가져오기
-	public ModelAndView getCompanyApprovalDetail(String ap_no) throws JsonProcessingException {
+	public ModelAndView getCompanyApprovalDetail(int ap_no, String ap_b_no) throws JsonProcessingException {
 		mav = new ModelAndView();
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
 		List<ApplyBusHistory> aList = null;
-		aList = cDao.getCompanyApprovalDetail(ap_no);
+		ApplyBusHistory abh = new ApplyBusHistory();
+		abh.setAp_no(ap_no);
+		abh.setAp_b_no(ap_b_no);
+		aList = cDao.getCompanyApprovalDetail(abh);
 		System.out.println(aList);
 		mav.addObject("aList", om.writeValueAsString(aList));
 		view="admin/company/companyApprovalDetailForm";
