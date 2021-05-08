@@ -8,14 +8,17 @@ import com.ebtd.www.bean.ApplyBusRoute;
 import com.ebtd.www.bean.Company;
 import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.bean.UserBookmarkBean;
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.bean.UserReserveHistoryBean;
 import com.ebtd.www.bean.VocBean;
 
 public interface I_UserMypageDao {
 
 	UserBean getMypage(String u_username);
-	List<UserBookmarkBean> getReservationHistoryList(String u_username);
+	List<UserReservationBean> getReservationHistoryList(String u_username);
+	List<UserReservationBean> getReservationHistoryDetail(int ur_no);
 	List<VocBean> getMyQuestionList(String u_username);
+	List<VocBean> getAnswerList(String u_username);
 	List<UserReserveHistoryBean> getReservationBusNum(String u_username);
 	void setMyQuestionWrite(VocBean vb);
 	List<VocBean> getMyQuestionDetail(String v_no);

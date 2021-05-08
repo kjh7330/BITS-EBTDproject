@@ -45,28 +45,17 @@
 	.inputtitle{
 		width: 359px;
 		height: 25px;
-	}
-	.inputcontent{
-		margin-top: 5px;
-		width: 412px;
-		height: 380px;
-	}
-	.file{
-		width: 80px;
-		height: 30px;
-		text-align: center;
-		margin-top: 10px;
-		margin-right: 10px;
 		font-size: 18px;
 	}
-	.img{
-		width: 313px;
-		height: 30px;
-		margin-top: 10px;
+	.inputcontent{
+		vertical-align: top;
+		margin-top: 5px;
+		width: 412px;
+		height: 400px;
 		font-size: 18px;
 	}
 	.btn{
-		margin-top: 11px;
+		margin-top: 30px;
 		margin-left: 39.5%;
 		width: 90px;
 		height: 45px;
@@ -98,12 +87,14 @@
 		<div class="divinput">
 		<form action="setMyQuestionWrite" method="post">
 		<!-- c:forEach var="v" items="${vList}"-->
-			<input class="username" type="hidden" name="u_username" value="${v.u_username}">
-			제목 : <input class="inputtitle" name="v_title" value="${v.v_title}">
-			버스번호 : <select class="select"></select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			평가 : <select class="select" name="voc_recommend"><option value="1">추천</option><option value="-1">비추천</option></select>
-			<input class="inputcontent" name="v_content" value="${v.v_content}">
-			<input class="file" value="첨부파일"><input class="img" value="사진.${v.imgextention}">
+			<input class="c_username" type="hidden" name="c_username">
+			<input class="u_username" type="hidden" name="u_username">
+			제목 : <input class="inputtitle" name="v_title" value="">
+			버스번호 : <select id="busnum" class="select" name="b_no" onchange="fn()" >
+			<option value="none" disabled>선택하세요</option>
+			</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			평가 : <select id="busvoc" class="select" name="voc_recommend"><option value="1">추천</option><option value="-1">비추천</option></select>
+			<textarea class="inputcontent" name="v_content" cols="40" rows="8" ></textarea>
 		<!-- /c:forEach-->
 			<a href="/user/getMyQuestionList"><input type="submit" class="btn" value="확인"></a>
 		</form>
@@ -160,27 +151,39 @@ function mouseDown3(){
 function mouseUp3(){
 	clearTimeout(timer3);
 }
-		$.ajax({
-			type : 'get',
-			url : 'getReservationBusNum',
+
+$.ajax({
+	type : 'get',
+	url : 'getReservationBusNum',
 			dataType : 'json',
-			data : {
-				'u_username' : $('.username').val()
-			},
-			success : function(data){
-				console.log(data);
-				$('.option').html('');
-				let op = '';
-				for(i in data){
-					op += '<option name="b_no">' + data[i]["b_no"] +'</option>';
-				}
-				$('.option').append(op);
-			},
-			error : function(err){
-				console.log(err,'@@@@');
+	data : {
+		'u_username' : $('.username').val()
+	},
+	success : function(data){
+		console.log(data);
+		$('#busnum').html('');
+		let op = '';
+			for(i in data){
+				op += '<option data-c_username = "' + data[i]["c_userName"] +'" data-u_username = "' + data[i]["u_userName"] +'" style="font-size: 15px;">' + data[i]["b_no"] +'</option>';
 			}
-		});
-		
+			
+		$('#busnum').append(op); 
+
+	},
+	error : function(err){
+		console.log(err,'@@@@');
+	}
+});
+
+function fn(){
+	
+	$('.c_username').val( $('#busnum option:selected').attr('data-c_username') );
+	$('.u_username').val( $('#busnum option:selected').attr('data-u_username') );
+	
+	//let val = $('#busnum option:selected').val();
+	
+}
+
 $('#logout').click(function () {
 	location.href = '/user/logout';
 });

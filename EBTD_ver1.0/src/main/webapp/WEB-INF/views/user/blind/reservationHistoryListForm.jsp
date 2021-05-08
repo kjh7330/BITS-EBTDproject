@@ -39,16 +39,11 @@
 		color: black;
 		margin: 15px;
 	}
-	.category{
-		text-align: center;
-	}
-	#category{
-		font-size: 20px;
-	}
 	.maintable{
 		width: 410px;
 		height: 100px;
 		font-size: 15px;
+		text-align: center;
 	}
 
 </style>
@@ -56,22 +51,16 @@
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
 <div class="main-container">
-	<div class="category">
-		<select id="category" onchange="fnCtg()">
-			<option value="all" selected>전체</option>
-			<option value="all" selected>일주일</option>
-			<option value="all" selected>1개월</option>
-			<option value="all" selected>3개월</option>
-		</select>
-	</div><br>
 	<div class="maindiv">
 		<table class="maintable">
 			<tr>
-				<td>탑승일</td><td>ubList[i]["urh_date"]</td>
+				<td>이용일자</td><td>노선번호</td><td>상세보기</td>
 			</tr>
+			<c:forEach var="ub" items="${ubList}">
 			<tr>
-				<td>[ubList[i]["b_no"]]</td><td></td>
+				<td>${ub.ur_date}</td><td>${ub.b_no}</td><td><button onclick="location.href='/user/getReservationHistoryDetail?ur_no=${ub.ur_no}'">상세</button></td>
 			</tr>
+			</c:forEach>
 		</table>
 	</div>
 

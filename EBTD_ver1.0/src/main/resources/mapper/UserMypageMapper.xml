@@ -8,8 +8,19 @@
 	<select id="getMypage" resultType="user">
 		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
 	</select>
-	<select id="getReservationHistoryList" resultType="bookmark">
-		SELECT * FROM USER_RESERVE_HISTORY WHERE U_USERNAME = #{u_username}
+	<select id="getReservationHistoryList" resultType="reservation">
+		SELECT UR_NO, U_USERNAME, 
+		(SELECT S_NAME FROM S WHERE S_NOSTART=S_NO) AS S_NAMESTART, 
+		(SELECT S_NAME FROM S WHERE S_NOLAST=S_NO) AS S_NAMELAST,
+		B_NO, TO_CHAR(UR_DATE,'YYYY-MM-DD') AS UR_DATE
+		FROM USER_RESERVE WHERE U_USERNAME = #{u_username} AND UR_STATE = 3
+	</select>
+	<select id="getReservationHistoryDetail" resultType="reservation">
+		SELECT UR_NO, U_USERNAME, 
+		(SELECT S_NAME FROM S WHERE S_NOSTART=S_NO) AS S_NAMESTART, 
+		(SELECT S_NAME FROM S WHERE S_NOLAST=S_NO) AS S_NAMELAST,
+		B_NO, UR_DATE
+		FROM USER_RESERVE WHERE UR_NO = #{ur_no}
 	</select>
 	<select id="getUserMyInfo" parameterType="String" resultType="user">
 		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
@@ -18,27 +29,31 @@
 		UPDATE USERLIST SET U_USERNAME=#{u_userName}, U_NAME=#{u_name}, U_USERPHONENUM=#{u_userphonenum}, U_ADDRESS=#{u_address}, U_GUARDNAME=#{u_guardname}, U_GUARDPHONENUM=#{u_guardphonenum}, U_GUARDRELATION=#{u_guardrelation} WHERE U_USERNAME=#{u_userName}
 	</update>
 	<insert id="setMyQuestionWrite" parameterType="VocBean">
-		INSERT INTO VOC VALUES((SELECT NVL(MAX(V_NO)+1,0) FROM VOC), 
-							   (SELECT C_USERNAME FROM BUS WHERE B_NO=#{b_no}), #{b_no}, 
-							   #{u_username}, #{v_title}, #{v_content}, SYSDATE, '', #{voc_recommend})
+		INSERT INTO VOC VALUES( (SELECT MAX(V_NO)+2 FROM VOC WHERE VOC_RECOMMEND != 0), #{c_username}, #{b_no}, #{u_username}, #{v_title}, #{v_content}, sysdate, null, #{voc_recommend})
 	</insert>
 	<select id="getMyQuestionList" resultType="VocBean">
-		SELECT V.*, U.U_TYPE, VA.A_NO
-		FROM VOC V
-		JOIN USERLIST U ON V.U_USERNAME=U.U_USERNAME
-		JOIN VOC_TO_ANSWER VA ON V.V_NO=VA.V_NO
-		WHERE V.U_USERNAME = #{u_username}
-		ORDER BY V.V_NO, VA.A_NO
+		SELECT V_NO, C_USERNAME, B_NO, U_USERNAME, V_TITLE, V_CONTENT, TO_CHAR(V_DATE,'YYYY-MM-DD') AS V_DATE, V_IMGEXTENTION, VOC_RECOMMEND
+		FROM VOC
+		WHERE U_USERNAME = #{u_username} AND VOC_RECOMMEND = 1 OR VOC_RECOMMEND = -1
+		ORDER BY V_NO
+	</select>
+	<select id="getAnswerList" resultType="VocBean">
+		SELECT V_NO-1 AS V_NO, C_USERNAME, B_NO, U_USERNAME, V_TITLE, V_CONTENT, TO_CHAR(V_DATE,'YYYY-MM-DD') AS V_DATE, V_IMGEXTENTION, VOC_RECOMMEND
+		FROM VOC
+		WHERE U_USERNAME = #{u_username} AND VOC_RECOMMEND = 0
+		ORDER BY V_NO
 	</select>
 	<select id="getReservationBusNum" resultType="userReserveHistory">
-		SELECT DISTINCT B_NO FROM USERPRESERVE_HISTORY WHERE U_USERNAME = #{u_username}
+		SELECT DISTINCT UR.B_NO, B.C_USERNAME, UR.U_USERNAME
+		FROM USER_RESERVE UR
+		JOIN BUS B ON B.B_NO=UR.B_NO
+		WHERE U_USERNAME = #{u_username} AND UR_STATE=3
 	</select>
 	<select id="getMyQuestionDetail" resultType="VocBean">
-		SELECT V.*, U.U_TYPE, VA.A_NO
+		SELECT V.*, U.U_TYPE
 		FROM VOC V
 		JOIN USERLIST U ON V.U_USERNAME=U.U_USERNAME
-		JOIN VOC_TO_ANSWER VA ON V.V_NO=VA.V_NO
-		WHERE V.V_NO = ${v_no}
-		ORDER BY V.V_NO, VA.A_NO
+		WHERE V.V_NO = #{v_no}
+		ORDER BY V.V_NO
 	</select>
 </mapper>
