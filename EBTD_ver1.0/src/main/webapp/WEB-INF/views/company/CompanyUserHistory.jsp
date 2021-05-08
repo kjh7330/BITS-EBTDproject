@@ -51,19 +51,19 @@ th, td {
 </body>
 <script type="text/javascript">
 console.log(${uhList});
-var hList = ${uhList};
+var uhList = ${uhList};
 $(document).ready(function() {
-	for(var i=0; i<hList.length; i++) {
+	for(var i=0; i<uhList.length; i++) {
 		$('#userHistory').append('<tr>');
-		$('#userHistory').append('<td>'+hList[i].urh_no+'</td>');
-		$('#userHistory').append('<td>'+hList[i].u_userName+'</td>');
-		$('#userHistory').append('<td>'+hList[i].s_nostart+'</td>');
-		$('#userHistory').append('<td>'+hList[i].s_nolast+'</td>');
-		$('#userHistory').append('<td>'+hList[i].b_no+'</td>');
-		$('#userHistory').append('<td>'+hList[i].urh_date+'</td>');
-		if(hList[i].u_type==0)
+		$('#userHistory').append('<td>'+uhList[i].ur_no+'</td>');
+		$('#userHistory').append('<td>'+uhList[i].u_userName+'</td>');
+		$('#userHistory').append('<td>'+uhList[i].s_nostart+'</td>');
+		$('#userHistory').append('<td>'+uhList[i].s_nolast+'</td>');
+		$('#userHistory').append('<td>'+uhList[i].b_no+'</td>');
+		$('#userHistory').append('<td>'+uhList[i].ur_date+'</td>');
+		if(uhList[i].u_type==0)
 			$('#userHistory').append('<td>휠체어</td></tr>');
-		else if(hList[i].u_type==1)
+		else if(uhList[i].u_type==1)
 			$('#userHistory').append('<td>시각장애인</td></tr>');
 	}
 }); 
