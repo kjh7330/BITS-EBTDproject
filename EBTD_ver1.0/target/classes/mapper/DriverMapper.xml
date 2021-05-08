@@ -39,7 +39,7 @@
 	</select>
 	
 	<update id="updateBus">
-		update ab set  r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no} 
+		update ab set r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind}, ab_updown = #{up} where ab_no = #{ab_no} 
 	</update>
 	<update id="on">
 		update ur set ur_state = 1 where ur_no = #{data} 

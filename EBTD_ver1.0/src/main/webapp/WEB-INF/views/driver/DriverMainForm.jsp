@@ -109,7 +109,8 @@
 								'go' : true,
 								'out' : test,
 								'blind' : all_blind,
-								'wheel' : all_wheel
+								'wheel' : all_wheel,
+								'up' : up
 							},
 					dataType : 'json',
 					method : 'get'
@@ -135,7 +136,7 @@
 							if( r_list[idx]['up'] ){
 								if(i != s_list.length-2){
 									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
@@ -146,13 +147,13 @@
 										}
 									
 									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							}else{
 								if(i == s_list.length-2){
 									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
 											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
@@ -164,11 +165,11 @@
 										}
 									
 									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}if(i == s_list.length-3){
 									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
 											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
@@ -180,7 +181,7 @@
 										}
 									
 									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							}
@@ -189,7 +190,7 @@
 							if( !r_list[idx]['up'] ){
 								if( i != 1 ){
 									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
 											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
@@ -201,13 +202,13 @@
 										}
 								
 									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							}else{
 								if( i == 1 ){
 									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 										}
 										else								{
@@ -215,11 +216,11 @@
 										}
 									
 									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}if( i == 2 ){
 									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-										if( r_list[idx]['u_type'] == 0 )	{
+										if( r_list[idx]['u_type'] == 1 )	{
 											nnext_on_blind_cnt++;
 										}
 										else								{
@@ -227,7 +228,7 @@
 										}
 									
 									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
+										if( r_list[idx]['u_type'] == 1 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							} 
@@ -236,7 +237,7 @@
 						if( first_check == 0 ){
 							if(up){
 								if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-									if( r_list[idx]['u_type'] == 0 )	{
+									if( r_list[idx]['u_type'] == 1 )	{
 										cur_on_blind_cnt++;
 										name = ''+idx;  
 										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
@@ -247,7 +248,7 @@
 										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 									}
 								else if( r_list[idx]['ur_start_turn'] == s_list[i+1]['r_turn'] && r_list[idx]['ur_state'] == 0 )
-									if( r_list[idx]['u_type'] == 0 )	{
+									if( r_list[idx]['u_type'] == 1 )	{
 										next_on_blind_cnt++;
 										name = ''+idx;  
 										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
@@ -259,10 +260,10 @@
 									}
 								
 								if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-									if( r_list[idx]['u_type'] == 0 )	cur_out_blind_cnt++;
+									if( r_list[idx]['u_type'] == 1 )	cur_out_blind_cnt++;
 									else								cur_out_wheel_cnt++;								
 								else if( r_list[idx]['ur_last_turn'] == s_list[i+1]['r_turn'] && r_list[idx]['ur_state'] == 1 )
-									if( r_list[idx]['u_type'] == 0 )	next_out_blind_cnt++;
+									if( r_list[idx]['u_type'] == 1 )	next_out_blind_cnt++;
 									else								next_out_wheel_cnt++;
 								
 							}
@@ -388,35 +389,28 @@
 										'car' : i+1,
 										'go' : false,
 										'blind' : '0',
-										'wheel' : '0'
+										'wheel' : '0',
+										'up' : up
 									},
 							dataType : 'json',
 							method : 'get'
-							
 						}).done(function () {
 							console.log('한바퀴 깔쌈하게 완료'); 
 						});
 						cycle_check = 0;
 					}
-					
 					if( up )	i++;
 					else {
 						i--;
-						
 						if ( i == 0 )	{
 							up = true;
 							cycle_check = 1;
-							
 						}
-						
 					}
-					
-					
 				}).fail(function (err) {
 					console.log(err,'!!!!!!!!!!!!!!');
 				});	
-			
-			}, 15000);
+			}, 2000);
 		});
 		$('#change').click(function () {
 			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';
@@ -427,13 +421,6 @@
 			  const wakeUpTime = Date.now() + ms
 			  while (Date.now() < wakeUpTime) {}
 			}
-		
-		
-		
-		
-		
-		
-	
 	</script>
 
 </body>

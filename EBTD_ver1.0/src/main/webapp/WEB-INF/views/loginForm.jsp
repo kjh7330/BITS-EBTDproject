@@ -126,7 +126,7 @@
         </table>  
 		</form>
         <div id="newcompany">
-        	<form action="/company/main/getRecommandedStopList" method="post"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
+        	<form action="/company/main/getRecommandedStopList" method="get"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
         </div>
         
     </section>

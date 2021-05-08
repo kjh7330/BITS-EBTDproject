@@ -59,18 +59,21 @@ public class DriverMM {
 		return mav;
 	}
 
-	public List<DriverReserveBean> refresh(String car, boolean go, String wheel, String blind, HttpSession ss) {
+	public List<DriverReserveBean> refresh(String car, boolean go, String wheel, String blind, HttpSession ss, boolean up) {
 		Map<String, Object> bm = new HashMap();
 		bm.put("ab_no", ss.getAttribute("ab_no").toString());
 		bm.put("wheel", wheel);
 		bm.put("blind", blind);
 		if (go) {
+			if(up)	bm.put("up", 1);
+			else	bm.put("up", 0);
 			bm.put("car", car);
 			bm.put("d_no", ss.getAttribute("d_no").toString());
 		}
 		else {
 			bm.put("car", "");
 			bm.put("d_no", "");			
+			bm.put("up", "");
 		}
 		bm.put("b_no", ss.getAttribute("b_no").toString());	
 		dd.updateBus(bm); // 버스 위치 업데이트
@@ -78,10 +81,10 @@ public class DriverMM {
 		List<DriverReserveBean> rl = dd.refresh(ss.getAttribute("b_no").toString());					// 예약 정보 가져오기
 																								//이용 완료 고객 예약 데이터 삭제
 		for( int i = 0 ; i < rl.size() ; i++ ) {
-			if(ss.getAttribute("b_type").equals("0") && rl.get(i).getU_type() == 1 )	rl.remove(i--);
+			if		(ss.getAttribute("b_type").equals("0") && rl.get(i).getU_type() == 0 )	rl.remove(i--);
+			else if ( rl.get(i).getUr_start_turn() > rl.get(i).getUr_last_turn() ) 			rl.get(i).setUp(false);
+			else																			rl.get(i).setUp(true);
 			
-			if ( rl.get(i).getUr_start_turn() > rl.get(i).getUr_last_turn() ) rl.get(i).setUp(false);
-			else													rl.get(i).setUp(true);
 		}
 		
 		return rl;
