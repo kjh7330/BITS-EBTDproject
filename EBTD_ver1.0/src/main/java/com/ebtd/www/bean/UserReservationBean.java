@@ -19,8 +19,6 @@ public class UserReservationBean {
 	private String b_no;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp ur_date;
-	@JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
-	private Timestamp ur_time;
 	private int ur_state;
 	
 	private String s_namestart; //출발 정류장 이름

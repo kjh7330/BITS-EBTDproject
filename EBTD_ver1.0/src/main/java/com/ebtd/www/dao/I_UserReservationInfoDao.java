@@ -7,6 +7,8 @@ import com.ebtd.www.bean.UserReservationBean;
 public interface I_UserReservationInfoDao {
 	
 	List<UserReservationBean> getReservationInfo(String u_username);
+
+	UserReservationBean getReservationDetail(int ur_no);
 		
 	
 

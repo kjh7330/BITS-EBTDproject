@@ -46,8 +46,33 @@ public class UserReservaionInfoMM {	//김아름
 			view = "/user/wheel/mainForm";
 		}
 		mav.setViewName(view);
-		return mav;
+		return mav;	
+	}
+
+	//예약 상세내역
+	public ModelAndView getReservationDetail(HttpSession session, UserReservationBean rb) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		UserReservationBean reserveDetail = null;
 		
+		int ur_no = rb.getUr_no();
+		System.out.println(ur_no + "=========예약 상세내역 ur_no=======");
+
+		reserveDetail = uriDao.getReservationDetail(ur_no);
+		System.out.println("디비에서 가져온 예약 상세내역 = " + reserveDetail);
+
+		//디비에서 가져온 데이터가 있으면
+		if( (reserveDetail != null) ) {
+			mav.addObject("reserveDetail", om.writeValueAsString(reserveDetail));
+			view = "/user/wheel/reservationInfoDetailForm";//.jsp
+		
+		}else {
+			System.out.println("uReserveList가져오기 실패-메인으로 이동");
+			view = "/user/wheel/mainForm";
+		}
+		mav.setViewName(view);
+		return mav;
 	}
 
 }

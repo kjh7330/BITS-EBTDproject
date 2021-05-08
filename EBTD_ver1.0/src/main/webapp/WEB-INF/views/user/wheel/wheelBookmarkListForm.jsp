@@ -160,12 +160,10 @@ body {
 				<span class="close">&times;</span>
 			</div>
 			<div class="modal_content">
-				<p style="color: black">
-				
-				
-				<button type="submit" id="reservationBtn">예약</button>
-				<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
-				<button id="modalOutBtn">취소</button>
+				<p id = 'modal_content_p' style="color: black">
+					<button type="submit" id="reservationBtn">예약</button>
+					<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
+					<button id="modalOutBtn">취소</button>
 				</p>
 			</div>
 		</div>
@@ -177,6 +175,7 @@ body {
 
 	<script type="text/javascript">
 		let uBookList = ${uBookList};
+		let btn = $('#modal_content_p').html(); // 버튼 미리 저장
 		let str = '';
 		/* if(uBookList.length == 0){
 			alert("예약 내역이 없습니다.");
@@ -202,12 +201,12 @@ body {
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 
+	
 		
-		<!--     모달 스크립트만 가져가세요~!    -->
-		  // 모달창 닫기 이벤트 
-		  $(".close").on("click", function(){
-		          $("#overlay").css({ visibility:"hidden", opacity:0 });
-		  });
+		// 모달창 닫기 이벤트 
+		$(".close").on("click", function(){
+		        $("#overlay").css({ visibility:"hidden", opacity:0 });
+		});
 
 		 $(document).on("click", function(e){  
 		    if( $("#overlay").is(e.target) ) {
@@ -215,27 +214,43 @@ body {
 		    }
 		  });
 
-		  // esc 누를시 모달창 닫기
-		  $(document).keydown(function(event) {
-		    if ( event.keyCode == 27 || event.which == 27 ) {
-		        $("#overlay").css({ visibility:"hidden", opacity:0 });
-		    }
+		// esc 누를시 모달창 닫기
+		$(document).keydown(function(event) {
+		  if ( event.keyCode == 27 || event.which == 27 ) {
+		      $("#overlay").css({ visibility:"hidden", opacity:0 });
+		  }
 		});
 		
-		//취소버튼 누를 시 모달창 닫기
-		$('#modalOutBtn').click(function modalOut(){
-			$("#overlay").css({ visibility:"hidden", opacity:0 });
-		});
-		<!--     모달 스크립트 여기까지~!     -->
 		
 		//즐겨찾기 클릭
 		$('.bookList').click(function (){ 	// 모달창 열기 이벤트
-			let p = '';
 			$("#overlay").css({ visibility:"visible", opacity:1 });
 			
-			p = $(this).html();
-			$('#userBookmarkForm').empty();
-			$('#userBookmarkForm').append(p); 
+			$('#modal_content_p').html($(this).html());
+			$('#modal_content_p').append(btn); 
+			$('#reservationBtn').click(function(){
+				
+				let ub_no = $(this).parent().children('#userBookmarkForm').children('.ub_no').val();
+				let u_userName = $(this).parent().children('#userBookmarkForm').children('.u_username').val();
+				let s_noStart = $(this).parent().children('#userBookmarkForm').children('.s_nostart').val();
+				let s_noLast = $(this).parent().children('#userBookmarkForm').children('.s_nolast').val();
+				let b_no = $(this).parent().children('#userBookmarkForm').children('.b_no').val();
+				let ub_alias = $(this).parent().children('#userBookmarkForm').children('.ub_alias').val();
+				console.log($(this).parent().children('#userBookmarkForm').children('.ub_no').val());
+				
+				//예약 버튼 누르면
+				if(ub_no != ''){
+					console.log(ub_no);
+					$('form').trigger('submit');
+				}else{
+					console.log("즐겨찾기 값이 없습니다.");
+				}
+				//취소버튼 누를 시 모달창 닫기
+				$('#modalOutBtn').click(function(){
+					$("#overlay").css({ visibility:"hidden", opacity:0 });
+				});
+				
+			});
 		});
 		
 		//별 클릭
@@ -288,24 +303,7 @@ body {
 		}); //별클릭 이벤트 end
 		
 		
-		//예약 버튼 누르면
-		$('#reservationBtn').click(function(){
-			let ub_no = $(this).parent().children('#userBookmarkForm').children('.ub_no').val();
-			let u_userName = $(this).parent().children('#userBookmarkForm').children('.u_username').val();
-			let s_noStart = $(this).parent().children('#userBookmarkForm').children('.s_nostart').val();
-			let s_noLast = $(this).parent().children('#userBookmarkForm').children('.s_nolast').val();
-			let b_no = $(this).parent().children('#userBookmarkForm').children('.b_no').val();
-			let ub_alias = $(this).parent().children('#userBookmarkForm').children('.ub_alias').val();
-			
-			console.log($(this).parent().children('#userBookmarkForm').children('.ub_no').val());
-			
-			if(ub_no != ''){
-				console.log(ub_no);
-				$('form').trigger('submit');
-			}else{
-				console.log("즐겨찾기 값이 없습니다.");
-			}
-		});
+		
 		
 	</script>
 

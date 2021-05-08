@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.service.UserReservaionInfoMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -29,4 +30,12 @@ public class UserReservaionInfoController {	//김아름
 		mav = urim.getReservationInfo(session);	
 	return mav;		
 	}
+	
+	//예약 확인 - 예약 상세내역 가져오기
+	@GetMapping(value = "/getReservationDetail")
+	public ModelAndView getReservationDetail(HttpSession session, UserReservationBean rb) throws JsonProcessingException {			
+		mav = urim.getReservationDetail(session, rb);	
+	return mav;		
+	}
+	
 }
