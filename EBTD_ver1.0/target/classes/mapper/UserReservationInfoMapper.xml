@@ -20,7 +20,7 @@
 		FROM UR 
 		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
 		JOIN S S2 ON UR.S_NOLAST=S2.S_NO
-		WHERE U_USERNAME=#{u_username} AND UR_STATE=0
+		WHERE U_USERNAME=#{u_username} AND UR_STATE IN(0,1) 
 	</select>
 	
 	<!-- 예약 상세내역 가져오기 -->
@@ -37,7 +37,14 @@
 		FROM UR 
 		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
 		JOIN S S2 ON UR.S_NOLAST=S2.S_NO 
-		WHERE UR_NO=#{ur_no} AND UR_STATE=0
+		WHERE UR_NO=#{ur_no} AND UR_STATE IN(0,1)
 	</select>
 	
+	<!-- 예약취소 -->
+	<update id="reservationCancel" parameterType="reservation">
+		UPDATE UR
+		SET ur_state=2 
+		WHERE ur_no=#{ur_no}
+	</update>
+
 </mapper>

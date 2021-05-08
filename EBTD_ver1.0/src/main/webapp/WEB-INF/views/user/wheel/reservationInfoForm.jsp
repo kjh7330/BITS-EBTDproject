@@ -22,8 +22,7 @@
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
 	<form id="reservationForm" name="reservationForm" action="/user/getReservationDetail" method="get">
 	</form>
-	<div id="reservationInfo">
-		
+	<div id="reservationInfo">	
 	</div>
 
 	<div id="userfooter"><%@ include

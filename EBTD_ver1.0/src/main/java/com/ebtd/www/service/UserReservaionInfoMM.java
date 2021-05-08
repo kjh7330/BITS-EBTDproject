@@ -50,7 +50,7 @@ public class UserReservaionInfoMM {	//김아름
 	}
 
 	//예약 상세내역
-	public ModelAndView getReservationDetail(HttpSession session, UserReservationBean rb) throws JsonProcessingException {
+	public ModelAndView getReservationDetail(UserReservationBean rb) throws JsonProcessingException {
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
@@ -71,6 +71,21 @@ public class UserReservaionInfoMM {	//김아름
 			System.out.println("uReserveList가져오기 실패-메인으로 이동");
 			view = "/user/wheel/mainForm";
 		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	//예약 취소
+	public ModelAndView reservationCancel(UserReservationBean rb) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		
+		int ur_no = rb.getUr_no();
+		System.out.println(ur_no + "=========예약취소 ur_no=======");
+		uriDao.reservationCancel(ur_no);	//디비에서 ur_state 값 변경
+		view = "/user/wheel/mainForm";//.jsp
+		 
 		mav.setViewName(view);
 		return mav;
 	}
