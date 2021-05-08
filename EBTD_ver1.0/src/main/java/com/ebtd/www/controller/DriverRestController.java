@@ -37,16 +37,8 @@ public class DriverRestController {
 		return dm.refresh(car, go, wheel, blind, ss);
 	}
 	
-	@GetMapping(value = "/on", produces = "application/json;charset=utf-8")
-	public List<String> on (@RequestParam(value="data[]") List<String> data ){
-		
-		return dm.on(data);
+	@GetMapping(value = "/on_out", produces = "application/json;charset=utf-8")
+	public List<String> on (@RequestParam(value="on_data[]") List<String> on_data, @RequestParam(value="out_data[]") List<String> out_data ){
+		return dm.on_out(on_data, out_data);
 	}
-	
-	@GetMapping(value = "/out", produces = "application/json;charset=utf-8")
-	public List<String> out (@RequestParam( value="data[]") List<String> data ) {
-		
-		return dm.out(data);
-	}
-	
 }

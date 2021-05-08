@@ -78,7 +78,7 @@
 		let nnext_on_blind_cnt = 0;					
 		let nnext_on_wheel_cnt = 0;
 		let cur_out_blind_cnt = 0;					
-		let cur_out_wheel_cnt = 0;					
+		let cur_out_wheel_cnt = 0;
 		let next_out_blind_cnt = 0;					
 		let next_out_wheel_cnt = 0;					
 		let nnext_out_blind_cnt = 0;					
@@ -103,7 +103,7 @@
 			let name;
 			let refresh = setInterval(function name() {
 				$.ajax({
-					url : 'refresh',
+					url : '/driver/refresh',
 					data : 	{
 								'car' : i+1,
 								'go' : true,
@@ -134,53 +134,52 @@
 						if(up){
 							if( r_list[idx]['up'] ){
 								if(i != s_list.length-2){
-									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
-											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 										else{
 											nnext_on_wheel_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 									
-									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							}else{
 								if(i == s_list.length-2){
-									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 										else								{
 											nnext_on_wheel_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 									
-									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}if(i == s_list.length-3){
-									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 										else								{
 											nnext_on_wheel_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 									
-									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i+2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
@@ -189,25 +188,25 @@
 						else{
 							if( !r_list[idx]['up'] ){
 								if( i != 1 ){
-									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 										else								{
 											nnext_on_wheel_cnt++;
 											name = ''+idx;  
-											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+											test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 										}
 								
-									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							}else{
 								if( i == 1 ){
-									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
 										}
@@ -215,11 +214,11 @@
 											nnext_on_wheel_cnt++;
 										}
 									
-									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}if( i == 2 ){
-									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] )
+									if( r_list[idx]['ur_start_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 										if( r_list[idx]['u_type'] == 0 )	{
 											nnext_on_blind_cnt++;
 										}
@@ -227,103 +226,106 @@
 											nnext_on_wheel_cnt++;
 										}
 									
-									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] )
+									if( r_list[idx]['ur_last_turn'] == s_list[i-2]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 										if( r_list[idx]['u_type'] == 0 )	nnext_out_blind_cnt++;
 										else								nnext_out_wheel_cnt++;
 								}
 							} 
 						}
 						
-						if( first_check == 0 )
+						if( first_check == 0 ){
 							if(up){
-								console.log("퍼첵 실행됌");
-								if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
+								if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 									if( r_list[idx]['u_type'] == 0 )	{
 										cur_on_blind_cnt++;
 										name = ''+idx;  
-										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 									}
 									else								{
 										cur_on_wheel_cnt++;
 										name = ''+idx;  
-										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 									}
-								else if( r_list[idx]['ur_start_turn'] == s_list[i+1]['r_turn'] )
+								else if( r_list[idx]['ur_start_turn'] == s_list[i+1]['r_turn'] && r_list[idx]['ur_state'] == 0 )
 									if( r_list[idx]['u_type'] == 0 )	{
 										next_on_blind_cnt++;
 										name = ''+idx;  
-										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 									}
 									else								{
 										next_on_wheel_cnt++;
 										name = ''+idx;  
-										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name };
+										test[cnt++] =  { ur_no : r_list[idx]['ur_no'], name : name, ur_state : 0 };
 									}
 								
-								if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] )
+								if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 									if( r_list[idx]['u_type'] == 0 )	cur_out_blind_cnt++;
 									else								cur_out_wheel_cnt++;								
-								else if( r_list[idx]['ur_last_turn'] == s_list[i+1]['r_turn'] )
+								else if( r_list[idx]['ur_last_turn'] == s_list[i+1]['r_turn'] && r_list[idx]['ur_state'] == 1 )
 									if( r_list[idx]['u_type'] == 0 )	next_out_blind_cnt++;
 									else								next_out_wheel_cnt++;
 								
 							}
-						for(jdx in test){
-							if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] )
-								if(r_list[idx]['ur_no'] == test[jdx]['ur_no'])
-									if( ( (i == s_list.length-1) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
-										//console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
-										test.splice(jdx, 1);
-										out_data[out_cnt] = r_list[idx]['ur_no'];
-										out_cnt++;
-										cnt--;
-									}
+					}
+						
+						if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 ){
+							if( ( (i == s_list.length-1) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
+								console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
+								out_data[out_cnt++] = r_list[idx]['ur_no'];
+							}
 							
-							if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] )
-								if(r_list[idx]['ur_no'] == test[jdx]['ur_no'])
-									if(r_list[idx]['up'] == up ) {
-										//console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 올라 탐!');
-										on_data[on_cnt] = r_list[idx]['ur_no'];
-										on_cnt++;
-									}
 						}
+						
+						if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 0 ){
+								if(r_list[idx]['up'] == up ) {
+									console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 올라 탐!');
+									on_data[on_cnt++] = r_list[idx]['ur_no'];
+								}
+						}
+						
+						
+						
+						/*for(jdx in test){
+								if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && test[jdx]['ur_state'] == 1 ){
+									if(r_list[idx]['ur_no'] == test[jdx]['ur_no']){
+										if( ( (i == s_list.length-1) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
+											console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
+											out_data[out_cnt++] = test[jdx]['ur_no'];
+											test.splice(jdx, 1);
+											cnt--;
+										}
+									}
+								}
+								
+								if( r_list[idx]['ur_start_turn'] == s_list[i]['r_turn'] ){
+									if(r_list[idx]['ur_no'] == test[jdx])
+										if(r_list[idx]['up'] == up ) {
+											console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 올라 탐!');
+											on_data[on_cnt++] = test[jdx]['ur_no'];
+										}
+								}
+						}*/
 						
 					}// for each end
 					
-					if(out_cnt > 0)
+					let on_out_data = {};
+					
+					on_out_data.on_data = on_cnt > 0 ? on_data : ['999999'];
+					on_out_data.out_data = out_cnt > 0 ? out_data : ['999999'];
+					
+					if( on_cnt + out_cnt > 0)
 						$.ajax({
-							url : '/driver/out',
-							data : {"data" : out_data},
-							dataType : 'html'
+							url : '/driver/on_out',
+							data : on_out_data,
+							dataType : 'json'
 						}).done(function (data) {
-							for(dt of data)	{
-								for( idx in out_data ){
-									if(out_data[idx] == dt)		out_data.splice(idx, 1);
-								}
-							}
+							on_cnt = 0;
 							out_cnt = 0;
 						}).fail(function (err) {
-							console.log(err,'!!!!!');
+							console.log(err,'!!!!!!!!!!!');
 						});
-					if(on_cnt > 0)
-						$.ajax({
-							url : '/driver/on',
-							data : {"data" : on_data},
-							dataType : 'html'
-						}).done(function (data) {
-							for(dt of data)	{
-								for( idx in on_data ){
-									if(on_data[idx] == dt)		on_data.splice(idx, 1);
-								}
-							}
-							on_cnt = 0;
-						}).fail(function (err) {
-							console.log(err,'!!!!!');
-						});
-					/*for(idx in test){
-						console.log(test[idx]['ur_no'],'번 예약손님 탑승중');
-					}
-					console.log('------------');*/
+					
+					
 					all_blind += cur_on_blind_cnt - cur_out_blind_cnt;
 					all_wheel += cur_on_wheel_cnt - cur_out_wheel_cnt;
 					
@@ -381,7 +383,7 @@
 							
 						}
 						$.ajax({
-							url : 'refresh',
+							url : '/driver/refresh',
 							data : 	{
 										'car' : i+1,
 										'go' : false,
@@ -398,8 +400,9 @@
 					}
 					
 					if( up )	i++;
-					else	{
+					else {
 						i--;
+						
 						if ( i == 0 )	{
 							up = true;
 							cycle_check = 1;
@@ -408,11 +411,12 @@
 						
 					}
 					
+					
 				}).fail(function (err) {
 					console.log(err,'!!!!!!!!!!!!!!');
 				});	
 			
-			}, 2000);
+			}, 15000);
 		});
 		$('#change').click(function () {
 			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';

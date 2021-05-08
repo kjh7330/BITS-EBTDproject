@@ -3,7 +3,6 @@ package com.ebtd.www.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
 
 import com.ebtd.www.bean.DriverBusBean;
 import com.ebtd.www.bean.DriverCompanyBean;
@@ -28,7 +27,7 @@ public interface DriverDao {
 	
 	int carNumberDupCheck(int ab_no);
 
-	public void on(String dt);
+	public void on(String data);
 
-	public void out(String dt);
+	public void out(String data);
 }

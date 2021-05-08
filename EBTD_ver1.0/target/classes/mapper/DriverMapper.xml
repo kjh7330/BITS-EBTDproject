@@ -26,12 +26,12 @@
 	</select>
 	
 	<select id="refresh" resultType = "reserve_wh">
-		select ur.ur_no, u.u_type, ur.ur_date, rb.r_turn ur_start_turn, rb2.r_turn ur_last_turn
+		select ur.ur_no, u.u_type, ur.ur_date, ur.ur_state, rb.r_turn ur_start_turn, rb2.r_turn ur_last_turn
 		from ur ur left 
 		join rb rb  on ur.s_nostart  = rb.s_no 
 		join rb rb2 on ur.s_nolast   = rb2.s_no 
 		join u  u   on ur.u_username = u.u_username 
-		where ur_state = 0 and rb.b_no = #{b_no} and rb2.b_no = #{b_no} 
+		where (ur_state = 0 or ur_state = 1) and rb.b_no = #{b_no} and rb2.b_no = #{b_no} 
 	</select>
 	
 	<select id = "carNumberDupCheck" resultType = "int">
@@ -39,13 +39,13 @@
 	</select>
 	
 	<update id="updateBus">
-		update ab set r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no} 
+		update ab set  r_turn = #{car}, d_no = #{d_no}, ab_wheel_cnt = #{wheel}, ab_blind_cnt = #{blind} where ab_no = #{ab_no} 
 	</update>
 	<update id="on">
-		update ur set ur_state = 0 where ur_no = #{dt} 
+		update ur set ur_state = 1 where ur_no = #{data} 
 	</update>
 	<update id="out">
-		update ur set ur_state = 0 where ur_no = #{dt} 
+		update ur set ur_state = 3 where ur_no = #{data} 
 	</update>
 	
 	

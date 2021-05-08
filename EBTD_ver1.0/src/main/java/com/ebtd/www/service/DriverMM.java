@@ -72,7 +72,7 @@ public class DriverMM {
 			bm.put("car", "");
 			bm.put("d_no", "");			
 		}
-			
+		bm.put("b_no", ss.getAttribute("b_no").toString());	
 		dd.updateBus(bm); // 버스 위치 업데이트
 		
 		List<DriverReserveBean> rl = dd.refresh(ss.getAttribute("b_no").toString());					// 예약 정보 가져오기
@@ -87,14 +87,21 @@ public class DriverMM {
 		return rl;
 	}
 
-	public List<String> on(List<String> data) {
-		for(String dt : data)	dd.on(dt);
+	public List<String> on_out(List<String> on_data, List<String> out_data) {
+		for(String data : on_data )		{
+			if(!dd.equals("999999")) {
+				System.out.println(data+"번 손님 탐");
+				dd.on(data);
+			}
+		}
+		for(String data : out_data )	{
+			if(!dd.equals("999999")) {
+				System.out.println(data+"번 손님 내림");
+				dd.out(data);
+			}
+		}
 		
-		return data;
+		return out_data;
 	}
 
-	public List<String> out(List<String> data) {
-		for(String dt : data)	dd.out(dt);		
-		return data;
-	}
 }
