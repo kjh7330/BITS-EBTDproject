@@ -118,8 +118,8 @@
 					let name = ''; 
 					cur_on_blind_cnt = next_on_blind_cnt;					
 					cur_on_wheel_cnt = next_on_wheel_cnt;					
-					next_on_blind_cnt = nnext_on_blind_cnt;					
-					next_on_wheel_cnt = nnext_on_wheel_cnt;					
+					next_on_blind_cnt = nnext_on_blind_cnt;	
+					next_on_wheel_cnt = nnext_on_wheel_cnt;
 					nnext_on_blind_cnt = 0;
 					nnext_on_wheel_cnt = 0;
 					
@@ -270,7 +270,7 @@
 					}
 						
 						if( r_list[idx]['ur_last_turn'] == s_list[i]['r_turn'] && r_list[idx]['ur_state'] == 1 ){
-							if( ( (i == s_list.length-1) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
+							if( ( ( (i == s_list.length-1) || ( i == 0 ) ) && (r_list[idx]['up'] != up) ) || (r_list[idx]['up'] == up ) ) {
 								console.log('무야호! ' + s_list[i]['s_name'] + "정류장에서 예약번호" + r_list[idx]['ur_no'] + '번 손님 내림!');
 								out_data[out_cnt++] = r_list[idx]['ur_no'];
 							}
@@ -347,18 +347,20 @@
 					$('#nnext_out_wheel').val(nnext_out_wheel_cnt);
 					
 						first_check = 1;
-					
+					console.log(i);
 					if( up ){
-						$('#cur_stop_name').val(s_list[i]['s_name']);
-						$('#next_stop_name').val(s_list[i+1]['s_name']);
+													$('#cur_stop_name').val(s_list[i]['s_name']);
+													$('#next_stop_name').val(s_list[i+1]['s_name']);
 						if(i == s_list.length-2)	$('#nnext_stop_name').val(s_list[i]['s_name']);
 						else						$('#nnext_stop_name').val(s_list[i+2]['s_name']);
 					}
 					else{
 						$('#cur_stop_name').val(s_list[i]['s_name']);
-						$('#next_stop_name').val(s_list[i-1]['s_name']);
-						if(i == 1)	$('#nnext_stop_name').val(s_list[i]['s_name']);
-						else		$('#nnext_stop_name').val(s_list[i-2]['s_name']);						
+						if(i == 0)			$('#next_stop_name').val(s_list[i+1]['s_name']);
+						else				$('#next_stop_name').val(s_list[i-1]['s_name']);
+						if(i == 0)			$('#nnext_stop_name').val(s_list[i+2]['s_name']);
+						else if ( i == 1 )	$('#nnext_stop_name').val(s_list[i]['s_name']);
+						else				$('#nnext_stop_name').val(s_list[i-2]['s_name']);						
 					}
 					
 					if(cycle_check == 1){
@@ -381,23 +383,23 @@
 							$('#next_out_wheel').val(0);
 							$('#nnext_out_blind').val(0);
 							$('#nnext_out_wheel').val(0);
+							$.ajax({
+								url : '/driver/refresh',
+								data : 	{
+											'car' : i+1,
+											'go' : false,
+											'blind' : '0',
+											'wheel' : '0',
+											'up' : up
+										},
+								dataType : 'json',
+								method : 'get'
+							}).done(function () {
+								console.log('한바퀴 깔쌈하게 완료'); 
+							});
 							
+							cycle_check = 0;
 						}
-						$.ajax({
-							url : '/driver/refresh',
-							data : 	{
-										'car' : i+1,
-										'go' : false,
-										'blind' : '0',
-										'wheel' : '0',
-										'up' : up
-									},
-							dataType : 'json',
-							method : 'get'
-						}).done(function () {
-							console.log('한바퀴 깔쌈하게 완료'); 
-						});
-						cycle_check = 0;
 					}
 					if( up )	i++;
 					else {
@@ -410,7 +412,7 @@
 				}).fail(function (err) {
 					console.log(err,'!!!!!!!!!!!!!!');
 				});	
-			}, 2000);
+			}, 3000);
 		});
 		$('#change').click(function () {
 			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';

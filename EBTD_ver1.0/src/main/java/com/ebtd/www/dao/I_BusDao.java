@@ -37,6 +37,8 @@ public interface I_BusDao {
 	
 	int applyUpdateBusRoute(ApplyBusHistory busBean);
 
+	int get_od_no(String c_username);
+
 	
 
 

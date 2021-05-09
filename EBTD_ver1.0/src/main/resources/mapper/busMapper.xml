@@ -29,8 +29,8 @@
 	<selectKey resultType="int" order="BEFORE" >
 	SELECT SEQ_AP_NO.NEXTVAL FROM DUAL
 	</selectKey>
-	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) 
-	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 0)
+	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE, ap_od_no) 
+	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 0, #{od_no})
 	</insert>
 	
 	<insert id="addBusAndCompany" parameterType="com.ebtd.www.bean.ApplyBusHistory">
@@ -55,4 +55,7 @@
 	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 3) 
 	</insert>
 	<select resultType="String" id="getTownNameList">SELECT t_name FROM T </select>
+	<select id="get_od_no" resultType = 'int'>
+	select od_no+1 od_no from official_document where c_username = #{c_username}
+	</select>
 </mapper>
