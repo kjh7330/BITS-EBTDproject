@@ -25,7 +25,7 @@
 				<option value="stopNumber">정류장 번호</option>
 				<option value="stopName">정류장 이름</option>
 			</select> <input id="search" name="search">&nbsp; -->
-			<button onclick="searchStop()">조회</button>
+			<button id="searchStop" onclick="searchStop()">조회</button>
 		</div>
 
 	
@@ -60,7 +60,6 @@
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
-$(document).ready(function() { 
 let sList = ${sList};
 var html = '';
 
@@ -81,42 +80,42 @@ var html = '';
  $("#stopList").empty();
  $("#stopList").append(html);
 
-//조회 버튼 클릭시 알림창 띄우고 해당 정류장 정보만 보여주기
-  	function searchStop() {
-		var sValue = $('#search').val(); //input 박스 입력한 값
-		alert(sValue + ' 관련 정류장 정보 조회');
+//조회 버튼 클릭시 알림창 띄우고 해당 정류장 정보만 보여주
+ 	function searchStop() {
+			var sValue = $('#search').val(); //input 박스 입력한 값
+			alert(sValue + ' 관련 정류장 정보 조회');
+			
+	 		$.ajax({
+				url : '/company/searchStop?S_NAME=' + sValue,     
+				type : 'get',
+				dataType : 'json',
+				success : function(data) {
+					//alert('검색성공');
+					var html = '';
 		
- 		$.ajax({
-			url : '/company/searchStop?S_NAME=' + sValue,     
-			type : 'get',
-			dataType : 'json',
-			success : function(data) {
-				//alert('검색성공');
-				var html = '';
-	
-				for(let i = 0 ; i<data.length; i++){
-					 html += '<tr>';
-					 html += '<td>'+data[i].s_NO+'</td>';
-					 html += '<td>'+data[i].t_NAME+'</td>';
-					 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+data[i].s_NO+'>';
-					 html += data[i].s_NAME+'</a>';
-					 /* html += '<td>'+data[i].s_X+'</td>';
-					 html += '<td>'+data[i].s_Y+'</td>';
-					 html += '<td>'+data[i].s_DETAIL+'</td>'; */
-					 html += '</tr>';
-					}
-				   
-				 $("#stopList").empty();
-				 $("#stopList").append(html);
-			},
-			error : function(err) {
-				alert('관련 정류장이 없습니다');
-				console.log(err);
-			}
+					for(let i = 0 ; i<data.length; i++){
+						 html += '<tr>';
+						 html += '<td>'+data[i].s_NO+'</td>';
+						 html += '<td>'+data[i].t_NAME+'</td>';
+						 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+data[i].s_NO+'>';
+						 html += data[i].s_NAME+'</a>';
+						 /* html += '<td>'+data[i].s_X+'</td>';
+						 html += '<td>'+data[i].s_Y+'</td>';
+						 html += '<td>'+data[i].s_DETAIL+'</td>'; */
+						 html += '</tr>';
+						}
+					   
+					 $("#stopList").empty();
+					 $("#stopList").append(html);
+				},
+				error : function(err) {
+					alert('관련 정류장이 없습니다');
+					console.log(err);
+				}
 
-		}); //ajax End  
+			}); //ajax End  
 
-	} //searhStop End  
-}); //ready End	
+		} //searhStop End 
+
 </script>
 </html>
