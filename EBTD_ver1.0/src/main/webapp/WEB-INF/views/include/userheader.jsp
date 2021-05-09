@@ -177,7 +177,7 @@
 <body>
     <header>
         <div class="container">
-            <div class="headertitle">&nbsp;<a style="text-decoration: none;" href="/user/loginForm"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고"/></a></div>
+            <div class="headertitle">&nbsp;<a style="text-decoration: none;" href="/user/reservationCheck"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고"/></a></div>
         </div>
         <nav class="navdiv">
             <div class="dropdown">

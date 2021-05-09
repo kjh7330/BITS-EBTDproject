@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.AllBusBean;
 import com.ebtd.www.bean.BusBean;
 import com.ebtd.www.bean.DriverStopBean;
 import com.ebtd.www.bean.StopBean;
@@ -32,6 +33,7 @@ public class UserReservationMM {
 		ObjectMapper om = new ObjectMapper();
 		
 		bList = urDao.getBusList();
+		System.out.println(bList);
 		if(bList!=null || bList.size()!=0) {
 			mav.addObject("bList", om.writeValueAsString(bList));
 			view = "/user/wheel/busReservationForm";
@@ -85,15 +87,18 @@ public class UserReservationMM {
 			return "불러오기 실패";
 		}
 	}
-	//작업중
+	
 	public ModelAndView getBusDetail(String b_No) throws JsonProcessingException {
 		List<DriverStopBean> brList = null;
+		List<AllBusBean> abList = null;
 		String view = null;
 		ObjectMapper om = new ObjectMapper();		
 		brList = urDao.getBusDetail(b_No);
-		System.out.println("5498749844854"+brList);
+		abList = urDao.getAllBusList(b_No);
+		
 		if(brList!=null || brList.size()!=0) {
 			mav.addObject("brList", om.writeValueAsString(brList));
+			mav.addObject("abList", om.writeValueAsString(abList));
 			view = "/user/wheel/busReservationDetailForm";
 		}else {
 			view = "user/getBusList";
@@ -101,10 +106,21 @@ public class UserReservationMM {
 		mav.setViewName(view);
 		return mav;
 	}
-	//정류장 작업중
-	public ModelAndView getStopDetail(int s_No) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ModelAndView getStopDetail(int s_No) throws JsonProcessingException {
+		List<DriverStopBean> brList = null;
+		String view = null;
+		ObjectMapper om = new ObjectMapper();		
+		brList = urDao.getStopDetail(s_No);
+		System.out.println("adsfasdfasdfasdfasdfasfdasdfasdfasdfasdfasdfasdfasdfasdfasdf"+brList);
+		if(brList!=null || brList.size()!=0) {
+			mav.addObject("brList", om.writeValueAsString(brList));
+			view = "/user/wheel/stopReservationDetailForm";
+		}else {
+			view = "user/wheel/stopReservationDetailForm";
+		}
+		mav.setViewName(view);
+		return mav;
 	}
 	
 	//예약하기
@@ -112,16 +128,47 @@ public class UserReservationMM {
 		mav = new ModelAndView();
 		String view = null;
 		String u_username = session.getAttribute("u_username").toString();
+		String u_type = session.getAttribute("u_type").toString();
+		
 		System.out.println("+++++++++++++++++++++++++++"+u_username);
+		System.out.println("+++++++++++++++++++++++++------------++"+u_type);
 		
 		ur.setU_username(u_username);
+		ur.setUr_state(Integer.parseInt(u_type));
+
 		if(urDao.reservation(ur)) {
-			view="redirect:/user/getBusList"; 
+			view="redirect:/user/reservationCheck"; 
 		}else {
-			view="redirect:user/loginForm";
+			view="redirect:/user/wheel/mainForm";
 		}
 		mav.setViewName(view);
 		return mav;
+	}
+
+	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
+		mav = new ModelAndView();
+		List<UserReservationBean> urList = null;
+		String view = null;
+		String u_username = session.getAttribute("u_username").toString();
+		ObjectMapper om = new ObjectMapper();	
+		
+		urList = urDao.reservationCheck(u_username);
+		if(urList!=null || urList.size()!=0) {
+			mav.addObject("urList", om.writeValueAsString(urList));
+			view = "user/wheel/mainForm";
+		}else {
+			view = "user/wheel/mainForm";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public List<AllBusBean> allbus(String b_No) {
+		List<AllBusBean> abList = null;
+		ObjectMapper om = new ObjectMapper();
+		abList = urDao.getAllBusList(b_No);
+		
+		return abList;
 	}
 
 
