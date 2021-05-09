@@ -39,6 +39,8 @@ public interface I_BusDao {
 
 	int get_od_no(String c_username);
 
+	void next_od_no(String c_username);
+
 	
 
 
