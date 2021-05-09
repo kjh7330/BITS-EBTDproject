@@ -129,7 +129,7 @@
     <section class="main">
         <div class="mainview">
             <form action="/user/wheel/joinAccess" method="post" id="joinFrm">
-            <input type="hidden" value="0" name = "u_type">
+            <input id="userType" type="hidden" name = "u_type">
                 <table class="formtable">
                     <!-- <tr>
                         <td class="titlename" colspan="4">회원가입</td>
@@ -140,20 +140,12 @@
                         <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
                     </tr>
                     <tr>
-<<<<<<< Updated upstream
-                        <td class="tabletitle">P W :</td>
-                        <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
-                    </tr>
-                    <tr>
-                        <td class="tabletitle">P W2 :</td>
-=======
                         <td class="tabletitle">비밀번호 :</td>
                         <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">비밀번호 확인 :</td>
->>>>>>> Stashed changes
-                        <td colspan="2"><input type="password" class="input" id = "u_password2"/></td>
+                        <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password2" minlength="4"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">이름 :</td>
@@ -210,7 +202,7 @@
 
                     <tr>
                     <td> <div  id="addr_check"></div> </td>
-                        <td colspan="4"><button id="logbtn" class="loginbtn" >JOIN</button> </td>
+                        <td colspan="4"><button id="logbtn" class="loginbtn" >가입하기</button> </td>
                     </tr>
                     
                 </table>
@@ -235,8 +227,9 @@
 <script>
 let guardianFlag = false;
 var tx =""
+$('#userType').val(${type});
+console.log("유저타입"+$('#userType').val());
 //비밀번호 check
-
 $('#u_password2').blur(function() {
 	if($('#u_password').val() != $('#u_password2').val()) {
 		if($('#u_password').val()!='') {
