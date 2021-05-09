@@ -29,4 +29,12 @@ public class CompanyDriverRestController {
 		return dm.getCompanyBusList(C_USERNAME);
 	}
 
+	//드라이버 삭제
+	@GetMapping(value = "/company/deleteDriver", produces="text/plain; charset=utf-8")
+	public ModelAndView deleteDriver(int d_no){
+		System.out.println("#######"+d_no);
+		//return ResponseEntity.ok(dm.getCompanyBusList(C_USERNAME));
+		return dm.deleteDriver(d_no);
+	}
+
 }

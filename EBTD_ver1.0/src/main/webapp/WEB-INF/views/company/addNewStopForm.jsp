@@ -19,7 +19,7 @@
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
 <div class="container" style="color: black">
-  <form action="/company/addNewStop" method="post">
+  <form action="/company/addNewStop" method="post" onsubmit="return checkAll()">
     <div class="form-group">
       <label for="c_UserName"> 신청회사 </label>
       <input type="text" class="form-control" id="c_UserName" name="c_UserName" value="${sessionScope.c_username}" readonly>
@@ -30,11 +30,11 @@
 	  <div class="checkSaName" id="checkSaName"></div>
     </div>
     <div class="form-group">
-      <label for="pwd"> x값 </label>
+      <label for="sa_X"> x값 </label>
       <input class="form-control" type="text" id="sa_X" name="sa_X" placeholder="X값">
     </div>
     <div class="form-group">
-      <label for="sa_Name"> y값 </label>
+      <label for="sa_Y"> y값 </label>
       <input class="form-control" type="text" id="sa_Y" name="sa_Y" placeholder="Y값" >
 	  <div class="checkSaPosition" id="checkSaPosition"></div>
     </div>
@@ -63,9 +63,10 @@
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
-
-
-
+	/* var sa_Name = $('#sa_Name').val(); //입력한 정류장 이름
+	var sa_X = $('#sa_X').val(); //입력한 X값
+	var sa_Y = $('#sa_Y').val(); //입력한 Y값
+	var sa_Reason = $('#sa_Reason').val(); //입력한 신청사유 */
 //정류장 이름 중복검사
 $("#sa_Name").blur(function() {
 		var sa_Name = $('#sa_Name').val(); //입력한 정류장 이름
@@ -77,23 +78,17 @@ $("#sa_Name").blur(function() {
 				console.log("정류장 이름 검사 성공");
 					//정류장 이름 중복시
 					if(data == "사용불가한 정류장 이름"){ 
-						$("#checkSaName").text("사용중인 정류장 이름 입니다");
-						$("#checkSaName").css("color", "red");
-						//$("#addSubmit").attr("disabled", true); //submit 비활성화 
+						$("#checkSaName").text("사용중인 정류장 이름 입니다").css("color", "red");
 					}
 					//정류장 이름 중복 아닐시
 					else {
-						$("#checkSaName").text("사용가능한 정류장 입니다");
-						$("#checkSaName").css("color", "blue");
-						//$("#addSubmit").attr("disabled", false); //submit 활성화
+						$("#checkSaName").text("사용가능한 정류장 입니다").css("color", "blue");
 					} 
 				}, error : function(err) {
 						console.log("정류장 이름 검사 실패");
-						//$("#addSubmit").attr("disabled", true); //submit 비활성화
 					}
 				}); //ajax End
 				
-				if(sa_Name=='')$("#addSubmit").attr("disabled", true);
 		}); //blur End 
 	//정류장 위치 중복검사
 		$("#sa_X").blur(function() {
@@ -110,12 +105,9 @@ $("#sa_Name").blur(function() {
 								$("#t_Name").val("");
 								$("#checkSaPosition").text("사용중인 정류장 위치 입니다");
 								$("#checkSaPosition").css("color", "red");
-								//$("#addSubmit").attr("disabled", true); //submit 비활성화 
 							}
 							//정류장 위치 중복 아닐시		
 							else {
-								//if(sa_X>100 || sa_Y>100) {alert('정류장 좌표 최대값은 100입니다.'); $("#t_Name").val(""); 
-								//$("#sa_X").val(""); $("#sa_Y").val(""); $("#checkSaPosition").hide();}
 								if(0 <= sa_X  && sa_X <= 33 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 								else if(34 <= sa_X && sa_X <= 66 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학2동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}                     
 								else if(67 <= sa_X && sa_X <= 100 && 0 <= sa_Y && sa_Y <= 33) {$("#t_Name").val("청학3동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
@@ -125,8 +117,6 @@ $("#sa_Name").blur(function() {
 								else if(0 <= sa_X && sa_X <= 33 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 								else if(34 <= sa_X && sa_X <= 66 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수2동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 								else if(67 <= sa_X && sa_X <= 100 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수3동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
-								
-								//$("#addSubmit").attr("disabled", false); //submit 활성화
 							}  
 						}, error : function(err) {
 								console.log("정류장 위치 검사 실패");
@@ -138,7 +128,6 @@ $("#sa_Name").blur(function() {
  $("#sa_Y").blur(function() {
 		var sa_X = $('#sa_X').val(); //입력한 X값
 		var sa_Y = $('#sa_Y').val(); //입력한 Y값
-		//if(sa_X>100 || sa_Y>100) alert('정류장 좌표 최대값은 100입니다.');
 		$.ajax({
 			url : '/company/checkSaPosition?',
 			type : 'get',
@@ -148,9 +137,7 @@ $("#sa_Name").blur(function() {
 					//정류장 위치 중복시
 					if(data == "사용불가한 정류장 위치"){
 						$("#checkSaPosition").text("사용중인 정류장 위치 입니다");
-						$("#t_Name").val(""); 
-						$("#checkSaPosition").css("color", "red");
-						//$("#addSubmit").attr("disabled", true); //submit 비활성화 
+						$("#t_Name").val(""); $("#checkSaPosition").css("color", "red");
 					}
 					//정류장 위치 중복 아닐시
 					else {
@@ -165,8 +152,6 @@ $("#sa_Name").blur(function() {
 						else if(0 <= sa_X && sa_X <= 33 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수1동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 						else if(34 <= sa_X && sa_X <= 66 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수2동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
 						else if(67 <= sa_X && sa_X <= 100 && 67 <= sa_Y && sa_Y <= 100) {$("#t_Name").val("연수3동"); $("#checkSaPosition").text("사용가능한 정류장 위치 입니다"); $("#checkSaPosition").css("color", "blue");}
-						
-						//$("#addSubmit").attr("disabled", false); //submit 활성화
 					}  
 				}, error : function(err) {
 						console.log("정류장 위치 검사 실패");
@@ -174,18 +159,25 @@ $("#sa_Name").blur(function() {
 			}); //ajax End
 		}); //blur End   
 
- 
-	 //var sa_Name = $('#sa_Name').val();
-	 //var sa_X = $('#sa_X').val(); //입력한 X값
-	// var sa_Y = $('#sa_Y').val(); //입력한 Y값
-	// if(sa_Name =='' || sa_X =='' || sa_Y =='') $("#addSubmit").attr("disabled", true); //submit 비활성화 
-	// else $("#addSubmit").attr("disabled", false); //submit 활성화
-	 
- 
 
-		
-function addNewStop(){
+
+/*  function addNewStop(){
 	alert('정류장 신청 완료');
-} 
+}   */
+
+//입력 안한값 체크
+  function checkAll() {
+	var sa_Name = $('#sa_Name').val(); //입력한 정류장 이름
+	var sa_X = $('#sa_X').val(); //입력한 X값
+	var sa_Y = $('#sa_Y').val(); //입력한 Y값
+	var sa_Reason = $('#sa_Reason').val(); //입력한 신청사유 
+ 	 if(sa_Name == '')alert('정류장 이름을 입력하세요');
+ 	 if(sa_X  == '')alert('y값을 입력하세요');
+ 	 if(sa_Y  == '')alert('y값을 입력하세요'); 
+ 	 if(sa_Reason == '')alert('신청 사유를 입력하세요');
+ 	 
+ 	 return false;
+ }  
+
 </script>
 </html>

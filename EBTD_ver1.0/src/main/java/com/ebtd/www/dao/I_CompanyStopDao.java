@@ -18,7 +18,7 @@ public interface I_CompanyStopDao {
 	
 	boolean addNewStop(StopApplyBean sa);
 
-	List<StopApplyBean> getNewStopConfirmList();
+	List<StopApplyBean> getNewStopConfirmList(String c_username);
 
 	List<StopBean> searchStop(String S_NAME);
 
