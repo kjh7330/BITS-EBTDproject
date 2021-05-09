@@ -43,7 +43,7 @@
     	width: 350px;
     	height: 150px;
     	font-size: 50px;
-    	margin-top: 95px;
+    	margin-top: 75px;
     	background-color: #0C3D6A;
     	color: #f9eb99;
     	border-radius: 15px;
@@ -55,7 +55,6 @@
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
 <div class="maindiv">
- 	<div class="menudetail" id="logout"><a>로그아웃</a></div>
 	
 		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
@@ -128,22 +127,13 @@
 		function mouseUp2(){
 			clearTimeout(timer2);
 		}
-		/* function holding2(){
-			alert('holding');
-		} */
 		function mouseDown3(){
 			timer3 = setTimeout(function(){holding3();},2000);
 		}
 		function mouseUp3(){
 			clearTimeout(timer3);
 		}
-		/* function holding3(){
-			location.href = '/user/loginForm';
-		} */
 		
-$('#logout').click(function () {
-	location.href = '/user/logout';
-});
 </script>
 </body>
 </html>

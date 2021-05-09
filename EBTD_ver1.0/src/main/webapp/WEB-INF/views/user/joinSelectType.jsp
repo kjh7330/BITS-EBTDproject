@@ -112,8 +112,20 @@
         .otherbtn1{
             background-color: #afd19f;
         }
+        .otherbtn1:hover{
+        	cursor: pointer;
+        }
+        #otherbtn1:hover{
+        	cursor: pointer;
+        }
         .otherbtn2{
             background-color: #a2c2e4;
+        }
+        .otherbtn2:hover{
+        	cursor: pointer;
+        }
+        #otherbtn2:hover{
+        	cursor: pointer;
         }
         table{
             display: flex;
@@ -156,10 +168,10 @@
                     <tr>
                         <!--아래 아이콘이 CSS효과가 안먹어서 태그에 넣음!-->
                         <form id="joinWheel" action="/user/wheel/join">
-                        	<td class="otherbtn3"><input class="otherbtn1" type="button"><i class="fas fa-wheelchair" style="position: absolute; color: black; font-size: 100px; left: 90px; padding-top:42px;"></i></td>
+                        	<td class="otherbtn3"><input class="otherbtn1" type="button"><i id="otherbtn1" class="fas fa-wheelchair" style="position: absolute; color: black; font-size: 100px; left: 90px; padding-top:42px;"></i></td>
                         </form>
                         <form id="joinBlind" action="/user/blind/join">
-                        	<td class="otherbtn4"><input class="otherbtn2" type="button"><i class="fas fa-blind" style="position: absolute; color: black; font-size: 100px; left: 290px; padding-top:42px;"></i></td>
+                        	<td class="otherbtn4"><input class="otherbtn2" type="button"><i id="otherbtn2" class="fas fa-blind" style="position: absolute; color: black; font-size: 100px; left: 290px; padding-top:42px;"></i></td>
                         </form>
                     </tr>
                     <tr>

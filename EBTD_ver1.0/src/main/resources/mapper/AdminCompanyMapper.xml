@@ -56,7 +56,7 @@
 		FROM APPLY_BUS_HISTORY H
 		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
 		JOIN ALLBUS AB ON AB.B_NO=H.AP_B_NO
-		WHERE H.AP_STATE=0 AND AB.AB_STATE=0
+		WHERE H.AP_STATE=0 AND AB.AB_STATE=0 AND C.C_STATE=1
 		ORDER BY H.AP_NO
 	</select>
 	<select id="getNewBusRouteDetail" resultType="ApplyBusHistory">
@@ -90,14 +90,17 @@
 	<insert id="setNewRouteBus" parameterType="ApplyBusHistory">
 		INSERT INTO ROUTE_BUS(R_TURN, B_NO, S_NO) 
 		SELECT APDE_TURN, AP_B_NO, S_NO FROM APPLY_BUS_HISTORY_DETAIL 
-		WHERE AP_B_NO=#{ap_b_no}
+		WHERE AP_B_NO=#{ap_b_no} AND AP_NO=#{ap_no}
 	</insert>
 	
 	<update id="setApplyBusHistoryChange2Reject" parameterType="Map">
-		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 2, AP_REJECT = #{ap_reject} WHERE AP_B_NO = #{ap_b_no}
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 2, AP_REJECT = #{ap_reject} WHERE AP_B_NO = #{ap_b_no} AND AP_NO = #{ap_no}
 	</update>
 	<delete id="setDeleteAllbus2" parameterType="Map">
 		DELETE FROM ALLBUS WHERE B_NO = #{ap_b_no}
+	</delete>
+	<delete id="setDeleteDriver2" parameterType="Map">
+		DELETE FROM DRIVER WHERE B_NO = #{ap_b_no}
 	</delete>
 	<delete id="setDeleteBus2" parameterType="Map">
 		DELETE FROM BUS WHERE B_NO = #{ap_b_no}
@@ -105,7 +108,7 @@
 	
 	
 	<update id="setApplyBusHistoryChange5Reject" parameterType="Map">
-		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 5, AP_REJECT = #{ap_reject} WHERE AP_B_NO = #{ap_b_no}
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 5, AP_REJECT = #{ap_reject} WHERE AP_B_NO = #{ap_b_no} AND AP_NO = #{ap_no}
 	</update>
 	
 	<select id="getUpdateBusRouteList" resultType="ApplyBusHistory">
@@ -160,7 +163,7 @@
 		WHERE AB.AB_STATE=1
 	</select>
 	<select id="getVocRecommendCount" resultType="Company">
-		SELECT COUNT(C_USERNAME) AS V_COUNT, COUNT(*) VOC_RECOMMEND 
+		SELECT COUNT(C_USERNAME) AS V_COUNT, SUM(VOC_RECOMMEND) AS VOC_RECOMMEND 
 		FROM VOC WHERE C_USERNAME=#{c_username}
 	</select>
 	<select id="getLowfloorRegularCount" resultType="Company">
@@ -174,7 +177,7 @@
 	</select>
 	
 	<select id="getCompanyQuestionList" resultType="Company">
-		SELECT V_NO, C_USERNAME, B_NO, V_TITLE, V_CONTENT, V_DATE, VOC_RECOMMEND 
+		SELECT V_NO, C_USERNAME, B_NO, V_TITLE, V_CONTENT, TO_CHAR(V_DATE,'YYYY-MM-DD') AS V_DATE, VOC_RECOMMEND 
 		FROM VOC 
 		WHERE C_USERNAME = #{c_username}
 	</select>
@@ -184,13 +187,12 @@
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
 		WHERE H.AP_STATE = 1 OR H.AP_STATE = 4
-
 	</select>
 	<select id="getCompanyApprovalDetail" resultType="ApplyBusHistory">
 		SELECT C.C_NAME, C.C_USERNAME, HD.APDE_TURN, H.AP_B_NO, HD.S_NO, S.S_NAME
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME
-		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO = HD.AP_NO
+		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO = HD.AP_NO AND H.AP_B_NO=HD.AP_B_NO
 		JOIN STOP S ON S.S_NO = HD.S_NO
 		WHERE H.AP_NO = #{ap_no} AND HD.AP_NO = #{ap_no} AND H.AP_B_NO = #{ap_b_no}
 		ORDER BY APDE_TURN
@@ -205,9 +207,9 @@
 		SELECT C.C_NAME, C.C_USERNAME, HD.APDE_TURN, H.AP_B_NO, HD.S_NO, S.S_NAME, H.AP_REJECT
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME
-		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_B_NO = HD.AP_B_NO
+		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_B_NO = HD.AP_B_NO AND H.AP_B_NO=HD.AP_B_NO
 		JOIN STOP S ON S.S_NO = HD.S_NO
-		WHERE H.AP_NO = #{ap_no} AND HD.AP_NO = #{ap_no}
+		WHERE H.AP_NO = #{ap_no} AND HD.AP_NO = #{ap_no} AND H.AP_B_NO = #{ap_b_no}
 		ORDER BY APDE_TURN
 	</select>
 </mapper>

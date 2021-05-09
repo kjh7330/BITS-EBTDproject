@@ -133,7 +133,7 @@
 			if( ( cur_date >= ba_date && ba_date >= period ) || val2 == 1 ){
 				c_name += '<tr>';
 				c_name += '<td>' + baList[i]["c_name"] + '</td>';
-				c_name += '<td><a href=/admin/company/getCompanyApprovalDetail?ap_no='+baList[i]["ap_no"]+' style="text-decoration: none;">';
+				c_name += '<td><a href=/admin/company/getCompanyApprovalDetail?ap_no='+baList[i]["ap_no"]+'&ap_b_no='+baList[i]["ap_b_no"]+' style="text-decoration: none;">';
 				c_name += baList[i]["ap_b_no"] +'번</td>';
 				c_name += '<td>' + baList[i]["ap_date"] + '</td>';
 					let state = baList[i]["ap_state"];

@@ -76,8 +76,16 @@
 	.tablebtn3:hover{
 		background-color: orange;
 	}
-	.tdcontent input{
+	.inputs{
 		width: 275px;
+		height: 30px;
+		font-size: 18px;
+		background-color: #fffbe5;
+		border: 1px solid black;
+		padding-left: 7px;
+	}
+	.inputss{
+		width: 160px;
 		height: 30px;
 		font-size: 18px;
 		background-color: #fffbe5;
@@ -102,33 +110,50 @@
 <table class="maintable">
 	<tr>
 		<td class="tdname">ID : </td>
-		<td class="tdcontent"><input type="text" name="u_userName" value="${mi.u_userName}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_userName" value="${mi.u_userName}" readonly></td>
 	</tr>
 	<tr>
 		<td class="tdname">이름 : </td>
-		<td class="tdcontent"><input type="text" name="u_name" value="${mi.u_name}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_name" value="${mi.u_name}" readonly></td>
 	</tr>
 	<tr>
 		<td class="tdname">전화번호 : </td>
-		<td class="tdcontent"><input type="text" name="u_userphonenum" value="${mi.u_userphonenum}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_userphonenum" value="${mi.u_userphonenum}"></td>
 	</tr>
 	<tr>
 		<td class="tdname">주소 : </td>
-		<td class="tdcontent"><input type="text" name="u_address" value="${mi.u_address}"></td>
+		<td class="tdcontent">
+		<select class="inputss" name="t_name">
+		<c:forEach var="t" items="${tList}">
+			<c:choose>
+				<c:when test="${t.t_name eq tName}">
+					<option selected>인천시 ${t.t_name}</option>
+				</c:when>
+				<c:otherwise>
+					<option>인천시 ${t.t_name}</option>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		</select><br>
+		<input style="margin-top: 5px;" class="inputs" name="aDetail" value="${aDetail}">
+		</td>
 	</tr>
 	<tr>
 		<td class="tdname">보호자 이름 : </td>
-		<td class="tdcontent"><input type="text" name="u_guardname" value="${mi.u_guardname}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_guardname" value="${mi.u_guardname}"></td>
 	</tr>
 	<tr>
 		<td class="tdname">보호자 연락처 : </td>
-		<td class="tdcontent"><input type="text" name="u_guardphonenum" value="${mi.u_guardphonenum}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_guardphonenum" value="${mi.u_guardphonenum}"></td>
 	</tr>
 	<tr>
 		<td class="tdname">보호자와의 관계 : </td>
-		<td class="tdcontent"><input type="text" name="u_guardrelation" value="${mi.u_guardrelation}"></td>
+		<td class="tdcontent"><input class="inputs" type="text" name="u_guardrelation" value="${mi.u_guardrelation}"></td>
 	</tr>
 </table>
+
+
+
 </div>
 <div class="btndiv">
 <input type="hidden" name="u_type" value="${mi.u_type}">

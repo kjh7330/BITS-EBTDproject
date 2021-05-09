@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.TownBean;
 import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.bean.UserBookmarkBean;
 import com.ebtd.www.bean.UserReservationBean;
@@ -70,7 +71,15 @@ public class UserMypageMM {
 		mav.setViewName(view);
 		return mav;
 	}
-
+	//이용 내역 - 즐겨찾기 추가
+	public ModelAndView setBookMark(UserBookmarkBean bm) {
+		mav = new ModelAndView();
+		String view = null;
+		umDao.setBookMark(bm);
+		view="redirect:/user/getBookmarkList"; //즐겨찾기 페이지로 이동
+		mav.setViewName(view);
+		return mav;
+	}
 	
 	//고객 소리함 - 리스트 가져오기 (내 질문들, 답변들)
 	public ModelAndView getMyQuestionList(String u_username) {
@@ -141,8 +150,14 @@ public class UserMypageMM {
 	public ModelAndView getUserMyInfo(String u_username) {
 		mav = new ModelAndView();
 		String view = null;
-		List<UserBean> miList = null;
-		miList = umDao.getUserMyInfo(u_username);
+		List<UserBean> miList = umDao.getUserMyInfo(u_username);
+		List<UserBean> tList = umDao.get_t_list();
+		System.out.println(tList);
+		//인천시  송도1동 xxxx
+		//012 3 4567 8 9~
+		mav.addObject("aDetail", miList.get(0).getU_address().substring(9)); //상세주소
+		mav.addObject("tName", miList.get(0).getU_address().substring(4,8)); //동주소
+		mav.addObject("tList", tList); //동 리스트
 		mav.addObject("miList", miList);
 		if(miList.get(0).getU_type()==1) { //시각
 			view="user/blind/userMyInfoForm";
@@ -157,10 +172,9 @@ public class UserMypageMM {
 	public ModelAndView setUserMyInfo(UserBean ub) {
 		mav = new ModelAndView();
 		String view = null;
-		List<UserBean> miList = null;
+		System.out.println(ub.getT_name()+" "+ub.getADetail());
+		ub.setU_address(ub.getT_name()+" "+ub.getADetail());
 		umDao.setUserMyInfo(ub);
-		//miList = umDao.getUserMyInfo(ub.getU_userName());
-		//mav.addObject("miList", miList);
 		if(ub.getU_type()==0) { // 휠체어
 			view="redirect:/user/myPage";
 		}else if(ub.getU_type()==1) { // 시각

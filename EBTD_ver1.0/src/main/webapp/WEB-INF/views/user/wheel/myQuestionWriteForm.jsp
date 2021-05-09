@@ -63,10 +63,13 @@
 		<div class="divinput">
 		<form action="setMyQuestionWrite" method="post">
 		<!-- c:forEach var="v" items="${vList}"-->
-			<input class="username" type="hidden" name="u_username" value="${v.u_username}">
-			제목 : <input class="inputtitle" name="v_title" value="${v.v_title}">
-			버스번호 : <select class="select"></select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			평가 : <select class="select" name="voc_recommend"><option value="1">추천</option><option value="-1">비추천</option></select>
+			<input class="c_username" type="hidden" name="c_username">
+			<input class="u_username" type="hidden" name="u_username">
+			제목 : <input class="inputtitle" name="v_title" value="">
+			버스번호 : <select id="busnum" class="select" name="b_no" onchange="fn()" >
+			<option value="none" disabled>선택하세요</option>
+			</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			평가 : <select id="busvoc" class="select" name="voc_recommend"><option value="1">추천</option><option value="-1">비추천</option></select>
 			<textarea class="inputcontent" name="v_content" cols="40" rows="8" ></textarea>
 		<!-- /c:forEach-->
 			<a href="/user/getMyQuestionList"><input type="submit" class="btn" value="확인"></a>
@@ -86,12 +89,12 @@
 		},
 		success : function(data){
 			console.log(data);
-			$('.option').html('');
+			$('#busnum').html('');
 			let op = '';
 			for(i in data){
 				op += '<option name="b_no">' + data[i]["b_no"] +'</option>';
 			}
-			$('.option').append(op);
+			$('#busnum').append(op);
 		},
 		error : function(err){
 			console.log(err,'@@@@');

@@ -32,10 +32,11 @@ public interface I_AdminCompanyDao {
 	//신규 버스 등록
 	void setApplyBusHistoryChangeApproval(String ap_b_no);
 	void setAllBusChangeApproval(String ap_b_no);
-	void setNewRouteBus(String ap_b_no);
+	void setNewRouteBus(ApplyBusHistory abhBean);
 
 	void setApplyBusHistoryChange2Reject(Map<String, Object> cMap);
 	void setDeleteAllbus2(Map<String, Object> cMap);
+	void setDeleteDriver2(Map<String, Object> cMap);
 	void setDeleteBus2(Map<String, Object> cMap);
 
 	List<ApplyBusHistory> getUpdateBusRouteList();
@@ -55,7 +56,7 @@ public interface I_AdminCompanyDao {
 	List<ApplyBusHistory> getCompanyApprovalList();
 	List<ApplyBusHistory> getCompanyApprovalDetail(ApplyBusHistory abh);
 	List<ApplyBusHistory> getCompanyRejectList();
-	List<ApplyBusHistory> getCompanyRejectDetail(String ap_no);
+	List<ApplyBusHistory> getCompanyRejectDetail(ApplyBusHistory abh);
 
 
 
