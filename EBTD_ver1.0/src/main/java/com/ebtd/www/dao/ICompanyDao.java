@@ -15,7 +15,7 @@ public interface ICompanyDao {
 	public int accessUserState(String username);
 	public String getPwd(CompanyAliasBean cb);
 	public String checkId(String c_username);
-	public void companyJoin(CompanyJoinBean cjb);
+	public boolean companyJoin(CompanyJoinBean cjb);
 	public void official_document_insert(CompanyJoinBean cjb);
 	public Integer get_ap_no();
 	public void bus_insert(CompanyJoinBean cjb);

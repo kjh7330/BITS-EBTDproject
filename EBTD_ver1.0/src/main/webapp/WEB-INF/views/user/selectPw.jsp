@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>Document</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -51,7 +51,7 @@
             align-items: center; /*세로 가운데 정렬*/
             justify-content: center; /*가로 가운데 정렬*/
             text-align: center;
-            height: 78vh;
+            height: 75vh;
             /*해당 웹페이지를 실행하고 있는 기기의 화면크기 비율 vw(viewport width), vh(viewport height)*/
         }
         footer{
@@ -93,7 +93,6 @@
             color: #0C3D6A;
             border-radius: 8px;
             border: none;
-            cursor: pointer;
         }
         .otherbtn{
             width: 190px;
@@ -105,7 +104,6 @@
             color: #0C3D6A;
             border-radius: 8px;
             border: none;
-            cursor: pointer;
             
         }
         table{
@@ -127,34 +125,27 @@
     </header>
     <section class="main">
         <div class="mainview">
-            <form action="/user/loginAccess" name="login" method="post" onsubmit="return check()">
+            <form action="/user/rePw" name="login" method="post">
                 <table class="formtable">
                     <tr>
                         <td class="titlename" colspan="4">EBTD</td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">I D :</td>
-                        <td colspan="2"><input class="input" type="text" id="username" name="u_username"></td>
-                        <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
-                        <td rowspan="2"><button id="logbtn" class="loginbtn" >Login</button> </td>
+                        <td class="tabletitle">비밀번호를 다시 입력해주세요</td>
                     </tr>
                     <tr>
                         <td class="tabletitle">P W :</td>
-                        <td colspan="2"><input class="input" type="password" id="password" name="u_password"></td>
+                        <td colspan="2"><input class="input" type="password" id="u_password" name="u_password"><input type="hidden" name="u_username" value="${username}"></td>
+                    	
                     </tr>
-                    </form>
-                </table>
-                <table>
                     <tr>
-						<form action="/user/joinForm" method="get">
-	                        <!-- <td><input class="otherbtn" type="button" value="회원가입"></td>-->
-							<td><button class="otherbtn">회원가입</button></td>
-						</form>
-						<form action="/user/findForm" method="get">
-                        	<td><input class="otherbtn" type="submit" value="ID/PW 찾기"></td>
-						</form>
+                    <td>
+                    	<button class="loginbtn">비밀번호 재설정</button>
+                    </td>    
                     </tr>
+               
                 </table>
+                </form>
             
         </div>
     </section>
@@ -164,19 +155,12 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁
+                김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
             </div>
         </div>
     </footer>
 </body>
 
 <script>
-	function check() {
-		if($("#username").val() != ''&& $("#password").val() != ''){return true;}
-			alert('아이디 혹은 비밀번호를 확인해주세요');
-			return false;
-		
-	}
-	console.log(${msg});
 </script>
 </html>

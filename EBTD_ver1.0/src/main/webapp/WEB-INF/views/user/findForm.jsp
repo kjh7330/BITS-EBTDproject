@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>Document</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,10 +18,11 @@
             width: 450px; /*만들땐 450px에 두고 만들고 실제로 핸드폰 구현시는 100vw*/
         }
         .container {
-            display: flex;
-            justify-content: center;
+            position: fixed;
             background-color : #0C3D6A;
-            width: 450px;
+            left: 0px;
+            top: 0px;
+            width: 450px; /*만들땐 450px에 두고 만들고 실제로 핸드폰 구현시는 100vw*/
             height: 80px;
             text-align: center;
         }
@@ -34,12 +34,6 @@
         .headertitle img{
             height: 57px;
         } 
-        .headerbell{
-            color: yellow;
-            padding-top: 25px;
-            padding-right: 30px;
-            font-size: 40px;
-        }
         .footer-container img{
             height: 60px;
         }
@@ -51,7 +45,7 @@
             align-items: center; /*세로 가운데 정렬*/
             justify-content: center; /*가로 가운데 정렬*/
             text-align: center;
-            height: 78vh;
+            height: 93vh; 
             /*해당 웹페이지를 실행하고 있는 기기의 화면크기 비율 vw(viewport width), vh(viewport height)*/
         }
         footer{
@@ -80,7 +74,6 @@
             border-radius: 4px;
             border: none;
             margin-left: 5px;
-            margin-right: 5px;
             font-size: 20px;
         }
         .loginbtn{
@@ -93,7 +86,6 @@
             color: #0C3D6A;
             border-radius: 8px;
             border: none;
-            cursor: pointer;
         }
         .otherbtn{
             width: 190px;
@@ -105,8 +97,23 @@
             color: #0C3D6A;
             border-radius: 8px;
             border: none;
-            cursor: pointer;
-            
+        }
+        .jointable input{
+            height: 180px;
+            width: 180px;
+            font-size: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+            color: #0C3D6A;
+            border-radius: 20px;
+            border: none;
+        }
+        .otherbtn1{
+            background-color: #afd19f;
+        }
+        .otherbtn2{
+            background-color: #a2c2e4;
         }
         table{
             display: flex;
@@ -115,6 +122,18 @@
         .titlename{
             font: bold;
             font-size: 60px;
+            color: black;
+        }
+        .title1{
+            font: bold;
+            font-size: 40px;
+            color: black;
+            height: 20px;
+        }
+        .title2{
+            color: black;
+        }
+        .content{
             color: black;
         }
     </style>
@@ -127,35 +146,27 @@
     </header>
     <section class="main">
         <div class="mainview">
-            <form action="/user/loginAccess" name="login" method="post" onsubmit="return check()">
-                <table class="formtable">
+            <table class="jointable">
                     <tr>
-                        <td class="titlename" colspan="4">EBTD</td>
+                        <td colspan="2"><p class="title1">ID / PW 찾기</p></td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">I D :</td>
-                        <td colspan="2"><input class="input" type="text" id="username" name="u_username"></td>
-                        <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
-                        <td rowspan="2"><button id="logbtn" class="loginbtn" >Login</button> </td>
+                        <td colspan="2"><p class="title2">찾으실 정보를 선택하세요</p></td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">P W :</td>
-                        <td colspan="2"><input class="input" type="password" id="password" name="u_password"></td>
+                        <!--아래 아이콘이 CSS효과가 안먹어서 태그에 넣음!-->
+                        <form id="joinWheel" action="/user/findIdForm">
+                        	<td class="otherbtn1"><input class="otherbtn1" type="button"><b style="position: absolute; color: black; font-size: 110px; left: 75px; padding-top:25px;">ID</b></td>
+                        </form>
+                        <form id="joinBlind" action="/user/findPwForm">
+                        	<td class="otherbtn2"><input class="otherbtn2" type="button"><b style="position: absolute; color: black; font-size: 100px; left: 240px; padding-top:30px;">PW</b></td>
+                        </form>
                     </tr>
-                    </form>
-                </table>
-                <table>
                     <tr>
-						<form action="/user/joinForm" method="get">
-	                        <!-- <td><input class="otherbtn" type="button" value="회원가입"></td>-->
-							<td><button class="otherbtn">회원가입</button></td>
-						</form>
-						<form action="/user/findForm" method="get">
-                        	<td><input class="otherbtn" type="submit" value="ID/PW 찾기"></td>
-						</form>
+                        <td><p class="content">아이디</p></td>
+                        <td><p class="content">비밀번호</p></td>
                     </tr>
-                </table>
-            
+            </table>
         </div>
     </section>
     <footer>
@@ -170,13 +181,12 @@
     </footer>
 </body>
 
-<script>
-	function check() {
-		if($("#username").val() != ''&& $("#password").val() != ''){return true;}
-			alert('아이디 혹은 비밀번호를 확인해주세요');
-			return false;
-		
-	}
-	console.log(${msg});
+<script type="text/javascript">
+$('.otherbtn1').click(function() {
+	$('#joinWheel').submit();
+});
+$('.otherbtn2').click(function() {
+	$('#joinBlind').submit();
+});
 </script>
 </html>

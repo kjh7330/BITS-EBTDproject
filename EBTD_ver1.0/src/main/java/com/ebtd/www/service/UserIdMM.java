@@ -151,4 +151,23 @@ public class UserIdMM {
         }
 		return mav;
 	}
+	public String findId(UserBean ub) {
+		String result = uIdDao.findId(ub);
+		return result;
+	}
+	public String findPw(UserBean ub) {
+		String result = uIdDao.findPw(ub);
+		System.out.println(result);
+		return result;
+	}
+	public ModelAndView updatePw(UserBean_ch ub) {
+		mav=new ModelAndView();
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String raw = ub.getU_password();
+		ub.setU_password(pwdEncoder.encode(raw));
+		
+		boolean result = uIdDao.updatePw(ub);
+		mav.setViewName("redirect:/user/loginForm");
+		return mav;
+	}
 }

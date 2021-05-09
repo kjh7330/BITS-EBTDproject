@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.service.IdMM;
 import com.ebtd.www.service.UserIdMM;
 
@@ -37,6 +38,20 @@ public class IdRestController {	//관리자 전용
 	@ResponseBody
 	public int UserCheckDisNo(@RequestParam("u_disableno") String u_disableno) {
 		return uIdmm.userCheckNo(u_disableno);
+	}
+	@RequestMapping(value = "/user/findId", method = RequestMethod.GET ,produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String findId(UserBean ub) {
+		System.out.println(ub.getU_name());
+		
+		return uIdmm.findId(ub);
+	}
+	@RequestMapping(value = "/user/findPw", method = RequestMethod.GET ,produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String findPw(UserBean ub) {
+		String result = uIdmm.findPw(ub);
+		System.out.println(result);
+		return result;
 	}
 	
 

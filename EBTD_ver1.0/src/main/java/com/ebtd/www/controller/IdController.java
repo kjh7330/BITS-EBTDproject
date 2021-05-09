@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.CompanyAliasBean;
+import com.ebtd.www.dao.IUserIdDao;
 import com.ebtd.www.service.IdMM;
 
 //관리자 - 로그인 및 회원가입에 관한 컨트롤러
@@ -18,7 +19,8 @@ import com.ebtd.www.service.IdMM;
 public class IdController {
 	@Autowired
 	private IdMM idmm;
-//	@Autowired
+	@Autowired
+	private IUserIdDao uIdDao;
 //	private CommonMM cmMM;
 	//전역변수 mav 등록
 	ModelAndView mav;
@@ -58,6 +60,17 @@ public class IdController {
 		System.out.println(session.getAttribute("c_username"));
 		return mav;
 	}
+	/*
+	 * @PostMapping(value = "/joinAccess") public ModelAndView
+	 * joinResult(CompanyAliasBean cb, HttpSession session) {
+	 * System.out.println("회원가입 등록"); //회원가입 service이동 mav = idmm.joinAccess(cb);
+	 * 
+	 * if(mav!=null) {return mav;} else {joinForm(session);
+	 * 
+	 * }return mav;
+	 * 
+	 * }
+	 */
 	
 }
 

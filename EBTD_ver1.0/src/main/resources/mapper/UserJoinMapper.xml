@@ -31,4 +31,18 @@
   	<select id="getPwd" resultType="String">
   		select u_password from u where u_username = #{u_username}
   	</select>
+  	<select id="findId" resultType="String" parameterType="com.ebtd.www.bean.UserBean">
+  		select u_username from u where u_name=#{u_name} and
+  		u_userphonenum=#{u_userphonenum} and 
+  		u_disabledno=#{u_disabledno} 
+  	</select>
+  	<select id="findPw" resultType="String" parameterType="com.ebtd.www.bean.UserBean">
+  		select u_username from u where u_username=#{u_userName} and u_name=#{u_name} and
+  		u_userphonenum=#{u_userphonenum} and 
+  		u_disabledno=#{u_disabledno} 
+  	</select>
+  	
+  	<update id="updatePw" parameterType="com.ebtd.www.bean.UserBean_ch">
+  	 	update u set u_password = #{u_password} where u_username = #{u_username} 
+  	 </update>
   </mapper>

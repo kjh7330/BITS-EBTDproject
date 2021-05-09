@@ -9,14 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.CompanyAliasBean;
+import com.ebtd.www.bean.UserBean;
+import com.ebtd.www.bean.UserBean_ch;
 import com.ebtd.www.controller.AdminCompanyController;
 import com.ebtd.www.dao.ICompanyDao;
+import com.ebtd.www.dao.IUserIdDao;
 
 @Service
 public class IdMM {
 	//companyDao 주입
 	@Autowired
 	private ICompanyDao cDao;
+	@Autowired
+	private IUserIdDao uIdDao;
 	
 	//모델앤 뷰 필드화
 	ModelAndView mav = null;
@@ -77,10 +82,37 @@ public class IdMM {
 		
 		return mav;
 	}
+	
 
 	public int checkId(String c_username) {
 		//아이디 있을경우 1, 아닐시 0
 		return (cDao.checkId(c_username)!=null)?1:0;
+	}
+	public String findId(UserBean ub) {
+		String result = uIdDao.findId(ub);
+		return result;
+	}
+	
+	public String findPw(UserBean ub) {
+		String result = uIdDao.findPw(ub);
+		System.out.println(result);
+		return result;
+	}
+	public ModelAndView selectPw(String u_username) {
+		mav=new ModelAndView();
+		mav.addObject("u_username", u_username);
+		mav.setViewName("/user/selectPw");
+		return mav;
+	}
+	public ModelAndView updatePw(UserBean_ch ub) {
+		mav=new ModelAndView();
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String raw = ub.getU_password();
+		ub.setU_password(pwdEncoder.encode(raw));
+		
+		boolean result = uIdDao.updatePw(ub);
+		mav.setViewName("redirect:/user/loginForm");
+		return mav;
 	}
 
 	

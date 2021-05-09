@@ -109,6 +109,36 @@ public class UserIdController {	//유저 - 로그인, 회원가입
 		String view = "redirect:/user/loginForm";
 		return view;
 	}
+	@RequestMapping(value = "/findForm")
+	public String findForm(HttpSession session, HttpServletRequest request) {
+		return "/user/findForm";        
+	}
+	@RequestMapping(value = "/findPwForm")
+	public String findPwForm(HttpSession session, HttpServletRequest request) {
+		return "/user/findPwForm";        
+	}
+	@RequestMapping(value = "/findIdForm")
+	public String findIdForm(HttpSession session, HttpServletRequest request) {
+		return "/user/findIdForm";        
+	}
+	
+	@PostMapping(value = "/findPw")
+	public String findPw(HttpSession session, HttpServletRequest request) {
+		return "/user/findIdForm";        
+	}
+	@PostMapping(value = "/selectPw")
+	public ModelAndView selectPw(String u_username) {
+		mav=new ModelAndView();
+		mav.addObject("username",u_username);
+		mav.setViewName("/user/selectPw");
+		return mav;        
+	}
+	@PostMapping(value = "/rePw")
+	public ModelAndView rePw(UserBean_ch ub) {
+		mav=new ModelAndView();
+		mav=uIdmm.updatePw(ub);
+		return mav;        
+	}
 }
 
 
