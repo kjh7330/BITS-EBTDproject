@@ -140,12 +140,12 @@
                         <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
                     </tr>
                     <tr>
-                        <td class="tabletitle">P W :</td>
-                        <td colspan="2"><input class="input" name = "u_password" id = "u_password" minlength="4"/></td>
+                        <td class="tabletitle">비밀번호 :</td>
+                        <td colspan="2"><input type="password" class="input" name = "u_password" id = "u_password" minlength="4"/></td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">P W2 :</td>
-                        <td colspan="2"><input class="input" id = "u_password2"/></td>
+                        <td class="tabletitle">비밀번호 확인 :</td>
+                        <td colspan="2"><input type="password" class="input" id = "u_password2"/></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">이름 :</td>
@@ -163,7 +163,17 @@
                     </tr>
                     <tr>
                         <td class="tabletitle">주소 :</td>
-                        <td colspan="2"><select class="input" id="AddressArr"></select></td>
+                        <td colspan="2"><select class="input" id="AddressArr">
+                        	<option value = "청학1동">청학1동</option>
+                        	<option value = "청학2동">청학2동</option>
+                        	<option value = "청학3동">청학3동</option>
+                        	<option value = "송도1동">송도1동</option>
+                        	<option value = "송도2동">송도2동</option>
+                        	<option value = "송도3동">송도3동</option>
+                        	<option value = "연수1동">연수1동</option>
+                        	<option value = "연수2동">연수2동</option>
+                        	<option value = "연수3동">연수3동</option>
+                        </select></td>
                         <input type="hidden" id='u_address' name = "u_address">
                     </tr>
                     <tr>
@@ -202,7 +212,7 @@
 
                     <tr>
                     <td> <div  id="addr_check"></div> </td>
-                        <td colspan="4"><button id="logbtn" class="loginbtn" >Login</button> </td>
+                        <td colspan="4"><button id="logbtn" class="loginbtn" >JOIN</button> </td>
                     </tr>
                     
                 </table>
@@ -216,7 +226,7 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁, 이민성
             </div>
         </div>
     </footer>
@@ -227,6 +237,18 @@
 <script>
 let guardianFlag = false;
 var tx =""
+//비밀번호 check
+
+$('#u_password2').blur(function() {
+	if($('#u_password').val() != $('#u_password2').val()) {
+		if($('#u_password').val()!='') {
+				alert("비밀번호가 일치하지 않습니다.");
+				$('#u_password2').val('')
+				$('#u_password2').focus();
+			};		
+		};
+		
+	});
 
 //보호자 input 생성용 but안씀
 $('#guardAdd').click(function () {
@@ -294,12 +316,10 @@ $(document).ready(function(){
     $("#u_guardphonenum").blur(function(){
     	var num2 = $("#u_guardphonenum").val();
     	blur2(num2)
-     	console.log('ㅎㅇ');
     });
     $("#u_guardphonenum").click(function(){
     	var num2 = $("#u_guardphonenum").val();
     	focus2(num2);
-    	console.log('ㅎㅇ2');
     });
     function focus2(num2) {
     	num2 = num2.replace(/[^0-9]/g, '');
@@ -323,8 +343,6 @@ $(document).ready(function(){
 $('#submitCheckBtn').click(function () { 
 	if($('#u_password').val != $('#u_password2').val){return 0;}
 	chkValue();
-		
-	
 });
 
 function chkValue() {
@@ -364,7 +382,9 @@ function chkValue() {
 	 
 	var $townList = ${townList};
 	console.log($townList);	
-	for (i in $townList){
+	
+	//주소 select 에 option값 추가
+	for (var i in $townList){
 		$('#AddressArr').append("<option value="+$townList[i]+">"+$townList[i]+"</option>");
 		console.log($townList[i]);
 	}

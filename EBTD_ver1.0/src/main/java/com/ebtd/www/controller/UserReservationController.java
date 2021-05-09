@@ -41,19 +41,22 @@ public class UserReservationController {
 	}
 	//정류장 상세(정류장에 서는 버스들)
 	@GetMapping(value = "/getStopDetail")
-	public ModelAndView getStopDetail(int s_No) {
+	public ModelAndView getStopDetail(int s_No) throws JsonProcessingException {
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++"+s_No);
 		mav=urm.getStopDetail(s_No);
 		return mav;
 	}
 	@PostMapping(value = "/reservation")
 	public ModelAndView reservation(UserReservationBean ur, HttpSession session) {
-		
 		mav = urm.reservation(ur, session);
 		return mav;
 	}
-	@GetMapping(value = "/reservationPopUp")
-	public String reservationPopUp() {
-		return "/user/ReservationPopUp";
+	
+	@GetMapping(value = "/reservationCheck")
+	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
+		mav = urm.reservationCheck(session);
+		return mav;
 	}
+	
+
 }

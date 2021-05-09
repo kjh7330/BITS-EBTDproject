@@ -11,7 +11,4 @@ public interface I_UserReservationInfoDao {
 	UserReservationBean getReservationDetail(int ur_no);
 
 	void reservationCancel(int ur_no);
-		
-	
-
 }

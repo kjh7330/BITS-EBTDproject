@@ -36,6 +36,13 @@ public class UserMypageController {
 		mav = umm.getReservationHistoryList(u_username);
 		return mav;
 	}
+	//마이페이지 - 이용 상세 내역
+	@GetMapping(value = "/user/getReservationHistoryDetail")
+	public ModelAndView getReservationHistoryDetail(HttpSession session, int ur_no) {
+		String u_username = (String) session.getAttribute("u_username");
+		mav = umm.getReservationHistoryDetail(u_username, ur_no);
+		return mav;
+	}
 	//마이페이지 - 고객 소리함
 	@GetMapping(value = "/user/getMyQuestionList")
 	public ModelAndView getMyQuestionList(HttpSession session) {

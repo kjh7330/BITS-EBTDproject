@@ -40,7 +40,7 @@ public class CompanyMainMM {
 		ObjectMapper om = new ObjectMapper();
 		mav.addObject("sList", om.writeValueAsString(bDao.getStopList()));
 		mav.addObject("tList", om.writeValueAsString(bDao.getTownList()));
-		mav.setViewName("/join");
+		mav.setViewName("/join"); // .jsp
 		return mav;
 	}
 

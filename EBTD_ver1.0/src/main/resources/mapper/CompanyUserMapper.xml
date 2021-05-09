@@ -5,9 +5,31 @@
 
 <mapper namespace="com.ebtd.www.dao.I_CompanyUserDao">
 	<select id="getUserHistory" resultType="userReserveHistory" parameterType="String">
-	SELECT H.URH_NO, H.U_USERNAME, H.S_NOSTART, H.S_NOLAST, H.B_NO, H.URH_DATE, U.U_TYPE FROM
-	USER_RESERVE_HISTORY H JOIN BUS B ON H.B_NO=B.B_NO
-	JOIN USERLIST U ON H.U_USERNAME=U.U_USERNAME
-	WHERE C_USERNAME=#{id} AND URH_STATE=3
+	SELECT R.UR_NO, R.U_USERNAME, R.S_NOSTART, R.S_NOLAST, R.B_NO, R.UR_DATE, U.U_TYPE FROM
+	USER_RESERVE R JOIN BUS B ON R.B_NO=B.B_NO
+	JOIN USERLIST U ON R.U_USERNAME=U.U_USERNAME
+	WHERE B.C_USERNAME=#{id} AND R.UR_STATE=3
 	</select>
+	<select id="getUserTownWheelCount" resultType="int" parameterType="String">
+	SELECT COUNT(*) FROM U WHERE U_ADDRESS LIKE '%'||#{tName}||'%' AND U_TYPE = 0
+	</select>
+	<select id="getUserTownBlindCount" resultType="int" parameterType="String">
+	SELECT COUNT(*) FROM U WHERE U_ADDRESS LIKE '%'||#{tName}||'%' AND U_TYPE = 1
+	</select>
+	<select id="getAllWheelCount" resultType="int">
+	SELECT COUNT(*) FROM U WHERE U_TYPE = 0
+	</select>
+	<select id="getAllBlindCount" resultType="int">
+	SELECT COUNT(*) FROM U WHERE U_TYPE = 1
+	</select>
+	<select id="getBusNum" resultType="companyBus" parameterType="String">
+	SELECT B_NO FROM B WHERE C_USERNAME = #{id} 
+	</select>
+	<select id="getVocList" resultType="com.ebtd.www.bean.VocBean" parameterType="String">
+	SELECT * FROM VOC WHERE C_USERNAME = #{id} AND MOD(V_NO, 2) = 0
+	</select>
+	<insert id="addReply" parameterType="com.ebtd.www.bean.VocBean">
+	INSERT INTO VOC(V_NO, C_USERNAME, B_NO, U_USERNAME, V_TITLE, V_CONTENT, V_DATE, VOC_RECOMMEND)
+	VALUES(#{a_no}, #{c_username}, #{b_no}, #{u_username}, #{v_title}, #{v_content}, SYSDATE, #{voc_recommend})
+	</insert>
 </mapper>

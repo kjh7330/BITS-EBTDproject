@@ -175,7 +175,7 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁, 충레기
             </div>
         </div>
     </footer>
@@ -185,7 +185,7 @@
 $('.otherbtn1, .otherbtn3').click(function() {
 	$('#joinWheel').submit();
 });
-$('.otherbtn2, otherbtn4').click(function() {
+$('.otherbtn2, .otherbtn4').click(function() {
 	$('#joinBlind').submit();
 });
 </script>

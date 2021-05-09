@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.UserBean;
 import com.ebtd.www.bean.UserBookmarkBean;
+import com.ebtd.www.bean.UserReservationBean;
 import com.ebtd.www.bean.UserReserveHistoryBean;
 import com.ebtd.www.bean.VocBean;
 import com.ebtd.www.dao.I_UserMypageDao;
@@ -39,9 +40,10 @@ public class UserMypageMM {
 	public ModelAndView getReservationHistoryList(String u_username) {
 		mav = new ModelAndView();
 		String view = null;
-		List<UserBookmarkBean> ubList = null;
+		List<UserReservationBean> ubList = null;
 		UserBean ub = umDao.getMypage(u_username);
 		ubList = umDao.getReservationHistoryList(u_username);
+		System.out.println(ubList);
 		mav.addObject("ubList", ubList);
 		if(ub.getU_type()==1) {
 			view = "user/blind/reservationHistoryListForm";
@@ -51,15 +53,39 @@ public class UserMypageMM {
 		mav.setViewName(view);
 		return mav;
 	}
+	//이용 내역 상세 가져오기
+	public ModelAndView getReservationHistoryDetail(String u_username, int ur_no) {
+		mav = new ModelAndView();
+		String view = null;
+		List<UserReservationBean> ubdList = null;
+		UserBean ub = umDao.getMypage(u_username);
+		ubdList = umDao.getReservationHistoryDetail(ur_no);
+		System.out.println(ubdList);
+		mav.addObject("ubdList", ubdList);
+		if(ub.getU_type()==1) {
+			view = "user/blind/reservationHistoryDetailForm";
+		}else if(ub.getU_type()==0) { //휠체어
+			view = "user/wheel/reservationHistoryDetailForm";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	
 	//고객 소리함 - 리스트 가져오기 (내 질문들, 답변들)
 	public ModelAndView getMyQuestionList(String u_username) {
 		mav = new ModelAndView();
 		String view = null;
 		List<VocBean> vList = umDao.getMyQuestionList(u_username);
+		List<VocBean> aList = umDao.getAnswerList(u_username);
+		UserBean ub = umDao.getMypage(u_username);
 		mav.addObject("vList", vList);
-		if(vList.get(0).getU_type()==1) { //시각
+		mav.addObject("aList", aList);
+		System.out.println(vList);
+		System.out.println(aList);
+		if(ub.getU_type() == 1) { //시각
 			view="user/blind/myQuestionListForm";
-		}else if(vList.get(0).getU_type()==0) {
+		}else if(ub.getU_type() == 0) {
 			view="user/wheel/myQuestionListForm"; //휠체어
 		}
 		mav.setViewName(view);
@@ -101,13 +127,13 @@ public class UserMypageMM {
 		mav = new ModelAndView();
 		String view = null;
 		List<VocBean> vList = null;
-		//vList = umDao.getMyQuestionDetail(v_no);
-		//mav.addObject("vList", vList);
-		//if(vList.get(0).getU_type()==1) { //시각
+		vList = umDao.getMyQuestionDetail(v_no);
+		mav.addObject("vList", vList);
+		if(vList.get(0).getU_type()==1) { //시각
 			view="user/blind/myQuestionDetailForm";
-		//}else if(vList.get(0).getU_type()==0) { //휠체어
-		//	view="user/wheel/myQuestionDetailForm";
-		//}
+		}else if(vList.get(0).getU_type()==0) { //휠체어
+			view="user/wheel/myQuestionDetailForm";
+		}
 		mav.setViewName(view);
 		return mav;
 	}

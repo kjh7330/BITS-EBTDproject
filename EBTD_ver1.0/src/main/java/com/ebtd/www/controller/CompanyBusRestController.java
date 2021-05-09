@@ -1,5 +1,7 @@
 package com.ebtd.www.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,10 @@ public class CompanyBusRestController {
 	}
 	
 	@GetMapping(value = "/existBusNumCheck")
-	public int existBusNumCheck(String busNum) {
+	public int existBusNumCheck(String busNum, HttpSession session) {
 		System.out.println("ajax 통신 성공");
-		int checkResult = bm.existBusNumCheck(busNum);
+		System.out.println("노선번호 확인 :"+ busNum);
+		int checkResult = bm.existBusNumCheck(busNum, session);
 		return checkResult;
 	}
 

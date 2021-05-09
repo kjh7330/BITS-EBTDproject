@@ -23,7 +23,26 @@
 		ORDER BY R_TURN ASC
 	</select>
 	
+	<select id="getAllBusList" parameterType="String" resultType="allbus">
+		SELECT * FROM AB WHERE B_NO=#{b_No}
+	</select>
+	
+	<select id="getStopDetail" parameterType="int" resultType="stop_wh">
+		SELECT B_NO, S_NAME, S.S_NO FROM S S JOIN RB RB
+		ON S.S_NO = RB.S_NO
+		WHERE S.S_NO = #{s_No}
+	</select>
+	
 	<insert id="reservation" parameterType="reservation">
 		INSERT INTO USER_RESERVE VALUES(SEQ_UR_NO.NEXTVAL, #{u_username}, #{s_nostart}, #{s_nolast}, #{b_no}, SYSDATE, 0) 
 	</insert>
+	
+	<select id="reservationCheck" parameterType="String" resultType="reservation">
+		SELECT UR.UR_NO, UR.U_USERNAME, UR.UR_STATE, UR.S_NOSTART, UR.S_NOLAST, UR.UR_DATE, UR.B_NO, S.S_NAME S_NAMESTART, S2.S_NAME S_NAMELAST 
+		FROM UR UR JOIN S S
+		ON UR.S_NOSTART = S.S_NO JOIN S S2
+		ON UR.S_NOLAST = S2.S_NO 
+		WHERE UR.U_USERNAME = #{u_username} and UR.UR_STATE IN (0, 1)
+	</select>
+	
 </mapper>

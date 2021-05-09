@@ -3,6 +3,8 @@ package com.ebtd.www.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.AllBusBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.service.UserReservationMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,5 +38,10 @@ public class UserReservationRestController {
 		return stopList; 
 	}
 	
-	
+	@GetMapping(value = "/allbus")
+	public List<AllBusBean> allbus(String b_No) throws JsonProcessingException {
+		List<AllBusBean> abList = urm.allbus(b_No);
+		
+		return abList;
+	}
 }

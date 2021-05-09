@@ -167,7 +167,7 @@ $("#myBtn").on("click", function(){
 			 	 $("#overlay").css({ visibility:"visible", opacity:1 });
 	         	 $("#myModal").css({ display: "inline"});
 		  	} else if(data!=1) {
-			 	 alert("없는 버스번호입니다.");
+			 	 alert("존재하지 않는 버스 번호이거나 귀사의 소속이 아닌 버스입니다.");
 		 	 }
 		  } else {
 			  alert("노선번호를 입력하세요.");
@@ -204,6 +204,15 @@ $('#mTownSelect').on('change', function() {
 		let sTName = sList[i]['t_NAME'];
 		let sName = sList[i]['s_NAME'];
 		if(sTName == townSelect) {
+			$('#mStopSelect').append("<option value ='"+sName+"'>"+sName+"</option>");
+		}
+	}
+});
+$(document).ready(function() {
+	for (let i in sList) {
+		let sTName = sList[i]['t_NAME'];
+		let sName = sList[i]['s_NAME'];
+		if(sTName == '청학1동') {
 			$('#mStopSelect').append("<option value ='"+sName+"'>"+sName+"</option>");
 		}
 	}

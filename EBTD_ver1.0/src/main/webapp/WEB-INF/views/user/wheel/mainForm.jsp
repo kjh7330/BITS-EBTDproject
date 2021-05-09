@@ -31,9 +31,10 @@
         .maindetail{
             height: 27vh;
             text-align: center;
+            padding-left: 10px;
         }
-        .maindetail input{
-            width: 385px;
+        .maindetail table{
+            width: 391px;
             height: 175px;
             background-color: #f9eb99;
             text-align: center;
@@ -55,6 +56,10 @@
             border: none;
             cursor: pointer;
         }
+        .reservationCheck{
+        	text-align: center;
+        	
+        }
     </style>
 </head>
 <body>
@@ -62,7 +67,9 @@
     <main class="mainview">
         <div class="maindetail">
             <!--예약 내용 readonly -->
-            <input type="text" value="예약 내용을 불러오세요" readonly>
+            <table class = "reservationCheck">
+
+            </table>
         </div>
         <div class="mainbtn">
             <button onclick="location.href='/user/getBusList'">예약하기</button>
@@ -73,4 +80,30 @@
     </main>
     <div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
 </body>
+
+<script type="text/javascript">
+	console.log(${urList});
+ 	let i = 0;
+	let str = '';
+	
+	if(${urList}.length == 0){
+		str+='<tr><td><input type="text" value = "예약한 내역이 없습니다." readonly = "readonly"></td></tr>';
+		$('.reservationCheck').append(str);
+	}else{
+		$('#reservationCheck').val('');
+		for(i=0; i<${urList}.length; i++){
+			str+='<tr><td style = "font-size : 13px; width : 250px;">경로 : '+${urList}[i]["s_nameStart"]+'->'+${urList}[i]["s_nameLast"];
+			str+='</td>'
+			if(${urList}[i]["ur_state"]==0){
+				str+='<td style="color : orange; font-size : 13px; font-weight: bolder;">탑승 대기중</td>';
+			}else{
+				str+='<td style="color : blue; font-size : 13px; font-weight: bolder;">탑승중</td>';
+			};
+			str+='</tr>';
+			
+		};
+		$(".reservationCheck").append(str); 
+	}
+	
+</script>
 </html>

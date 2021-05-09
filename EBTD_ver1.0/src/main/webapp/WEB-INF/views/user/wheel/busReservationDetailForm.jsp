@@ -14,14 +14,13 @@
 }
 #bustitle{
 	text-align: center;
-	font-size: 30px;
 	background-color: blue;
 }
 #busRoute{
 	float : right;
 	color: black;
 	border: 1px solid black;
-	width: 75%;
+	width: 100%;
 }
 #stopinfo{
 	background-color: blue;
@@ -40,10 +39,15 @@
 	text-align: center;
 	font-size: 30px;
 	background-color: blue;
-	font-color : white;
+	color : white;
 	border: none;
 }
+.route_td{
+	width : 10%;
+}
+.fas fa-bus{
 
+}
 </style>
 </head>
 
@@ -64,7 +68,6 @@
 		<td><div class="inputValue" id="lastValue">목적지 : <input id = "s_namelast" type="text" readonly='readonly'><input id="s_nolast" name="s_nolast" style="display: none;"></div></td>
 		</tr>
 	</table>
-	<br>	
 	<table id = "busRoute">
 	</table>
 </form>	    
@@ -75,6 +78,7 @@
 
 <script type="text/javascript">
 console.log(${brList});
+console.log(${abList});
 $("<input id='b_no' name='b_no' readonly='readonly' value="+${brList}[0]["b_no"]+">").appendTo("#bustitle"); 
 $("#startstop").append(${brList}[0]["s_name"]);
 $("#laststop").append(${brList}[${brList}.length-1]["s_name"]);
@@ -82,10 +86,44 @@ $("#laststop").append(${brList}[${brList}.length-1]["s_name"]);
 let i=0;
 let str='';
 
-for (i; i<${brList}.length; i++){
-	str+='<tr id="stop">';
+let timer = setInterval(function () {
+	$.ajax({
+		url : '/user/allbus',
+		data : { 'b_No' : ${brList}[0]["b_no"] },
+		dataType : 'json'
+	}).done(function (data) {
+		$('.route_td').html('');
+		
+		let split;
+		let i = 1;
+		for(idx in data){
+			for(child of $('.route_td') ){
+				split = $(child).attr('id').split('_');
+				if( $(data)[idx]['r_turn'] == split[3] )
+					if( data[idx]['ab_type'] == 0 )
+						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html(data[idx]['ab_no']+'일반'+'<i class="fas fa-bus" style="color : blue;"></i><i class="fal fa-comment-alt"></i>');
+						else									$('#route_down_td_'+i+'').html(data[idx]['ab_no']+'일반'+'<i class="fas fa-bus" style="color : blue;"></i><i class="fal fa-comment-alt"></i>');
+					else
+						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html(data[idx]['ab_no']+'저상'+'<i class="fas fa-bus" style="color : green;"></i><i class="fal fa-comment-alt"></i>');
+						else									$('#route_down_td_'+i+'').html(data[idx]['ab_no']+'저상'+'<i class="fas fa-bus" style="color : green;"></i><i class="fal fa-comment-alt"></i>');
+				if( split[1] == 'down' ) i++;
+			}
+			i = 1;
+		}
+	}).fail(function (err) {
+		console.log(err,'!!!!!!!!');
+	});
 	
-	str+='<td class="stopList">'+${brList}[i]["s_name"]+'<br>';
+}, 1000);
+
+for (i; i<${brList}.length; i++){
+	str='<tr id="stop">';
+	
+	
+	
+	str+='<td class = "route_td" id = "route_up_td_'+(i+1)+'"></td>';
+	str+='<td class = "route_td" id = "route_down_td_'+(i+1)+'"></td>';
+	str+='</td><td class="stopList">'+${brList}[i]["s_name"]+'<br>';
 	str+=${brList}[i]["s_no"]+'</td>';
 	
 	str+='<td class = "div_td">';
@@ -95,8 +133,19 @@ for (i; i<${brList}.length; i++){
 	str+='</td>';
 	
 	str+='</tr>'; 
+	$("#busRoute").append(str);
+	
+	for( idx in ${abList}){
+		if( ${abList}[idx]['r_turn'] == i+1 ) {
+			if( ${abList}[idx]['ab_type'] == 0 )
+				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'일반');
+				else									$('#route_down_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'일반');
+			else
+				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'저상');
+				else									$('#route_down_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'저상');
+		}
+	}
 };
-$("#busRoute").append(str);
 
 $(".stopList").click(function () {
     if ($(this).parent().find('.routeSetting').css('visibility') == 'hidden'){
@@ -135,5 +184,6 @@ $("#Btn").click(function() {
 		console.log("입력이나 해 충호야");
 	}
 });
+
 </script>
 </html>

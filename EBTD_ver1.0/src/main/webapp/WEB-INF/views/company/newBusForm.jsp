@@ -208,6 +208,15 @@ $("#myBtn").on("click", function(){
         $("#overlay").css({ visibility:"hidden", opacity:0 });
     }
 });
+$(document).ready(function() {
+	for (let i in sList) {
+		let sTName = sList[i]['t_NAME'];
+		let sName = sList[i]['s_NAME'];
+		if(sTName == '청학1동') {
+			$('#mStopSelect').append("<option value ='"+sName+"'>"+sName+"</option>");
+		}
+	}
+});
 //동,읍,면 선택 시 해당 지역의 정류장 리스트 불러오기
 $('#mTownSelect').on('change', function() {	
 	let townSelect = $('#mTownSelect').val();

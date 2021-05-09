@@ -14,6 +14,7 @@ public class DriverReserveBean {
 	private int ur_no;
 	private int ur_start_turn;
 	private int ur_last_turn;
+	private int ur_state;
 	private Date ur_date;
 	private int u_type;
 	private boolean up;

@@ -33,20 +33,12 @@ public class DriverRestController {
 	DriverMM dm;
 	
 	@GetMapping(value = "/refresh", produces = "application/json;charset=utf-8")
-	public List<DriverReserveBean> refresh (String car, boolean go, String wheel, String blind,  HttpSession ss) throws JsonProcessingException{
-		return dm.refresh(car, go, wheel, blind, ss);
+	public List<DriverReserveBean> refresh (String car, boolean go, String wheel, String blind,  HttpSession ss, boolean up) throws JsonProcessingException{
+		return dm.refresh(car, go, wheel, blind, ss, up);
 	}
 	
-	@GetMapping(value = "/on", produces = "application/json;charset=utf-8")
-	public List<String> on (@RequestParam(value="data[]") List<String> data ){
-		
-		return dm.on(data);
+	@GetMapping(value = "/on_out", produces = "application/json;charset=utf-8")
+	public List<String> on (@RequestParam(value="on_data[]") List<String> on_data, @RequestParam(value="out_data[]") List<String> out_data ){
+		return dm.on_out(on_data, out_data);
 	}
-	
-	@GetMapping(value = "/out", produces = "application/json;charset=utf-8")
-	public List<String> out (@RequestParam( value="data[]") List<String> data ) {
-		
-		return dm.out(data);
-	}
-	
 }

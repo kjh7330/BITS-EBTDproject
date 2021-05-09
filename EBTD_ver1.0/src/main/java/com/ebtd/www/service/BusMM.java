@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.BusBean;
+import com.ebtd.www.bean.CompanyCheckBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.TownBean;
 import com.ebtd.www.dao.I_BusDao;
@@ -48,12 +49,13 @@ public class BusMM {
 	 * model.getAttribute("busRoute"); System.out.println(rMap);
 	 * model.getAttribute("busRoute"); return mav; }
 	 */
-	public ModelAndView applyNewBusRoute(Object id, Object busNum) {
+	public ModelAndView applyNewBusRoute(Object id, Object busNum, int od_no) {
 		String busNumber = busNum.toString();
 		String companyName = id.toString();
 		ApplyBusHistory BusBean = new ApplyBusHistory();
 		BusBean.setAp_b_no(busNumber);
 		BusBean.setC_username(companyName);
+		BusBean.setOd_no(od_no);
 		bDao.applyNewBusRoute(BusBean);
 		bDao.addBusAndCompany(BusBean);
 		return null;
@@ -102,10 +104,23 @@ public class BusMM {
 		}
 		return mav;
 	}
-	public int existBusNumCheck(String busNum) {
-		int checkResult = 0;
-		checkResult = bDao.existBusNumCheck(busNum);
-		return checkResult;
+	public int existBusNumCheck(String busNum, HttpSession session) {
+		Integer checkResult = null;
+		String cName = session.getAttribute("c_username").toString();
+		CompanyCheckBean cb = new CompanyCheckBean();
+		System.out.println("버스남바"+busNum);
+		System.out.println("회사이름은!!"+cName);
+		cb.setBusNum(busNum);
+		cb.setCName(cName);
+		checkResult = bDao.existBusNumCheck(cb);
+		System.out.println(checkResult);
+		if(checkResult.equals(Integer.valueOf(1)) || checkResult.equals(Integer.valueOf(4)) || checkResult.equals(Integer.valueOf(5))) {
+			return 1;
+		} else if (checkResult.equals(null)){
+			return 0;
+		} else {
+			return 0;
+		}
 	}
 	public ModelAndView applyUpdateBusRoute(Object id, Object busNum) {
 		String busNumber = busNum.toString();
@@ -139,6 +154,9 @@ public class BusMM {
 			System.out.println(model.getAttribute("stopNum"+i)+"여기");
 		};
 		return mav;
+	}
+	public int get_od_no(String c_username) {
+		return bDao.get_od_no(c_username);
 	};
 
 

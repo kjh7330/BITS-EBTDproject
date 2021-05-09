@@ -24,24 +24,14 @@
 	.inputcontent{
 		margin-top: 5px;
 		width: 412px;
-		height: 380px;
+		height: 400px;
+		resize: none;
 	}
-	.file{
-		width: 80px;
-		height: 30px;
-		text-align: center;
-		margin-top: 10px;
-		margin-right: 10px;
-		font-size: 18px;
-	}
-	.img{
-		width: 313px;
-		height: 30px;
-		margin-top: 10px;
-		font-size: 18px;
+	.inputcontent:focus{
+		outline: none;
 	}
 	.btn{
-		margin-top: 11px;
+		margin-top: 30px;
 		margin-left: 39.5%;
 		width: 90px;
 		height: 45px;
@@ -77,8 +67,7 @@
 			제목 : <input class="inputtitle" name="v_title" value="${v.v_title}">
 			버스번호 : <select class="select"></select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			평가 : <select class="select" name="voc_recommend"><option value="1">추천</option><option value="-1">비추천</option></select>
-			<input class="inputcontent" name="v_content" value="${v.v_content}">
-			<input class="file" value="첨부파일"><input class="img" value="사진.${v.imgextention}">
+			<textarea class="inputcontent" name="v_content" cols="40" rows="8" ></textarea>
 		<!-- /c:forEach-->
 			<a href="/user/getMyQuestionList"><input type="submit" class="btn" value="확인"></a>
 		</form>

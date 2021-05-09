@@ -16,8 +16,9 @@
 	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
 	</select>
 	
-	<select id="existBusNumCheck" resultType="int" parameterType="String">
-	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
+	<select id="existBusNumCheck" resultType="Integer" parameterType="com.ebtd.www.bean.CompanyCheckBean">
+	SELECT AP_STATE FROM AP
+	WHERE AP_NO=(SELECT MAX(AP_NO) FROM APPLY_BUS_HISTORY WHERE AP_B_NO=#{busNum} AND C_USERNAME=#{cName})
 	</select>
 	
 	<select id="getApplyNumber" resultType="int" parameterType="com.ebtd.www.bean.ApplyBusHistory">
@@ -28,7 +29,8 @@
 	<selectKey resultType="int" order="BEFORE" >
 	SELECT SEQ_AP_NO.NEXTVAL FROM DUAL
 	</selectKey>
-	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 0)
+	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE, ap_od_no) 
+	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 0, #{od_no})
 	</insert>
 	
 	<insert id="addBusAndCompany" parameterType="com.ebtd.www.bean.ApplyBusHistory">
@@ -36,18 +38,24 @@
 	</insert>
 
 	<insert id="applyNewBusRouteDetail" parameterType="com.ebtd.www.bean.ApplyBusHistory">
-	INSERT INTO APPLY_BUS_HISTORY_DETAIL(AP_NO, AP_B_NO, APDE_TURN, S_NO) VALUES(#{ap_no}, #{ap_b_no}, #{apde_turn}, #{s_no})
+	INSERT INTO APPLY_BUS_HISTORY_DETAIL(AP_NO, AP_B_NO, APDE_TURN, S_NO) 
+	VALUES(#{ap_no}, #{ap_b_no}, #{apde_turn}, #{s_no})
 	</insert>
 	
 	<insert id="addNewMotorNumber" parameterType="bus">
-	INSERT INTO ALLBUS(AB_NO, B_NO, AB_TYPE, AB_STATE) VALUES(#{motorNumber}, #{busNumber}, #{busType}, 0)
+	INSERT INTO ALLBUS(AB_NO, B_NO, AB_TYPE, AB_STATE) 
+	VALUES(#{motorNumber}, #{busNumber}, #{busType}, 0)
 	</insert>
 	
 	<insert id="applyUpdateBusRoute" parameterType="com.ebtd.www.bean.ApplyBusHistory">
 	<selectKey resultType="int" order="BEFORE" >
 	SELECT SEQ_AP_NO.NEXTVAL FROM DUAL
 	</selectKey>
-	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 3) 
+	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) 
+	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 3) 
 	</insert>
 	<select resultType="String" id="getTownNameList">SELECT t_name FROM T </select>
+	<select id="get_od_no" resultType = 'int'>
+	select od_no+1 od_no from official_document where c_username = #{c_username}
+	</select>
 </mapper>

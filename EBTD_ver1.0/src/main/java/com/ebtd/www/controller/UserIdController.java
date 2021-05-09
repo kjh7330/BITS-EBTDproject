@@ -45,6 +45,7 @@ public class UserIdController {	//유저 - 로그인, 회원가입
 	@RequestMapping(value = "/wheel/join")
 	public ModelAndView wheelJoinForm() throws JsonProcessingException {
 		mav = uIdmm.getTownList();
+		mav.addObject("type", 0);
 		mav.setViewName("/user/wheel/wheelJoin");
 		return mav;
 	}

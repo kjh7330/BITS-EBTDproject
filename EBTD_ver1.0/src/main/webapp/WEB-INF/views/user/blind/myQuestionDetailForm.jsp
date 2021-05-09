@@ -90,7 +90,7 @@
 <div class="main-container">
 	<div>
 		<div class="divinput">
-		<!-- c:forEach var="v" items="${vList}"-->
+		<c:forEach var="v" items="${vList}">
 			제목 : <input class="inputtitle" value="${v.v_title}">
 			<c:choose>
 				<c:when test="${v.voc_recommend eq 1}">
@@ -100,9 +100,8 @@
 					<input class="recom" type="text" value="비추천">
 				</c:when>
 			</c:choose>
-			내용<input class="inputcontent" value="${v.v_content}">
-			<input class="file" value="첨부파일"><input class="img" value="사진.${v.imgextention}">
-		<!-- /c:forEach-->
+			내용<textarea class="inputcontent" name="v_content" cols="40" rows="8" readonly>${v.v_content}</textarea>
+		</c:forEach>
 		</div>
 		<div class="divbtn">
 			<a href="/user/getMyQuestionList"><button class="btn">확인</button></a>

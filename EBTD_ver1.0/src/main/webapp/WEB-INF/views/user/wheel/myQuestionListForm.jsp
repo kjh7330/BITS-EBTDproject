@@ -57,17 +57,13 @@
 	<div class="divtable">
 	<table class="tablestyle">
 		<tr style="background-color: lightgray;">
-			<td class="tabletitle">번호</td>
+			<td class="tabletitle">접수번호</td>
 			<td class="tabletitle">버스번호</td>
 			<td class="tabletitle">제목</td>
 			<td class="tabletitle">작성일</td>
 		</tr>
-		<tr>
-			<td>번호</td>
-			<td>버스번호</td>
-			<td><a style="text-decoration: none; color:black" href="/user/getMyQuestionDetail?v_no=${v.v_no}">제목</a></td>
-			<td>작성일</td>
-		</tr>
+		<c:set var="aL" value="${aList}" />
+		<c:if test="${empty aL}">
 		<c:forEach var="v" items="${vList}">
 		<tr>
 			<td>${v.v_no}</td>
@@ -76,6 +72,29 @@
 			<td>${v.v_date}</td>
 		</tr>
 		</c:forEach>
+		</c:if>
+		<c:if test="${not empty aL}">
+		<c:forEach var="v" items="${vList}">
+		<c:forEach var="a" items="${aList}">
+		<c:set var="vv" value="${v.v_no}" />
+		<c:set var="aa" value="${a.v_no}" />
+		<tr>
+			<td>${v.v_no}</td>
+			<td>${v.b_no}</td>
+			<td><a style="text-decoration: none;" href="/user/getMyQuestionDetail?v_no=${v.v_no}">${v.v_title}</a></td>
+			<td>${v.v_date}</td>
+		</tr>
+		<c:if test="${aa eq vv}">
+		<tr>
+			<td>${a.v_no+1}</td>
+			<td>${a.b_no}</td>
+			<td><a style="text-decoration: none;" href="/user/getMyQuestionDetail?v_no=${a.v_no+1}">${a.v_title}</a></td>
+			<td>${a.v_date}</td>
+		</tr>
+		</c:if>
+		</c:forEach>
+		</c:forEach>
+		</c:if>
 	</table>
 	</div>
 </div>

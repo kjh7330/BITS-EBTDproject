@@ -16,9 +16,11 @@
 	}
 	.maintable{
 		width: 410px;
-		height: 100px;
-		font-size: 15px;
+		height: 500px;
+		font-size: 23px;
 		text-align: center;
+		background-color: #f9eb99;
+		
 	}
 
 	
@@ -29,29 +31,26 @@
 <div class="main-container">
 	<div class="maindiv">
 		<table class="maintable">
+			<c:forEach var="ubd" items="${ubdList}">
 			<tr>
-				<td>이용일자</td><td>노선번호</td><td>상세보기</td>
+				<td>버스번호</td><td>${ubd.b_no}</td>
 			</tr>
-			<c:forEach var="ub" items="${ubList}">
 			<tr>
-				<td>${ub.ur_date}</td><td>${ub.b_no}</td><td><button onclick="location.href='/user/getReservationHistoryDetail?ur_no=${ub.ur_no}'">상세</button></td>
+				<td>출발지</td><td>${ubd.s_nameStart}</td>
+			</tr>
+			<tr>
+				<td>도착지</td><td>${ubd.s_nameLast}</td>
+			</tr>
+			<tr>
+				<td>이용시간</td><td>${ubd.ur_date}</td>
 			</tr>
 			</c:forEach>
 		</table>
 	</div>
- 
+
 </div>
 <div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
 <script>
-	let ubList = ${ubList};
-	
-	$('.maindiv').html('');
-	let apple = '';
-	for(i in ubList){
-		apple += '<input class="maininput" type="text" value="탑승일'+ ubList[i]["urh_date"];
-		apple += '">';
-	}
-	$('.maindiv').append(apple);
 	
 </script>
 </body>

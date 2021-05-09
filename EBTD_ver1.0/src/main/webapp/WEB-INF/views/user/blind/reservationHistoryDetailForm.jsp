@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객 소리함</title>
+<title>내 정보 확인</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,43 +35,15 @@
     	border:none;
     	cursor: pointer;
     }
-	.main-container{
+    .main-container{
 		color: black;
+		margin: 15px;
 	}
-	.divbtn{
-		margin-top: 20px;
-		margin-right: 10px;
-		text-align: right;
-	}
-	.btn{
-		background-color: #f9eb99;
-		width: 90px;
-		height: 40px;
-		font-size: 20px;
-		border-radius: 10px;
-		border: none;
-		cursor: pointer;
-	}
-	.btn:hover{
-		background-color: lightgray;
-	}
-	.divtable{
-		margin-left: 15px;
-		margin-top: 10px;
-	}
-	.tablestyle{
-		width: 425px;
-		border-bottom: 1px solid black;
-		border-collapse: collapse;
+	.maintable{
+		width: 410px;
+		height: 100px;
+		font-size: 15px;
 		text-align: center;
-	}
-	.tablestyle td{
-		border-bottom: 1px solid black;
-		border-collapse: collapse;
-		height: 30px;
-	}
-	.tabletitle{
-		font-weight: bold;
 	}
 
 </style>
@@ -79,62 +51,34 @@
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
 <div class="main-container">
-	<div class="divbtn">
-		<a href="/user/getMyQuestionWrite"><button class="btn">작성</button></a>
+	<div class="maindiv">
+		<table class="maintable">
+			<c:forEach var="ubd" items="${ubdList}">
+			<tr>
+				<td>버스번호</td><td>${ubd.b_no}</td>
+			</tr>
+			<tr>
+				<td>출발지</td><td>${ubd.s_nameStart}</td>
+			</tr>
+			<tr>
+				<td>도착지</td><td>${ubd.s_nameLast}</td>
+			</tr>
+			<tr>
+				<td>이용시간</td><td>${ubd.ur_date}</td>
+			</tr>
+			</c:forEach>
+		</table>
 	</div>
-	<div class="divtable">
-	<table class="tablestyle">
-		<tr style="background-color: lightgray;">
-			<td class="tabletitle">접수번호</td>
-			<td class="tabletitle">버스번호</td>
-			<td class="tabletitle">제목</td>
-			<td class="tabletitle">작성일</td>
-		</tr>
-		<c:set var="aL" value="${aList}" />
-		<c:if test="${empty aL}">
-		<c:forEach var="v" items="${vList}">
-		<tr>
-			<td>${v.v_no}</td>
-			<td>${v.b_no}</td>
-			<td><a style="text-decoration: none;" href="/user/getMyQuestionDetail?v_no=${v.v_no}">${v.v_title}</a></td>
-			<td>${v.v_date}</td>
-		</tr>
-		</c:forEach>
-		</c:if>
-		<c:if test="${not empty aL}">
-		<c:forEach var="v" items="${vList}">
-		<c:forEach var="a" items="${aList}">
-		<c:set var="vv" value="${v.v_no}" />
-		<c:set var="aa" value="${a.v_no}" />
-		<tr>
-			<td>${v.v_no}</td>
-			<td>${v.b_no}</td>
-			<td><a style="text-decoration: none;" href="/user/getMyQuestionDetail?v_no=${v.v_no}">${v.v_title}</a></td>
-			<td>${v.v_date}</td>
-		</tr>
-		<c:if test="${aa eq vv}">
-		<tr>
-			<td>${a.v_no+1}</td>
-			<td>${a.b_no}</td>
-			<td><a style="text-decoration: none;" href="/user/getMyQuestionDetail?v_no=${a.v_no}">${a.v_title}</a></td>
-			<td>${a.v_date}</td>
-		</tr>
-		</c:if>
-		</c:forEach>
-		</c:forEach>
-		</c:if>
-	</table>
-	</div>
+
 </div>
 <footer>
      <div class="footer-container">
-         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
-         	<button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
-         	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
+         	<button class="footerbtn" ondblclick="dbClick1()" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
+         	<button class="footerbtn" ondblclick="dbClick2()" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
+         	<button class="footerbtn" ondblclick="dbClick3()" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
      </div>
 </footer>
 <script>
-
 $('#btn1').click(function(){
 	if(    $('.btn').css('background-color') == 'rgb(249, 235, 153)' ){
 		   $('.btn').css("background-color","lightgray");

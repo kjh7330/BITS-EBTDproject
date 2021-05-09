@@ -22,5 +22,6 @@ public class ApplyBusHistory {
 	private int c_state;	   // 회사 승인상태 0:미승인 1:승인 2:반려 3:수정
 	private int ap_state;	   // 버스 승인상태 0:미승인 1:승인 2:반려 3:수정
 	private String ap_reject;  // 반려 사유
+	private int od_no; 
 	
 }
