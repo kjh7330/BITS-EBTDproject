@@ -23,5 +23,7 @@ public interface I_CompanyDriverDao {
 
 	boolean updateDriver(DriverBean db);
 
+	boolean deleteDriver(int d_no);
+
 
 }

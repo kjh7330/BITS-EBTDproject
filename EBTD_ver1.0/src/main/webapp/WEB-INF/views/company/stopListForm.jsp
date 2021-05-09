@@ -60,6 +60,7 @@
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>
 <script type="text/javascript">
+$(document).ready(function() { 
 let sList = ${sList};
 var html = '';
 
@@ -81,10 +82,9 @@ var html = '';
  $("#stopList").append(html);
 
 //조회 버튼 클릭시 알림창 띄우고 해당 정류장 정보만 보여주기
-	
   	function searchStop() {
 		var sValue = $('#search').val(); //input 박스 입력한 값
-		alert(sValue + '정류장 정보 조회');
+		alert(sValue + ' 관련 정류장 정보 조회');
 		
  		$.ajax({
 			url : '/company/searchStop?S_NAME=' + sValue,     
@@ -93,9 +93,7 @@ var html = '';
 			success : function(data) {
 				//alert('검색성공');
 				var html = '';
-				
-
-				
+	
 				for(let i = 0 ; i<data.length; i++){
 					 html += '<tr>';
 					 html += '<td>'+data[i].s_NO+'</td>';
@@ -112,13 +110,13 @@ var html = '';
 				 $("#stopList").append(html);
 			},
 			error : function(err) {
-				alert('검색실패');
+				alert('관련 정류장이 없습니다');
 				console.log(err);
 			}
 
 		}); //ajax End  
 
 	} //searhStop End  
-	
+}); //ready End	
 </script>
 </html>

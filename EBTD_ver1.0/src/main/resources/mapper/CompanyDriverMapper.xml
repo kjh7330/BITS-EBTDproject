@@ -15,14 +15,13 @@
 		SELECT * FROM DRIVER WHERE d_no = #{d_no}
 	</select>
   
-	
 	<!-- 기사 추가 -->
 	<insert id="addDriver" parameterType="driver"> 
   		<selectKey resultType="int" order="BEFORE" >
 			SELECT SEQ_D_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO DRIVER(D_NO, C_USERNAME, D_NAME, D_IMGEXTENTION, D_PHONENUM, D_ENTERDATE, B_NO)
-		VALUES(SEQ_D_NO.NEXTVAL,#{c_userName},#{d_name},#{d_imgExtention},#{d_phoneNum},#{d_enterDate},#{b_no})
+		INSERT INTO DRIVER(D_NO, C_USERNAME, D_NAME, D_PHONENUM, D_ENTERDATE, B_NO)
+		VALUES(SEQ_D_NO.NEXTVAL,#{c_userName},#{d_name},#{d_phoneNum},#{d_enterDate},#{b_no})
 	</insert>  
 	 
 	<!-- 해당회사 노선 조회 -->
@@ -35,4 +34,8 @@
 		UPDATE DRIVER SET d_phoneNum = #{d_phoneNum} , b_no = #{b_no} WHERE d_no = #{d_no}
 	</update>
 	
+	<!-- 기사 삭제 -->
+	<delete id="deleteDriver" parameterType="int">
+		DELETE FROM DRIVER WHERE d_no = #{d_no}
+	</delete>
 </mapper>

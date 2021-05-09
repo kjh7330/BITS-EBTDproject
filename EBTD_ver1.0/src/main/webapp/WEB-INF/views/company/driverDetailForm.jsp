@@ -25,7 +25,6 @@
 				<th>기사 번호</th>
 				<!-- <th>회사 이름</th> -->
 				<th>기사 이름</th>
-				<th>이미지</th>
 				<th>전화번호</th>
 				<th>입사일</th> 
 				<th>노선번호</th>
@@ -40,7 +39,8 @@
 
 	</div>
   </form>
- 
+ 	
+
  
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
@@ -58,7 +58,6 @@ console.log(rBean);
 	 html += '<tr>';
 	 html += '<td>'+rBean.d_no+'</td>';
 	 html += '<td>'+rBean.d_name+'</td>';
-	 html += '<td>'+rBean.d_imgExtention+'</td>';
 	 html += "<td><input type='text' id='d_phoneNum' name='d_phoneNum' value='"+rBean.d_phoneNum+"' maxlength=13 >"+"</td>";
 	 html += '<td>'+rBean.d_enterDate+'</td>';
 	 html += "<td><select id='b_no' name='b_no'>"+'</select></td>';
@@ -108,6 +107,14 @@ $('#d_phoneNum').on('click', function(){
 				    }
 				 
 				    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
-				});			
+				});	
+
+//기사 삭제
+/*  $("#deleteDriver").click(function(){
+        
+        if(confirm("삭제 하시겠습니까?")){
+   
+        }
+ } */
 </script>
 </html>

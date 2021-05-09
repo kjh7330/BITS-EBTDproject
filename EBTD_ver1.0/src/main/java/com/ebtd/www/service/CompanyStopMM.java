@@ -66,6 +66,8 @@ public class CompanyStopMM {
 	public String searchStop(String S_NAME) throws JsonProcessingException {
 		ObjectMapper om = new ObjectMapper();
 		List<StopBean> cList = null;
+		
+	
 		cList = sDao.searchStop(S_NAME); 
 		if(cList!=null && cList.size()!=0) { 
 			System.out.println(cList);
@@ -120,7 +122,7 @@ public class CompanyStopMM {
 	}
 
 	//정류장 신청내역 가져오기
-	public ModelAndView getNewStopConfirmList() throws JsonProcessingException {
+	public ModelAndView getNewStopConfirmList(String c_username) throws JsonProcessingException {
 		mav = new ModelAndView(); 
 		String view=null; 
 
@@ -128,7 +130,7 @@ public class CompanyStopMM {
 
 		List<StopApplyBean> nList = null;
 
-		nList = sDao.getNewStopConfirmList(); 
+		nList = sDao.getNewStopConfirmList(c_username); 
 
 		if(nList!=null && nList.size()!=0) { 
 			//ObjectMapper를 사용해서 리스트를 json으로 변환 
@@ -148,13 +150,13 @@ public class CompanyStopMM {
 	//동 이름 중복조회
 	public String checkSaName(String S_NAME) {
 	
-		//System.out.println(S_NAME);
 		StopBean sb = null;
 		sb = sDao.checkSaName(S_NAME);
 		//System.out.println(sb);
 		
 		if(sb != null) { //검색 결과가 있다면		
 			return "사용불가한 정류장 이름"; }
+		
 		return null;
 
 		
