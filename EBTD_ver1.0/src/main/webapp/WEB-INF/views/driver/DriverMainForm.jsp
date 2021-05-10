@@ -4,65 +4,191 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>EBTD Driver Display</title>
+<style type="text/css">
+	body{
+		margin : 0;
+	}
+	.on_wheel{
+		position : relative;
+		background-color : #c4f5b1;
+		z-index : 3;
+		border : none;
+		width : 10px;
+		transform : translate(-17px, 0px);
+	}
+	.out_wheel{
+		position : relative;
+		background-color : #f5dcb1;		
+		width : 10px;
+		z-index : 3;
+		border : none;
+		transform : translate(-17px, 0px);
+	}
+	.on_blind{
+		position : relative;
+		width : 10px;
+		background-color : #b1d2f5;
+		border : none;
+		z-index : 3;
+		transform : translate(-17px, 0px);
+	}
+	.out_blind{
+		position : relative;
+		width : 10px;
+		border : none;
+		background-color : #f5b1b1;
+		z-index : 3;
+		transform : translate(-17px, 0px);
+	}
+	.arrow{
+		position : absolute;
+		width : 80px;
+		height : 26px;
+		z-index : -1;
+		transform : translate(-17px, 0px);
+	}
+	.img_blind{
+		width : 16px;
+		padding-left : 10px;
+		transform : translate(-17px, 0px);
+	}
+	td{
+		width : 80px;
+	}
+	.img_wheel{
+		padding-left : 10px;
+		transform : translate(-17px, 0px);
+	}
+	#logo_table{
+		width : 100%;
+		background-color: #0C3D6a;
+		background-color: #0C3D6a;
+		text-align : center;
+	}
+	.logo_td{
+		font-size : 11px;
+		color : #f9eb99;
+		font-weight : bold;
+	}
+	.logo{
+		width: 50px;
+	}
+	#all_cnt td{
+		background-color : lightgray; 
+	}
+	div{
+		text-align : center;
+		margin-left  : auto;
+		margin-right  : auto;
+	}
+	#all_wheel,#all_blind{
+		width : 17px;
+		text-align : center;
+	}
+	#main_table{
+		margin : auto;
+	}
+	.s_name_input{
+		text-align : center;
+		border : none;
+	}
+</style>
 </head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-	<h1>기사 메인화면</h1>
-
-	현재 ${c_username}의 ${b_no}번 버스 ${d_name}기사님 운행중입니다.
-	<br>
-	<br> 이용자 총원
-	<br> BLIND&nbsp; :
-	<input id='all_blind' value=0>
-	<br> WHEEL :
-	<input id='all_wheel' value=0>
-	<br>
-	<br>
-
-	<table>
+<header>
+	<table id = 'logo_table'>
 		<tr>
-			<td><input id="nnext_on_blind" value=0></td>
-			<td>다다음 정류장</td>
-			<td><input id="nnext_out_blind" value=0></td>
+			<td class = 'logo_td'>${c_username}
+			</td>
+			<td colspan = 2  class = 'logo_td'> <img class="logo" alt="logo" src="/resources/image/mainlogo.png">
+			</td>
+			<td class = 'logo_td'>${b_no}번 버스<br> ${d_name}기사님</td>
 		</tr>
-		<tr>
-			<td><input id="nnext_on_wheel" value=0></td>
-			<td><input id="nnext_stop_name"></td>
-			<td><input id="nnext_out_wheel" value=0></td>
-		</tr>
-		<tr>
-			<td>-----</td>
-		</tr>
-		<tr>
-			<td><input id="next_on_blind" value=0></td>
-			<td>다음 정류장</td>
-			<td><input id="next_out_blind" value=0></td>
-		</tr>
-		<tr>
-			<td><input id="next_on_wheel" value=0></td>
-			<td><input id="next_stop_name"></td>
-			<td><input id="next_out_wheel" value=0></td>
-		</tr>
-		<tr>
-			<td>-----</td>
-		</tr>
-		<tr>
-			<td><input id="cur_on_blind" value=0></td>
-			<td>현재 위치</td>
-			<td><input id="cur_out_blind" value=0></td>
-		</tr>
-		<tr>
-			<td><input id="cur_on_wheel" value=0></td>
-			<td><input id="cur_stop_name"></td>
-			<td><input id="cur_out_wheel" value=0></td>
+		<tr id = 'all_cnt'>
+			<td style = "width : 120px"colspan = 2><img style = "width : 16px;" alt="blind_img" src="/resources/image/blind.png"> : <input id='all_blind' value=0></td>
+			<td colspan = 2><i class="fas fa-wheelchair"></i> : <input id='all_wheel' value=0></td>
 		</tr>
 	</table>
+</header>
 
-	<button id='start'>운행시작</button>
-	<button id='change'>교대</button> <br><br>
-	<input type = 'checkbox' id = 'infinite'>노동에 끝은 없다. 무한히 달려라!
+	<br>
+	<div>
+	<table id = 'main_table'>
+		<tr>
+			<td><img id = 'img_b_on_nnext' class = 'arrow' alt="on_blind" src="/resources/image/on_blind.png"/>
+				<img id = 'img_b_on_nnext2' class = 'img_blind' alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'on_blind' id="nnext_on_blind" value=0></td>
+			<td>다다음 정류장</td>
+			<td><img id = 'img_b_out_nnext' class = 'arrow' alt="out_blind" src="/resources/image/out_blind.png"/>
+				<img id = 'img_b_out_nnext2' class = 'img_blind' alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'out_blind' id="nnext_out_blind" value=0></td>
+		</tr>
+		<tr>
+			<td><img id = 'img_w_on_nnext' class = 'arrow' alt="on_wheel" src="/resources/image/on_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_on_nnext2' class="fas fa-wheelchair"></i>
+				<input class = 'on_wheel' id="nnext_on_wheel" value=0></td>
+			<td><input id="nnext_stop_name" class = 's_name_input'></td>
+			<td><img id = 'img_w_out_nnext' class = 'arrow' alt="out_wheel" src="/resources/image/out_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_out_nnext2' class="fas fa-wheelchair"></i>
+				<input class = 'out_wheel'  id="nnext_out_wheel" value=0></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img id = 'img_b_on_next' class = 'arrow' alt="on_blind" src="/resources/image/on_blind.png"/>
+				<img id = 'img_b_on_next2' class = 'img_blind'  alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'on_blind' id="next_on_blind" value=0></td>
+			<td>다음 정류장</td>
+			<td><img id = 'img_b_out_next' class = 'arrow' alt="out_blind" src="/resources/image/out_blind.png"/>
+				<img id = 'img_b_out_next2' class = 'img_blind'  alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'out_blind' id="next_out_blind" value=0></td>
+		</tr>
+		<tr>
+			<td><img id = 'img_w_on_next' class = 'arrow' alt="on_wheel" src="/resources/image/on_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_on_next2' class="fas fa-wheelchair"></i>
+				<input class = 'on_wheel'  id="next_on_wheel" value=0></td>
+			<td><input id="next_stop_name" class = 's_name_input'></td>
+			<td><img id = 'img_w_out_next' class = 'arrow' alt="out_wheel" src="/resources/image/out_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_out_next2' class="fas fa-wheelchair"></i>
+				<input class = 'out_wheel'  id="next_out_wheel" value=0></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img id = 'img_b_on_curr' class = 'arrow' alt="on_blind" src="/resources/image/on_blind.png"/>
+				<img id = 'img_b_on_curr2' class = 'img_blind'  alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'on_blind' id="cur_on_blind" value=0></td>
+			<td>현재 위치</td>
+			<td><img id = 'img_b_out_curr'class = ' arrow' alt="out_blind" src="/resources/image/out_blind.png"/>
+				<img id = 'img_b_out_curr2' class = 'img_blind'  alt="blind_img" src="/resources/image/blind.png">
+				<input class = 'out_blind' id="cur_out_blind" value=0></td>
+		</tr>
+		<tr>
+			<td><img id = 'img_w_on_curr' class = 'arrow' alt="on_wheel" src="/resources/image/on_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_on_curr2' class="fas fa-wheelchair"></i>
+				<input class = 'on_wheel'  id="cur_on_wheel" value=0></td>
+			<td><input id="cur_stop_name" class = 's_name_input'></td>
+			<td><img id = 'img_w_out_curr' class = 'arrow' alt="out_wheel" src="/resources/image/out_wheel.png"/>
+				<i style = "padding-left : 10px; transform : translate(-17px, 0px);" id = 'img_w_out_curr2' class="fas fa-wheelchair"></i>
+				<input class = 'out_wheel'  id="cur_out_wheel" value=0></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		
+		<tr>
+			<td><button id='start'>운행시작</button></td>
+			<td><button id='change'>교대</button></td>
+			<td><input type = 'checkbox' id = 'infinite'>반복</td>
+		</tr>
+	</table>
+	</div>
+
 
 
 	<script type="text/javascript">
@@ -88,7 +214,50 @@
 		$('#cur_stop_name').val(s_list[i]['s_name']);
 		$('#next_stop_name').val(s_list[i+1]['s_name']);
 		$('#nnext_stop_name').val(s_list[i+2]['s_name']);
-	
+		
+		$('#cur_stop_name').css('background-color', ( i % 2 == 0 ? 'lightgray':'white' ) );
+		$('#next_stop_name').css('background-color', ( i % 2 == 0 ? 'white':'lightgray' ) );
+		$('#nnext_stop_name').css('background-color', ( i % 2 == 0 ? 'lightgray':'white' ) );
+		
+		$('#cur_on_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#cur_on_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#next_on_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#next_on_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#nnext_on_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#nnext_on_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#cur_out_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#cur_out_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#next_out_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#next_out_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#nnext_out_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#nnext_out_blind').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		
+		$('#img_b_on_curr').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_b_out_curr').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_b_on_next').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_b_out_next').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_b_on_nnext').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_b_out_nnext').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_on_curr').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_out_curr').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_on_next').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_out_next').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_on_nnext').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		$('#img_w_out_nnext').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+		
+		$('#img_b_on_curr2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_b_out_curr2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_b_on_next2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_b_out_next2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_b_on_nnext2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_b_out_nnext2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_on_curr2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_out_curr2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_on_next2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_out_next2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_on_nnext2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		$('#img_w_out_nnext2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+		
 		$('#start').click(function () {
 			let go = true;
 			i = 0;
@@ -346,6 +515,33 @@
 					$('#nnext_out_blind').val(nnext_out_blind_cnt);
 					$('#nnext_out_wheel').val(nnext_out_wheel_cnt);
 					
+					$('#img_b_on_curr').css('opacity', ( $('#cur_on_blind').val() == 0 ? '0.2':'1' ) );
+					$('#img_b_out_curr').css('opacity', ( $('#cur_out_blind').val() == 0 ? '0.2':'1' ) );
+					$('#img_b_on_next').css('opacity', ( $('#next_on_blind').val() == 0 ? '0.2':'1' ) );
+					$('#img_b_out_next').css('opacity', ( $('#next_out_blind').val() == 0 ? '0.2':'1' ) );
+					$('#img_b_on_nnext').css('opacity', ( $('#nnext_on_blind').val() == 0 ? '0.2':'1' ) );
+					$('#img_b_out_nnext').css('opacity', ( $('#nnext_out_blind').val() == 0 ? '0.2':'1' ) );
+					
+					$('#img_w_on_curr').css('opacity', ( $('#cur_on_wheel').val() == 0 ? '0.2':'1' ) );
+					$('#img_w_out_curr').css('opacity', ( $('#cur_out_wheel').val() == 0 ? '0.2':'1' ) );
+					$('#img_w_on_next').css('opacity', ( $('#next_on_wheel').val() == 0 ? '0.2':'1' ) );
+					$('#img_w_out_next').css('opacity', ( $('#next_out_wheel').val() == 0 ? '0.2':'1' ) );
+					$('#img_w_on_nnext').css('opacity', ( $('#nnext_on_wheel').val() == 0 ? '0.2':'1' ) );
+					$('#img_w_out_nnext').css('opacity', ( $('#nnext_out_wheel').val() == 0 ? '0.2':'1' ) );
+					
+					$('#img_b_on_curr2').css('visibility', ( $('#cur_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_b_out_curr2').css('visibility', ( $('#cur_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_b_on_next2').css('visibility', ( $('#next_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_b_out_next2').css('visibility', ( $('#next_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_b_on_nnext2').css('visibility', ( $('#nnext_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_b_out_nnext2').css('visibility', ( $('#nnext_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_on_curr2').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_out_curr2').css('visibility', ( $('#cur_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_on_next2').css('visibility', ( $('#next_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_out_next2').css('visibility', ( $('#next_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_on_nnext2').css('visibility', ( $('#nnext_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#img_w_out_nnext2').css('visibility', ( $('#nnext_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					
 						first_check = 1;
 					console.log(i);
 					if( up ){
@@ -362,6 +558,24 @@
 						else if ( i == 1 )	$('#nnext_stop_name').val(s_list[i]['s_name']);
 						else				$('#nnext_stop_name').val(s_list[i-2]['s_name']);						
 					}
+					$('#cur_stop_name').css('background-color', ( i % 2 == 0 ? 'lightgray':'white' ) );
+					$('#next_stop_name').css('background-color', ( i % 2 == 0 ? 'white':'lightgray' ) );
+					$('#nnext_stop_name').css('background-color', ( i % 2 == 0 ? 'lightgray':'white' ) );
+					
+					$('#cur_on_wheel').css('visibility', ( $('#cur_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#cur_on_blind').css('visibility', ( $('#cur_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#next_on_wheel').css('visibility', ( $('#next_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#next_on_blind').css('visibility', ( $('#next_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#nnext_on_wheel').css('visibility', ( $('#nnext_on_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#nnext_on_blind').css('visibility', ( $('#nnext_on_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#cur_out_wheel').css('visibility', ( $('#cur_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#cur_out_blind').css('visibility', ( $('#cur_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#next_out_wheel').css('visibility', ( $('#next_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#next_out_blind').css('visibility', ( $('#next_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					$('#nnext_out_wheel').css('visibility', ( $('#nnext_out_wheel').val() == 0 ? 'hidden':'visible' ) );
+					$('#nnext_out_blind').css('visibility', ( $('#nnext_out_blind').val() == 0 ? 'hidden':'visible' ) );
+					
+					
 					
 					if(cycle_check == 1){
 						if( !$('#infinite').is(":checked") )	{
@@ -398,8 +612,8 @@
 								console.log('한바퀴 깔쌈하게 완료'); 
 							});
 							
-							cycle_check = 0;
 						}
+							cycle_check = 0;
 					}
 					if( up )	i++;
 					else {
@@ -412,17 +626,12 @@
 				}).fail(function (err) {
 					console.log(err,'!!!!!!!!!!!!!!');
 				});	
-			}, 3000);
+			}, 2000);
 		});
 		$('#change').click(function () {
 			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';
 		});
 		console.log(${ab_no});
-		
-		function sleep(ms) {
-			  const wakeUpTime = Date.now() + ms
-			  while (Date.now() < wakeUpTime) {}
-			}
 	</script>
 
 </body>
