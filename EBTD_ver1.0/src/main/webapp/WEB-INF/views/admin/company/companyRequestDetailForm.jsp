@@ -89,7 +89,7 @@
 			top:50%;
 			left:50%;
 			transform: translate(-50%,-73%);
-			width: 500px;
+			width: 502px;
 			height: 670px;
 			color: black;
 			overflow:scroll;
@@ -346,29 +346,39 @@
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content4">
-             	<p style="color:black;">
+             	
              		<table class="modal_table" style="font-weight: bold;">
 	        			<tr>
 							<table class="modal_table2" style="text-align: center">
-								<tr>
-									<td>버스 번호</td>
-									<td>정류장 순서</td>
-									<td>정류장 번호</td>
-									<td>정류장 이름</td>
-									<td>동 이름</td>
-								</tr>
+
+								<c:set var="b_no" value="0" />
 			 			        <c:forEach var="ab" items="${abList}">
-								<tr>
-									<td>${ab.ap_b_no}</td>
-									<td>${ab.apde_turn}</td>
-									<td>${ab.s_no}</td>
-									<td>${ab.s_name}</td>
-									<td>${ab.t_name}</td>
-								</tr>
+									
+									<c:choose>
+										<c:when test="${b_no ne ab.ap_b_no}">
+											<tr><td>&nbsp;</td></tr>
+											<tr>
+												<td>버스 번호</td>
+												<td>정류장 순서</td>
+												<td>정류장 번호</td>
+												<td>정류장 이름</td>
+												<td>동 이름</td>
+											</tr>
+											<c:set var="b_no" value="${ab.ap_b_no}" />
+										</c:when>
+									</c:choose>
+									<tr>
+										<td>${ab.ap_b_no}</td>
+										<td>${ab.apde_turn}</td>
+										<td>${ab.s_no}</td>
+										<td>${ab.s_name}</td>
+										<td>${ab.t_name}</td>
+									</tr>
 		           				</c:forEach>			
 							</table>
 	        			</tr>
                		</table>
+               		<p style="color:black;">
              	</p>
              </div>
              <div class="modal_footer">
@@ -429,7 +439,6 @@
 <div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-
 
 
 

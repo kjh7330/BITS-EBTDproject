@@ -82,11 +82,12 @@
 	for(i in baList){
 		all += '<tr>';
 		all += '<td>' + baList[i]["c_name"] + '</td>';
-		all += '<td><a href=/admin/company/getCompanyRejectDetail?ap_no='+baList[i]["ap_no"]+' style="text-decoration: none;">';
+		all += '<td><a href=/admin/company/getCompanyRejectDetail?ap_no='+baList[i]["ap_no"]+'&ap_b_no='+baList[i]["ap_b_no"]+' style="text-decoration: none;">';
 		all += baList[i]["ap_b_no"] +'번</td>';
 		all += '<td>' + baList[i]["ap_date"] + '</td>';
 			let state = baList[i]["ap_state"];
 		 	if	   (state == 2){ all += '<td style="color: red">등록 반려</td>'; }
+		 	else if(state == 5){ all += '<td style="color: orange;">변경 반려</td>'; }
 		all += '</tr>';
 	}
 	$('.maintable').append(all);
@@ -134,11 +135,13 @@
 			if( ( cur_date >= ba_date && ba_date >= period ) || val2 == 1 ){
 				c_name += '<tr>';
 				c_name += '<td>' + baList[i]["c_name"] + '</td>';
-				c_name += '<td><a href=/admin/company/getCompanyRejectDetail?ap_no='+baList[i]["ap_no"]+' style="text-decoration: none;">';
+				c_name += '<td><a href=/admin/company/getCompanyRejectDetail?ap_no='+baList[i]["ap_no"]+'&ap_b_no='+baList[i]["ap_b_no"]+' style="text-decoration: none;">';
 				c_name += baList[i]["ap_b_no"] +'번</td>';
 				c_name += '<td>' + baList[i]["ap_date"] + '</td>';
 					let state = baList[i]["ap_state"];
-				 	if	   (state == 2){ c_name += '<td style="color: red">등록 반려</td>'; }
+					console.log(state);
+				 	if	   (state == 2){ c_name += '<td style="color: red;">등록 반려</td>'; }
+				 	else if(state == 5){ c_name += '<td style="color: orange;">변경 반려</td>'; }
 				c_name += '</tr>';
 			}
 		}

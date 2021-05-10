@@ -25,18 +25,22 @@
 			width: 400px;
 			font-size: 30px;
 		}
+		.main-info{
+			text-align: center;
+		}
 		.maintable1{
 			width: 600px;
+			margin: auto;
 		}
 		.maintable2{
 			margin-top: 20px;
-			width: 600px;
+			width: 1000px;
 			border: 1px solid black;
 		
 		}
 		tr, td{
 			border: 1px solid black;
-			font-size: 20px;
+			font-size: 18px;
 		}
 		td{
 			height: 40px;
@@ -67,11 +71,24 @@
 			</table>
 			<table class="maintable2">
 				<tr style="background-color: lightgray;">
-					<td>민원 번호</td><td>평가</td><td>버스번호</td><td>제목</td><td>내용</td><td>고객아이디</td><td>작성일</td>
+					<td style="width: 85px;">민원 번호</td>
+					<td style="width: 70px;">평가</td>
+					<td style="width: 85px;">버스번호</td>
+					<td style="width: 200px;">제목</td>
+					<td>내용</td>
+					<td style="width: 110px;">고객아이디</td>
+					<td style="width: 110px;">작성일</td>
 				</tr>
 				<c:forEach var="voc" items="${vocList}">
 				<tr>
-					<td>${voc.v_no}</td><td>${voc.voc_recommend}</td><td>${voc.b_no}</td><td>${voc.v_title}</td><td>${voc.v_content}</td><td>${voc.c_username}</td><td>${voc.v_date}</td>
+					<td>${voc.v_no}</td>
+					<td><c:choose><c:when test="${voc.voc_recommend eq 1}">추천</c:when><c:when test="${voc.voc_recommend eq 0}">답변</c:when><c:when test="${voc.voc_recommend eq -1}">비추천</c:when></c:choose></td>
+					<td>${voc.b_no}</td>
+					<td>${voc.v_title}</td>
+					<td>${voc.v_content}</td>
+					<td>${voc.c_username}</td>
+					<td>${voc.v_date}</td>
+				
 				</tr>
 				
 				</c:forEach>

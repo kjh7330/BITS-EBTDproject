@@ -43,7 +43,7 @@
     	width: 350px;
     	height: 140px;
     	font-size: 50px;
-    	margin-top: 45px;
+    	margin-top: 28px;
     	background-color: #0C3D6A;
     	color: #f9eb99;
     	border-radius: 15px;

@@ -153,14 +153,17 @@ public class AdminCompanyMM {
 	}
 	//신규등록 버스 승인하기
 	@Transactional
-	public ModelAndView setNewBusRouteApproval(String ap_b_no) {
+	public ModelAndView setNewBusRouteApproval(String ap_b_no, int ap_no) {
 		mav = new ModelAndView();
 		String view = null;
 		List<ApplyBusHistory> cList = null;
+		ApplyBusHistory abhBean = new ApplyBusHistory();
+		abhBean.setAp_b_no(ap_b_no);
+		abhBean.setAp_no(ap_no);
 		try {
 			cDao.setApplyBusHistoryChangeApproval(ap_b_no);
 			cDao.setAllBusChangeApproval(ap_b_no);
-			cDao.setNewRouteBus(ap_b_no);
+			cDao.setNewRouteBus(abhBean);
 			System.out.println("신규 버스 등록 트랜잭션 성공");
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -193,6 +196,7 @@ public class AdminCompanyMM {
 		List<ApplyBusHistory> cList = null;
 		cDao.setApplyBusHistoryChange2Reject(cMap);
 		cDao.setDeleteAllbus2(cMap);
+		cDao.setDeleteDriver2(cMap);
 		cDao.setDeleteBus2(cMap);
 		cList = cDao.getNewBusRouteList();
 		System.out.println(cList);
@@ -247,10 +251,12 @@ public class AdminCompanyMM {
 		mav = new ModelAndView();
 		String view = null;
 		List<ApplyBusHistory> cList = null;
+		ApplyBusHistory abhBean = new ApplyBusHistory();
+		abhBean.setAp_b_no(ap_b_no);
 		try {
 			cDao.setApplyBusHistoryChangeApproval(ap_b_no);
 			cDao.setAllBusChangeApproval(ap_b_no);
-			cDao.setNewRouteBus(ap_b_no);
+			cDao.setNewRouteBus(abhBean);
 			System.out.println("신규 버스 등록 트랜잭션 성공");
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -395,12 +401,15 @@ public class AdminCompanyMM {
 		return mav;
 	}
 	//반려 상세 내역 가져오기
-	public ModelAndView getCompanyRejectDetail(String ap_no) throws JsonProcessingException {
+	public ModelAndView getCompanyRejectDetail(int ap_no, String ap_b_no) throws JsonProcessingException {
 		mav = new ModelAndView();
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
 		List<ApplyBusHistory> rList = null;
-		rList = cDao.getCompanyRejectDetail(ap_no);
+		ApplyBusHistory abh = new ApplyBusHistory();
+		abh.setAp_no(ap_no);
+		abh.setAp_b_no(ap_b_no);
+		rList = cDao.getCompanyRejectDetail(abh);
 		mav.addObject("rList", om.writeValueAsString(rList));
 		view="admin/company/companyRejectDetailForm";
 		mav.setViewName(view);
