@@ -7,13 +7,29 @@
 
 
 	<!-- 정류장 리스트 조회 -->
-	<select id="getStopList" parameterType="Integer" resultType="stop">
+	<select id="getStopList" parameterType="search_wh" resultType="stop">
+		<![CDATA[
+			SELECT * FROM (
+			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
+			FROM S
+			WHERE ROWNUM<=#{pageNum}*15 and s_name like '%'||#{search}||'%')
+			WHERE RN>=#{pageNum}*15-14 
+		]]>
+	</select>
+	
+	
+	<!-- 정류장 갯수 조회 -->
+	<select id="getStopCount" resultType="int">
+		select count(*) from stop where s_name like '%'||#{search}||'%'
+	</select>
+	
+	<select id="searchStopList" parameterType="search_wh" resultType="stop">
 		<![CDATA[
 			SELECT * FROM (
 			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
 			FROM S
 			WHERE ROWNUM<=#{pageNum}*15)
-			WHERE RN>=#{pageNum}*15-14
+			WHERE RN>=#{pageNum}*15-14 and s_name like '%'||#{search}||'%'
 		]]>
 	</select>
 	<!-- 정류장 상세내용 조회 -->

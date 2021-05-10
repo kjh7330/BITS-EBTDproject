@@ -6,13 +6,14 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.ebtd.www.bean.CompanyStopSearchBean;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.service.CompanyStopMM;
 
 public interface I_CompanyStopDao {
 
-	List<StopBean> getStopList(Integer pageNum);
+	List<StopBean> getStopList(CompanyStopSearchBean sb);
 	
 	List<StopBean> getStopDetail(Integer S_NO);
 	
@@ -28,8 +29,9 @@ public interface I_CompanyStopDao {
 
 	List<StopBean> getStopApplyDetail(Integer sa_No);
 
-	@Select("SELECT COUNT(*) FROM stop")
-	int getStopCount();
+	int getStopCount(CompanyStopSearchBean sb);
+
+	List<StopBean> searchStopList(CompanyStopSearchBean sb);
 
 	
 }

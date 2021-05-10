@@ -26,7 +26,7 @@
 				<!-- <th>회사 이름</th> -->
 				<th>기사 이름</th>
 				<th>전화번호</th>
-				<th>입사일</th> 
+				<!-- <th>입사일</th>  -->
 				<th>노선번호</th>
 			</tr>
 			
@@ -59,7 +59,7 @@ console.log(rBean);
 	 html += '<td>'+rBean.d_no+'</td>';
 	 html += '<td>'+rBean.d_name+'</td>';
 	 html += "<td><input type='text' id='d_phoneNum' name='d_phoneNum' value='"+rBean.d_phoneNum+"' maxlength=13 >"+"</td>";
-	 html += '<td>'+rBean.d_enterDate+'</td>';
+	 /* html += '<td>'+rBean.d_enterDate+'</td>'; */
 	 html += "<td><select id='b_no' name='b_no'>"+'</select></td>';
 	 html += "<td><input type='hidden' id='d_no' name='d_no' value='"+rBean.d_no+"' readonly/>"+"</td>";
 	 //html += "<td><select><option value='"+rBean.b_no+"'>"+"</option></select></td>";

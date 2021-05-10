@@ -71,7 +71,6 @@ public class CompanyDriverMM {
 		rBean = dDao.getDriverDetail(d_no); 
 		
 		if(rBean!=null) { 
-			//ObjectMapper를 사용해서 리스트를 json으로 변환 
 			mav.addObject("rBean",om.writeValueAsString(rBean));
 			view = "company/driverDetailForm";
 			System.out.println("기사 상세정보 가져오기 성공"); 

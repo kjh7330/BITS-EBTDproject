@@ -19,11 +19,6 @@ public class CompanyStopRestController {
 	private CompanyStopMM sm;
 	ModelAndView mav;
 
-	//정류장 검색
-	@GetMapping(value = "/company/searchStop",produces="text/plain; charset=utf-8") 
-	public String companyIndexForm(String S_NAME) throws JsonProcessingException { 
-		String cList =sm.searchStop(S_NAME); 
-		return cList; }
 
 	//정류장 이름 중복조회
 	@GetMapping(value = "/company/checkSaName", produces="text/plain; charset=utf-8")
