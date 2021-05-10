@@ -82,7 +82,7 @@ public class AdminUserMM {	//김아름
 		if( uerInfoList!=null) {
 			return om.writeValueAsString(uerInfoList); //List를 json으로 변환
 		}else {
-			return "userSearchUserName 가져오기 실패";
+			return "getUserSearchUType 가져오기 실패";
 		}
 	}	//getUserSearchUType end
 
@@ -188,7 +188,7 @@ public class AdminUserMM {	//김아름
 		if( urhList!=null) {
 			return om.writeValueAsString(urhList); //List를 json으로 변환
 		}else {
-			return "userSearchUserName 가져오기 실패";
+			return "getUserHistoryCompanyName 가져오기 실패";
 		}
 	}
 	
@@ -204,10 +204,58 @@ public class AdminUserMM {	//김아름
 		if( urhList!=null) {
 			return om.writeValueAsString(urhList); //List를 json으로 변환
 		}else {
-			return "userSearchUserName 가져오기 실패";
+			return "getUserHistoryBusNum 가져오기 실패";
 		}
 	}
 
+	//Rest
+	//이용자 히스토리 : 출발지 검색
+	public String getStopStartName(String s_namestart) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getStopStartName(s_namestart);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "getUserStartName 가져오기 실패";
+		}
+	}
+	
+	//Rest
+	//이용자 히스토리 : 도착지 검색
+	public String getStopLastName(String s_namelast) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getStopLastName(s_namelast);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "getStopLastName 가져오기 실패";
+		}
+	}
+	
+	//Rest
+	//이용자 히스토리 : 이용상태 검색
+	public String getState(String ur_state) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getState(ur_state);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "getState 가져오기 실패";
+		}
+	}
+	
 	//이용자 차트 보기
 	public Object getUserChart() {
 		mav = new ModelAndView();	
@@ -231,6 +279,12 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
+
+
+
+
+	
 
 	
 

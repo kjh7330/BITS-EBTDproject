@@ -44,22 +44,36 @@ public class AdminUserRestController {	//김아름
 	//이용자 히스토리 조건:아이디 검색
 	@GetMapping(value = "/getUserHistoryUserName", produces =  "text/plain;charset=utf-8")
 	public String getUserHistoryUserName(String u_userName) throws JsonProcessingException {	
-		
 		return aum.getUserHistoryUserName(u_userName);		
 	}
 	
 	//이용자 히스토리 조건:회사명 검색
-		@GetMapping(value = "/getUserHistoryCompanyName", produces =  "text/plain;charset=utf-8")
-		public String getUserHistoryCompanyName(String c_userName) throws JsonProcessingException {	
-			
-			return aum.getUserHistoryCompanyName(c_userName);		
-		}
+	@GetMapping(value = "/getUserHistoryCompanyName", produces =  "text/plain;charset=utf-8")
+	public String getUserHistoryCompanyName(String c_userName) throws JsonProcessingException {			
+		return aum.getUserHistoryCompanyName(c_userName);		
+	}
+	
 	//이용자 히스토리 조건:버스번호 검색
-		@GetMapping(value = "/getUserHistoryBusNum", produces =  "text/plain;charset=utf-8")
-		public String getUserHistoryBusNum(String b_no) throws JsonProcessingException {	
-			
-			return aum.getUserHistoryBusNum(b_no);		
-		}
+	@GetMapping(value = "/getUserHistoryBusNum", produces =  "text/plain;charset=utf-8")
+	public String getUserHistoryBusNum(String b_no) throws JsonProcessingException {	
+		return aum.getUserHistoryBusNum(b_no);		
+	}
 	
+	//이용자 히스토리 조건:출발지 검색
+	@GetMapping(value = "/getStopStartName", produces =  "text/plain;charset=utf-8")
+	public String getStopStartName(String s_namestart) throws JsonProcessingException {	
+		return aum.getStopStartName(s_namestart);		
+	}
 	
+	//이용자 히스토리 조건:도착지 검색
+	@GetMapping(value = "/getStopLastName", produces =  "text/plain;charset=utf-8")
+	public String getStopLastName(String s_namelast) throws JsonProcessingException {	
+		return aum.getStopLastName(s_namelast);		
+	}
+	
+	//이용자 히스토리 조건:도착지 검색
+	@GetMapping(value = "/getState", produces =  "text/plain;charset=utf-8")
+	public String getState(String ur_state) throws JsonProcessingException {	
+		return aum.getState(ur_state);		
+	}
 }

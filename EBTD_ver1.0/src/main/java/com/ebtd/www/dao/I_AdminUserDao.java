@@ -32,6 +32,15 @@ public interface I_AdminUserDao {
 	//유저히스토리에서 버스번호 검색 ajax
 	List<UserReserveHistoryBean> getUserHistoryBusNum(String b_no);
 
+	//유저히스토리에서 출발지 검색 ajax
+	List<UserReserveHistoryBean> getStopStartName(String s_namestart);
+
+	//유저히스토리에서 목적지 검색 ajax
+	List<UserReserveHistoryBean> getStopLastName(String s_namelast);
+
+	//유저히스토리에서 이용상태 검색 ajax
+	List<UserReserveHistoryBean> getState(String ur_state);
+
 	
 
 

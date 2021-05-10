@@ -64,6 +64,7 @@
 			<option value="6">버스번호</option>
 			<option value="7">출발지</option>
 			<option value="8">목적지</option>
+			<option value="9">이용상태</option>
 		</select>
 		
 		<!-- selectSort에서 선택하면 그거에 맞춰서 선택할수있게 -->
@@ -124,7 +125,7 @@
 				str += '<td>' + urhList[i].ur_no + '</td>'; //예약번호
 				str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 				str += '<td>' + urhList[i].b_no + '</td>'; //버스번호	
-				str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 	
+				str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 				str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 				str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 				str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -141,6 +142,7 @@
 				
 				let detail_period = ["조회기간을 선택해주세요","1주일", "1개월", "3개월", "6개월", "1년"];
 				let u_type = ["장애유형을 선택해주세요","시각", "휠체어"];
+				let u_state = ["이용상태를 선택해주세요","예약중", "탑승중", "예약취소", "완료"];
 				let targetSelect = document.getElementById("selectSortDetail");
 				
 				$('#selectSortDetail').html("");
@@ -160,6 +162,19 @@
 				}
 				if(e.value == "3"){ 		//장애유형
 					let detail = u_type;
+					
+					for (let index in detail) {
+						let opt = document.createElement("option");
+						opt.value = detail[index];
+						opt.innerHTML = detail[index];
+						targetSelect.appendChild(opt);
+						$('#selectSortDetail').show();
+						$('#searchInput').hide();
+						$('#searchBtn').hide();
+					}	
+				}
+				if(e.value == "9"){ 		//이용상태
+					let detail = u_state;
 					
 					for (let index in detail) {
 						let opt = document.createElement("option");
@@ -236,7 +251,7 @@
 								str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 								str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 								str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-								str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+								str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 								str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 								str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 								str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -261,7 +276,7 @@
 								str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 								str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 								str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-								str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+								str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 								str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 								str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 								str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -274,25 +289,86 @@
 						break;
 					
 					case "1주일":
-						date_serch("1주일");
+						date_search("1주일");
 						break;
 					case "1개월":
 						date_serch("1개월");
 						break;
 					case "3개월":
-						date_serch("3개월");
+						date_search("3개월");
 						break;
 					case "6개월":
-						date_serch("6개월");
+						date_search("6개월");
 						break;
 					case "1년":
-						date_serch("1년");
+						date_search("1년");
 						break;
+						
+					case "예약중":
+						state_search(0);
+						break;
+					case "탑승중":
+						state_search(1);
+						break;
+					case "예약취소":
+						state_search(2);
+						break;
+					case "완료":
+						state_search(3);
+						break;
+					
 				}	//switch end
 				
 			}); //selectSortDetail change end
 			
-			function date_serch(period) {
+			function state_search(state){
+				$.ajax({
+					url : "/admin/user/getState",
+					data : { 'ur_state' : state },
+					dataType : 'json',
+				}).done(function (data) {
+					console.log(data);
+					let urhList = data;
+					let str = "";
+					
+					for (let i = 0; i < urhList.length; i++) {
+						//0,1을 --> 휠체어, 시각으로 바꾸어 출력
+						if (urhList[i].u_type == 0) {
+							urhList[i].u_type = '휠체어';
+						} else urhList[i].u_type = '시각';
+						
+						//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+						if (urhList[i].ur_state == 2) {
+							urhList[i].ur_state = '취소';
+						} else if(urhList[i].ur_state == 3){
+							urhList[i].ur_state = '완료';
+						}else if(urhList[i].ur_state == 0){
+							urhList[i].ur_state = '예약중'
+						}else if(urhList[i].ur_state == 1){
+							urhList[i].ur_state = '탑승중'
+						}
+			
+						str += '<tr>';
+						str += '<th>' + (i+1) + '</th>' //NO
+						str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
+						str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
+						str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
+						str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
+						str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
+						str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+						str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
+						str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+						str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
+					}
+					$("#userHistoryList").empty();
+					$("#userHistoryList").append(str);
+					
+				}).fail(function(err) {
+					console.log(err,"!!!!!!!!!!");
+				});
+			}
+			
+			function date_search(period) {
 				$.ajax({
 					url : "/admin/user/getUserHistoryDateList",
 					data : { 'urh_date' : period },
@@ -324,7 +400,7 @@
 						str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 						str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 						str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-						str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+						str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 						str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 						str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 						str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -382,7 +458,7 @@
 									str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-									str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -428,7 +504,7 @@
 									str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-									str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -450,6 +526,7 @@
 							}).done(function(data){
 								console.log(data);
 								let urhList = data;
+								console.log(urhList);
 								let str = "";
 					
 								for (let i = 0; i < urhList.length; i++) {
@@ -474,7 +551,7 @@
 									str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-									str += '<td>' + urhList[i].c_userName + '</td>'; //버스회사 
+									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
 									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
@@ -489,9 +566,97 @@
 							break;
 						
 						case "7":	//출발지
+							$.ajax({
+								url : "/admin/user/getStopStartName",
+								data : { 's_namestart' : input },
+								dataType : 'json',
+							}).done(function(data){
+								console.log(data);
+								let urhList = data;
+								console.log(urhList);
+								let str = "";
+					
+								for (let i = 0; i < urhList.length; i++) {
+									//0,1을 --> 휠체어, 시각으로 바꾸어 출력
+									if (urhList[i].u_type == 0) {
+										urhList[i].u_type = '휠체어';
+									} else urhList[i].u_type = '시각';
+									
+									//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+									if (urhList[i].ur_state == 2) {
+										urhList[i].ur_state = '취소';
+									} else if(urhList[i].ur_state == 3){
+										urhList[i].ur_state = '완료';
+									}else if(urhList[i].ur_state == 0){
+										urhList[i].ur_state = '예약중'
+									}else if(urhList[i].ur_state == 1){
+										urhList[i].ur_state = '탑승중'
+									}
+									
+									str += '<tr>';
+									str += '<th>' + (i+1) + '</th>' //NO
+									str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
+									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
+									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
+									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
+									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
+									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
+									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
+								}
+								$("#userHistoryList").empty();
+								$("#userHistoryList").append(str);
+							}).fail(function(err){
+								console.log(err,"!!!!!!!!!!");
+							});
 							break;
 						
 						case "8":	//목적지
+							$.ajax({
+								url : "/admin/user/getStopLastName",
+								data : { 's_namelast' : input },
+								dataType : 'json',
+							}).done(function(data){
+								console.log(data);
+								let urhList = data;
+								console.log(urhList);
+								let str = "";
+					
+								for (let i = 0; i < urhList.length; i++) {
+									//0,1을 --> 휠체어, 시각으로 바꾸어 출력
+									if (urhList[i].u_type == 0) {
+										urhList[i].u_type = '휠체어';
+									} else urhList[i].u_type = '시각';
+									
+									//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+									if (urhList[i].ur_state == 2) {
+										urhList[i].ur_state = '취소';
+									} else if(urhList[i].ur_state == 3){
+										urhList[i].ur_state = '완료';
+									}else if(urhList[i].ur_state == 0){
+										urhList[i].ur_state = '예약중'
+									}else if(urhList[i].ur_state == 1){
+										urhList[i].ur_state = '탑승중'
+									}
+									
+									str += '<tr>';
+									str += '<th>' + (i+1) + '</th>' //NO
+									str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
+									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
+									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
+									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
+									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
+									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
+									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
+								}
+								$("#userHistoryList").empty();
+								$("#userHistoryList").append(str);
+							}).fail(function(err){
+								console.log(err,"!!!!!!!!!!");
+							});
 							break;
 					}	//switch end			
 				} //if end
