@@ -20,6 +20,6 @@ public class UserReservationBean {
 	private String ur_date;
 	private int ur_state;
 	
-	private String s_nameStart; //출발 정류장 이름
-	private String s_nameLast;  //도착 정류장 이름
+	private String s_namestart; //출발 정류장 이름
+	private String s_namelast;  //도착 정류장 이름
 }

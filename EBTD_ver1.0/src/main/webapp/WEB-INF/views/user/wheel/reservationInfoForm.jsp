@@ -36,13 +36,13 @@
 	
 	for (let i = 0; i < uReserveList.length; i++) {
 		str += "<div class='oneReservationDiv'>"
-		str += '<input type="text" class="ur_date" name="ur_date" value="'+uReserveList[i].ur_date+'">' //예약일자
-		str += '<input type="text" class="b_no" name="b_no" value="'+uReserveList[i].b_no+'">' //버스번호
-		str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList[i].s_namestart +'">' //출발지
-		//str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList[i].s_namestart + '['+uReserveList[i].s_nostart+'">' //출발지
-		str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList[i].s_namelast +'">' //도착지
-		//str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList[i].s_namelast + '['+uReserveList[i].s_nolast+'">' //도착지
-		str += '<input type="text" class="ur_no" name="ur_no" value="'+uReserveList[i].ur_no +'"><br>' //예약넘버	
+		str += '<input type="text" class="ur_date" name="ur_date" value="'+uReserveList.ur_date+'">' //예약일자
+		str += '<input type="text" class="b_no" name="b_no" value="'+uReserveList.b_no+'">' //버스번호
+		str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList.s_namestart +'">' //출발지
+		//str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList.s_namestart + '['+uReserveList[i].s_nostart+'">' //출발지
+		str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList.s_namelast +'">' //도착지
+		//str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList.s_namelast + '['+uReserveList[i].s_nolast+'">' //도착지
+		str += '<input type="text" class="ur_no" name="ur_no" value="'+uReserveList.ur_no +'"><br>' //예약넘버	
 		str += '<input type="button" class="cancelBtn" value="예약취소">'
 		str += "</div>"
 	}
@@ -61,6 +61,8 @@
 	$(".cancelBtn").click(function(){
 		let ur_no = $(this).parent().children('.ur_no').val();
 		console.log(ur_no);
+		$('#reservationCancel').append('<input type="hidden" class="ur_no" name="ur_no" value="'+uReserveList.ur_no +'">');
+		$('form').trigger('submit');
 	});
 	
 </script>

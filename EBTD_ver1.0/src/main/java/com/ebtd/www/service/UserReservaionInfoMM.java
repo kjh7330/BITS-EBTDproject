@@ -74,8 +74,8 @@ public class UserReservaionInfoMM {	//김아름
 			view = "/user/wheel/reservationInfoDetailForm";//.jsp
 		
 		}else {
-			System.out.println("uReserveList가져오기 실패-메인으로 이동");
-			view = "/user/wheel/mainForm";
+			System.out.println("reserveDetail가져오기 실패-메인으로 이동");
+			view = "redirect:/user/reservationCheck";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -90,7 +90,7 @@ public class UserReservaionInfoMM {	//김아름
 		int ur_no = rb.getUr_no();
 		System.out.println(ur_no + "=========예약취소 ur_no=======");
 		uriDao.reservationCancel(ur_no);	//디비에서 ur_state 값 변경
-		view = "/user/wheel/mainForm";//.jsp
+		view = "redirect:/user/reservationCheck";//.jsp
 		 
 		mav.setViewName(view);
 		return mav;

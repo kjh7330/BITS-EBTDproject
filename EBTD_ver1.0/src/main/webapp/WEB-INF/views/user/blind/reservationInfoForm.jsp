@@ -74,10 +74,9 @@
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
 		
-		예약확인 페이지 ~~!~!	
+		<form name="reservationCancel" id="reservationCancel" action="/user/reservationCancel" method="post"></form>
 		<div id="reservationInfo"></div>
-		
-			
+				
 	<footer>
 	     <div class="footer-container">
 	         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
@@ -88,29 +87,39 @@
 </body>
 
 <script type="text/javascript">
-		let reservation = ${uReserveList};
-		console.log(reservation.b_no);
-		let str = '';
+	//예약 내역
+	let uReserveList = ${uReserveList};
+	let str = "";
+	console.log(uReserveList);
+	
+	for (let i = 0; i < uReserveList.length; i++) {
+		str += "<div class='oneReservationDiv'>"
+		str += '<input type="text" class="ur_date" name="ur_date" value="'+uReserveList[i].ur_date+'">' //예약일자
+		str += '<input type="text" class="b_no" name="b_no" value="'+uReserveList[i].b_no+'">' //버스번호
+		str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList[i].s_namestart +'">' //출발지
+		//str += '<input type="text" class="s_nostart" name="s_nostart" value="'+uReserveList[i].s_namestart + '['+uReserveList[i].s_nostart+'">' //출발지
+		str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList[i].s_namelast +'">' //도착지
+		//str += '<input type="text" class="s_namelast" name="s_namelast" value="'+uReserveList[i].s_namelast + '['+uReserveList[i].s_nolast+'">' //도착지
+		str += '<input type="text" class="ur_no" name="ur_no" value="'+uReserveList[i].ur_no +'"><br>' //예약넘버	
+		str += '<input type="button" class="cancelBtn" value="예약취소">'
+		str += "</div>"
+	}
+	$("#reservationInfo").empty();
+	$("#reservationInfo").append(str);
+	
+	//내역 div 클릭
+	$(".oneReservationDiv").click(function(){
+		$('#reservationForm').html('<input name = "ur_no" type = "hidden" value = '+$(this).children('.ur_no').val()+'>');
 		
-			
+		$('form').trigger('submit');
 		
-		$('#reservationInfo').empty();
-		$('#reservationInfo').append(str); 
-		
-		
-		//예약취소 버튼
-		$(".cancelBtn").click(function(){
-			let ur_no = $(this).parent().children('.ur_no').val();
-			console.log(ur_no);
-			/* console.log(ur_no);
-			location.href = '/user/reservation?ur_no='+ur_no; */
-			/* 
-			if(ur_no != ''){
-				console.log(ur_no);
-				$('form').trigger('submit');
-			}else{
-				console.log("즐겨찾기 값이 없습니다.");*/	
-		}); 
+	});
+	
+	//예약취소 버튼
+	$(".cancelBtn").click(function(){
+		let ur_no = $(this).parent().children('.ur_no').val();
+		console.log(ur_no);
+	});
 		
 </script>
 
