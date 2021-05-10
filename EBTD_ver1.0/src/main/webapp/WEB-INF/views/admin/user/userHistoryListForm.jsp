@@ -30,6 +30,7 @@
     transform: translate(-49%,0%);
 	width: 1000px;
 	padding-bottom: 140px;
+	font-size:15px;
 }
 .arrow{
 	border: 1px solid black;

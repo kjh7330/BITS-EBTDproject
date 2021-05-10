@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 김아름 -->
-<title>관리자 - 이용자 보기</title>
+<title>관리자 - 이용자 관리</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
@@ -56,7 +56,7 @@
 	<h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6>
 	<input class="maininput" value="이용자 상세" readonly>	</div>
 	<div style="color: black">
-		<br> 정렬:<select class="arrow" id="selectSort" onchange="selectSortClick(this)">
+		<br> 정렬:&nbsp;<select class="arrow" id="selectSort" onchange="selectSortClick(this)">
 			<option>정렬기준을 선택해주세요</option>
 			<option id="u_type">장애유형</option>
 			<option id="u_id">아이디</option>
@@ -64,7 +64,7 @@
 
 		<!-- 정렬에서 장애유형 선택하면 시각/휠체어 선택할수 있게 -->
 		<a id="selectSortDetail">
-			상세:<select class="arrow" id="selectSortUType">
+			&nbsp;&nbsp;상세:&nbsp;<select class="arrow" id="selectSortUType">
 					<option class="selectType">장애유형을 선택해주세요</option>
 					<option id="blind" class="selectType">시각</option>
 					<option id="wheel" class="selectType">휠체어</option>
@@ -73,7 +73,7 @@
 
 		<!-- 아이디 선택하면 검색할수있게 -->
 		<a id="searchInput">
-			아이디를 입력하세요: <input type="text" id="secrchInputUserName">
+			&nbsp;&nbsp;아이디를 입력하세요: <input type="text" id="secrchInputUserName">
 			<button id="searchBtn">검색</button>
 		</a>
 		<br>

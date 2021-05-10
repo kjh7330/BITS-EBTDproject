@@ -5,7 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 정류장 관리</title>
+<style>
+	#main-container{
+		position: absolute;
+        left: 50%;
+        transform: translate(-50%,20%);
+		color: black;
+		width: 1000px;
+        text-align: center;
+        font-size: 15px;
+	}
+	.maindivinput{
+		border: none;
+        border-radius: 8px;
+        text-align: center;
+        width: 800px;
+        background-color: pink;
+        height: 50px;
+        font-weight: bold;
+        font-size: 20px;
+	}
+</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,22 +34,14 @@
 </head>
 
 <body>
-<div>
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%>
 	</div>
+<div id="main-container">
 		
-		
-		<div style="color: black; text-align: center">
-			정류장 이름 검색 <input id="search" name="search" value = "${search}">
-			<button id="searchStop">조회</button>
-		</div>
+	<div><br><input type="text" class="maindivinput" value="정류장 전체 리스트" readonly><br></div>
 	
-		<div align="center">
-		${paging}
-		</div>
-	
-	
+	<br>
 	<table class="table table-striped" style="color: black">  
 		<thead>
 			<tr>
@@ -40,13 +53,21 @@
 		<tbody id="stopList">
 		</tbody>
 	</table>
+		<br>
+		<div style="color: black; text-align: center">
+			정류장 이름 검색 <input id="search" name="search" value = "${search}">
+			<button id="searchStop">조회</button>
+		</div>
+	
+		<div align="center">
+		${paging}
+		</div>
 
-
+</div>
 
 	<div id="adminfooter"><%@ include
 			file="/WEB-INF/views/include/adminfooter.jsp"%>
 
-	</div>
 </div>
 </body>
 

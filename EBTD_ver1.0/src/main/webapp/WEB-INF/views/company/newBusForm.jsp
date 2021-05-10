@@ -38,11 +38,11 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 200;
 	visibility: hidden;
 	opacity: 0;
 	transition: all 0.5s ease;
-	color : black;
+	color: black;
 }
 
 /* modal box */
@@ -53,12 +53,13 @@ body {
 }
 
 .modal_header {
+	text-align: center;
 	width: 100%;
 	position: relative;
 }
 
-.modal_header h3 {
-	padding: 20px 0;
+.modal_header h5 {
+	padding: 5px 0;
 	color: #333;
 }
 
@@ -67,7 +68,7 @@ body {
 	background: #fefefe;
 	border: 1px solid #888;
 	box-sizing: border-box;
-	height: 200px;
+	height: 115px;
 }
 
 .modal_footer {
@@ -92,53 +93,112 @@ body {
 	cursor: pointer;
 }
 /*   모달css여기까지~!   */
+.main-container {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 61%);
+	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
+	font-size: 20px;
+}
+
+#busNum {
+	height: 46px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.maininput {
+	border: none;
+	background-color: #f9eb99;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
+.sel {
+	width: 210px;
+}
+
+#myModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -72%);
+	width: 500px;
+	height: 720px;
+	color: black;
+	font-size: 13px;
+}
+#myModal input{
+	border: 1px solid black;
+	height: 22px;
+}
+#myModal select{
+	border: 1px solid black;
+}
+.bbb{
+	width: 100px;
+}
 </style>
 <body>
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-	<p style="color: black;">노선번호 선택</p>
+	<div class="main-container">
+	<div><input class="maininput" value="노선번호 선택" readonly></div><br>
 	<input type="text" id="busNum">
 	<!--    모달 버튼 가져가세요~!     -->
 	<button id="myBtn">노선 번호 확정</button>
-
+	</div>
 	<div id="overlay">
 		<div id="myModal" class="modal">
 			<div class="modal_header">
-				<p style="color: black; text-align: center;">새로운 노선 등록 신청</p>
+				<h5 style="margin-top:5px; margin-left:10px;">새로운 노선 등록 신청</h5>
 				<span class="close">&times;</span>
 			</div>
-			<div class="modal_content" style="text-align: center;">
-				<p style="color: black;">동, 읍, 면 선택</p>
-				<select id="mTownSelect"></select>
-				<p style="color: black;">출발 정류장 선택</p>
-				<select id="mStopSelect"></select>
-				<input type = "button" id = "stopConfi" value = "선택">
-				<p style = "color: black;">추천 정류장</p>
-				<select id="mRecommendStop"></select>
-				<input type = "button" id = "recommendConfi" value = "선택">
-				
+			<div class="modal_content">
+			<table style="margin-top: 20px; margin-left:50px;">
+			<tr>
+				<td>동, 읍, 면 선택</td><td><select class="sel" id="mTownSelect"></select></td>
+			</tr>
+			<tr>
+				<td>출발 정류장 선택</td><td><select class="sel" id="mStopSelect"></select> <input type = "button" id = "stopConfi" value = "선택"></td>
+			<tr>
+				<td>추천 정류장</td><td><select class="sel" id="mRecommendStop"></select> <input type = "button" id = "recommendConfi" value = "선택"></td>
+			</tr>
+			</table>
 			</div>
+			<div style="margin-top: 10px; margin-left:50px;margin-right:50px; overflow:scroll; height: 500px;">
 			<form id = "routeForm" action="/company/applyNewBusRoute" method = "post">
 			<div id = "busRouteSelect">
-				<p style = "color: black;">버스 노선</p> <input type = "text" id = "stopCount" name = "stopCount">개 정류장
-				<input id="mBusNum" name= "busNum">번 버스 <br/>
+				▶ 버스 노선<br>
+				<input class="bbb" type = "text" id = "stopCount" name = "stopCount">개 정류장	<input class="bbb" id="mBusNum" name= "busNum">번 버스 <br/>
 			</div>
-				운행 버스 배차
+				▶ 운행 버스 배차
 				<table id="dispatch">
 					<tr>
-						<td>차량번호 :</td>
-						<td><input type = "text" class = "motorNumber" name = "motorNumber1"></td>
+						<td>차량번호 : </td>
+						<td><input style="width: 150px;" type = "text" class = "motorNumber" name = "motorNumber1"></td>
 						<td><select name = "lowFloor1">
 							<option value = "일반">일반</option>
 							<option value = "저상">저상</option>
 						</select></td>
 						<td><input type = "button" value = "추가" id = "add"></td>
 					</tr>
+					<tr>
+						<td>총 버스 갯수 : </td>
+						<td><input style="width: 150px;" id="motorCount" type = "text" name= "motorCount"></td><td colspan="2"><input id="submitRoute" type = "submit"></td>
+					</tr>
 				</table>
-				총 버스 갯수 :<input id="motorCount" type = "text" name= "motorCount">
-				<input id="submitRoute" type = "submit">
 			</form>
+			</div>
 			<div class="modal_footer">
 			</div>
 		</div>

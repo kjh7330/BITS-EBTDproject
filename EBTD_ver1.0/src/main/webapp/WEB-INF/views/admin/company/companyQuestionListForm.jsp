@@ -5,14 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 관리 페이지</title>
+<title>관리자 - 회사 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		#main-container{
 			position: absolute;
-			top: 13%;
             left: 50%;
-            transform: translate(-50%,12%);
+            transform: translate(-50%,23%);
 			color: black;
 			text-align: center;
 			padding-bottom: 140px;
@@ -37,6 +36,8 @@
 			width: 900px;
 			border: 1px solid black;
 			font-size: 15px;
+			margin-left: auto;
+			margin-right: auto;
 		}
 		tr, td{
 			border: 1px solid black;

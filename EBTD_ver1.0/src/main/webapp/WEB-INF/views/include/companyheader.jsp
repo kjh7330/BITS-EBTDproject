@@ -39,8 +39,8 @@
         #headericon{
             font-size: 35px;
             padding-top: 26px;
-            padding-right: 10px;
-            padding-left: 15px;
+            padding-right: 78px;
+            padding-left: 25px;
         }
         .headericon{
             padding-top: 8px;
@@ -50,7 +50,7 @@
         .headerbell{
             color: yellow;
             padding-top: 25px;
-            padding-right: 30px;
+            padding-right: 40px;
             font-size: 40px;
         }
         .footer-container img{
@@ -120,11 +120,11 @@
             font-size: 20px;
             }
             .navdiv{
-                position: fixed;
+            	position: fixed;
                 display: flex;
                 justify-content: space-around;
-                top:13%;
-                height: 6%;
+                top:100px;
+                height: 45px;
                	width:100vw;
                 background-color: lightgray;
                 color: black;
@@ -140,7 +140,7 @@
                 font-size: 18px;
                 border: none;
                 cursor: pointer;
-                height: 40px;
+                height: 45px;
                 width: 240px;
                 flex-grow: 1;
             }
@@ -216,8 +216,8 @@
 <body>
     <header>
         <div class="hcontainer">
-            <div class="headericon"><i id="headericon" class="far fa-user"></i>관리자님</div>
-                <div class="headertitle"><a style="text-decoration: none;" href="/company/companyindexForm"><img src="./resources/image/mainlogo.png" alt="EBTD메인로고" style="height: 80px;"/>&nbsp;</div>
+            <div class="headericon"><i id="headericon" class="far fa-user"></i></div>
+                <div class="headertitle"><a style="text-decoration: none;" href="/company/companyindexForm"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고" style="height: 80px;"/></a>&nbsp;</div>
                 <div class="headeralarm">
                     <div class="headerbell">
                         <i class="fas fa-bell"></i><i class="fas fa-comment" style="font-size: 35px; color: red; position: absolute; top: 20px;"></i>
@@ -234,7 +234,7 @@
                 <div class="dropdown-content">
                     <div class="menudetail"><a href="/company/newBusForm">새로운 노선 등록 신청</a></div>
                     <div class="menudetail"><a href="/company/existBusUpdateForm">기존 노선 변경 신청</a></div>
-                    <div class="menudetail"><a href="#">노선 변경 및 등록 신청 내역 확인</a></div>
+                    <div class="menudetail"><a href="#">노선 변경 및 등록 신청 내역</a></div>
                     <div class="menudetail"><a class="/company/adetail" href="/company/newApplyForm">&nbsp;&nbsp;- 신규 신청 내역</a></div>
                     <div class="menudetail"><a class="/company/adetail" href="/company/updateApplyForm">&nbsp;&nbsp;- 변경 신청 내역</a></div>
                 </div>

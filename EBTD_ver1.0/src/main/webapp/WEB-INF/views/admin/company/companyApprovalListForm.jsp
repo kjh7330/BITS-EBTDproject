@@ -5,16 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 관리 페이지</title>
+<title>관리자 - 회사 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
 		    position: absolute;
-		    top: 10%;
             left: 50%;
-            transform: translate(-57%,17%);
+            transform: translate(-50%,35%);
 			color: black;
-			width: 700px;
+			width: 800px;
             text-align: center;
             padding-bottom: 140px;
 		}
@@ -63,7 +62,7 @@
 <div class="main-container"><br>
 	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div>
-		<a style="margin-left: 100px;">정렬:</a>
+		<a>정렬:</a>
 		<select class="arrow" id="category1" onchange="fnCtg()">
 			<option value="all" selected>전체</option>
 			<option value="c_name">회사명</option>

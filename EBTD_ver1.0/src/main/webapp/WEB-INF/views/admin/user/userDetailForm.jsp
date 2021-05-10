@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 - 이용자 상세 보기</title>
+<title>관리자 - 이용자 관리</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -63,7 +63,7 @@ h2{color: black; text-align:center}
 						src="https://image.9xsecndns.cn/image/uicon/25572456c459d48dc4929d08da4191b946acbf8030640a.png"
 						data-original-title="Usuario">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<div class="table-responsive"></div>
 				</div>
 			</div>

@@ -4,16 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 관리 페이지</title>
+<title>관리자 - 회사 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
 		    position: absolute;
-		    top: 13%;
             left: 50%;
-            transform: translate(-56%,12%);
+            transform: translate(-50%,25%);
 			color: black;
-			width: 700px;
+			width: 800px;
             text-align: center;
 			padding-bottom: 140px;
 		}

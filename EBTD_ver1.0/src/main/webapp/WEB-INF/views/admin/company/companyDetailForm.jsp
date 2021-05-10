@@ -5,28 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 관리 페이지</title>
+<title>관리자 - 회사 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
-		#main-container{
-			position: absolute;
-			top: 13%;
+		.main-container{
+		    position: absolute;
             left: 50%;
-            transform: translate(-50%,9%);
+            transform: translate(-50%,27%);
 			color: black;
-			text-align: center;
-			padding-top: -1px;
+			width: 800px;
+            text-align: center;
 			padding-bottom: 140px;
 		}
 		.maindivinput{
 			border: none;
-			border-radius: 8px;
-			text-align: center;
 			background-color: #f9eb99;
-			height: 50px;
-			width: 800px;
 			font-size: 20px;
 			font-weight: bold;
+			width: 800px;
+			height: 50px;
+			text-align: center;
+			border-radius: 8px;
+		}
+		.maindivinput:focus{
+			outline:none;
 		}
 		.maintable1{
 			text-align: center;
@@ -61,53 +63,57 @@
 		.qbtn:hover{
 			background-color: #f9eb99;
 		}
+		.main-info{
+			width: 800px;
+		}
 
     </style>
 </head>
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
-	<div id="main-container">
-		<div><br>
-			<input type="text" class="maindivinput" value="버스 회사 상세 정보" readonly><br>
-		</div><br>
-		<div class="main-info">
-			<table class="maintable1">
-				<tr style="background-color: lightgray;">
-					<td style="width: 220px;">회사명 : </td><td>${cName.c_name}</td>
-				</tr>
-				<c:forEach var="vr" items="${vrCountList}">
-				<tr>
-					<td>총 민원 수 :</td><td>${vr.v_count}</td>
-				</tr>
-				<tr>
-					<td>총 추천 수 :</td><td>${vr.voc_recommend}</td>
-				</tr>
-				</c:forEach>
-			</table>
-		</div>
-		<div class="maindivtable">
-			<table class="maintable2">
-				<tr style="background-color: lightgray;">
-					<td>운행노선</td><td>인가대수</td><td>저상버스</td><td>일반버스</td><td style="width: 165px;">기사수</td>
-				</tr>
-				<c:forEach var="bd" items="${bdCountList}">
-				<c:forEach var="lr" items="${lrCountList}">
-				<c:if test="${bd.b_no eq lr.b_no}">
-				<tr>
-					<td>${bd.b_no}</td><td>${bd.b_all_num}</td><td>${lr.b_lowfloor_num}</td><td>${lr.b_regular_num}</td><td>${bd.d_num}</td>
-				</tr>
-				</c:if>
-				</c:forEach>
-				</c:forEach>
-			</table>
-		</div>
-		<div>
-			<a href="/admin/company/getCompanyQuestionList?c_username=${cName.c_username}">
-			<input class="qbtn" type="button" value="고객소리함">
-			</a>
-		</div>
+
+<div class="main-container">
+	<div>
+		<input type="text" class="maindivinput" value="버스 회사 상세 정보" readonly><br>
+	</div><br>
+	<div class="main-info">
+		<table class="maintable1">
+			<tr style="background-color: lightgray;">
+				<td style="width: 220px;">회사명 : </td><td>${cName.c_name}</td>
+			</tr>
+			<c:forEach var="vr" items="${vrCountList}">
+			<tr>
+				<td>총 민원 수 :</td><td>${vr.v_count}</td>
+			</tr>
+			<tr>
+				<td>총 추천 수 :</td><td>${vr.voc_recommend}</td>
+			</tr>
+			</c:forEach>
+		</table>
 	</div>
+	<div class="maindivtable">
+		<table class="maintable2">
+			<tr style="background-color: lightgray;">
+				<td>운행노선</td><td>인가대수</td><td>저상버스</td><td>일반버스</td><td style="width: 165px;">기사수</td>
+			</tr>
+			<c:forEach var="bd" items="${bdCountList}">
+			<c:forEach var="lr" items="${lrCountList}">
+			<c:if test="${bd.b_no eq lr.b_no}">
+			<tr>
+				<td>${bd.b_no}</td><td>${bd.b_all_num}</td><td>${lr.b_lowfloor_num}</td><td>${lr.b_regular_num}</td><td>${bd.d_num}</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+			</c:forEach>
+		</table>
+	</div>
+	<div>
+		<a href="/admin/company/getCompanyQuestionList?c_username=${cName.c_username}">
+			<input class="qbtn" type="button" value="고객소리함">
+		</a>
+	</div>
+</div>
 	
-	<div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
+<div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 </body>
 </html>

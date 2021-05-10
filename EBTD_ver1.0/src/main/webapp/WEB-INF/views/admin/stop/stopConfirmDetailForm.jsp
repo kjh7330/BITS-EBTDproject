@@ -7,9 +7,46 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-	#confirmtitle{
-		background-color: black;
+	#main-container{
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%,34%);
+		color: black;
+		width: 800px;
+		text-align: center;
 	}
+	#confirmtitle{
+		border: none;
+        border-radius: 8px;
+        text-align: center;
+        width: 600px;
+        background-color: pink;
+        height: 50px;
+        font-weight: bold;
+        font-size: 20px;
+	}
+	#table1{
+        margin-top: 5px;
+		width: 600px;
+		height: 400px;
+		color: black;
+		border: 1px solid black;
+		margin-left:auto;
+		margin-right:auto;
+		font-size: 18px;
+	}
+	.jbtn{
+        text-align: center;
+        background-color: lightgray;
+        border-radius: 8px;
+        border: none;
+        margin: 10px;
+        width: 100px;
+        height: 40px;
+	}
+    .jbtn:hover{
+      	background-color: gray;
+    }
 	/*   모달 CSS   */
         /* reset */
         h2, p, div, h3 { margin:0; padding:0 }
@@ -34,7 +71,7 @@
                     background:rgba(0,0,0,0.4);
                     position:fixed;
                     top:0; left:0; 
-                    z-index:1; 
+                    z-index:110; 
                     visibility:hidden; 
                     opacity:0;   
                     transition:all 0.5s ease;
@@ -111,37 +148,37 @@
 
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
-<div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
-<div id="confirmtitle">신청 정류장 리스트</div><br>
-	
-<table id="table1" border="1px solid black" style="color: black">
-<tr>
-<td>신청회사</td><td>${saList[0].c_UserName}</td>
-</tr>
-<tr>
-<td>정류장 이름</td><td>${saList[0].sa_Name}</td>
-</tr>
-<tr>
-<td>위치</td><td>( ${saList[0].sa_X}, ${saList[0].sa_Y} )</td>
-</tr>
-<tr>
-<td>동 이름</td><td>${saList[0].t_Name}</td>
-<tr>
-<tr>
-<td>신청일</td><td id="date">${saList[0].sa_Date}</td>
-</tr>
-<tr>
-<td>상태</td><td>${saList[0].sa_State}</td>
-</tr>
-
-</table>
-<br>
-
-<div>
-<span><input id="myBtn" type="button" value="공문보기"></span>
-<span><input id="myBtn2" type="button" value="승인"></span>
-<span><input id="myBtn3"  type="button" value="반려"></span>
-</div>
+<div id="main-container">
+	<input type="text" id="confirmtitle" value="정류장 신청 상세"><br><br>
+	<table id="table1">
+		<tr>
+			<td>신청회사</td><td>${saList[0].c_UserName}</td>
+		</tr>
+		<tr>
+			<td>정류장 이름</td><td>${saList[0].sa_Name}</td>
+		</tr>
+		<tr>
+			<td>위치</td><td>( ${saList[0].sa_X}, ${saList[0].sa_Y} )</td>
+		</tr>
+		<tr>
+			<td>동 이름</td><td>${saList[0].t_Name}</td>
+		</tr>
+		<tr>
+			<td>신청일</td><td id="date">${saList[0].sa_Date}</td>
+		</tr>
+		<tr>
+			<td>상태</td><td>${saList[0].sa_State}</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input id="myBtn" type="button" class="jbtn" value="공문보기">
+				<input id="myBtn2" type="button" class="jbtn" value="승인">
+				<input id="myBtn3"  type="button" class="jbtn" value="반려">
+			</td>
+		</tr>
+	</table>
+	<br>
+</div> 
 <div id="overlay">
        <div id="myModal" class="modal">
           <div class="modal_header">
@@ -151,7 +188,9 @@
           <div class="modal_content">
              <p style="color:black;">
              <table class="modal_table3">
-
+             	<tr>
+             		<td>(주) ${saList[0].c_UserName}</td>
+             	</tr>
              	</table><br>
              	<table class="modal_table" style="font-weight: bold;">
 	        	    <tr>
@@ -191,7 +230,12 @@
 	        			<td colspan="2"> - 신청 사유: ${saList[0].sa_Reason}</td>
 	        		</tr>
 
-               	</table>
+               	</table><br>
+               	<table class="modal_table">
+           			<tr>
+						<td>붙임</td><td colspan="3">1. 사업자등록증 사본 1부(별송) 끝.</td>
+					</tr>
+				</table>
                	<table class="modal_table3">
 					<tr>
 	        	    	<td colspan="2"><hr size="3" noshade></hr></td>
@@ -260,7 +304,7 @@
              </div>
           </div>
         </div>
-        
+<div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 </body>
 
 <script>

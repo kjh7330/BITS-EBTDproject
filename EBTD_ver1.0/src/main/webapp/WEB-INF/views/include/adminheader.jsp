@@ -123,8 +123,8 @@
             	position: fixed;
                 display: flex;
                 justify-content: space-around;
-                top:13%;
-                height: 6%;
+                top:100px;
+                height: 45px;
                	width:100vw;
                 background-color: lightgray;
                 color: black;

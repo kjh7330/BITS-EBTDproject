@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>회사 관리 페이지</title>
+<title>관리자 - 회사 관리 페이지</title>
 
     <style>
 		#main-container{
@@ -54,21 +54,11 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 	<div id="main-container">
 
-		<div>
-			<br> <input type="text" class="maindivinput" value="버스 회사 리스트"
-				readonly> <br>
-		</div>
+		<div><br><input type="text" class="maindivinput" value="버스 회사 리스트" readonly><br></div>
 		<br>
-		<div id="inputForm">
-			회사 이름 : 
-			<input type="text" id="value" placeholder="검색어를 입력하세요."
-				onkeyup="filter()" />
-		</div>
+		<div id="inputForm">회사 이름 : <input type="text" id="value" placeholder="검색어를 입력하세요." onkeyup="filter()" /></div>
 		<br>
-		<div class="maindivtable">
-			<table id="stoptable" style="color: black">
-			</table>
-		</div>
+		<div class="maindivtable"><table id="stoptable" style="color: black"></table></div>
 	</div>
 <script>
 

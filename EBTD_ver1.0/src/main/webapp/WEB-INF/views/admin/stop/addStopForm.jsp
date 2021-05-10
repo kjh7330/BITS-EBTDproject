@@ -7,28 +7,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>정류장 등록 페이지</title>
+<style type="text/css">
+	.checkBox {
+		width: 180px;
+		display: hidden;
+	}
+	#main-container{
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%,39%);
+		color: black;
+		width: 800px;
+		text-align: center;
+	}
+	.maindivinput{
+		border: none;
+        border-radius: 8px;
+        text-align: center;
+        width: 800px;
+        background-color: pink;
+        height: 50px;
+        font-weight: bold;
+        font-size: 20px;
+	}
+	#inputtable{
+		width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	td{
+		height: 40px;
+	}
+	#inputtable input{
+		border: none;
+		text-align: center;
+	}
+	.arrow{
+		border: 1px solid black;
+		width: 90px;
+		height: 35px;
+	}
+	.arrow:hover {
+		border: 1px solid #aaa;
+	}
+	#submit{
+		margin-top: 20px;
+		width: 200px;
+		height: 45px;
+		font-size: 20px;
+		border-radius: 10px;
+		background-color: lightgray;
+	}
+	#submit:hover{
+		background-color: #ff8197;
+	}
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style type="text/css">
-.checkBox {
-	width: 180px;
-	display: hidden;
-}
-</style>
 </head>
 <body>
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
-	<div id="adminfooter"><%@ include
-			file="/WEB-INF/views/include/adminfooter.jsp"%></div>
-
+	<div id="main-container">
+	<div><br><input type="text" class="maindivinput" value="정류장 등록" readonly><br></div>
+	<br>
 	<form id="addStop" action="/admin/stop/addStop">
 		<table id="inputtable" border="1" style="color: black">
 			
 			<tr>
-				<td class="inputtitle">동 이름</td>
+				<td style="width: 200px" class="inputtitle">동 이름</td>
 				<td>
-				<select id="t_Name" name="T_NAME">
+				<select id="t_Name" class="arrow" name="T_NAME">
 						<option>동 선택</option>
 					<c:forEach var="stop" items="${sList}">
 						<option>${stop.t_NAME}</option>
@@ -39,12 +88,12 @@
 			
 			<tr>
 				<td class="inputtitle">정류장 번호</td>
-				<td><div><input type="text" id="checkNo" readonly="readonly" name="S_NO"></div></td>
+				<td><div><input type="text" id="checkNo" readonly="readonly"name="S_NO"></div></td>
 			</tr>
 
 			<tr>
 				<td class="inputtitle">정류장 이름</td>
-				<td><input type="text" id="s_Name" name="S_NAME"></td>
+				<td><input type="text" id="s_Name" placeholder="입력하세요~!" name="S_NAME"></td>
 				<td><div class="checkBox" id="checkName"></div></td>
 			</tr>
 
@@ -65,12 +114,12 @@
 				<td class="inputtitle">상세정보</td>
 				<td><input type="text" id="s_Detail" name="S_DETAIL"></td>
 			</tr>
-			<tr>
-			<td colspan="2" style="text-align: center;"><button id="submit">등록하기</button></td>
-			</tr>
 		</table>
+		<button id="submit">등록하기</button></td>
 	</form>
-
+	</div>
+	<div id="adminfooter"><%@ include
+			file="/WEB-INF/views/include/adminfooter.jsp"%></div>
 </body>
 <script type="text/javascript">
 //유효성 검사
