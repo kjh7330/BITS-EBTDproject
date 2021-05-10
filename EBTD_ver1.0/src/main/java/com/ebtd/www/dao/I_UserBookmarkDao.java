@@ -2,6 +2,7 @@ package com.ebtd.www.dao;
 
 import java.util.List;
 
+import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.UserBookmarkBean;
 
 public interface I_UserBookmarkDao {
@@ -18,4 +19,8 @@ public interface I_UserBookmarkDao {
 
 	//시각장애인 예약확인
 	UserBookmarkBean confirmReservation(int ub_no);
+
+	List<StopBean> stopList();
+
+	
 }

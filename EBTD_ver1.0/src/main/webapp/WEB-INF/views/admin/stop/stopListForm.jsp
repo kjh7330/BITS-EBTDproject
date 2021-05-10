@@ -83,7 +83,7 @@ var html = '';
 	 html += '<tr>';
 	 html += '<td>'+sList[i].s_NO+'</td>';
 	 html += '<td>'+sList[i].t_NAME+'</td>';
-	 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+sList[i].s_NO+'>';
+	 html += '<td>'+'<a href=/admin/stop/getStopDetail?s_No='+sList[i].s_NO+'>';
 	 html += sList[i].s_NAME+'</a>';
 	 html += '</tr>';
 	}

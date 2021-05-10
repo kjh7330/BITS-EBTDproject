@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.UserBookmarkBean;
 import com.ebtd.www.dao.I_UserBookmarkDao;
+import com.ebtd.www.exception.CommonException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -121,6 +123,25 @@ public class UserBookmarkMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}
+
+	public ModelAndView stopList() throws JsonProcessingException {
+		List<StopBean> sList = null;
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		String view = null;			
+		sList=uBookDao.stopList();
+		
+		if(sList!=null && sList.size() != 0) {
+			mav.addObject("sList", om.writeValueAsString(sList));
+			
+			view = "/user/blind/addBookMark";//.jsp
+		}else {
+			view = "/user/blind/mainForm";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+		
 	
 	
 

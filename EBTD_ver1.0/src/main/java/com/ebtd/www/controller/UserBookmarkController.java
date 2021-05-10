@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.service.UserBookmarkMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -43,5 +45,10 @@ public class UserBookmarkController {	//김아름
 		return mav;		
 	}
 	
-
+	@GetMapping(value = "/stopList")
+	public ModelAndView stopList() throws JsonProcessingException{			
+		mav = ubm.stopList();	
+		return mav;		
+	}
+	
 }

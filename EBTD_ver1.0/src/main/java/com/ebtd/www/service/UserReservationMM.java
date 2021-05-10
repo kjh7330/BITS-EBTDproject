@@ -150,7 +150,7 @@ public class UserReservationMM {
 
 	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
 		mav = new ModelAndView();
-		System.out.println("lksghdjklfghsjdklghjklsdghjksldfghkjlsdghjksldgljfdhskljghdskfjlghkj");
+		
 		List<UserReservationBean> urList = null;
 		String view = null;
 		String u_username = session.getAttribute("u_username").toString();

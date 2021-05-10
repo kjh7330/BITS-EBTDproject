@@ -53,4 +53,7 @@
 		WHERE UB_NO=#{ub_no}
 	</select>
 
+	<select id="stopList" resultType="stop">
+		SELECT DISTINCT T_NAME FROM S
+	</select>
 </mapper>
