@@ -27,8 +27,9 @@ public class UserReservaionInfoMM {	//김아름
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
 		List<UserReservationBean> uReserveList = null;
-		
+		int u_type = (int)session.getAttribute("u_type");
 		String u_username = session.getAttribute("u_username").toString();
+		
 		System.out.println("세션에서 꺼낸 u_username = " + u_username);
 		uReserveList = uriDao.getReservationInfo(u_username);	//예약내역 디비 가서 가져오기
 		System.out.println("디비에서 가져온 예약내역 = " + uReserveList);
@@ -38,12 +39,21 @@ public class UserReservaionInfoMM {	//김아름
 			mav.addObject("uReserveList", om.writeValueAsString(uReserveList));
 			//mav.addObject("uBookList2", uBookList);
 			//잭슨으로 데이터-->json으로 변환
-			view = "/user/wheel/reservationInfoForm";//.jsp
+
+			if( u_type == 0 ) { //휠체어면
+				view = "/user/wheel/reservationInfoForm";//.jsp
+			}else if(u_type == 1) { //시각이면
+				view = "/user/blind/reservationInfoForm";//.jsp
+			}
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {
 			System.out.println("uReserveList가져오기 실패-메인으로 이동");
-			view = "/user/wheel/mainForm";
+			if( u_type == 0 ) { //휠체어면
+				view = "/user/wheel/mainForm";//.jsp
+			}else if(u_type == 1) { //시각이면
+				view = "/user/blind/mainForm";//.jsp
+			}
 		}
 		mav.setViewName(view);
 		return mav;	

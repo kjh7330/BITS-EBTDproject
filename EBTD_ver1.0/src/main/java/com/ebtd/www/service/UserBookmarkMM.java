@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +21,7 @@ public class UserBookmarkMM {	//김아름
 
 	ModelAndView mav;
 	
+	//유저( 시각 + 휠체어)의 즐겨찾기 리스트
 	public ModelAndView getBookmarkList(HttpSession session) throws JsonProcessingException {
 		
 		mav = new ModelAndView();	
@@ -30,15 +30,11 @@ public class UserBookmarkMM {	//김아름
 		List<UserBookmarkBean> uBookList = null;
 		String u_username = session.getAttribute("u_username").toString();
 		int u_type = (int)session.getAttribute("u_type");
-		System.out.println(u_type +"==================");
 		
-		System.out.println("세션에서 꺼낸 u_username = " + u_username);
 		uBookList = uBookDao.getBookmarkList(u_username);	//즐겨찾기 리스트 디비 가서 가져오기
-		System.out.println("디비에서 가져온 즐겨찾기 리스트 = " + uBookList);
 
 		//디비에서 가져온 데이터가 있으면
 		if( (uBookList!=null) && (uBookList.size()!= 0) ) {
-			
 			mav.addObject("uBookList", om.writeValueAsString(uBookList));
 			//mav.addObject("uBookList2", uBookList);
 			//잭슨으로 데이터-->json으로 변환
@@ -60,8 +56,7 @@ public class UserBookmarkMM {	//김아름
 			}
 		}
 		mav.setViewName(view);
-		return mav;
-			
+		return mav;	
 	} //getBookmarkList end
 
 	
@@ -85,5 +80,64 @@ public class UserBookmarkMM {	//김아름
 		
 		return "저장완료";
 	} //insertBookmark end
+
+	//시각장애인 즐겨찾기 Detail
+	public ModelAndView getBookmarkDetail(HttpSession session, int ub_no) throws JsonProcessingException {
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		UserBookmarkBean bookmark = null;
+		int u_type = (int)session.getAttribute("u_type");
+		
+		bookmark = uBookDao.getBookmarkDetail(ub_no);	//즐겨찾기 리스트 디비 가서 가져오기
+		System.out.println("디비에서 가져온 즐겨찾기 Detail= " + bookmark);
+		
+		//디비에서 가져온 데이터가 있으면
+		if( bookmark != null ) {		
+			mav.addObject("bookmark", om.writeValueAsString(bookmark));
+			if( u_type == 1 ) { 
+				view = "/user/blind/bookmarkDetailForm";//.jsp
+			}			
+		}else {
+			System.out.println("bookmark가져오기 실패-메인으로 이동");
+			if( u_type == 1 ) { 
+				view = "/user/blind/mainForm";//.jsp
+			}
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+	
+	//시각장애인 queryReservation
+	public ModelAndView queryReservation(HttpSession session, int ub_no) throws JsonProcessingException {
+		mav = new ModelAndView();
+		ObjectMapper om = new ObjectMapper();
+		String view = null;
+		UserBookmarkBean bookmark = null;
+		int u_type = (int)session.getAttribute("u_type");
+		
+		bookmark = uBookDao.confirmReservation(ub_no);	//즐겨찾기 리스트 디비 가서 가져오기
+		System.out.println("디비에서 가져온 즐겨찾기 Detail= " + bookmark);
+		
+		//디비에서 가져온 데이터가 있으면
+		if( bookmark != null ) {		
+			mav.addObject("bookmark", om.writeValueAsString(bookmark));
+			if( u_type == 1 ) { 
+				view = "/user/blind/queryReservationForm";//.jsp
+			}			
+		}else {
+			System.out.println("bookmark가져오기 실패-메인으로 이동");
+			if( u_type == 1 ) { 
+				view = "/user/blind/mainForm";//.jsp
+			}
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+	
+	
+
+
+	
 		
 } //UserBookmarkMM class end

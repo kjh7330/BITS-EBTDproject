@@ -148,8 +148,8 @@ body {
 
 	<!-- 즐겨찾기 리스트 -->
 	<form name="userBookmark" id="userBookmarkForm" action="/user/reservation" method="post">
-		<div id="booklist"></div>
 	</form>
+	<div id="booklist"></div> 
 	
 
 	<!-- 모달 -->
@@ -201,7 +201,6 @@ body {
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 
-	
 		
 		// 모달창 닫기 이벤트 
 		$(".close").on("click", function(){
@@ -224,6 +223,7 @@ body {
 		
 		//즐겨찾기 클릭
 		$('.bookList').click(function (){ 	// 모달창 열기 이벤트
+			$('#userBookmarkForm').html($(this).html());
 			$("#overlay").css({ visibility:"visible", opacity:1 });
 			
 			$('#modal_content_p').html($(this).html());

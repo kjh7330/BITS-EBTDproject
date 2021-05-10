@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시각 - 메인</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style type="text/css">
-
-	.maindiv{
+<title>시각유저 - 즐겨찾기 상세</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--font-awesome CDN-->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+	rel="stylesheet">
+</head>
+<style>
+.maindiv{
 		color: black;
 		text-align: center;
 	}
@@ -49,45 +51,82 @@
     	border-radius: 15px;
     	cursor: pointer;
     }
-    
-    #mbtn3{
-    	display: none;
-    }
+	#bookListDiv { /* 즐겨찾기 전체 div */
+		height: 90px;
+		text-align: center;
+		font-size: 14pt;
+		color: black; /* width: 300px */
+		padding-top: 15px;
+		margin: 20px;
+	}
+	
+	.bookList { /* 즐겨찾기 개인 div */
+		height: 90px;
+		text-align: center;
+		font-size: 14pt;
+		color: black; /* width:50px; */
+		padding-top: 15px; /* margin: 20px; */
+		border: 0.2px solid;
+	}
 
 </style>
-</head>
 <body>
-<div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
-<div class="maindiv">
- 	<div class="menudetail" id="logout"><a>로그아웃</a></div>
-	
-		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
-		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/getReservationInfo'">예약확인</button>
-		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
-	
-</div>
-
-<footer>
-     <div class="footer-container">
-         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
-         	<button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
-         	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
-     </div>
-</footer>
+	<div id="userheader"><%@ include
+			file="/WEB-INF/views/include/userheader.jsp"%></div>
+			
+		<div id="reservationInfo"></div>
+		
+			
+	<footer>
+	     <div class="footer-container">
+	         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
+	         	<button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
+	         	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
+	     </div>
+	</footer>
+</body>
 
 <script type="text/javascript">
-	
-	//예약 내역이 없으면 mbt1(즐겨찾기) display - mbt3(예약확인) display none
-	//if(){
-	//	$("#overlay").css({ visibility:"visible", opacity:1 });
-	//}else if(){ //예약 내역이 있으면 mbt3(예약확인) display - mbt1(즐겨찾기) display none
+		let reservation = ${uReserveList};
+		console.log(uReserveList.b_no);
+		let str = '';
 		
-	//}
-	
-</script>
+			str += '<div class="bookmarkTotal" overflow="auto">';
+			str += '<div class="bookmark">';
+			str += '<button id="mbtn" class="mainbtn">'+reservation.b_no+'</button>';
+			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namestart+'</button>';
+			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namelast+'</button>';
+			
+			str += '<input type="hidden" class="mainbtn" name="b_no">'+reservation.b_no+'</button>';
+			str += '<input type="hidden" class="ub_no" name="u_username" value="'+reservation.u_username+'">';	//아이디
+			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+reservation.ur_no+'">';	//예약번호
+			str += '<input type="hidden" class="s_noStart" name="s_noStart" value="'+reservation.s_nostart+'">';	//도착정류장ID
+			str += '<input type="hidden" class="s_noLast" name="s_noLast" value="'+reservation.s_nolast+'">';	//도착정류장ID
+			str += '<button id="cancelBtn" class="mainbtn">예약취소</button>';
+			str += '<div></div>';
+		
+		$('#reservationInfo').empty();
+		$('#reservationInfo').append(str); 
+		
+		
+		//예약취소 버튼
+		$(".cancelBtn").click(function(){
+			let ur_no = $(this).parent().children('.ur_no').val();
+			console.log(ur_no);
+			/* console.log(ur_no);
+			location.href = '/user/reservation?ur_no='+ur_no; */
+			/* 
+			if(ur_no != ''){
+				console.log(ur_no);
+				$('form').trigger('submit');
+			}else{
+				console.log("즐겨찾기 값이 없습니다.");
+			} */
+		});
+		
+	</script>
 
 <script>
-		
 		$('#btn1').click(function(){
 			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
 				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
@@ -106,7 +145,7 @@
 		$('#btn2').click(function(){
 			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
 				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!")
+				console.log("아직 페이지 이동할 곳이 없음!");
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
 				location.href = '/user/myPage';
 			}
@@ -156,10 +195,7 @@
 		/* function holding3(){
 			location.href = '/user/loginForm';
 		} */
-		
-$('#logout').click(function () {
-	location.href = '/user/logout';
-});
-</script>
-</body>
+
+		</script>
+
 </html>

@@ -22,11 +22,26 @@ public class UserBookmarkController {	//김아름
 
 	ModelAndView mav;
 
-	//유저(휠체어+시각)의 즐겨찾기 가져오고 성공하면 페이지 이동
+	//유저(휠체어+시각)의 즐겨찾기 리스트
 	@GetMapping(value = "/getBookmarkList")
 	public ModelAndView getBookmarkList(HttpSession session) throws JsonProcessingException {			
-			mav = ubm.getBookmarkList(session);	
+		mav = ubm.getBookmarkList(session);	
 		return mav;		
 	}
+	
+	//시각의 즐겨찾기 Detail
+	@GetMapping(value = "/getBookmarkDetail")
+	public ModelAndView getBookmarkDetail(HttpSession session, int ub_no) throws JsonProcessingException {			
+		mav = ubm.getBookmarkDetail(session, ub_no);	
+		return mav;		
+	}
+	
+	//시각의 예약 확인
+	@GetMapping(value = "/queryReservation")
+	public ModelAndView queryReservation(HttpSession session, int ub_no) throws JsonProcessingException {			
+		mav = ubm.queryReservation(session, ub_no);	
+		return mav;		
+	}
+	
 
 }

@@ -8,7 +8,9 @@
 
 	                <!-- mybatis-config.xml에 별칭설정 or Bean에 @Alias("bookmark") -->
 	<select id="getBookmarkList" resultType="bookmark">
-		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME s_nameStart, S2.S_NAME s_nameLast, UB.B_NO, UB.UB_ALIAS, UB.s_nostart, UB.s_noLAST 
+		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME S_NAMESTART, S1.S_DETAIL S_START_DETAIL,
+                S2.S_NAME S_NAMELAST, S2.S_DETAIL S_LAST_DETAIL,
+                UB.B_NO, UB.UB_ALIAS, UB.S_NOSTART, UB.S_NOLAST 
 		FROM UB
 		JOIN S S1 ON UB.S_NOSTART = S1.S_NO 
 		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
@@ -30,5 +32,25 @@
         INSERT INTO UB(u_userName, ub_no, s_nostart, s_nolast, b_no, ub_alias)
     	VALUES(#{u_username}, #{ub_no}, #{s_nostart},#{s_nolast},#{b_no},#{ub_alias})
     </insert>
+    
+    <select id="getBookmarkDetail" resultType="bookmark">
+		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME S_NAMESTART, S1.S_DETAIL S_START_DETAIL,
+                S2.S_NAME S_NAMELAST, S2.S_DETAIL S_LAST_DETAIL,
+                UB.B_NO, UB.UB_ALIAS, UB.S_NOSTART, UB.S_NOLAST 
+		FROM UB
+		JOIN S S1 ON UB.S_NOSTART = S1.S_NO 
+		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
+		WHERE UB_NO=#{ub_no}
+	</select>
+	
+	<select id="confirmReservation" resultType="bookmark">
+		SELECT UB.U_USERNAME, UB.UB_NO, S1.S_NAME S_NAMESTART, S1.S_DETAIL S_START_DETAIL,
+                S2.S_NAME S_NAMELAST, S2.S_DETAIL S_LAST_DETAIL,
+                UB.B_NO, UB.UB_ALIAS, UB.S_NOSTART, UB.S_NOLAST 
+		FROM UB
+		JOIN S S1 ON UB.S_NOSTART = S1.S_NO 
+		JOIN S S2 ON UB.S_NOLAST = S2.S_NO
+		WHERE UB_NO=#{ub_no}
+	</select>
 
 </mapper>
