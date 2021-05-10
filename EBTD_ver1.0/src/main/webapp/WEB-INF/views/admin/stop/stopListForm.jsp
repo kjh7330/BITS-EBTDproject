@@ -1,116 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style type="text/css">
-#stoptable {
-	width: 99.9%;
-	height: 200px;
-	text-align: center;
-}
-
-th {
-	width: 33.3%;
-}
-
-.stopName {
-	width: 33.3%;
-}
-</style>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+<div>
 	<div id="adminheader"><%@ include
-			file="/WEB-INF/views/include/adminheader.jsp"%></div>
-	<div id="adminfooter"><%@ include
-			file="/WEB-INF/views/include/adminfooter.jsp"%></div>
-
-	<div id="inputForm">
-		<input type="text" id="search" placeholder="정류장을 검색하세요." /><input id="searchBtn" type="button" value="검색">
+			file="/WEB-INF/views/include/adminheader.jsp"%>
 	</div>
-
-	<br>
-	<br>
-
-	<table id="stoptable" style="color: black" border="1px solid black">
+		
+		
+		<div style="color: black; text-align: center">
+			정류장 이름 검색 <input id="search" name="search" value = "${search}">
+			<button id="searchStop">조회</button>
+		</div>
+	
+		<div align="center">
+		${paging}
+		</div>
+	
+	
+	<table class="table table-striped" style="color: black">  
 		<thead>
 			<tr>
 				<th>정류장 번호</th>
-				<th>정류장 이름</th>
 				<th>동 이름</th>
+				<th>정류장 이름</th>
 			</tr>
 		</thead>
-		
-		<tbody id="result">
-		
+		<tbody id="stopList">
 		</tbody>
 	</table>
-	<br>
-	<div align="center">${paging}</div>
+
+
+
+	<div id="adminfooter"><%@ include
+			file="/WEB-INF/views/include/adminfooter.jsp"%>
+
+	</div>
+</div>
 </body>
 
-<script type="text/javascript">
-console.log(${sList});
-let i=0;
-let str='';
-for(i; i<${sList}.length; i++){
-	str+='<tr class="line">';
-	
-	str+='<td>'+${sList}[i]["s_NO"]+'</td>'
-	
-	str+='<td class="stopName"><a href=/admin/stop/getStopDetail?s_No='+${sList}[i]["s_NO"]+'>'
-	str+=${sList}[i]['s_NAME']+'</a></td>'
-	
-	str+='<td>'+${sList}[i]["t_NAME"]+'</td>';
-	
-	str+="</tr>";
-};
-$("#result").append(str); 
-
-
-//검색기능 작업중입니다.
-
-$('#searchBtn').click(function(){
-	str = '';			
-	//입력받은 userName
-	let search = $('#search').val();
-	console.log( search );
-	if(search != ''){
-		$('#result').html('');
-		// 입력된 값이 있으면 비동기로 입력된 조건으로 데이터 가지러?
-		$.ajax({
-			url: '/admin/stop/search?search='+search,
-					type: 'Get',
-					success: function(data){
-						console.log("ajax통신 성공 - 아이디");
-						let Obj = JSON.parse(data);	//문자열을 Json 객체로 변환
-						console.log(Obj);
-						
-						for (let i = 0; i < Obj.length; i++){
-							str += '<tr>';
-							//정류장 번호
-							str+='<td>'+${sList}[i]["s_NO"]+'</td>'
-							//정류장 이름
-							str+='<td><a href=/admin/stop/getStopDetail?s_No='+${sList}[i]["s_NO"]+'>'
-							str+=${sList}[i]['s_NAME']+'</a></td>'
-							//동 이름
-							str+='<td>'+${sList}[i]["t_NAME"]+'</td>';
-							str += "</tr>";
-							
-							$("#result").empty();	
-							$("#result").append(str);
-						}	
-					},
-					fail: function(err){
-						console.log(err);
-					}
-				});
-			}
-		}); 
+<script src="http://code.jquery.com/jquery-latest.js">
 </script>
+<script type="text/javascript">
+let sList = ${sList};
+var html = '';
 
+//console.log(sList);
+
+ for(let i = 0 ; i<sList.length; i++){
+	 html += '<tr>';
+	 html += '<td>'+sList[i].s_NO+'</td>';
+	 html += '<td>'+sList[i].t_NAME+'</td>';
+	 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+sList[i].s_NO+'>';
+	 html += sList[i].s_NAME+'</a>';
+	 html += '</tr>';
+	}
+   
+ $("#stopList").empty();
+ $("#stopList").append(html);
+
+//조회 버튼 클릭시 알림창 띄우고 해당 정류장 정보만 보여주기
+	$('#searchStop').click(function () {
+		location.href = "/admin/stop/getStopList?search="+$('#search').val();
+	});
+
+</script>
 </html>
