@@ -12,21 +12,25 @@
 		    position: absolute;
 		    top: 10%;
             left: 50%;
-            transform: translate(-50%,10%);
+            transform: translate(-57%,17%);
 			color: black;
 			width: 700px;
             text-align: center;
-            height: 100%;
+            padding-bottom: 140px;
 		}
 		.maininput{
 			border: none;
-			background-color: pink;
-			font-size: 30px;
-			width: 400px;
-			height: 80px;
+			background-color: #f9eb99;
+			font-size: 20px;
+			font-weight: bold;
+			width: 800px;
+			height: 50px;
 			text-align: center;
 			margin-bottom: 20px;
 			border-radius: 10px;
+		}
+		.maintable td{
+			height: 33px;
 		}
 		.maininput:focus{
 			outline:none;
@@ -35,13 +39,20 @@
 			border: none;
             border-radius: 8px;
             text-align: center;
-            width: 700px;
-            background-color: pink;
+            width: 800px;
+            background-color: #f9eb99;
             height: 50px;
             font-size: 18px;
 		}
 		.maintable:focus{
 			outline:none;
+		}
+		.arrow{
+			border: 1px solid black;
+			height: 35px;
+		}
+		.arrow:hover {
+			border: 1px solid #aaa;
 		}
 
     </style>
@@ -52,15 +63,15 @@
 <div class="main-container"><br>
 	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div>
-		정렬:
-		<select id="category1" onchange="fnCtg()">
+		<a style="margin-left: 100px;">정렬:</a>
+		<select class="arrow" id="category1" onchange="fnCtg()">
 			<option value="all" selected>전체</option>
 			<option value="c_name">회사명</option>
 			<option value="ap_state">승인종류</option>
 			<option value="ap_date">승인일자</option>
 		</select>&nbsp;&nbsp;&nbsp;
-		정렬기간:
-		<select id="category2" onchange="fnCtg()">
+		<a>정렬기간:</a>
+		<select class="arrow" id="category2" onchange="fnCtg()">
 			<option value="1" selected>전체</option>
 			<option value="2">일주일</option>
 			<option value="3">1개월</option>

@@ -12,7 +12,7 @@
 		#main-container{
 		    position: absolute;
             left: 50%;
-            transform: translate(-50%,3%);
+            transform: translate(-50%,54%);
 			color: black;
 			width: 800px;
             text-align: center;
@@ -22,8 +22,8 @@
             border-radius: 8px;
             text-align: center;
             width: 800px;
-            background-color: pink;
-            height: 60px;
+            background-color: #f9eb99;
+            height: 50px;
             font-weight: bold;
             font-size: 20px;
 		}
@@ -39,7 +39,7 @@
             font-size: 18px;
 		}
 		.maintableinput:hover{
-			background-color: #fe83ab;
+			background-color: #f9eb99;
 		}
 		.maintableinput:focus{
 			outline:none;

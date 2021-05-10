@@ -18,6 +18,11 @@
             color: white;
             min-height: 100%;
         }
+        header{
+        	position: fixed;
+        	width: 100vw;
+            z-index: 90;
+        }
         .hcontainer {
             display: flex;
             justify-content: space-between;
@@ -35,7 +40,7 @@
             font-size: 35px;
             padding-top: 26px;
             padding-right: 10px;
-            padding-left: 15px;
+            padding-left: 25px;
         }
         .headericon{
             padding-top: 8px;
@@ -45,7 +50,7 @@
         .headerbell{
             color: yellow;
             padding-top: 25px;
-            padding-right: 30px;
+            padding-right: 40px;
             font-size: 40px;
         }
         .footer-container img{
@@ -115,11 +120,15 @@
             font-size: 20px;
             }
             .navdiv{
+            	position: fixed;
                 display: flex;
                 justify-content: space-around;
-                height: 100%;
+                top:13%;
+                height: 6%;
+               	width:100vw;
                 background-color: lightgray;
                 color: black;
+                z-index: 100;
             }
             .navline{
                 font-size: 30px;
@@ -131,7 +140,7 @@
                 font-size: 18px;
                 border: none;
                 cursor: pointer;
-                height: 40px;
+                height: 45px;
                 width: 240px;
                 flex-grow: 1;
             }
@@ -191,7 +200,7 @@
             font-size: 16px;
             color: white;
             position: absolute;
-            right: 23px;
+            right: 32px;
             top: 23px;
             width: 20px;
             background-color: transparent;

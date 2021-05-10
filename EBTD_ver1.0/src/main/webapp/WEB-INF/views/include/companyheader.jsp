@@ -18,6 +18,11 @@
             color: white;
             min-height: 100%;
         }
+        header{
+        	position: fixed;
+        	width: 100vw;
+            z-index: 90;
+        }
         .hcontainer {
             display: flex;
             justify-content: space-between;
@@ -115,11 +120,15 @@
             font-size: 20px;
             }
             .navdiv{
+                position: fixed;
                 display: flex;
                 justify-content: space-around;
-                height: 100%;
+                top:13%;
+                height: 6%;
+               	width:100vw;
                 background-color: lightgray;
                 color: black;
+                z-index: 100;
             }
             .navline{
                 font-size: 30px;
@@ -154,11 +163,15 @@
                 display: block;
                 font-size: 15px;
             }
+            .adetail{
+                text-decoration: none;
+            }
             .dropdown-content a:hover {
                 background-color: #f1f1f1;
             }
             .dropdown:hover .dropdown-content {
                 display: block;
+                color: black;
             }
             .dropdown:hover .dropbtn {
                 background-color: #0C3D6A;
@@ -187,8 +200,8 @@
             font-size: 16px;
             color: white;
             position: absolute;
-            right: 24px;
-            top: 25px;
+            right: 32px;
+            top: 23px;
             width: 20px;
             background-color: transparent;
             /* 알림 숫자 */border: none;
