@@ -61,8 +61,6 @@
 	$(".cancelBtn").click(function(){
 		let ur_no = $(this).parent().children('.ur_no').val();
 		console.log(ur_no);
-		$('#reservationCancel').append('<input type="hidden" class="ur_no" name="ur_no" value="'+uReserveList.ur_no +'">');
-		$('form').trigger('submit');
 	});
 	
 </script>

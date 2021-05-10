@@ -299,7 +299,7 @@ let timer = setInterval(function () {
 		console.log(err,'!!!!!!!!');
 	});
 	
-}, 7000);
+}, 2000);
 let $brList = ${brList};	
 $("#modalUp").on("click", function(){
     $("#overlay2").css({ visibility:"visible", opacity:1 });

@@ -30,10 +30,7 @@ public class UserReservaionInfoMM {	//김아름
 		int u_type = (int)session.getAttribute("u_type");
 		String u_username = session.getAttribute("u_username").toString();
 		
-		System.out.println("getReservationInfo : 세션에서 꺼낸 u_username = " + u_username);
 		uReserveList = uriDao.getReservationInfo(u_username);	//예약내역 디비 가서 가져오기
-		System.out.println("getReservationInfo : 디비에서 가져온 예약내역 = " + uReserveList);
-
 		//디비에서 가져온 데이터가 있으면
 		if( (uReserveList.size() !=0) ) {
 			mav.addObject("uReserveList", om.writeValueAsString(uReserveList));
@@ -63,16 +60,12 @@ public class UserReservaionInfoMM {	//김아름
 		UserReservationBean reserveDetail = null;
 		
 		int ur_no = rb.getUr_no();
-		System.out.println(ur_no + "=========예약 상세내역 ur_no=======");
-
 		reserveDetail = uriDao.getReservationDetail(ur_no);
-		System.out.println("디비에서 가져온 예약 상세내역 = " + reserveDetail);
 
 		//디비에서 가져온 데이터가 있으면
 		if( (reserveDetail != null) ) {
 			mav.addObject("reserveDetail", om.writeValueAsString(reserveDetail));
 			view = "/user/wheel/reservationInfoDetailForm";//.jsp
-		
 		}else {
 			System.out.println("reserveDetail가져오기 실패-메인으로 이동");
 			view = "redirect:/user/reservationCheck";
@@ -86,9 +79,7 @@ public class UserReservaionInfoMM {	//김아름
 		mav = new ModelAndView();	
 		ObjectMapper om = new ObjectMapper();
 		String view = null;
-		
 		int ur_no = rb.getUr_no();
-		System.out.println(ur_no + "=========예약취소 ur_no=======");
 		uriDao.reservationCancel(ur_no);	//디비에서 ur_state 값 변경
 		view = "redirect:/user/reservationCheck";//.jsp
 		 

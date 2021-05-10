@@ -32,7 +32,6 @@ public class UserBookmarkMM {	//김아름
 		int u_type = (int)session.getAttribute("u_type");
 		
 		uBookList = uBookDao.getBookmarkList(u_username);	//즐겨찾기 리스트 디비 가서 가져오기
-
 		//디비에서 가져온 데이터가 있으면
 		if( (uBookList!=null) && (uBookList.size()!= 0) ) {
 			mav.addObject("uBookList", om.writeValueAsString(uBookList));
@@ -44,16 +43,11 @@ public class UserBookmarkMM {	//김아름
 			}else if(u_type == 1) { //시각이면
 				view = "/user/blind/blindBookmarkListForm";//.jsp
 			}
-			
 			//페이징을 하던 무한대로 쓸수있게 하던 해야됨 !
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {
 			System.out.println("uBookList가져오기 실패-메인으로 이동");
-			if( u_type == 0 ) { //휠체어면
-				view = "/user/wheel/mainForm";//.jsp
-			}else if(u_type == 1) { //시각이면
-				view = "/user/blind/mainForm";//.jsp
-			}
+			view = "redirect:/user/reservationCheck";//.jsp
 		}
 		mav.setViewName(view);
 		return mav;	
@@ -77,7 +71,6 @@ public class UserBookmarkMM {	//김아름
 		uBookmark.setUb_alias(ub_alias);
 		
 		uBookDao.insertBookmark(uBookmark);	//디비에 즐겨찾기 추가하러
-		
 		return "저장완료";
 	} //insertBookmark end
 
@@ -90,8 +83,6 @@ public class UserBookmarkMM {	//김아름
 		int u_type = (int)session.getAttribute("u_type");
 		
 		bookmark = uBookDao.getBookmarkDetail(ub_no);	//즐겨찾기 리스트 디비 가서 가져오기
-		System.out.println("디비에서 가져온 즐겨찾기 Detail= " + bookmark);
-		
 		//디비에서 가져온 데이터가 있으면
 		if( bookmark != null ) {		
 			mav.addObject("bookmark", om.writeValueAsString(bookmark));
@@ -100,9 +91,7 @@ public class UserBookmarkMM {	//김아름
 			}			
 		}else {
 			System.out.println("bookmark가져오기 실패-메인으로 이동");
-			if( u_type == 1 ) { 
-				view = "/user/blind/mainForm";//.jsp
-			}
+			view = "redirect:/user/reservationCheck";//.jsp
 		}
 		mav.setViewName(view);
 		return mav;
@@ -116,9 +105,7 @@ public class UserBookmarkMM {	//김아름
 		UserBookmarkBean bookmark = null;
 		int u_type = (int)session.getAttribute("u_type");
 		
-		bookmark = uBookDao.confirmReservation(ub_no);	//즐겨찾기 리스트 디비 가서 가져오기
-		System.out.println("디비에서 가져온 즐겨찾기 Detail= " + bookmark);
-		
+		bookmark = uBookDao.confirmReservation(ub_no);	//즐겨찾기 리스트 디비 가서 가져오기	
 		//디비에서 가져온 데이터가 있으면
 		if( bookmark != null ) {		
 			mav.addObject("bookmark", om.writeValueAsString(bookmark));

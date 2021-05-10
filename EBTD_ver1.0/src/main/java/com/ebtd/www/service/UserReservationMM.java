@@ -112,7 +112,6 @@ public class UserReservationMM {
 		String view = null;
 		ObjectMapper om = new ObjectMapper();		
 		brList = urDao.getStopDetail(s_No);
-		System.out.println("adsfasdfasdfasdfasdfasfdasdfasdfasdfasdfasdfasdfasdfasdfasdf"+brList);
 		if(brList!=null || brList.size()!=0) {
 			mav.addObject("brList", om.writeValueAsString(brList));
 			view = "/user/wheel/stopReservationDetailForm";
@@ -159,7 +158,6 @@ public class UserReservationMM {
 		ObjectMapper om = new ObjectMapper();	
 		
 		urList = urDao.reservationCheck(u_username);
-		System.out.println("urList=======" + urList);
 		if(urList!=null || urList.size()!=0) {
 			mav.addObject("urList", om.writeValueAsString(urList));
 			if( u_type.equals("0") ) { //휠체어면

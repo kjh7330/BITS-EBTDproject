@@ -54,7 +54,6 @@ public class UserReservationController {
 	
 	@GetMapping(value = "/reservationCheck")
 	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
-		System.out.println("뀨뀨뀨");
 		mav = urm.reservationCheck(session);
 		return mav;
 	}
