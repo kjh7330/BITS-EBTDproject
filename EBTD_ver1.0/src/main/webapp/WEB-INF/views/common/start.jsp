@@ -26,7 +26,7 @@
 	      location.href = 'admin';
 	});
 	$('#userlogin').click(function () {
-	   location.href = 'user/loginForm';
+	   location.href = 'user/logout';
 	});
 	$('#company').click(function () {
 	   location.href = 'company/companyindexForm';

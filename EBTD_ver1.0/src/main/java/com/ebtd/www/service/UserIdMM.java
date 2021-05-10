@@ -123,7 +123,7 @@ public class UserIdMM {
 			}else if(u_type==1) {
 				System.out.println("5");
 				//시각장애인 유저인 경우
-				view = "redirect:/user/blind/mainForm";
+				view = "redirect:/user/reservationCheck";
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
 			}			

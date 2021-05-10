@@ -48,14 +48,13 @@ public class UserReservationController {
 	}
 	@PostMapping(value = "/reservation")
 	public ModelAndView reservation(UserReservationBean ur, HttpSession session) {
-		System.out.println("5465465165165165165"+ur);
-		System.out.println(ur.getS_nolast());
 		mav = urm.reservation(ur, session);
 		return mav;
 	}
 	
 	@GetMapping(value = "/reservationCheck")
 	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
+		System.out.println("뀨뀨뀨");
 		mav = urm.reservationCheck(session);
 		return mav;
 	}

@@ -36,7 +36,7 @@ public class UserBookmarkController {	//김아름
 		return mav;		
 	}
 	
-	//시각의 예약 확인
+	//시각의 queryReservation
 	@GetMapping(value = "/queryReservation")
 	public ModelAndView queryReservation(HttpSession session, int ub_no) throws JsonProcessingException {			
 		mav = ubm.queryReservation(session, ub_no);	

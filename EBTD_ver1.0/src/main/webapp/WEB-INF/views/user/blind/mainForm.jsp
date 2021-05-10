@@ -50,9 +50,9 @@
     	cursor: pointer;
     }
     
-    #mbtn3{
+    /* #mbtn3{
     	display: none;
-    }
+    } */
 
 </style>
 </head>
@@ -64,7 +64,6 @@
 		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
 		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/getReservationInfo'">예약확인</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
-	
 </div>
 
 <footer>
@@ -76,13 +75,18 @@
 </footer>
 
 <script type="text/javascript">
+
+	let reservation = '${urList}';
+	console.dir(reservation);
 	
 	//예약 내역이 없으면 mbt1(즐겨찾기) display - mbt3(예약확인) display none
-	//if(){
-	//	$("#overlay").css({ visibility:"visible", opacity:1 });
-	//}else if(){ //예약 내역이 있으면 mbt3(예약확인) display - mbt1(즐겨찾기) display none
-		
-	//}
+	if(reservation.length === 2){
+		$("#mbtn1").css({ display:"block"});
+		$("#mbtn3").css({ display:"none"});
+	}else{ //예약 내역이 있으면 mbt3(예약확인) display - mbt1(즐겨찾기) display none
+		$("#mbtn1").css({ display:"none"});
+		$("#mbtn3").css({ display:"block"});
+	} 
 	
 </script>
 

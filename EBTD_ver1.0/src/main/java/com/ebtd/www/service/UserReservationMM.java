@@ -139,7 +139,11 @@ public class UserReservationMM {
 		if(urDao.reservation(ur)) {
 			view="redirect:/user/reservationCheck"; 
 		}else {
-			view="redirect:/user/wheel/mainForm";
+			if( u_type == "0" ) { //휠체어면
+				view = "/user/wheel/mainForm";//.jsp
+			}else if(u_type == "1") { //시각이면
+				view = "/user/blind/mainForm";//.jsp
+			}
 		}
 		mav.setViewName(view);
 		return mav;
@@ -147,17 +151,22 @@ public class UserReservationMM {
 
 	public ModelAndView reservationCheck(HttpSession session) throws JsonProcessingException {
 		mav = new ModelAndView();
+		System.out.println("lksghdjklfghsjdklghjklsdghjksldfghkjlsdghjksldgljfdhskljghdskfjlghkj");
 		List<UserReservationBean> urList = null;
 		String view = null;
 		String u_username = session.getAttribute("u_username").toString();
+		String u_type = session.getAttribute("u_type").toString();
 		ObjectMapper om = new ObjectMapper();	
 		
 		urList = urDao.reservationCheck(u_username);
+		System.out.println("urList=======" + urList);
 		if(urList!=null || urList.size()!=0) {
 			mav.addObject("urList", om.writeValueAsString(urList));
-			view = "user/wheel/mainForm";
-		}else {
-			view = "user/wheel/mainForm";
+			if( u_type.equals("0") ) { //휠체어면
+				view = "user/wheel/mainForm";//.jsp
+			}else{ //시각이면
+				view = "user/blind/mainForm";//.jsp
+			}
 		}
 		mav.setViewName(view);
 		return mav;

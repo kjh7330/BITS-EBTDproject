@@ -73,7 +73,8 @@
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-			
+		
+		예약확인 페이지 ~~!~!	
 		<div id="reservationInfo"></div>
 		
 			
@@ -88,22 +89,10 @@
 
 <script type="text/javascript">
 		let reservation = ${uReserveList};
-		console.log(uReserveList.b_no);
+		console.log(reservation.b_no);
 		let str = '';
 		
-			str += '<div class="bookmarkTotal" overflow="auto">';
-			str += '<div class="bookmark">';
-			str += '<button id="mbtn" class="mainbtn">'+reservation.b_no+'</button>';
-			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namestart+'</button>';
-			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namelast+'</button>';
 			
-			str += '<input type="hidden" class="mainbtn" name="b_no">'+reservation.b_no+'</button>';
-			str += '<input type="hidden" class="ub_no" name="u_username" value="'+reservation.u_username+'">';	//아이디
-			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+reservation.ur_no+'">';	//예약번호
-			str += '<input type="hidden" class="s_noStart" name="s_noStart" value="'+reservation.s_nostart+'">';	//도착정류장ID
-			str += '<input type="hidden" class="s_noLast" name="s_noLast" value="'+reservation.s_nolast+'">';	//도착정류장ID
-			str += '<button id="cancelBtn" class="mainbtn">예약취소</button>';
-			str += '<div></div>';
 		
 		$('#reservationInfo').empty();
 		$('#reservationInfo').append(str); 
@@ -120,11 +109,10 @@
 				console.log(ur_no);
 				$('form').trigger('submit');
 			}else{
-				console.log("즐겨찾기 값이 없습니다.");
-			} */
-		});
+				console.log("즐겨찾기 값이 없습니다.");*/	
+		}); 
 		
-	</script>
+</script>
 
 <script>
 		$('#btn1').click(function(){

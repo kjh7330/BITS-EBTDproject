@@ -84,8 +84,8 @@ public class UserIdController {	//유저 - 로그인, 회원가입
                 // loginCookie의 값을 꺼내오고 -> 즉, 저장해논 세션Id를 꺼내오고
                 session.setAttribute("u_username", u_usernameCookies);
                 session.setAttribute("u_type", u_typeCookies);
-                }
             }
+        }
 		
 		if(session.getAttribute("u_username")==null) {view = "/user/loginForm";}
 		else if(session.getAttribute("u_type").equals(0)) {view = "/user/wheel/mainForm";}
