@@ -61,8 +61,8 @@ public class AdminCompanyController {
 	}
 	//신규 노선 등록 -> 승인하기
 	@PostMapping(value = "/admin/company/setNewBusRouteApproval")
-	public ModelAndView setNewBusRouteApproval(String ap_b_no) {
-		mav=acm.setNewBusRouteApproval(ap_b_no);
+	public ModelAndView setNewBusRouteApproval(String ap_b_no, int ap_no) {
+		mav=acm.setNewBusRouteApproval(ap_b_no, ap_no);
 		return mav;
 	}
 	//신규 노선 등록  -> 반려하기
@@ -131,8 +131,8 @@ public class AdminCompanyController {
 	}
 	//버스 회사 반려 목록 - 상세
 	@GetMapping(value = "/admin/company/getCompanyRejectDetail")
-	public ModelAndView getCompanyRejectDetail(String ap_no) throws JsonProcessingException {
-		mav=acm.getCompanyRejectDetail(ap_no);
+	public ModelAndView getCompanyRejectDetail(int ap_no, String ap_b_no) throws JsonProcessingException {
+		mav=acm.getCompanyRejectDetail(ap_no, ap_b_no);
 		return mav;
 	}
 	

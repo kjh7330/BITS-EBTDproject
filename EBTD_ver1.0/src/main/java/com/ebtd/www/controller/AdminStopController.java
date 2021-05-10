@@ -3,6 +3,7 @@ package com.ebtd.www.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.service.AdminStopMM;
+import com.ebtd.www.service.CompanyStopMM;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
@@ -25,14 +27,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 public class AdminStopController {
 	@Autowired
-	private AdminStopMM am; 
-	
+	private AdminStopMM am;
 	ModelAndView mav;
 	
 	//정류장 전체 리스트 불러오기
 	@GetMapping(value = "/admin/stop/getStopList")
-	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException {
-		mav=am.getStopList(pageNum);
+	public ModelAndView getStopList(Integer pageNum, String search, HttpSession sss) throws JsonProcessingException {
+		mav=am.getStopList(pageNum, search, sss);
 		return mav; 
 	}
 	

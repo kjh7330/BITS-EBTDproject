@@ -16,18 +16,24 @@
 		FROM USER_RESERVE WHERE U_USERNAME = #{u_username} AND UR_STATE = 3
 	</select>
 	<select id="getReservationHistoryDetail" resultType="reservation">
-		SELECT UR_NO, U_USERNAME, 
+		SELECT UR_NO, U_USERNAME,
+        (SELECT S_NO FROM S WHERE S_NOSTART=S_NO) AS S_NOSTART, 
+        (SELECT S_NO FROM S WHERE S_NOLAST=S_NO) AS S_NOLAST,
 		(SELECT S_NAME FROM S WHERE S_NOSTART=S_NO) AS S_NAMESTART, 
 		(SELECT S_NAME FROM S WHERE S_NOLAST=S_NO) AS S_NAMELAST,
 		B_NO, UR_DATE
 		FROM USER_RESERVE WHERE UR_NO = #{ur_no}
 	</select>
+	
 	<select id="getUserMyInfo" parameterType="String" resultType="user">
 		SELECT * FROM USERLIST WHERE U_USERNAME = #{u_username}
 	</select>
 	<update id="setUserMyInfo" parameterType="User">
 		UPDATE USERLIST SET U_USERNAME=#{u_userName}, U_NAME=#{u_name}, U_USERPHONENUM=#{u_userphonenum}, U_ADDRESS=#{u_address}, U_GUARDNAME=#{u_guardname}, U_GUARDPHONENUM=#{u_guardphonenum}, U_GUARDRELATION=#{u_guardrelation} WHERE U_USERNAME=#{u_userName}
 	</update>
+	<insert id="setBookMark" parameterType="bookmark">
+		INSERT INTO USER_BOOK VALUES( #{u_username}, (SELECT MAX(UB_NO)+1 FROM USER_BOOK), #{s_nostart}, #{s_nolast}, #{b_no}, #{ub_alias} )
+	</insert>
 	<insert id="setMyQuestionWrite" parameterType="VocBean">
 		INSERT INTO VOC VALUES( (SELECT MAX(V_NO)+2 FROM VOC WHERE VOC_RECOMMEND != 0), #{c_username}, #{b_no}, #{u_username}, #{v_title}, #{v_content}, sysdate, null, #{voc_recommend})
 	</insert>
@@ -43,7 +49,10 @@
 		WHERE U_USERNAME = #{u_username} AND VOC_RECOMMEND = 0
 		ORDER BY V_NO
 	</select>
-	<select id="getReservationBusNum" resultType="userReserveHistory">
+	<select id="get_t_list" resultType="user">
+		SELECT T_NAME FROM TOWN
+	</select>
+	<select id="getReservationBusNum" resultType="reservation">
 		SELECT DISTINCT UR.B_NO, B.C_USERNAME, UR.U_USERNAME
 		FROM USER_RESERVE UR
 		JOIN BUS B ON B.B_NO=UR.B_NO

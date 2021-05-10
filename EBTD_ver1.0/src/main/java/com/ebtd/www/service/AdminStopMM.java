@@ -3,13 +3,17 @@ package com.ebtd.www.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.common.Paging;
+import com.ebtd.www.common.Paging2;
 import com.ebtd.www.exception.CommonException;
+import com.ebtd.www.bean.CompanyStopSearchBean;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.dao.I_AdminStopDao;
@@ -25,32 +29,49 @@ public class AdminStopMM {
 	ModelAndView mav;
 
 	//정류장 리스트 보기 후 페이지 이동
-	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException {
-		mav = new ModelAndView();
+	public ModelAndView getStopList(Integer pageNum, String search, HttpSession sss) throws JsonProcessingException {
+		mav = new ModelAndView(); 
+		String view=null; 
+		ObjectMapper om =new ObjectMapper(); 
 		List<StopBean> sList = null;
-		ObjectMapper om = new ObjectMapper();
-		String view = null;
+		CompanyStopSearchBean sb = new CompanyStopSearchBean();
+		if(!(search==null))	sss.setAttribute("search", search);
+		else						sss.removeAttribute("search");
+		sb.setSearch(( search==null ) ? "" : sss.getAttribute("search").toString() );
+		sb.setPageNum((pageNum==null)? 1 : pageNum);
 		
-		pageNum = (pageNum==null)? 1 : pageNum;
-		
-		if(pageNum<=0) {
-			throw new CommonException("잘못된 페이지 번호 입니다.");
+		if(sb.getPageNum()<=0) {
+			throw new CommonException("잘못된 페이지번호 입니다.");
 		}
 		
-		sList=sDao.getStopList(pageNum);
-		
-		if(sList!=null && sList.size() != 0) {
-			mav.addObject("sList", om.writeValueAsString(sList));
-			mav.addObject("paging", getPaging(pageNum));
-			view = "/admin/stop/stopListForm";//.jsp
-		}else {
-			view = "/admin";
+		sList = sDao.getStopList(sb); 
+		if(sList!=null && sList.size()!=0) { 
+			//ObjectMapper를 사용해서 리스트를 json으로 변환 
+			mav.addObject("sList",om.writeValueAsString(sList));
+			mav.addObject("paging", getPaging(sb, sss));
+			view = "admin/stop/stopListForm";
+			//System.out.println("정류장 정보 가져오기 성공"); 
+			mav.setViewName(view); 
+		} 
+		else { 
+			view = "admin/mainForm";
+			//System.out.println("정류장 정보 가져오기 실패"); 
 		}
 		mav.setViewName(view);
-		return mav;
+		return mav; 
 	}
 	
-	private String getPaging(Integer pageNum) {
+	//페이징
+	private String getPaging(CompanyStopSearchBean sb, HttpSession sss) {
+		int maxNum = sDao.getStopCount(sb); //전체 정류장 수
+		int listCount = 15;
+		int pageCount = 10;
+		String boardName = "getStopList"; //url
+		Paging2 paging = new Paging2(maxNum, sb.getPageNum(), listCount, pageCount, boardName,sss);
+		return paging.makeHtmlPaging(); //"<이전><a href=3 4><다음>"
+	}
+	
+/*	private String getPaging(Integer pageNum) {
 		int maxNum = sDao.getStopCount();
 		int listCount = 15;
 		int pageCount = 10;
@@ -59,7 +80,7 @@ public class AdminStopMM {
 		Paging paging= new Paging(maxNum, pageNum, listCount, pageCount, getStopList);
 		
 		return paging.makeHtmlPaging();	//<이전><a hef=3 4>"<다음>"
-	}
+	}*/
 	
 	//정류장 상세정보 보기
 	public ModelAndView getStopDetail(Integer s_No) throws JsonProcessingException {

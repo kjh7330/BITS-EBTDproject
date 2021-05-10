@@ -19,4 +19,6 @@ public class UserBean {
 		private String u_guardphonenum;	//보호자 전화번호
 		private String u_guardrelation;	//보호자 관계
 	
+		private String t_name;
+		private String aDetail;
 }

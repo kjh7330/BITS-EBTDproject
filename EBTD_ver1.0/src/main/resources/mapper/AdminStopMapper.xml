@@ -5,14 +5,19 @@
 
 <mapper namespace="com.ebtd.www.dao.I_AdminStopDao">
 
-<select id="getStopList" parameterType="Integer" resultType="stop">
+<select id="getStopList" parameterType="search_wh" resultType="stop">
 		<![CDATA[
 			SELECT * FROM (
 			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
 			FROM S
-			WHERE ROWNUM<=#{pageNum}*15)
-			WHERE RN>=#{pageNum}*15-14
+			WHERE ROWNUM<=#{pageNum}*15 and s_name like '%'||#{search}||'%')
+			WHERE RN>=#{pageNum}*15-14 
 		]]>
+</select>
+
+	<!-- 정류장 갯수 조회 -->
+<select id="getStopCount" resultType="int">
+	select count(*) from stop where s_name like '%'||#{search}||'%'
 </select>
 
 <select id="getStopDetail" parameterType="Integer" resultType="stop">

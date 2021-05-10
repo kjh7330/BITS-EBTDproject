@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.UserBean;
+import com.ebtd.www.bean.UserBookmarkBean;
 import com.ebtd.www.bean.VocBean;
 import com.ebtd.www.service.UserMypageMM;
 
@@ -41,6 +42,12 @@ public class UserMypageController {
 	public ModelAndView getReservationHistoryDetail(HttpSession session, int ur_no) {
 		String u_username = (String) session.getAttribute("u_username");
 		mav = umm.getReservationHistoryDetail(u_username, ur_no);
+		return mav;
+	}
+	//마이페이지 - 즐겨찾기 추가
+	@PostMapping(value = "/user/setBookMark")
+	public ModelAndView setBookMark(UserBookmarkBean bm) {
+		mav=umm.setBookMark(bm);
 		return mav;
 	}
 	//마이페이지 - 고객 소리함

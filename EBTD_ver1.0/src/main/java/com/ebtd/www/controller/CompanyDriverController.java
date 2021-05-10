@@ -70,20 +70,27 @@ public class CompanyDriverController {
 		mav=dm.addDriver(db);
 		return mav;	
 	}
-	
-//	@RequestMapping(value = "/company/addDriver")
-//	public ModelAndView addDriver(MultipartHttpServletRequest multi){
-//		System.out.println("b_title="+multi.getParameter("b_title"));
-//		System.out.println("bf="+multi.getFile("files").getOriginalFilename());
-//		mav=dm.addDriver(multi);
-//		return mav;	
-//	}
-//	
-	
+
+	//	@RequestMapping(value = "/company/addDriver")
+	//	public ModelAndView addDriver(MultipartHttpServletRequest multi){
+	//		System.out.println("b_title="+multi.getParameter("b_title"));
+	//		System.out.println("bf="+multi.getFile("files").getOriginalFilename());
+	//		mav=dm.addDriver(multi);
+	//		return mav;	
+	//	}
+	//	
+
 	//기사정보 수정하기
 	@RequestMapping(value = "/company/updateDriver")
 	public ModelAndView updateDriver(DriverBean db){
 		mav=dm.updateDriver(db);
+		return mav;	
+	}
+
+	//기사 삭제하기
+	@RequestMapping(value = "/company/deleteDriver")
+	public ModelAndView deleteDriver(int d_no){
+		mav=dm.deleteDriver(d_no);
 		return mav;	
 	}
 

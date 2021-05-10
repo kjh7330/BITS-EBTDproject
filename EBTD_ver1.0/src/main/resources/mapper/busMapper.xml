@@ -51,11 +51,15 @@
 	<selectKey resultType="int" order="BEFORE" >
 	SELECT SEQ_AP_NO.NEXTVAL FROM DUAL
 	</selectKey>
-	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE) 
-	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 3) 
+	INSERT INTO APPLY_BUS_HISTORY(AP_NO, AP_B_NO, C_USERNAME, AP_DATE, AP_STATE, ap_od_no) 
+	VALUES(SEQ_AP_NO.NEXTVAL, #{ap_b_no}, #{c_username}, SYSDATE, 3, #{od_no}) 
 	</insert>
 	<select resultType="String" id="getTownNameList">SELECT t_name FROM T </select>
 	<select id="get_od_no" resultType = 'int'>
-	select od_no+1 od_no from official_document where c_username = #{c_username}
+	select od_no from official_document where c_username = #{c_username}
 	</select>
+	
+	<update id="next_od_no">
+	update od set od_no = (select od_no+1 from od where c_username = #{c_username}) where c_username = #{c_username}
+	</update>
 </mapper>

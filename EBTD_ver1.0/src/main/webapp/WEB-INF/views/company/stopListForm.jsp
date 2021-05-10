@@ -18,20 +18,16 @@
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
 		
+		<form action="/company/getSearchStopList"></form>
 		<div style="color: black; text-align: center">
-			정류장 이름 검색 <input id="search" name="search">
-			<!-- <select>
-				<option value="all">전체</option>
-				<option value="stopNumber">정류장 번호</option>
-				<option value="stopName">정류장 이름</option>
-			</select> <input id="search" name="search">&nbsp; -->
-			<button onclick="searchStop()">조회</button>
+			정류장 이름 검색 <input id="search" name="search" value = "${search}">
+			<button id="searchStop">조회</button>
 		</div>
-
 	
-	<div align="center">
-	${paging}
-	</div>
+		<div align="center">
+		${paging}
+		</div>
+	
 	
 	<table class="table table-striped" style="color: black">  
 		<thead>
@@ -39,9 +35,6 @@
 				<th>정류장 번호</th>
 				<th>동 이름</th>
 				<th>정류장 이름</th>
- 				<!-- <th>X값</th>
-				<th>Y값</th>
-				<th>상세내용</th>  -->
 			</tr>
 		</thead>
 		<tbody id="stopList">
@@ -71,9 +64,6 @@ var html = '';
 	 html += '<td>'+sList[i].t_NAME+'</td>';
 	 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+sList[i].s_NO+'>';
 	 html += sList[i].s_NAME+'</a>';
-/* 	 html += '<td>'+sList[i].s_X+'</td>';
-	 html += '<td>'+sList[i].s_Y+'</td>';
-	 html += '<td>'+sList[i].s_DETAIL+'</td>'; */
 	 html += '</tr>';
 	}
    
@@ -81,44 +71,45 @@ var html = '';
  $("#stopList").append(html);
 
 //조회 버튼 클릭시 알림창 띄우고 해당 정류장 정보만 보여주기
+	$('#searchStop').click(function () {
+		location.href = "/company/getStopList?search="+$('#search').val();
+	});
+
+
+ 	function searchStop() {
+				
 	
-  	function searchStop() {
-		var sValue = $('#search').val(); //input 박스 입력한 값
-		alert(sValue + '정류장 정보 조회');
+	var sValue = $('#search').val(); //input 박스 입력한 값
+			alert(sValue + ' 관련 정류장 정보 조회');
+			
+	 		$.ajax({
+				url : '/company/searchStop?S_NAME=' + sValue,     
+				type : 'get',
+				dataType : 'json',
+				success : function(data) {
+					//alert('검색성공');
+					var html = '';
 		
- 		$.ajax({
-			url : '/company/searchStop?S_NAME=' + sValue,     
-			type : 'get',
-			dataType : 'json',
-			success : function(data) {
-				//alert('검색성공');
-				var html = '';
-				
+					for(let i = 0 ; i<data.length; i++){
+						 html += '<tr>';
+						 html += '<td>'+data[i].s_NO+'</td>';
+						 html += '<td>'+data[i].t_NAME+'</td>';
+						 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+data[i].s_NO+'>';
+						 html += data[i].s_NAME+'</a>';
+						 html += '</tr>';
+						}
+					   
+					 $("#stopList").empty();
+					 $("#stopList").append(html);
+				},
+				error : function(err) {
+					alert('관련 정류장이 없습니다');
+					console.log(err);
+				}
 
-				
-				for(let i = 0 ; i<data.length; i++){
-					 html += '<tr>';
-					 html += '<td>'+data[i].s_NO+'</td>';
-					 html += '<td>'+data[i].t_NAME+'</td>';
-					 html += '<td>'+'<a href=/company/getStopDetail?S_NO='+data[i].s_NO+'>';
-					 html += data[i].s_NAME+'</a>';
-					 /* html += '<td>'+data[i].s_X+'</td>';
-					 html += '<td>'+data[i].s_Y+'</td>';
-					 html += '<td>'+data[i].s_DETAIL+'</td>'; */
-					 html += '</tr>';
-					}
-				   
-				 $("#stopList").empty();
-				 $("#stopList").append(html);
-			},
-			error : function(err) {
-				alert('검색실패');
-				console.log(err);
-			}
+			}); //ajax End  
 
-		}); //ajax End  
+		} //searhStop End 
 
-	} //searhStop End  
-	
 </script>
 </html>

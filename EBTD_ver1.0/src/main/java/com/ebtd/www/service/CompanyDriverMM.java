@@ -41,10 +41,12 @@ public class CompanyDriverMM {
 		//System.out.println(dList);
 		if(dList!=null && dList.size()!=0) { 
 			//ObjectMapper를 사용해서 리스트를 json으로 변환 
+			
+			//시간 짜르고 날짜만
+			for(DriverBean data : dList) data.setD_enterDate( data.getD_enterDate().substring(0,10));
 			mav.addObject("dList",om.writeValueAsString(dList));
 			view = "company/driverListForm";
-			//System.out.println(dList);
-			//System.out.println(sList.get(0).getS_name());
+		
 			System.out.println("기사 정보 가져오기 성공"); 
 			mav.setViewName(view); 
 			} 
@@ -69,7 +71,6 @@ public class CompanyDriverMM {
 		rBean = dDao.getDriverDetail(d_no); 
 		
 		if(rBean!=null) { 
-			//ObjectMapper를 사용해서 리스트를 json으로 변환 
 			mav.addObject("rBean",om.writeValueAsString(rBean));
 			view = "company/driverDetailForm";
 			System.out.println("기사 상세정보 가져오기 성공"); 
@@ -89,12 +90,11 @@ public class CompanyDriverMM {
 	public ModelAndView addDriver(DriverBean db) {
 		mav = new ModelAndView();
 		String view = null;
-		System.out.println(db.getD_imgExtention()); 
 		boolean b= dDao.addDriver(db);
 		System.out.println(b);
 		if(b) {
 			System.out.println("기사 추가 성공");
-			view="company/companyindex"; //성공시 회사 메인 페이지 
+			view="redirect:getDriverList"; //성공시 기사 리스트 페이지 
 		}else {
 			System.out.println("기사 추가 실패");
 			view="company/addDriverForm"; //실패시 기사 추가 페이지
@@ -141,7 +141,6 @@ public class CompanyDriverMM {
 //	}
 		
 		
-
 	
 	//해당회사 노선 가져오기
 	public String getCompanyBusList(String C_USERNAME) throws JsonProcessingException { 
@@ -175,6 +174,22 @@ public class CompanyDriverMM {
 			mav.setViewName("redirect:getDriverList"); //성공시 기사 목록 페이지 
 		}else {
 			System.out.println("기사정보 수정 실패");
+			mav.setViewName("redirect:getDriverDetail"); //실패시 기사 목록 페이지
+		}
+		return mav;
+	}
+	
+	//드라이버 삭제
+	public ModelAndView deleteDriver(int d_no) {
+		mav = new ModelAndView();
+		String view = null;
+		
+		boolean b = dDao.deleteDriver(d_no);
+		if(b) {
+			System.out.println("기사 삭제 성공");
+			mav.setViewName("redirect:getDriverList"); //성공시 기사 목록 페이지 
+		}else {
+			System.out.println("기사 삭제 실패");
 			mav.setViewName("redirect:getDriverDetail"); //실패시 기사 목록 페이지
 		}
 		return mav;

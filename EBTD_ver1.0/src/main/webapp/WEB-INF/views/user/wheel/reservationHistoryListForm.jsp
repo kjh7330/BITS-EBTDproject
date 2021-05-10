@@ -19,6 +19,7 @@
 		height: 100px;
 		font-size: 15px;
 		text-align: center;
+		margin-bottom: 100px;
 	}
 
 	

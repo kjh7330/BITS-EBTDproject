@@ -122,12 +122,13 @@ public class BusMM {
 			return 0;
 		}
 	}
-	public ModelAndView applyUpdateBusRoute(Object id, Object busNum) {
+	public ModelAndView applyUpdateBusRoute(Object id, Object busNum, int od_no) {
 		String busNumber = busNum.toString();
 		String companyName = id.toString();
 		ApplyBusHistory BusBean = new ApplyBusHistory();
 		BusBean.setAp_b_no(busNumber);
 		BusBean.setC_username(companyName);
+		BusBean.setOd_no(od_no);
 		bDao.applyUpdateBusRoute(BusBean);
 		/* bDao.addBusAndCompany(BusBean);  bus 테이블에 저장*/
 		return null;
@@ -156,6 +157,7 @@ public class BusMM {
 		return mav;
 	}
 	public int get_od_no(String c_username) {
+		bDao.next_od_no(c_username);
 		return bDao.get_od_no(c_username);
 	};
 

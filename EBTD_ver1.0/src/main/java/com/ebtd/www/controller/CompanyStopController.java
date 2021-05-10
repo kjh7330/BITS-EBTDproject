@@ -34,9 +34,9 @@ public class CompanyStopController {
 
 	//정류장 목록보기 페이지 이동 
 	@GetMapping(value = "/company/getStopList") 
-	public ModelAndView getStopList(Integer pageNum) throws JsonProcessingException { 
+	public ModelAndView getStopList(Integer pageNum, String search, HttpSession sss) throws JsonProcessingException { 
 		logger.info("정류장 목록보기 페이지 이동"); 
-		mav=sm.getStopList(pageNum);
+		mav=sm.getStopList(pageNum, search, sss);
 		return mav; 
 
 	}
@@ -69,9 +69,10 @@ public class CompanyStopController {
 
 	//정류장 신청내역 보기 페이지 이동 
 	@GetMapping(value = "/company/getNewStopConfirmList") 
-	public ModelAndView getNewStopConfirmList() throws JsonProcessingException { 
+	public ModelAndView getNewStopConfirmList(HttpSession session) throws JsonProcessingException { 
+		String c_username = (String) session.getAttribute("c_username");
 		logger.info("정류장 신청내역 보기 페이지 이동"); 
-		mav=sm.getNewStopConfirmList();
+		mav=sm.getNewStopConfirmList(c_username);
 		return mav; 
 
 	}

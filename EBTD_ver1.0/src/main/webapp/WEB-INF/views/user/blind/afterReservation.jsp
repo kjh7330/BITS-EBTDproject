@@ -43,26 +43,23 @@
     	width: 350px;
     	height: 150px;
     	font-size: 50px;
-    	margin-top: 75px;
+    	margin-top: 95px;
     	background-color: #0C3D6A;
     	color: #f9eb99;
     	border-radius: 15px;
     	cursor: pointer;
     }
-    
-    /* #mbtn3{
-    	display: none;
-    } */
 
 </style>
 </head>
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
 <div class="maindiv">
+ 	<div class="menudetail" id="logout"><a>로그아웃</a></div>
 	
-		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
-		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/getReservationInfo'">예약확인</button>
+		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getReservationList'">예약확인</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
+	
 </div>
 
 <footer>
@@ -72,24 +69,8 @@
          	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
      </div>
 </footer>
-
-<script type="text/javascript">
-
-	let reservation = '${urList}';
-	console.dir(reservation);
-	
-	//예약 내역이 없으면 mbt1(즐겨찾기) display - mbt3(예약확인) display none
-	if(reservation.length === 2){
-		$("#mbtn1").css({ display:"block"});
-		$("#mbtn3").css({ display:"none"});
-	}else{ //예약 내역이 있으면 mbt3(예약확인) display - mbt1(즐겨찾기) display none
-		$("#mbtn1").css({ display:"none"});
-		$("#mbtn3").css({ display:"block"});
-	} 
-	
-</script>
-
 <script>
+		//
 		
 		$('#btn1').click(function(){
 			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
@@ -147,13 +128,22 @@
 		function mouseUp2(){
 			clearTimeout(timer2);
 		}
+		/* function holding2(){
+			alert('holding');
+		} */
 		function mouseDown3(){
 			timer3 = setTimeout(function(){holding3();},2000);
 		}
 		function mouseUp3(){
 			clearTimeout(timer3);
 		}
+		/* function holding3(){
+			location.href = '/user/loginForm';
+		} */
 		
+$('#logout').click(function () {
+	location.href = '/user/logout';
+});
 </script>
 </body>
 </html>

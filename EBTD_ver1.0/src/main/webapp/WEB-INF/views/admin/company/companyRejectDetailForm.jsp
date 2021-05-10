@@ -119,6 +119,10 @@
 		good += '</tr>';
 	$('.maintable3').append(good);
 
+	$('#maintable2').css('border-radius','8px'); 
+	
+	
+	
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.ebtd.www.bean.CompanyStopSearchBean;
 import com.ebtd.www.bean.StopApplyBean;
 import com.ebtd.www.bean.StopBean;
 
@@ -12,7 +13,7 @@ import com.ebtd.www.bean.StopBean;
 
 public interface I_AdminStopDao {
 	//정류장 전체목록 불러오기
-	List<StopBean> getStopList(Integer pageNum);
+	List<StopBean> getStopList(CompanyStopSearchBean sb);
 
 	//정류장 상세목록 불러오기
 	List<StopBean> getStopDetail(Integer s_No);
@@ -60,8 +61,7 @@ public interface I_AdminStopDao {
 	String checkStopNo(String t_Name);
 	
 	//정류장 전체 갯수
-	@Select("SELECT COUNT(*) FROM STOP")
-	int getStopCount();
+	int getStopCount(CompanyStopSearchBean sb);
 
 	List<StopBean> searchStop(String word);
 	

@@ -232,7 +232,7 @@
                 	<button id="myBtn${abn.ap_b_no}" class="cdetail-btn30">승인</button>
                 </td>
                 <td>
-                	<button id="myBtn${abn.ap_b_no}" class="cdetail-btn40">반려</button>
+                	<button id="${abn.ap_no}${abn.ap_b_no}" class="cdetail-btn40">반려</button>
 				</td>
 			</tr>
 			</c:forEach>
@@ -333,6 +333,7 @@
 		                <input type="text" class="approval" value="">번<br>
 		                을 승인하시겠습니까?<br><br>
 		                <input class="approval" type="hidden" name="ap_b_no" value="">
+		                <input class="approval1" type="hidden" name="ap_no" value="">
 		        	    <input id="mcbtn1" type="submit" value="승인">
 		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
                		</form>
@@ -355,6 +356,7 @@
 		                <input type="text" class="reject" value="">번<br>
 		                을 반려하시겠습니까?<br><br>
 		        	    <input class="reject" type="hidden" name="ap_b_no" value="">
+		        	    <input class="reject1" type="hidden" name="ap_no" value="">
 		        	    반려사유: <input class="reject-reason" type="text" name="ap_reject" placeholder="입력하세요." style="height: 30px; border-width: 1px"><br><br>
 		        	    <input id="mcbtn1" type="submit" value="반려">
 		        	    <input id="mcbtn2" class="cancle" type="button" value="취소">
@@ -458,16 +460,18 @@
 			
 			
 		$(".cdetail-btn30").on("click", function() {
-			let apno = $(this).attr('id').substring(5);
-			console.log(apno);
+			let apno = $(this).attr('id').substring(6);
+			let apno1 = $(this).attr('id').substring(0,6);
 			$(".approval").val(apno);
+			$(".approval1").val(apno1);
 			$("#overlay2").css({visibility : "visible",	opacity : 1	});
 			$("#myModal2").css({display : "inline"});
 		});
 		$(".cdetail-btn40").on("click", function() {
-			let apno = $(this).attr('id').substring(5);
-			
+			let apno = $(this).attr('id').substring(6);
+			let apno1 = $(this).attr('id').substring(0,6);
 			$(".reject").val(apno);
+			$(".reject1").val(apno1);
 			$("#overlay3").css({visibility : "visible", opacity : 1	});
 			$("#myModal3").css({display : "inline"});
 		});
