@@ -34,7 +34,7 @@
                     background:rgba(0,0,0,0.4);
                     position:fixed;
                     top:0; left:0; 
-                    z-index:1; 
+                    z-index:110; 
                     visibility:hidden; 
                     opacity:0;   
                     transition:all 0.5s ease;
@@ -127,7 +127,7 @@
             width: 800px;
             color: black;
             left: 50%;
-            transform: translate(-50%,10%);
+            transform: translate(-50%,101%);
         }
         .cdate{
             text-align: right;
@@ -135,6 +135,7 @@
         .cname{
             text-align: center;
             width: 100%;
+            margin-top:14px;
             margin-bottom: 10px;
             background-color: #f9eb99;
             height: 50px;
@@ -229,7 +230,7 @@
         			<button id="myBtn1${abn.ap_no}" class="cdetail-btn20">공문보기</button><!-- 신청번호를 넘겨! -->
         		</td>
         		<td>
-                	<button id="myBtn${abn.ap_b_no}" class="cdetail-btn30">승인</button>
+                	<button id="${abn.ap_no}${abn.ap_b_no}" class="cdetail-btn30">승인</button>
                 </td>
                 <td>
                 	<button id="${abn.ap_no}${abn.ap_b_no}" class="cdetail-btn40">반려</button>

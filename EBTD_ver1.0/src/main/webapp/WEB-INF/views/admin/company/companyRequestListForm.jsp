@@ -15,7 +15,7 @@
             color: black;
             position: absolute;
             left: 50%;
-            transform: translate(-50%,25%);
+            transform: translate(-50%,140%);
         }
         .ctile{
             text-align: center;
@@ -64,18 +64,6 @@
     
     
 <script type="text/javascript">
-
-/*$('.cbtn').click(function(){
-	
-	let $c_name = $('.cbtn').val();
-	//console.log(c_name);
-	$.ajax({
-		type : 'get',
-		url : 'getCompanyRequestDetail',
-		data : {c_name : $c_name}
-	})
-});
-*/
 
 </script>
 <div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>

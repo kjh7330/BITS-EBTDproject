@@ -128,7 +128,7 @@
 		ORDER BY HD.AP_B_NO, HD.APDE_TURN
 	</select>
 	<select id="getUpdateBusOfficialDocument" resultType="ApplyBusHistory">
-		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME, C.C_NO
+		SELECT H.AP_NO, H.AP_B_NO, C.C_NAME, H.AP_DATE, C.C_USERNAME, C.C_NO, H.AP_OD_NO
 		FROM APPLY_BUS_HISTORY H
 		JOIN COMPANY C ON H.C_USERNAME=C.C_USERNAME
 		JOIN APPLY_BUS_HISTORY_DETAIL HD ON H.AP_NO=HD.AP_NO AND HD.AP_B_NO = H.AP_B_NO
@@ -180,6 +180,7 @@
 		SELECT V_NO, C_USERNAME, B_NO, V_TITLE, V_CONTENT, TO_CHAR(V_DATE,'YYYY-MM-DD') AS V_DATE, VOC_RECOMMEND 
 		FROM VOC 
 		WHERE C_USERNAME = #{c_username}
+		ORDER BY V_NO
 	</select>
 	
 	<select id="getCompanyApprovalList" resultType="ApplyBusHistory">

@@ -11,18 +11,20 @@
 		    position: absolute;
 		    top: 13%;
             left: 50%;
-            transform: translate(-50%,10%);
+            transform: translate(-56%,12%);
 			color: black;
 			width: 700px;
             text-align: center;
-            height:	100%;
+			padding-bottom: 140px;
 		}
 		.maininput{
 			border: none;
-			background-color: pink;
-			font-size: 30px;
+			background-color: #f9eb99;
+			font-size: 20px;
 			width: 400px;
-			height: 80px;
+			font-weight: bold;
+			width: 800px;
+			height: 50px;
 			text-align: center;
 			margin-bottom: 20px;
 			border-radius: 10px;
@@ -32,25 +34,33 @@
 		}
 		.maintable1, .maintable2{
 			border: none;
-            border-radius: 8px;
             text-align: center;
-            width: 700px;
-            background-color: pink;
+            width: 600px;
+            height: 50px;
             font-size: 18px;
+            border: 1px solid black;
+            margin-left: auto;
+            margin-right: auto;
 		}
 		.maintable1{
-			font-size: 20px;
-			height: 50px;
+			background-color: #fff9d4;
+		}
+		tr, td{
+			border: 1px solid black;
+		}
+		.main-table{
+			width: 800px;
 		}
 		.maintable3{
 			border: none;
-            border-radius: 8px;
             text-align: center;
             width: 700px;
             height: 50px;
             background-color: violet;
             top: 0;
             font-size: 18px;
+            margin-left: auto;
+            margin-right: auto;
 		}
 		#adminfooter{
 			display: block;
@@ -66,19 +76,14 @@
 	<div>
 		<input class="maininput" value="노선 반려 상세" readonly>
 	</div>
-	
-	<table class="maintable1"></table>
-	<br>
-	
-	<table class="maintable2"></table>
-	<br>
-	<table class="maintable3"></table>
-<div>
- 	<h3>&nbsp;</h3>
- 	<h3>&nbsp;</h3>
- 	<h3>&nbsp;</h3>
-</div>
-	
+	<div class="main-table">
+		<table class="maintable1"></table>
+		<br>
+		
+		<table class="maintable2"></table>
+		<br>
+		<table class="maintable3"></table>
+	</div>
 </div>
 
 

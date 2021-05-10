@@ -40,7 +40,7 @@
                     background:rgba(0,0,0,0.4);
                     position:fixed;
                     top:0; left:0; 
-                    z-index:1; 
+                    z-index:110; 
                     visibility:hidden; 
                     opacity:0;   
                     transition:all 0.5s ease;
@@ -133,7 +133,7 @@
             width: 800px;
             color: black;
             left: 50%;
-            transform: translate(-50%,10%);
+            transform: translate(-50%,57%);
         }
         .cdate{
             text-align: right;

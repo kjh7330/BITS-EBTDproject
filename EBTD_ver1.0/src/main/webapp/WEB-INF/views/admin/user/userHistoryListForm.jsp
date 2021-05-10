@@ -7,6 +7,39 @@
 <!-- 김아름 -->
 <title>관리자 - 이용자 히스토리 보기</title>
 <style>
+.maininput{
+	border: none;
+	background-color: skyblue;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	margin-left: 100px;
+	
+}
+.maininput:focus{
+	outline:none;
+}
+.maindiv{
+	position: relative;
+    left: 50%;
+    transform: translate(-49%,0%);
+	width: 1000px;
+	padding-bottom: 140px;
+}
+.arrow{
+	border: 1px solid black;
+	height: 35px;
+	margin-bottom: 10px;
+	}
+.arrow:hover {
+	border: 1px solid #aaa;
+}
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,10 +49,13 @@
 <body>
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
-
+	<div class="maindiv">
+	<div>
+	<h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6>
+	<input class="maininput" value="이용자 전체 히스토리" readonly>	</div>
 	<!-- 정렬에서 이용일, 장애유형 선택하면 상세에 그에 맞는 정보 선택가능하게 하기 -->
 	<div style="color: black">
-		<br> 정렬:<select id="selectSort" onchange="categoryChange(this)">
+		<br> <a style="margin-left:250px;">정렬:</a>&nbsp;<select class="arrow" id="selectSort" onchange="categoryChange(this)">
 			<option value="1">정렬기준을 선택해주세요</option>
 			<option value="2">이용일</option>
 			<option value="3">장애유형</option>	
@@ -31,7 +67,7 @@
 		</select>
 		
 		<!-- selectSort에서 선택하면 그거에 맞춰서 선택할수있게 -->
-		상세:<select id="selectSortDetail" name="selectSortDetail" style="display:none">	
+		&nbsp;&nbsp;상세:&nbsp;<select class="arrow" id="selectSortDetail" name="selectSortDetail" style="display:none">	
 		</select> 
 		<!-- 버스회사 버스번호 버스정류장 아이디 -->
 		<input type="text" id="searchInput" style="width:220px; display:none" placeholder="">
@@ -43,23 +79,23 @@
 		<thead>
 			<tr>
 				<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
-				<th scope="col">NO</th>
-				<th scope="col">예약번호</th>
-				<th scope="col">이용일</th>
-				<th scope="col">버스번호</th>
-				<th scope="col">버스회사</th>
+				<th scope="col" style="width:30px;">NO</th>
+				<th scope="col" style="width:80px;">예약번호</th>
+				<th scope="col" style="width:160px;">이용일</th>
+				<th scope="col" style="width:80px;">버스번호</th>
+				<th scope="col" style="width:80px;">버스회사</th>
 				<th scope="col">출발지</th>
 				<th scope="col">목적지</th>
-				<th scope="col">장애유형</th>
-				<th scope="col">유저아이디</th>
-				<th scope="col">이용상태</th>
+				<th scope="col" style="width:80px;">장애유형</th>
+				<th scope="col" style="width:90px;">유저아이디</th>
+				<th scope="col" style="width:80px;">이용상태</th>
 			</tr>
 		</thead>
 		<tbody id="userHistoryList">
 		</tbody>
 
 	</table>
-
+</div>
 	<script type="text/javascript">
 			let urhList = ${urhList};
 			let str = "";
