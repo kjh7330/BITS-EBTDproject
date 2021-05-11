@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 고객 센터</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--부트스트랩-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,16 +15,15 @@
     var myChart = new Chart(ctx, { type: 'bar', data: { labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], datasets: [{ label: '# of Votes', data: [12, 19, 3, 5, 2, 3], backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ], borderColor: [ 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ], borderWidth: 1 }] }, options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } } });
 </script>
 <style type="text/css">
-            .mainview{
-                display: flex;
-                justify-content: space-around;
-                position: relative;
-                font-size: 40px;
-                color: black;
-                padding: 20px;
-                padding-bottom: 120px; /*footer여백*/
-
-            }
+.mainview {
+	position: absolute;
+	display: flex;
+	justify-content: space-around;
+    transform: translate(32%,35%);
+	font-size: 40px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+}
 </style>
 </head>
 <body>
@@ -135,7 +134,7 @@
             data = {
                 datasets: [{
                     backgroundColor: ['blue','red'],
-                    data: [109, 20]
+                    data: [${vb.chu}, ${vb.bee}]
                 }], // 라벨의 이름이 툴팁처럼 마우스가 근처에 오면 나타남
                 labels: ['만족','불만족']
             }; // 가운데 구멍이 없는 파이형 차트

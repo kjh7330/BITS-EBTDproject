@@ -73,9 +73,14 @@
         }
         #logbtn{
             font-size: 15px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            padding-top: 14px;
+            padding-bottom: 14.5px;
             border-radius: 8px;
+            background-color: #f9eb99;
+            cursor: pointer;
+        }
+        #logbtn:hover{
+            background-color: lightgray;
         }
         #newcompany{
             position: absolute;
@@ -93,7 +98,24 @@
          	text-decoration:none;
          	color:white;
         }
-    </style>
+        
+#username{
+	margin-bottom: 5px;
+}
+
+#aa{
+	
+	margin-bottom: 7px;
+}
+#btn{
+	border-radius: 8px;
+	height: 35px;
+	width: 164.8px;
+	margin-right:17.5px;
+	cursor: pointer;
+}
+
+</style>
 
 <body>
 <header>
@@ -108,10 +130,12 @@
         <form action="login" name="login" method="post" onsubmit="return check()">
         <table class="logintable">
             <tr id="inputid">
-                <td class="tabletitle">
-                    ID : 
+                <td class="tabletitle" style="text-align: right">
+                    <div id="aa">ID : </div>
+                    PW : 
                 </td>
-                <td colspan="3" ><input id="username" name="c_username" type="text" style="border-radius: 8px"/></td>
+                <td colspan="3" ><input id="username" name="c_username" type="text" style="border-radius: 8px"/><br>
+                	<input id="password" name="c_password" type="password" style="border-radius: 8px"/></td>
                 <td rowspan="2">
                 <button id="logbtn">Login</button> 
                 </td>
@@ -119,14 +143,14 @@
             
             <tr>
                 <td class="tabletitle">
-                    PW : 
                 </td>
-                <td colspan="3"><input id="password" name="c_password" type="password" style="border-radius: 8px"/></td>
+                <td colspan="3"></td>
             </tr>
         </table>  
 		</form>
         <div id="newcompany">
-        	<form action="/company/main/getRecommandedStopList" method="get"><button>신규 회사 등록 신청</button></form></a><br/><a href = '#'>ID/PW찾기</a>
+        	<form action="/company/main/getRecommandedStopList" method="get"><button id="btn">신규 회사 등록 신청</button></form></a><br/>
+        	<!-- <a href = '#'>ID/PW찾기</a> -->
         </div>
         
     </section>

@@ -2,6 +2,8 @@ package com.ebtd.www.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,12 +39,13 @@ public class CompanyUserMM {
 		return mav;
 	}
 
-	public ModelAndView getUserTotalInfo() {
+	public ModelAndView getUserTotalInfo(HttpSession ss) {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<Integer> cList = new ArrayList<Integer>();
 		ArrayList<String> tList = new ArrayList<String>();
 		ArrayList<Integer> aList = new ArrayList<Integer>();
 		tList = bDao.getTownNameList();
+		VocBean vb = bDao.getVocCount(ss.getAttribute("c_username").toString());
 		for(int i = 0; i < tList.size(); i++) { //송도123 연수123 청학123
 				System.out.println(tList.get(i));
 				System.out.println("휠체어 교통약자 : "+uDao.getUserTownWheelCount(tList.get(i)));
@@ -55,6 +58,7 @@ public class CompanyUserMM {
 		aList.add(1, uDao.getAllBlindCount());
 		mav.addObject("cList", cList);
 		mav.addObject("aList", aList);
+		mav.addObject("vb", vb);
 		mav.setViewName("/company/CompanyUserTotal");
 			/*
 			 * for(int i = 1; i<=18; i++) cList.set(0, uDao.getUserTownCount());

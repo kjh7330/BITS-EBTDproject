@@ -218,7 +218,7 @@
         <div class="hcontainer">
             <div class="headericon"><i id="headericon" class="far fa-user"></i>관리자님</div>
                 <div class="headertitle"><a style="text-decoration: none;" href="/admin"><img src="/resources/image/mainlogo.png" alt="EBTD메인로고" style="height: 80px;"/></a>&nbsp;</div>
-                <div class="headeralarm">
+                <div class="headeralarm" style="visibility: hidden">
                     <div class="headerbell">
                         <i class="fas fa-bell"></i><i class="fas fa-comment" style="font-size: 35px; color: red; position: absolute; top: 20px;"></i>
                     </div>

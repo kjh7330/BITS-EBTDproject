@@ -12,8 +12,8 @@
 			SELECT * FROM (
 			SELECT /*+INDEX_ASC(S PK_S_NO)*/ ROWNUM RN, S.*
 			FROM S
-			WHERE ROWNUM<=#{pageNum}*15 and s_name like '%'||#{search}||'%')
-			WHERE RN>=#{pageNum}*15-14 
+			WHERE ROWNUM<=#{pageNum}*6 and s_name like '%'||#{search}||'%')
+			WHERE RN>=#{pageNum}*6-5 
 		]]>
 	</select>
 	

@@ -9,7 +9,7 @@
 	#main-container{
 		position: absolute;
 		left: 50%;
-		transform: translate(-50%,34%);
+		transform: translate(-50%,32%);
 		color: black;
 		width: 800px;
 		text-align: center;

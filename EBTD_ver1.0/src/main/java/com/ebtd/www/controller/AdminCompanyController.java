@@ -22,8 +22,10 @@ public class AdminCompanyController {
 	ModelAndView mav;
 	
 	@RequestMapping(value = "/admin")
-	public String getMain() {
-		return "/admin/mainForm";  //.jsp
+	public ModelAndView getMain() {
+		mav = acm.getUserTotalInfo();
+		return mav;
+		//return "/admin/mainForm";  //.jsp
 	}
 	
 	/* ---------- [회사 관리] - [회사 등록 승인] ---------- */
@@ -81,8 +83,8 @@ public class AdminCompanyController {
 	}
 	//버스 노선 변경 -> 승인하기
 	@PostMapping(value = "/admin/company/setUpdateBusRouteApproval")
-	public ModelAndView setUpdateBusRouteApproval(String ap_b_no) {
-		mav=acm.setUpdateBusRouteApproval(ap_b_no);
+	public ModelAndView setUpdateBusRouteApproval(String ap_b_no, int ap_no) {
+		mav=acm.setUpdateBusRouteApproval(ap_b_no, ap_no);
 		return mav;
 	}
 	//버스 노선 변경  -> 반려하기

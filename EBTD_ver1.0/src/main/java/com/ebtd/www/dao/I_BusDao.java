@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.StopBean;
 import com.ebtd.www.bean.TownBean;
+import com.ebtd.www.bean.VocBean;
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.BusBean;
 import com.ebtd.www.bean.CompanyCheckBean;
@@ -40,6 +41,8 @@ public interface I_BusDao {
 	int get_od_no(String c_username);
 
 	void next_od_no(String c_username);
+
+	VocBean getVocCount(String c_username);
 
 	
 

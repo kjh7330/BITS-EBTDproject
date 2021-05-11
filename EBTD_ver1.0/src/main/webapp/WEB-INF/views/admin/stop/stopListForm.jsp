@@ -10,11 +10,12 @@
 	#main-container{
 		position: absolute;
         left: 50%;
-        transform: translate(-50%,20%);
+        transform: translate(-50%,26%);
 		color: black;
-		width: 1000px;
+		width: 800px;
         text-align: center;
         font-size: 15px;
+		padding-bottom: 140px;
 	}
 	.maindivinput{
 		border: none;

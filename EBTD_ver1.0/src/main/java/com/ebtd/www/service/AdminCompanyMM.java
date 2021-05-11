@@ -1,5 +1,6 @@
 package com.ebtd.www.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.Company;
+import com.ebtd.www.bean.VocBean;
 import com.ebtd.www.dao.I_AdminCompanyDao;
+import com.ebtd.www.dao.I_BusDao;
+import com.ebtd.www.dao.I_CompanyUserDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,6 +24,10 @@ public class AdminCompanyMM {
 	
 	@Autowired
 	private I_AdminCompanyDao cDao;
+	@Autowired
+	I_CompanyUserDao uDao;
+	@Autowired
+	I_BusDao bDao;
 	
 	ModelAndView mav;
 	//회사 등록 요청 리스트 가져오기 -> 리스트 출력 페이지로 이동
@@ -247,16 +255,18 @@ public class AdminCompanyMM {
 	}
 //	//버스노선 변경 승인하기
 	@Transactional
-	public ModelAndView setUpdateBusRouteApproval(String ap_b_no) {
+	public ModelAndView setUpdateBusRouteApproval(String ap_b_no, int ap_no) {
 		mav = new ModelAndView();
 		String view = null;
 		List<ApplyBusHistory> cList = null;
 		ApplyBusHistory abhBean = new ApplyBusHistory();
 		abhBean.setAp_b_no(ap_b_no);
+		abhBean.setAp_no(ap_no);
+		System.out.println(abhBean);
 		try {
-			cDao.setApplyBusHistoryChangeApproval(ap_b_no);
-			cDao.setAllBusChangeApproval(ap_b_no);
-			cDao.setNewRouteBus(abhBean);
+			cDao.setApplyBusHistoryChange4Approval(abhBean);
+			cDao.setDeleteRouteBus(ap_b_no);
+			cDao.setUpdateRouteBus(abhBean);
 			System.out.println("신규 버스 등록 트랜잭션 성공");
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -413,6 +423,33 @@ public class AdminCompanyMM {
 		mav.addObject("rList", om.writeValueAsString(rList));
 		view="admin/company/companyRejectDetailForm";
 		mav.setViewName(view);
+		return mav;
+	}
+	//메인 차트
+	public ModelAndView getUserTotalInfo() {
+		ModelAndView mav = new ModelAndView();
+		ArrayList<Integer> cList = new ArrayList<Integer>();
+		ArrayList<String> tList = new ArrayList<String>();
+		ArrayList<Integer> aList = new ArrayList<Integer>();
+		VocBean vb = cDao.getVocCount();
+		tList = bDao.getTownNameList();
+		for(int i = 0; i < tList.size(); i++) { //송도123 연수123 청학123
+				System.out.println(tList.get(i));
+				System.out.println("휠체어 교통약자 : "+uDao.getUserTownWheelCount(tList.get(i)));
+				System.out.println("시각장애 교통약자 : "+uDao.getUserTownBlindCount(tList.get(i)));
+				uDao.getUserTownWheelCount(tList.get(i));
+				cList.add(i, uDao.getUserTownWheelCount(tList.get(i)));
+				cList.add(i, uDao.getUserTownBlindCount(tList.get(i)));
+			};
+		aList.add(0, uDao.getAllWheelCount());
+		aList.add(1, uDao.getAllBlindCount());
+		mav.addObject("cList", cList);
+		mav.addObject("aList", aList);
+		mav.addObject("vb", vb);
+		mav.setViewName("/admin/mainForm");
+			/*
+			 * for(int i = 1; i<=18; i++) cList.set(0, uDao.getUserTownCount());
+			 */
 		return mav;
 	}
 

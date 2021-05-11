@@ -5,7 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 정류장 관리</title>
+<style type="text/css">
+.main-container {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 44%);
+	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
+}
+
+.maininput {
+	border: none;
+	background-color: #b6e8fc;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+#maintable{
+	font-size: 18px;
+}
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,8 +42,9 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-
-	<table class="table table-striped" style="color: black">
+<div class="main-container"><br>
+	<div><input class="maininput" value="노선 승인 내역" readonly></div>
+	<table id="maintable" class="table table-striped" style="color: black">
 		<thead>
 			<tr>
 				<th>신청 번호</th>
@@ -30,7 +57,7 @@
 		<tbody id="newStopConfirmList">
 		</tbody>
 	</table>
-
+</div>
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
 

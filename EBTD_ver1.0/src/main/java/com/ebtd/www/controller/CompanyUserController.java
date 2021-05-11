@@ -39,9 +39,9 @@ public class CompanyUserController {
 	};
 	
 	@GetMapping(value = "/total")
-	public ModelAndView CompanyUserTotal() {
+	public ModelAndView CompanyUserTotal( HttpSession ss ) {
 		System.out.println("/total");
-		mav = um.getUserTotalInfo();
+		mav = um.getUserTotalInfo(ss);
 		return mav;
 	}
 	@GetMapping(value = "/currentpassenger")

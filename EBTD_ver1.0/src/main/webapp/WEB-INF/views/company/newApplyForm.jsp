@@ -4,32 +4,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 노선 관리</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"></script>
 <style type="text/css">
 #newApplyListHeader {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 40%);
 	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
 }
+
 #newApplyList {
 	border: 1px solid;
 }
+
 th, td {
 	border: 1px solid;
+	height: 37px;
+}
+
+.maininput {
+	border: none;
+	background-color: #f9eb99;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+.maintable{
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
 }
 </style>
 </head>
 <body>
 	<div id="companyheader"><%@ include file="/WEB-INF/views/include/companyheader.jsp"%></div>
-	
 	<div id="newApplyListHeader">
-		신규 신청 내역
-		<table>
-			
+	<div><input class="maininput" value="신규 신청 내역" readonly></div>
+		<table class="maintable">
 			<thead>
-			<tr>
+			<tr style="background-color: lightgray">
 				<th>버스 번호</th>
 				<th>신청 일시</th>
 				<th>신청 상황</th>

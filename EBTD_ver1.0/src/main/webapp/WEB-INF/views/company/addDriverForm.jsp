@@ -7,7 +7,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 기사 관리</title>
+<style type="text/css">
+.main-container {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 30%);
+	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
+}
+
+.maininput {
+	border: none;
+	background-color: #b6e8fc;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
+.maintable {
+	font-size: 18px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 350px;
+	height: 300px;
+}
+
+.inpute {
+	width: 150px;
+	text-align: center;
+}
+
+#btn{
+	text-align: center;
+	background-color: lightgray;
+	border-radius: 8px;
+	border: none;
+	margin: 10px;
+	width: 100px;
+	height: 40px;
+}
+#btn:hover {
+	background-color: gray;
+}
+</style>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,23 +68,38 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-
+<div class="main-container"><br>
+	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div class="insertData" style="color: black; text-align: center">
 		<form action="/company/addDriver" method="post" enctype="multipart/form-data">
-			회사 이름 : <input type="text" id="c_userName" name="c_userName" value="${sessionScope.c_username}" readonly><br> 
-			기사 이름 : <input type="text" id="d_name" name="d_name"><br> 
-			핸드폰 번호 : <input type="text" id="d_phoneNum" name="d_phoneNum" maxlength="13" placeholder="숫자만 입력"><br>
-			입사일 : <input type=date id="d_enterDate" name="d_enterDate"><br> 
-			운행노선 : <select id="b_no" name="b_no">
-			</select> <br> <input type="submit" value="추가하기" onClick=addDriver()>
+		<table class="maintable">
+			<tr>
+				<td>회사 이름 : </td><td><input type="text" class="inpute" id="c_userName" name="c_userName" value="${sessionScope.c_username}" readonly></td> 
+			</tr>
+			<tr>
+				<td>기사 이름 : </td><td><input type="text" class="inpute" id="d_name" name="d_name"></td> 
+			</tr>
+			<tr>
+				<td>핸드폰 번호 : </td><td><input type="text" class="inpute" id="d_phoneNum" name="d_phoneNum" maxlength="13" placeholder="숫자만 입력"></td>
+			</tr>
+			<tr>
+				<td>입사일 : </td><td><input type=date class="inpute" id="d_enterDate" name="d_enterDate"></td>
+			</tr>
+			<tr>
+				<td>운행노선 : </td><td><select class="inpute" id="b_no" name="b_no"></select></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input id="btn" type="submit" value="추가하기" onClick=addDriver()></td>
+			</tr>
+		</table>
 		</form>
 	</div>
+</div>
 
 	<div id="companyfooter"><%@ include
 			file="/WEB-INF/views/include/companyfooter.jsp"%>
 
 	</div>
-
 </body>
 <script src="http://code.jquery.com/jquery-latest.js">
 </script>

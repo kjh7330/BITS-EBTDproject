@@ -4,21 +4,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 고객 센터</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/js/jquery.serializeObject.js"></script>
-<script type="text/javascript">
 
-</script>
 <style type="text/css">
 #userHistoryHeader {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 7%);
 	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
 }
+.maininput {
+	border: none;
+	background-color: #f9eb99;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
 #userHistory {
 	border: 1px solid;
 }
+
 th, td {
 	border: 1px solid;
+}
+.maintable{
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
 }
 </style>
 </head>
@@ -27,8 +49,8 @@ th, td {
 
 </div>
 	<div id="userHistoryHeader">
-		당사 고객 이용 현황
-		<table>
+		<div><input class="maininput" value="당사 고객 이용 현황" readonly></div>
+		<table class="maintable">
 			<thead>
 			<tr>
 				<th>예약 번호</th>

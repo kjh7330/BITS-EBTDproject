@@ -6,6 +6,7 @@ import java.util.Map;
 import com.ebtd.www.bean.ApplyBusHistory;
 import com.ebtd.www.bean.ApplyBusRoute;
 import com.ebtd.www.bean.Company;
+import com.ebtd.www.bean.VocBean;
 
 public interface I_AdminCompanyDao {
 
@@ -32,7 +33,11 @@ public interface I_AdminCompanyDao {
 	//신규 버스 등록
 	void setApplyBusHistoryChangeApproval(String ap_b_no);
 	void setAllBusChangeApproval(String ap_b_no);
+	
+	void setApplyBusHistoryChange4Approval(ApplyBusHistory abhBean);
+	void setDeleteRouteBus(String ap_b_no);
 	void setNewRouteBus(ApplyBusHistory abhBean);
+	void setUpdateRouteBus(ApplyBusHistory abhBean);
 
 	void setApplyBusHistoryChange2Reject(Map<String, Object> cMap);
 	void setDeleteAllbus2(Map<String, Object> cMap);
@@ -57,6 +62,8 @@ public interface I_AdminCompanyDao {
 	List<ApplyBusHistory> getCompanyApprovalDetail(ApplyBusHistory abh);
 	List<ApplyBusHistory> getCompanyRejectList();
 	List<ApplyBusHistory> getCompanyRejectDetail(ApplyBusHistory abh);
+	
+	VocBean getVocCount();
 
 
 

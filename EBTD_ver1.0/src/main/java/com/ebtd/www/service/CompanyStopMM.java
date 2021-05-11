@@ -63,7 +63,7 @@ public class CompanyStopMM {
 	//페이징
 	private String getPaging(CompanyStopSearchBean sb, HttpSession sss) {
 		int maxNum = sDao.getStopCount(sb); //전체 정류장 수
-		int listCount = 15;
+		int listCount = 6;
 		int pageCount = 10;
 		String boardName = "getStopList"; //url
 		Paging2 paging = new Paging2(maxNum, sb.getPageNum(), listCount, pageCount, boardName,sss);

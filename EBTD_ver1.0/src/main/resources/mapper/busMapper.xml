@@ -15,10 +15,9 @@
 	<select id="busNumCheck" resultType = "int" parameterType="String">
 	SELECT COUNT(*) FROM B WHERE B_NO = #{busNum}
 	</select>
-	
 	<select id="existBusNumCheck" resultType="Integer" parameterType="com.ebtd.www.bean.CompanyCheckBean">
 	SELECT AP_STATE FROM AP
-	WHERE AP_NO=(SELECT MAX(AP_NO) FROM APPLY_BUS_HISTORY WHERE AP_B_NO=#{busNum} AND C_USERNAME=#{cName})
+	WHERE AP_B_NO=#{busNum} AND C_USERNAME=#{cName} and AP_NO=(SELECT MAX(AP_NO) FROM APPLY_BUS_HISTORY WHERE AP_B_NO=#{busNum} AND C_USERNAME=#{cName})
 	</select>
 	
 	<select id="getApplyNumber" resultType="int" parameterType="com.ebtd.www.bean.ApplyBusHistory">
@@ -62,4 +61,9 @@
 	<update id="next_od_no">
 	update od set od_no = (select od_no+1 from od where c_username = #{c_username}) where c_username = #{c_username}
 	</update>
+	<select id="getVocCount" resultType="VocBean">
+	select (select count(voc_recommend) from voc where voc_recommend=1 and c_username=#{c_username}) chu,
+    	   (select count(voc_recommend) from voc where voc_recommend=-1 and c_username=#{c_username}) bee
+	from dual
+	</select>
 </mapper>

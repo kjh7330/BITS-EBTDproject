@@ -84,10 +84,21 @@
 	<update id="setApplyBusHistoryChangeApproval" parameterType="ApplyBusHistory"> <!-- resultType은 쓰면 안돼~~! -->
 		UPDATE APPLY_BUS_HISTORY SET AP_STATE=1 WHERE AP_B_NO=#{ap_b_no}
 	</update>
+	<update id="setApplyBusHistoryChange4Approval" parameterType="ApplyBusHistory"> <!-- resultType은 쓰면 안돼~~! -->
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE=4 WHERE AP_B_NO=#{ap_b_no} and ap_no=#{ap_no}
+	</update>
 	<update id="setAllBusChangeApproval" parameterType="ApplyBusHistory"> <!-- resultType은 쓰면 안돼~~! -->
 		UPDATE ALLBUS SET AB_STATE=1 WHERE B_NO=#{ap_b_no}
 	</update>
 	<insert id="setNewRouteBus" parameterType="ApplyBusHistory">
+		INSERT INTO ROUTE_BUS(R_TURN, B_NO, S_NO) 
+		SELECT APDE_TURN, AP_B_NO, S_NO FROM APPLY_BUS_HISTORY_DETAIL 
+		WHERE AP_B_NO=#{ap_b_no} AND AP_NO=#{ap_no}
+	</insert>
+	<delete id="setDeleteRouteBus" parameterType="ApplyBusHistory">
+		DELETE FROM ROUTE_BUS WHERE B_NO = #{ap_b_no}
+	</delete>
+	<insert id="setUpdateRouteBus" parameterType="ApplyBusHistory">
 		INSERT INTO ROUTE_BUS(R_TURN, B_NO, S_NO) 
 		SELECT APDE_TURN, AP_B_NO, S_NO FROM APPLY_BUS_HISTORY_DETAIL 
 		WHERE AP_B_NO=#{ap_b_no} AND AP_NO=#{ap_no}
@@ -212,5 +223,10 @@
 		JOIN STOP S ON S.S_NO = HD.S_NO
 		WHERE H.AP_NO = #{ap_no} AND HD.AP_NO = #{ap_no} AND H.AP_B_NO = #{ap_b_no}
 		ORDER BY APDE_TURN
+	</select>
+	<select id="getVocCount" resultType="VocBean">
+	select (select count(voc_recommend) from voc where voc_recommend=1) chu,
+       	   (select count(voc_recommend) from voc where voc_recommend=-1) bee
+	from dual
 	</select>
 </mapper>

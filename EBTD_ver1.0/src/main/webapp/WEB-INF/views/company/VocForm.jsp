@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회사 - 고객 센터</title>
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -38,11 +38,11 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 110;
 	visibility: hidden;
 	opacity: 0;
 	transition: all 0.5s ease;
-	color : black;
+	color: black;
 }
 
 /* modal box */
@@ -53,12 +53,13 @@ body {
 }
 
 .modal_header {
+	text-align: center;
 	width: 100%;
 	position: relative;
 }
 
-.modal_header h3 {
-	padding: 20px 0;
+.modal_header h5 {
+	padding: 5px 0;
 	color: #333;
 }
 
@@ -67,7 +68,7 @@ body {
 	background: #fefefe;
 	border: 1px solid #888;
 	box-sizing: border-box;
-	height: 200px;
+	height: 240px;
 }
 
 .modal_footer {
@@ -92,54 +93,140 @@ body {
 	cursor: pointer;
 }
 /*   모달css여기까지~!   */
+.main-container {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 35%);
+	color: black;
+	width: 800px;
+	text-align: center;
+	padding-bottom: 140px;
+}
+
+input, textarea {
+	border: 1px solid black;
+}
+
+.maininput {
+	border: none;
+	background-color: #f9eb99;
+	font-size: 20px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
+#maintable {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+	border: 1px solid black;
+	width: 800px;
+}
+
+#myModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -80%);
+	width: 520px;
+	height: 525px;
+	color: black;
+	font-size: 13px;
+}
+
+.btn {
+	text-align: center;
+	border-radius: 8px;
+	border: none;
+	margin: 10px;
+	width: 100px;
+	height: 40px;
+}
+
+.btn:hover {
+	background-color: gray;
+}
 </style>
 <body>
 <div id="adminheader"><%@ include
-			file="/WEB-INF/views/include/companyheader.jsp"%>
-	</div>
-	<table style = "color : black;">
+			file="/WEB-INF/views/include/companyheader.jsp"%></div>
+
+<div class="main-container"><br>
+	<div><input class="maininput" value="이용자 문의" readonly></div>
+	<div class="main">
+	<table id="maintable" style = "color : black;">
 			<thead>
 			<tr>
-				<th>문의 번호</th>
-				<th>노선 번호</th>
-				<th>고객 ID</th>
-				<th>제목</th>
-				<th>작성 일시</th>
+				<th style="border: 1px solid black;">문의 번호</th>
+				<th style="border: 1px solid black;">노선 번호</th>
+				<th style="border: 1px solid black;">고객 ID</th>
+				<th style="border: 1px solid black;">제목</th>
+				<th style="border: 1px solid black;">작성 일시</th>
+				<th style="border: 1px solid black;">답글</th>
 			</tr>
 			</thead>
 			<tbody id="vocList">
 			</tbody>
 		</table>
-	
-	<button class="myBtn">답글 달기</button>
+	</div>
+</div>
 	<div id="overlay">
 		<div id="myModal" class="modal">
 			<div class="modal_header">
-				<p style="color: black; text-align: center;">답변 달기 창</p>
+				<h5 style="margin-top:5px; margin-left:10px;">답변 달기 창</h5>
 				<span class="close">&times;</span>
 			</div>
-			<div class="modal_content" style="text-align: center;">
-				문의번호:<input id = "vocNum"> <br/>
-				문의 버스노선:<input id = "vocBusNum"> <br/> 
-				제목:<input id = "vocTitle"> <br/>
-				문의자:<input id = "vocUserName"> 
-				문의 일시:<input id = "vocDate"> <br/>
-				내용:
-				<input id = "vocContent">
+			<div class="modal_content">
+				<table style="margin-top: 20px; margin-left:100px;">
+					<tr>
+						<td style="width: 130px;">문의번호 : </td><td><input id = "vocNum" readonly></td>
+					</tr>
+					<tr>
+						<td>문의 버스노선 : </td><td><input id = "vocBusNum" readonly></td> 
+					</tr>
+					<tr>
+						<td>제목 : </td><td><input id = "vocTitle" readonly></td>
+					</tr>
+					<tr>
+						<td>문의자 : </td><td><input id = "vocUserName" readonly></td>
+					</tr>
+					<tr>
+						<td>문의 일시 : </td><td><input id = "vocDate" readonly></td>
+					<tr>
+						<td>내용 : </td><td><textarea id = "vocContent" style="height: 60px; width:158px;resize: none;" readonly></textarea></td>
+					</tr>
+				</table>
 			</div>
-			<form id = "reply" action="/company/user/addReply" method = "post">
-			<input type = "hidden" id = "replystate" name = "voc_recommend" value = 0>
-			<input type = "hidden" id = "replyUserName" name = "u_username">
-			<input type = "hidden" id = "replyCompanyName" name = "c_username">
-			<!-- 위에는 히든처리 -->
-			답변번호:<input type = "text" id = "replyNum" name = "a_no">
-			노선번호:<input type = "text" id = "replyBusNum" name = "b_no">
-			제목: <input type = "text" id = "replyTitle" name = "v_title">
-			내용: <input type = "text" id = "replyContent" name = "v_content">
-			<input type = "submit" id = "replySubmit" value = "전송">
-			</form>
-			<div class="modal_footer">
+			<div style="margin-top: 30px; margin-left:100px;margin-right:50px; height: 500px;">
+				<form id = "reply" action="/company/user/addReply" method = "post">
+					<input type = "hidden" id = "replystate" name = "voc_recommend" value = 0>
+					<input type = "hidden" id = "replyUserName" name = "u_username">
+					<input type = "hidden" id = "replyCompanyName" name = "c_username">
+					<!-- 위에는 히든처리 -->
+					<table>
+						<tr>
+							<td style="width: 130px;">▶ 답변번호 : </td><td><input type = "text" id = "replyNum" name = "a_no" readonly></td>
+						</tr>
+						<tr>
+							<td>▶ 노선번호 : </td><td><input type = "text" id = "replyBusNum" name = "b_no" readonly></td>
+						</tr>
+						<tr>
+							<td>▶ 제목 : </td><td><input type = "text" id = "replyTitle" name = "v_title" readonly></td>
+						</tr>
+						<tr>
+							<td>▶ 내용 : </td><td><textarea id = "replyContent" name = "v_content" style="height: 60px; width:158px;resize: none;"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="height:50px; text-align: center;"><input class="btn" style="background-color:#a1f8d5;" type = "submit" id = "replySubmit" value = "전송"></td>
+						</tr>
+					</table>
+				</form>
 			</div>
+			<div class="modal_footer"></div>
 		</div>
 	</div>
 	<!--    모달 버튼 끝!    -->
@@ -155,13 +242,13 @@ body {
 console.log(${vList});
 let tx = '';
 	for(var i=0; i<${vList}.length; i++) {
-		tx = "<tr id = 'voc"+i+"'>";
-		tx += '<td>'+${vList}[i].v_no+'</td>';
-		tx += '<td>'+${vList}[i].b_no+'</td>';
-		tx += '<td>'+${vList}[i].u_username+'</td>';
-		tx += '<td>'+${vList}[i].v_title+'</td>';
-		tx += '<td>'+${vList}[i].v_date+'</td>';
-		tx += "<td><button class = 'myBtn'>답글달기</button></td></tr>";
+		tx = "<tr id = 'voc"+i+"' style='border: 1px solid black;'>";
+		tx += '<td style="border: 1px solid black;">'+${vList}[i].v_no+'</td>';
+		tx += '<td style="border: 1px solid black;">'+${vList}[i].b_no+'</td>';
+		tx += '<td style="border: 1px solid black;">'+${vList}[i].u_username+'</td>';
+		tx += '<td style="border: 1px solid black;">'+${vList}[i].v_title+'</td>';
+		tx += '<td style="border: 1px solid black;">'+${vList}[i].v_date+'</td>';
+		tx += "<td style='border: 1px solid black;'><button class = 'myBtn'>답글달기</button></td></tr>";
 		$('#vocList').append(tx);
 	};
 

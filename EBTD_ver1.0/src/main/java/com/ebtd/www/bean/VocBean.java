@@ -20,4 +20,7 @@ public class VocBean {
 	
 	//voc_to_answer 테이블
 	private int a_no;				//답변문의 번호 PK FK
+	
+	private int chu; //추천
+	private int bee; //비추천
 }
