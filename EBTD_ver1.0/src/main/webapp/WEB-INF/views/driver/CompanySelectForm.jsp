@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>업체 선택 화면</title>
 <style type="text/css">
 	body{
 		margin : 0;
