@@ -8,6 +8,7 @@
 <style type="text/css">
 	body{
 		margin : 0;
+		backround-color : lightgray;
 	}
 	.on_wheel{
 		position : relative;
@@ -63,7 +64,6 @@
 	#logo_table{
 		width : 100%;
 		background-color: #0C3D6a;
-		background-color: #0C3D6a;
 		text-align : center;
 	}
 	.logo_td{
@@ -78,9 +78,13 @@
 		background-color : lightgray; 
 	}
 	div{
+		position : absolute;
+		width : 100%;
+		height : 100%; 
 		text-align : center;
 		margin-left  : auto;
 		margin-right  : auto;
+		z-index : -5;
 	}
 	#all_wheel,#all_blind{
 		width : 17px;
@@ -91,7 +95,21 @@
 	}
 	.s_name_input{
 		text-align : center;
-		border : none;
+		border : 0.5px black solid;
+	}#logo_table td{
+		width : 33%;
+	} button{
+            text-align: center;
+            background-color: #f9eb99;
+            border-radius: 8px;
+            width : 80px;
+            height : 30px;
+            border: none;
+            margin: 5px;
+	}
+	button:hover{
+	   background-color: #cec380;
+	   cursor : pointer;
 	}
 </style>
 </head>
@@ -105,19 +123,20 @@
 		<tr>
 			<td class = 'logo_td'>${c_username}
 			</td>
-			<td colspan = 2  class = 'logo_td'> <img class="logo" alt="logo" src="/resources/image/mainlogo.png">
+			<td class = 'logo_td'> <img class="logo" alt="logo" src="/resources/image/mainlogo.png">
 			</td>
 			<td class = 'logo_td'>${b_no}번 버스<br> ${d_name}기사님</td>
 		</tr>
 		<tr id = 'all_cnt'>
-			<td style = "width : 120px"colspan = 2><img style = "width : 16px;" alt="blind_img" src="/resources/image/blind.png"> : <input id='all_blind' value=0></td>
-			<td colspan = 2><i class="fas fa-wheelchair"></i> : <input id='all_wheel' value=0></td>
+			<td><img style = "width : 16px;" alt="blind_img" src="/resources/image/blind.png"> : <input id='all_blind' value=0></td>
+			<td style = 'font-weight : bold; font-size:11px;'>현재 탑승 인원</td>
+			<td><i class="fas fa-wheelchair"></i> : <input id='all_wheel' value=0></td>
 		</tr>
 	</table>
 </header>
 
-	<br>
 	<div>
+	<br>
 	<table id = 'main_table'>
 		<tr>
 			<td><img id = 'img_b_on_nnext' class = 'arrow' alt="on_blind" src="/resources/image/on_blind.png"/>
