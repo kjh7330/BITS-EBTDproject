@@ -92,7 +92,7 @@
 	}else{
 		$('#reservationCheck').val('');
 		for(i=0; i<${urList}.length; i++){
-			str+='<tr><td style = "font-size : 13px; width : 250px;">경로 : '+${urList}[i]["s_nameStart"]+'->'+${urList}[i]["s_nameLast"];
+			str+='<tr><td style = "font-size : 13px; width : 250px;">경로 : '+${urList}[i]["s_namestart"]+'->'+${urList}[i]["s_namelast"];
 			str+='</td>'
 			if(${urList}[i]["ur_state"]==0){
 				str+='<td style="color : orange; font-size : 13px; font-weight: bolder;">탑승 대기중</td>';

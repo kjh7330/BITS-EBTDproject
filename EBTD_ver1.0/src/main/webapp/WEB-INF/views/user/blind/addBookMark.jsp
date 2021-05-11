@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시각유저 - 즐겨찾기</title>
+<title>시각유저 - 즐겨찾기 추가</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--font-awesome CDN-->
@@ -52,53 +52,50 @@
     	border-radius: 15px;
     	cursor: pointer;
     }
-	#bookListDiv{ /* 즐겨찾기 전체 div */
-		height: 90px;
-		text-align: center;
-		font-size: 14px;
-		color: black; /* width: 300px */
-	}
-	.bookList { /* 즐겨찾기 개인 div */
-		height: 90px;
-		text-align: center;
-		font-size: 14pt;
-		color: black; /* width:50px; */
-		padding-top: 15px; /* margin: 20px; */
-		border: 0.2px solid;
-	}
-	.btn{
-		width: 350px;
-		height: 80px;
-		font-size: 30px;
-    	margin-top: 20px;
-    	background-color: #0C3D6A;
-    	color: #f9eb99;
-    	border-radius: 15px;
-    	cursor: pointer;
-	}
-	 #plusBox {
-		height: 80px;
-		color: black;
-		height: 90px;
-		text-align: center;
-		color: black; /* width: 300px */
-		margin-top: 50px;
-	}
-	#stopList{
-		cursor: pointer;
-	}
 
 </style>
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-
-	<div id="bookListDiv">
-	</div>
 	
-	<div id="plusBox">
-		<i class="fas fa-plus-circle fa-4x" id = "stopList" style="color: #0C3D6A"></i>
+	<div style="color: black">
+		<br> 
+		
+		동 이름 : <select id="t_nameSelect" onchange="selectSortClick(this)">
+				<option class="selectType">동 이름을 선택해주세요</option>
+			  </select><br>
+				
+		<!-- 정렬에서 장애유형 선택하면 시각/휠체어 선택할수 있게 -->
+		<div id="selectSortDetail">
+		노선번호 : <select id="selectSortUType">
+					<option class="selectType">장애유형을 선택해주세요</option>
+					<option id="blind" class="selectType">시각</option>
+					<option id="wheel" class="selectType">휠체어</option>
+				</select><br>
+		</div>
+
+		<div id="selectSortDetail">
+		출발 정류장 : <select id="selectSortUType">
+					<option class="selectType">장애유형을 선택해주세요</option>
+					<option id="blind" class="selectType">시각</option>
+					<option id="wheel" class="selectType">휠체어</option>
+				</select><br>
+				
+		<div id="selectSortDetail">
+		도착 정류장 : <select id="selectSortUType">
+					<option class="selectType">장애유형을 선택해주세요</option>
+					<option id="blind" class="selectType">시각</option>
+					<option id="wheel" class="selectType">휠체어</option>
+				</select><br>
+		</div>
+
 	</div>
+
+
+
+
+
+
 	
 	<footer>
 	     <div class="footer-container">
@@ -109,37 +106,18 @@
 	</footer>
 </body>
 
-	<script type="text/javascript">
-		let uBookList = ${uBookList};
-		let str = '';
-		
-		let i = 0;
-		for(i = 0; i < uBookList.length; i++){
-			str += '<button id="mbtn"'+i+' class="btn">'+uBookList[i].ub_alias+'</button>';
-			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">';	//즐겨찾기 번호
-			str += '<input type="hidden" class="b_no" name="b_no" value="'+uBookList[i].b_no+'">';//버스번호
-			str += '<input type="hidden" class="s_nameStart" name="s_nameStart" value="'+uBookList[i].s_namestart+'">';	//출발정류장
-			str += '<input type="hidden" class="s_nameLast" name="s_nameLast" value="'+uBookList[i].s_namelast+'">';	//도착정류장
-			str += '<input type="hidden" class="s_noStart" name="s_noStart" value="'+uBookList[i].s_nostart+'">';	//도착정류장ID
-			str += '<input type="hidden" class="s_noLast" name="s_noLast" value="'+uBookList[i].s_nolast+'">';	//도착정류장ID
-		}
-		
-		$('#bookListDiv').append(str); 
-		
-		
-		//즐겨찾기 클릭
-		$('.btn').click(function (){
-			let ub_no = $(this).parent().children('.ub_no').val();
-			location.href = '/user/getBookmarkDetail?ub_no='+ub_no;
-		});
-		
-		$('#stopList').click(function () {
-			location.href = '/user/stopList';
-		});
-	</script>
 	
-	<script>
-		
+<script>
+console.log(${sList});
+let i = 0;
+let str='';
+	for(i=0; i<${sList}.length; i++){
+	str+='<option class = "t_name" id = "t_name">'+${sList}[i]['t_NAME']+'</option>';
+	}
+	$("#t_nameSelect").append(str);
+
+
+
 		$('#btn1').click(function(){
 			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
 				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){

@@ -17,5 +17,6 @@ public class StopBean {
 	private int S_X;
 	private int S_Y;
 	private String S_DETAIL;
+	private String B_NO;
 	
 }
