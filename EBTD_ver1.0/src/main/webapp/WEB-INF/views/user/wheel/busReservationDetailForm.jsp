@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ReservationDetailForm</title>
+<title>EBTD - 예약하기</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 
@@ -14,7 +14,7 @@
 }
 #bustitle{
 	text-align: center;
-	background-color: blue;
+	background-color: skyblue;
 }
 #busRoute{
 	float : right;
@@ -22,7 +22,7 @@
 	width: 100%;
 }
 #stopinfo{
-	background-color: blue;
+	background-color: skyblue;
 }
 .s_namestart, .s_namelast, #nearBus, #distantBus{
 	width: 50%;
@@ -37,7 +37,7 @@
 #b_no{
 	text-align: center;
 	font-size: 30px;
-	background-color: blue;
+	background-color: skyblue;
 	color : white;
 	border: none;
 }
@@ -52,7 +52,8 @@
                     font-size:15px; 
                     background:#f5f5f5;
                     color:black; 
-                    padding:8px 16px; }
+                    padding:8px 16px; 
+                    width: 232px;}
         .modal_content3 input { border:none; 
                     font-size:18px; 
                     background:#f44336;
@@ -108,23 +109,58 @@
         }
     	#myModal2{
         	position: absolute;
-			top:130px;
-			left:75px;
-			width: 300px;
+			top:70px;
+			left:50px;
+			width: 350px;
 			height: 250px;
 			color: black;
     	}
 
 /*   모달css여기까지~!   */
 
- 
- 
+ .mainview {
+	position: relative;
+	top: 120px;
+	color: black;
+	padding: 20px;
+	padding-bottom: 120px; /*footer여백*/
+	overflow:auto;
+	background-color: #f6f4f4;
+}
+
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
+input:focus{
+	outline: none;
+}
+#start{
+	background-color: skyblue;
+	width:80px;
+	height:30px;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+}
+#last{
+	background-color: pink;
+	width:80px;
+	height:30px;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+	font-size: 15px;
+}
  
 </style>
 </head>
 
 <body>
 	<div id="userheader"><%@ include file="/WEB-INF/views/include/userheader.jsp"%></div>
+	
+	<div class="mainview">
 	<form action="/user/reservation" id="reservation" method="post">
 	
 		<div id="bustitle"></div>
@@ -133,7 +169,7 @@
 	<table id="routetable" style="border: 1px solid black">
 		<tr>
 		<td><div class="inputValue" id="startValue">출발지 : <input class = "s_namestart" type="text" readonly='readonly'><input id="s_nostart" name="s_nostart" style="display: none;"></div></td>
-		<td colspan="1" rowspan="2"><input type="button" id="modalUp" value="예약" style="height: 50px"></td>
+		<td colspan="1" rowspan="2"><input type="button" id="modalUp" value="예약" style="height: 50px; width:80px; font-size:18px;"></td>
 		<td></td>
 		</tr>
 		<tr>
@@ -153,8 +189,8 @@
              	<p style="color:black;"><br>
 					출발지 : <input class = "s_namestart" type="text" readonly='readonly'><br><br>
 					목적지 : <input class = "s_namelast" type="text" readonly='readonly'><br><br>
-					다음버스 : <input id = "nearBus" type="text" readonly='readonly'><br><br>
-					그 다음버스 : <input id = "distantBus" type="text" readonly='readonly'><br><br><br>
+					다음버스 : <input style="width: 216px;" id = "nearBus" type="text" readonly='readonly'><br><br>
+					그 다음버스 : <input style="width: 195px;" id = "distantBus" type="text" readonly='readonly'><br><br><br>
 				</p>
 				</div>
 				<div class="modal_content3">
@@ -163,8 +199,8 @@
              </div>
           </div>
         </div>
-    
-</form>	    
+	</form>	    
+    </div>
 	<div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
 	
 </body>
@@ -321,7 +357,7 @@ for (i; i<${brList}.length; i++){
 	
 	str+='<td class = "div_td">';
 	
-	str+='<div class="routeSetting" style="visibility : hidden"><span class="start">출발지</span> &nbsp&nbsp&nbsp&nbsp&nbsp <span class="last">목적지</span></div>';
+	str+='<div class="routeSetting" style="visibility : hidden"><span class="start"><input id="start"value="출발지"></span> &nbsp&nbsp&nbsp&nbsp&nbsp <span class="last"><input id="last" value="목적지"></span></div>';
 	
 	str+='</td>';
 	

@@ -4,15 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 정류장 관리 페이지</title>
 <style type="text/css">
 	#main-container{
-		position: absolute;
-		left: 50%;
-		transform: translate(-50%,32%);
-		color: black;
-		width: 800px;
 		text-align: center;
+		            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
+            
 	}
 	.maindivinput{
 		border: none;
@@ -56,7 +59,7 @@
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 <div id="main-container">
-	<div><br><input type="text" class="maindivinput" value="정류장 등록 및 신청 리스트" readonly><br></div>
+	<div><input type="text" class="maindivinput" value="정류장 등록 및 신청 리스트" readonly><br></div>
 	<br>
 	<form action="stopList"><input class="submitbtn" type="submit" value="정류장 등록"></form>
 	<br>

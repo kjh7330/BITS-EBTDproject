@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 고객 센터</title>
+<title>회사 - 고객 센터 페이지</title>
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -17,8 +17,8 @@
 button {
 	border: none;
 	font-size: 18px;
-	background: #f44336;
-	color: #f9f9f9;
+	background: #a1f8d5;
+	color: black;
 	padding: 8px 16px;
 }
 
@@ -94,14 +94,15 @@ body {
 }
 /*   모달css여기까지~!   */
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 61%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
 	font-size: 20px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 #busNum {
@@ -112,7 +113,7 @@ body {
 
 .maininput {
 	border: none;
-	background-color: #f9eb99;
+	background-color: #a1f8d5;
 	font-size: 20px;
 	font-weight: bold;
 	width: 800px;
@@ -152,7 +153,7 @@ body {
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
 	<div class="main-container">
-	<div><input class="maininput" value="노선번호 선택" readonly></div><br>
+	<div><input class="maininput" value="새로운 노선 등록 신청" readonly></div><br>
 	<input type="text" id="busNum">
 	<!--    모달 버튼 가져가세요~!     -->
 	<button id="myBtn">노선 번호 확정</button>
@@ -194,7 +195,7 @@ body {
 					</tr>
 					<tr>
 						<td>총 버스 갯수 : </td>
-						<td><input style="width: 150px;" id="motorCount" type = "text" name= "motorCount"></td><td colspan="2"><input id="submitRoute" type = "submit"></td>
+						<td><input style="width: 150px;" id="motorCount" type = "text" name= "motorCount"></td><td colspan="2"><input id="submitRoute" type = "submit" style="background-color:#a1f8d5;" value="제출"></td>
 					</tr>
 				</table>
 			</form>

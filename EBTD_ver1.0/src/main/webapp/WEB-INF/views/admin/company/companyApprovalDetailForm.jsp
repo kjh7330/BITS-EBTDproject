@@ -8,13 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
-		    position: absolute;
+            width: 800px;
+            color: black;
             left: 50%;
-            transform: translate(-50%,173px);
-			color: black;
-			width: 800px;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
-			padding-bottom: 140px;
+            padding-bottom: 140px;
 		}
 		.maininput{
 			border: none;

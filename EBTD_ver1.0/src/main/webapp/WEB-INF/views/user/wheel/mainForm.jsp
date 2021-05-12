@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인페이지</title>
+    <title>EBTD - 메인페이지</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,13 +20,16 @@
         }
         main{
             min-height: 100%;
+            background-color : #f6f4f4;
         }
         .mainview{
             position: relative;
+            top: 122px;
             font-size: 40px;
             color: black;
             padding: 20px;
             padding-bottom: 120px; /*footer여백*/
+            z-index: 1;
         }
         .maindetail{
             height: 27vh;
@@ -60,11 +63,15 @@
         	text-align: center;
         	
         }
+        #userheader{
+        	position: absolute;
+        	z-index: 3;
+        }
     </style>
 </head>
 <body>
 	<div id="userheader"><%@ include file="/WEB-INF/views/include/userheader.jsp"%></div>
-    <main class="mainview">
+    <main class="mainview" style="z-index:0;">
         <div class="maindetail">
             <!--예약 내용 readonly -->
             <table class = "reservationCheck">
@@ -92,17 +99,17 @@
 	}else{
 		$('#reservationCheck').val('');
 		for(i=0; i<${urList}.length; i++){
-			str+='<tr><td style = "font-size : 13px; width : 250px;">경로 : '+${urList}[i]["s_namestart"]+'->'+${urList}[i]["s_namelast"];
-			str+='</td>'
-			if(${urList}[i]["ur_state"]==0){
-				str+='<td style="color : orange; font-size : 13px; font-weight: bolder;">탑승 대기중</td>';
-			}else{
-				str+='<td style="color : blue; font-size : 13px; font-weight: bolder;">탑승중</td>';
-			};
+				if(${urList}[i]["ur_state"]==0){
+					str+='<tr><td style="color : orange; font-size : 18px; font-weight: bolder; text-align: left; padding-left:20px;">▶ 탑승 대기중</td></tr>';
+				}else{
+					str+='<tr><td style="color : blue; font-size : 18px; font-weight: bolder; text-align: left; padding-left:20px;">▶ 탑승중</td></tr>';
+				};
+			str+='<tr><td style = "font-size : 17px; width : 250px; font-weight: bolder;">'+${urList}[i]["s_namestart"]+'</td>';
+			str+='<td style = "font-size : 17px; width : 250px; font-weight: bolder; width:22px;">-></td>';
+			str+='<td style = "font-size : 17px; width : 250px; font-weight: bolder;">'+${urList}[i]["s_namelast"]+'</td>';
 			str+='</tr>';
-			
 		};
-		$(".reservationCheck").append(str); 
+		$(".reservationCheck").append(str);
 	}
 	
 </script>

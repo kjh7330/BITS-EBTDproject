@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <!-- 김아름 -->
-<title>관리자 - 이용자 히스토리 보기</title>
+<title>관리자 - 이용자 관리 페이지</title>
 <style>
-.maininput{
+.maininput {
 	border: none;
 	background-color: skyblue;
 	font-size: 20px;
@@ -15,32 +15,33 @@
 	width: 800px;
 	height: 50px;
 	text-align: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	border-radius: 10px;
 	margin-left: 100px;
-	
 }
-.maininput:focus{
-	outline:none;
+
+.maininput:focus {
+	outline: none;
 }
-.maindiv{
-	position: relative;
-    left: 50%;
-    transform: translate(-49%,0%);
+
+.maindiv {
 	width: 1000px;
+	font-size: 15px;
+	color: black;
+	left: 50%;
+	padding-top: 170px;
+	margin-left: auto;
+	margin-right: auto;
 	padding-bottom: 140px;
-	font-size:15px;
 }
-.arrow{
+.arrow {
 	border: 1px solid black;
 	height: 35px;
 	margin-bottom: 10px;
-	}
+}
 .arrow:hover {
 	border: 1px solid #aaa;
 }
-
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -52,7 +53,6 @@
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 	<div class="maindiv">
 	<div>
-	<h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6>
 	<input class="maininput" value="이용자 전체 히스토리" readonly>	</div>
 	<!-- 정렬에서 이용일, 장애유형 선택하면 상세에 그에 맞는 정보 선택가능하게 하기 -->
 	<div style="color: black">

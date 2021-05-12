@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EBTD - 회원가입</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -167,12 +167,16 @@
                     </tr>
                     <tr>
                         <!--아래 아이콘이 CSS효과가 안먹어서 태그에 넣음!-->
-                        <form id="joinWheel" action="/user/wheel/join">
-                        	<td class="otherbtn3"><input class="otherbtn1" type="button"><i id="otherbtn1" class="fas fa-wheelchair" style="position: absolute; color: black; font-size: 100px; left: 90px; padding-top:42px;"></i></td>
-                        </form>
-                        <form id="joinBlind" action="/user/blind/join">
-                        	<td class="otherbtn4"><input class="otherbtn2" type="button"><i id="otherbtn2" class="fas fa-blind" style="position: absolute; color: black; font-size: 100px; left: 290px; padding-top:42px;"></i></td>
-                        </form>
+                        <td class="otherbtn3">
+	                        <form id="joinWheel" action="/user/wheel/join">
+	                        	<input class="otherbtn1" type="button"><i id="otherbtn1" class="fas fa-wheelchair" style="position: absolute; color: black; font-size: 100px; left: 90px; padding-top:42px;"></i>
+	                        </form>
+                        </td>
+                        <td class="otherbtn4">
+                        	<form id="joinBlind" action="/user/blind/join">
+                        		<input class="otherbtn2" type="button"><i id="otherbtn2" class="fas fa-blind" style="position: absolute; color: black; font-size: 100px; left: 290px; padding-top:42px;"></i>
+                        	</form>
+                        </td>
                     </tr>
                     <tr>
                         <td><p class="content">휠체어 이용자</p></td>
@@ -187,7 +191,7 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁, 충레기
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁
             </div>
         </div>
     </footer>

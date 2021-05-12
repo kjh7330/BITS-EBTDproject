@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 - 이용자 관리</title>
+<title>관리자 - 이용자 관리 페이지</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -26,7 +26,6 @@ h2{color: black; text-align:center}
 	width: 800px;
 	height: 50px;
 	text-align: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	border-radius: 10px;
 }
@@ -34,11 +33,13 @@ h2{color: black; text-align:center}
 	outline:none;
 }
 .maindiv{
-	position: relative;
-    left: 50%;
-    transform: translate(-49%,0%);
-	width: 800px;
-	padding-bottom: 140px;
+            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 </style>
@@ -48,7 +49,7 @@ h2{color: black; text-align:center}
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 	
 <div class="maindiv">
-	<div><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6>
+	<div>
 		 <input class="maininput" value="이용자 상세보기" readonly>
 	</div>
 

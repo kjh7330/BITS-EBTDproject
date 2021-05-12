@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이용 내역</title>
+<title>EBTD - 이용 내역</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +16,8 @@
 	}
 	.maintable{
 		width: 410px;
-		height: 500px;
+		height: 480px;
+		margin-left:5px;
 		font-size: 23px;
 		text-align: center;
 		background-color: #f9eb99;
@@ -55,7 +56,17 @@
 		color: white;
 		cursor: pointer;
 	}
-
+.maindiv{
+	position: relative;
+	top: 130px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 	
 </style>
 </head>
@@ -70,10 +81,10 @@
 				<td style="width: 120px;">버스번호</td><td><input type="hidden" name="u_username" value="${ubd.u_username}"><input class="input" name="b_no" value="${ubd.b_no}" readonly></td>
 			</tr>
 			<tr>
-				<td>출발지</td><td><input type="hidden" name="s_nostart" value="${ubd.s_nostart}"><input class="input" name="s_nameStart" value="${ubd.s_nameStart}" readonly></td>
+				<td>출발지</td><td><input type="hidden" name="s_nostart" value="${ubd.s_nostart}"><input class="input" name="s_namestart" value="${ubd.s_namestart}" readonly></td>
 			</tr>
 			<tr>
-				<td>도착지</td><td><input type="hidden" name="s_nolast" value="${ubd.s_nolast}"><input class="input" name="s_nameLast" value="${ubd.s_nameLast}" readonly></td>
+				<td>도착지</td><td><input type="hidden" name="s_nolast" value="${ubd.s_nolast}"><input class="input" name="s_namelast" value="${ubd.s_namelast}" readonly></td>
 			</tr>
 			<tr>
 				<td>이용시간</td><td><input class="input" name="ur_date" value="${ubd.ur_date}" readonly></td>
@@ -85,7 +96,6 @@
 		</table>
 	</form>
 	</div>
-
 </div>
 <div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
 <script>

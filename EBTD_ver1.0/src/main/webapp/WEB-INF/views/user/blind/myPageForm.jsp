@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>EBTD - 마이페이지</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -53,7 +53,7 @@
 </style>
 </head>
 <body>
-<div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
+<div id="userheader"><%@ include file="/WEB-INF/views/include/userBlindHeader.jsp"%></div>
 <div class="maindiv">
 <!-- 	<div class="menudetail" id="logout"><a>로그아웃</a></div> -->
 	

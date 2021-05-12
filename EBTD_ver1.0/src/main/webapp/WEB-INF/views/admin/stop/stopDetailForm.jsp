@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 - 정류장 관리</title>
+<title>관리자 - 정류장 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 #stoptable {
 	width: 500px;
-	height: 400px;
+	height: 372px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 18px;
@@ -34,14 +34,17 @@
 }
 
 #main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 24%);
-	color: black;
-	width: 800px;
+
+            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
+
 	text-align: center;
 	font-size: 15px;
-	padding-bottom: 140px;
 }
 
 .maindivinput {
@@ -60,12 +63,12 @@
 	background-color: lightgray;
 	border-radius: 8px;
 	border: none;
-	margin: 10px;
+	margin-top: 10px;
 	width: 100px;
 	height: 40px;
 }
 #ondisplay:hover {
-	background-color: gray;
+	background-color: pink;
 }
 </style>
 </head>
@@ -73,7 +76,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 <div id="adminfooter"><%@ include file="/WEB-INF/views/include/adminfooter.jsp" %></div>
 <div id="main-container">
-	<div><br><input type="text" class="maindivinput" value="정류장 전체 리스트" readonly><br></div><br>
+	<div><input type="text" class="maindivinput" value="정류장 전체 리스트" readonly><br></div><br>
 	<form action="addStopComment">
 		<table id="stoptable" border="1px solid black" style="color: black"></table>
 	</form>

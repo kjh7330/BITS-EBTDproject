@@ -9,11 +9,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
-		    position: absolute;
+            width: 800px;
+            color: black;
             left: 50%;
-            transform: translate(-50%,35%);
-			color: black;
-			width: 800px;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
             padding-bottom: 140px;
 		}
@@ -59,7 +60,7 @@
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div>
 		<a>정렬:</a>

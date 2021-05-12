@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 정류장 관리</title>
+<title>회사 - 정류장 관리 페이지</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 50%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -43,7 +44,7 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="정류장 상세 보기" readonly></div>
 
 	<table id="maintable" class="table table-striped" style="color: black">

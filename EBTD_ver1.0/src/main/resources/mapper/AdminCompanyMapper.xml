@@ -119,7 +119,8 @@
 	
 	
 	<update id="setApplyBusHistoryChange5Reject" parameterType="Map">
-		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 5, AP_REJECT = #{ap_reject} WHERE AP_B_NO = #{ap_b_no} AND AP_NO = #{ap_no}
+		UPDATE APPLY_BUS_HISTORY SET AP_STATE = 5, AP_REJECT = #{ap_reject} 
+		WHERE AP_B_NO = #{ap_b_no} AND AP_NO = #{ap_no}
 	</update>
 	
 	<select id="getUpdateBusRouteList" resultType="ApplyBusHistory">

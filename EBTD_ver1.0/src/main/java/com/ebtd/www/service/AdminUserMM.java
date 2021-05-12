@@ -37,7 +37,7 @@ public class AdminUserMM {	//김아름
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {
 			System.out.println("userList가져오기 실패-메인으로 이동");
-			view = "/admin/mainForm";
+			view = "redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -104,7 +104,7 @@ public class AdminUserMM {	//김아름
 			view = "/admin/user/userDetailForm";//.jsp	
 		}else {
 			System.out.println("userDetail 가져오기 실패-메인으로 이동");
-			view = "/admin/mainForm";
+			view = "redirect:/admin";
 		}
 		System.out.println(uInfo);
 		mav.setViewName(view);
@@ -130,7 +130,7 @@ public class AdminUserMM {	//김아름
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {
 			System.out.println("userHistoryList가져오기 실패-메인으로 이동");
-			view = "/admin/mainForm";
+			view = "redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -273,7 +273,7 @@ public class AdminUserMM {	//김아름
 			//mav.addObject("paging", getPaging(pageNum));	//페이징?		
 		}else {
 			System.out.println("userHistoryList가져오기 실패-메인으로 이동");
-			view = "/admin/mainForm";
+			view = "redirect:/admin";
 
 		}
 		mav.setViewName(view);

@@ -108,11 +108,13 @@ public class UserReservationMM {
 	}
 	
 	public ModelAndView getStopDetail(int s_No) throws JsonProcessingException {
+		System.out.println("asdfhalksjfalksjfaklsjfalskjfalks"+s_No);
 		List<DriverStopBean> brList = null;
 		String view = null;
 		ObjectMapper om = new ObjectMapper();		
 		brList = urDao.getStopDetail(s_No);
 		if(brList!=null || brList.size()!=0) {
+			System.out.println("sdfjhasjkdfaskhf"+brList);
 			mav.addObject("brList", om.writeValueAsString(brList));
 			view = "/user/wheel/stopReservationDetailForm";
 		}else {

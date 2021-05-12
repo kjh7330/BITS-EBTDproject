@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 김아름 -->
-<title>관리자 - 이용자 관리</title>
+<title>관리자 - 이용자 관리 페이지</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
@@ -25,7 +25,6 @@
 	width: 800px;
 	height: 50px;
 	text-align: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	border-radius: 10px;
 }
@@ -33,11 +32,13 @@
 	outline:none;
 }
 .maindiv{
-	position: relative;
-    left: 50%;
-    transform: translate(-49%,0%);
-	width: 800px;
-	padding-bottom: 140px;
+            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 .arrow{
 	border: 1px solid black;
@@ -52,48 +53,48 @@
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 	<div class="maindiv">
-	<div>
-	<h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6><h6>&nbsp;</h6>
-	<input class="maininput" value="이용자 상세" readonly>	</div>
-	<div style="color: black">
-		<br> 정렬:&nbsp;<select class="arrow" id="selectSort" onchange="selectSortClick(this)">
-			<option>정렬기준을 선택해주세요</option>
-			<option id="u_type">장애유형</option>
-			<option id="u_id">아이디</option>
-		</select>
+		<div>
+			<input class="maininput" value="이용자 상세" readonly>
+		</div>
+		<div style="color: black">
+			<br> 정렬:&nbsp;<select class="arrow" id="selectSort" onchange="selectSortClick(this)">
+				<option>정렬기준을 선택해주세요</option>
+				<option id="u_type">장애유형</option>
+				<option id="u_id">아이디</option>
+			</select>
+	
+			<!-- 정렬에서 장애유형 선택하면 시각/휠체어 선택할수 있게 -->
+			<a id="selectSortDetail">
+				&nbsp;&nbsp;상세:&nbsp;<select class="arrow" id="selectSortUType">
+						<option class="selectType">장애유형을 선택해주세요</option>
+						<option id="blind" class="selectType">시각</option>
+						<option id="wheel" class="selectType">휠체어</option>
+					</select>
+			</a>
+	
+			<!-- 아이디 선택하면 검색할수있게 -->
+			<a id="searchInput">
+				&nbsp;&nbsp;아이디를 입력하세요: <input type="text" id="secrchInputUserName">
+				<button id="searchBtn">검색</button>
+			</a>
+			<br>
+		</div>
 
-		<!-- 정렬에서 장애유형 선택하면 시각/휠체어 선택할수 있게 -->
-		<a id="selectSortDetail">
-			&nbsp;&nbsp;상세:&nbsp;<select class="arrow" id="selectSortUType">
-					<option class="selectType">장애유형을 선택해주세요</option>
-					<option id="blind" class="selectType">시각</option>
-					<option id="wheel" class="selectType">휠체어</option>
-				</select>
-		</a>
-
-		<!-- 아이디 선택하면 검색할수있게 -->
-		<a id="searchInput">
-			&nbsp;&nbsp;아이디를 입력하세요: <input type="text" id="secrchInputUserName">
-			<button id="searchBtn">검색</button>
-		</a>
-		<br>
-	</div>
-
-	<!-- 부트스트랩 테이블 -->
-	<table style="margin-top: 10px;" class="table table-sm">
-		<thead>
-			<tr>
-				<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
-				<th scope="col" style="width: 50px;">NO</th>
-				<th scope="col" style="width: 170px;">아이디</th>
-				<th scope="col" style="width: 150px;">이름</th>
-				<th scope="col" style="width: 100px;">장애유형</th>
-				<th scope="col" style="width: 279px;">주소</th>
-			</tr>
-		</thead>
-		<tbody id="result">
-		</tbody>
-	</table>
+		<!-- 부트스트랩 테이블 -->
+		<table style="margin-top: 10px;" class="table table-sm">
+			<thead>
+				<tr>
+					<!--이용자아이디 누르면 이용자 상세정보 띄우기-->
+					<th scope="col" style="width: 50px;">NO</th>
+					<th scope="col" style="width: 170px;">아이디</th>
+					<th scope="col" style="width: 150px;">이름</th>
+					<th scope="col" style="width: 100px;">장애유형</th>
+					<th scope="col" style="width: 279px;">주소</th>
+				</tr>
+			</thead>
+			<tbody id="result">
+			</tbody>
+		</table>
 	</div>
 	<script type="text/javascript">
 		//이용자 리스트 출력

@@ -71,7 +71,7 @@ public class AdminCompanyMM {
 		}else {		
 			for(int i=0; i<cList.size();i++) {
 				if(cList.get(i).getC_name() == c_name && cList.get(i).getC_state()==1) {
-					view="admin/mainForm";
+					view="redirect:/admin";
 				}else {
 					mav.addObject("cList", cList);
 					view="redirect:/admin/company/getCompanyRequestList";
@@ -110,7 +110,7 @@ public class AdminCompanyMM {
 		for(int i=0; i<cList.size();i++) {
 			if(cList.get(i).getC_username() == c_username) {
 				System.out.println("삭제가 안됨.. 문제가 있다는 얘기죠~?");
-				view="admin/mainForm";
+				view="redirect:/admin";
 			}else {
 				mav.addObject("cList", cList);
 				view="redirect:/admin/company/getCompanyRequestList";
@@ -186,7 +186,7 @@ public class AdminCompanyMM {
 		}else {
 			for(int i=0; i<cList.size();i++) {
 				if(cList.get(i).getAp_b_no() == ap_b_no) {
-					view="admin/mainForm";
+					view="redirect:/admin";
 					System.out.println("신규버스 등록 실패! 쿠구구궁");
 				}else {
 					mav.addObject("cList", cList);
@@ -209,7 +209,7 @@ public class AdminCompanyMM {
 		cList = cDao.getNewBusRouteList();
 		System.out.println(cList);
 		mav.addObject("cList", cList);
-		view="admin/company/newBusRouteListForm";
+		view="redirect:admin/company/getNewBusRouteList";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -277,7 +277,7 @@ public class AdminCompanyMM {
 		System.out.println(cList);//
 		for(int i=0; i<cList.size();i++) {
 			if(cList.get(i).getAp_b_no() == ap_b_no) {
-				view="admin/mainForm";
+				view="redirect:/admin";
 				System.out.println("신규버스 등록 실패! 쿠구구궁");
 			}else {
 				mav.addObject("cList", cList);
@@ -296,7 +296,7 @@ public class AdminCompanyMM {
 		cList = cDao.getNewBusRouteList();
 		System.out.println(cList);
 		mav.addObject("cList", cList);
-		view="admin/company/updateBusRouteListForm";
+		view="redirect:/admin/company/getUpdateBusRouteList";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -314,7 +314,7 @@ public class AdminCompanyMM {
 			mav.addObject("cList", om.writeValueAsString(cList));
 			view="admin/company/companyNameListForm";
 		}else {
-			view="admin/mainForm";
+			view="redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -341,7 +341,7 @@ public class AdminCompanyMM {
 			mav.addObject("lrCountList", lrCountList);
 			view="admin/company/companyDetailForm";
 		}else {
-			view="admin/mainForm";
+			view="redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -363,7 +363,7 @@ public class AdminCompanyMM {
 			mav.addObject("vocList", vocList);
 			view="admin/company/companyQuestionListForm";
 		}else {
-			view="admin/mainForm";
+			view="redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;

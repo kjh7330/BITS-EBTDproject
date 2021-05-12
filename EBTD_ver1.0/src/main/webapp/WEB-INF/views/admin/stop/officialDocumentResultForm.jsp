@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 정류장 관리 페이지</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 42%);
-	color: black;
-	width: 800px;
+            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 	text-align: center;
-	padding-bottom: 140px;
 	font-size: 20px;
 }
 
@@ -39,7 +40,7 @@
 <body>
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 	<div class="main-container">
-	<div><br><input type="text" class="maindivinput" value="정류장 등록 및 신청 리스트" readonly><br></div><br>
+	<div><input type="text" class="maindivinput" value="정류장 등록 및 신청 리스트" readonly><br></div><br>
 	<table id="table1" border="1px solid black" style="color: black;text-align:center;">
 	<tr style="background-color: lightgray;">
 		<th>신청회사</th>

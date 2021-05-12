@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EBTD - 아이디/비밀번호 찾기</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -129,6 +129,7 @@
             font-size: 40px;
             color: black;
             height: 20px;
+            font-weight: bold;
         }
         .title2{
             color: black;
@@ -155,12 +156,16 @@
                     </tr>
                     <tr>
                         <!--아래 아이콘이 CSS효과가 안먹어서 태그에 넣음!-->
-                        <form id="joinWheel" action="/user/findIdForm">
-                        	<td class="otherbtn1"><input class="otherbtn1" type="button"><b style="position: absolute; color: black; font-size: 110px; left: 75px; padding-top:25px;">ID</b></td>
-                        </form>
-                        <form id="joinBlind" action="/user/findPwForm">
-                        	<td class="otherbtn2"><input class="otherbtn2" type="button"><b style="position: absolute; color: black; font-size: 100px; left: 240px; padding-top:30px;">PW</b></td>
-                        </form>
+                        <td class="otherbtn1" style="cursor: pointer;">
+	                        <form id="joinWheel" action="/user/findIdForm">
+	                        	<input class="otherbtn1" type="button"><b style="position: absolute; color: black; font-size: 106px; left: 75px; padding-top:25px;">ID</b>
+	                        </form>
+	                    </td>
+	                    <td class="otherbtn2" style="cursor: pointer;">
+	                        <form id="joinBlind" action="/user/findPwForm">
+    	                    	<input class="otherbtn2" type="button"><b style="position: absolute; color: black; font-size: 92px; left: 240px; padding-top:33px;">PW</b>
+                        	</form>
+                       	</td>
                     </tr>
                     <tr>
                         <td><p class="content">아이디</p></td>

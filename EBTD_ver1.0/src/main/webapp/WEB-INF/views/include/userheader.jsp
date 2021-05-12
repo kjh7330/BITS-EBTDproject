@@ -18,12 +18,14 @@
             width: 450px; /*만들땐 450px에 두고 만들고 실제로 핸드폰 구현시는 100vw*/
         }
         .container {
+        	position: fixed;
             display: flex;
             justify-content: center;
             background-color : #0C3D6A;
             width: 450px;
             height: 80px;
             text-align: center;
+            top: 0;
         }
         .headertitle{
             padding-top: 10px;
@@ -48,9 +50,12 @@
             font-size: 20px;
         }
         .navdiv{
+        	position: fixed;
             display: flex;
             justify-content: space-around;
-            height: 100%;
+            height: 5.5%;
+            top: 80px;
+            width: 450px;
             background-color: lightgray;
             color: black;
         }
@@ -77,25 +82,14 @@
             width: 240px;
             flex-grow: 1;
         }
-        main{
-            min-height: 100%;
-        }
-        .mainview{
-            position: relative;
-            font-size: 40px;
-            color: black;
-            padding: 20px;
-            padding-bottom: 120px; /*footer여백*/
-        }
         .menu_bg { 
             width: 450px;
             height: 90vh;
             position: absolute;
-            top:80px;
+            top:0px;
             left:0px;
             overflow: hidden;
             display: none;
-            z-index: 10;
         }
 		.menu {
             position:absolute;
@@ -184,8 +178,7 @@
                 <button class="navline" onclick="ShowMenu()"><i style="cursor: pointer;" class="fas fa-bars"></i></button>
                 <div class="menu_bg">
                     <div class="menu"> <!--dropdown-content-->
-                        <div  style="width: 96%; height: 13px; text-align: right" onclick="HideMenu()"><a>닫기</a></div>
-                        <br><br>
+                        <div  style="width: 96%; height: 20px; text-align: right" onclick="HideMenu()"><a>닫기</a></div>
                         <div class="mainmenu"><a href="/user/getBusList">예약하기</a></div>
                         <div class="menudetail"><a href="/user/getBusList">- 버스 검색</a></div>
                         <div class="menudetail"><a href="/user/getStopList">- 정류장 검색</a></div>

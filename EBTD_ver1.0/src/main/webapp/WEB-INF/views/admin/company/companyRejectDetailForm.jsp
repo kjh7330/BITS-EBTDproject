@@ -8,13 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		.main-container{
-		    position: absolute;
+            width: 800px;
+            color: black;
             left: 50%;
-            transform: translate(-50%,25%);
-			color: black;
-			width: 800px;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
-			padding-bottom: 140px;
+            padding-bottom: 140px;
 		}
 		.maininput{
 			border: none;
@@ -103,9 +104,9 @@
 	$('.maintable2').html('');
 	let apple = '';
 		apple += '<tr>';
-		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">순번</td>';
-		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">정류장번호</td>';
-		apple += '<td style="border-bottom: 1px solid black; background-color:skyblue;">정류장이름</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:lightgray;">순번</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:lightgray;">정류장번호</td>';
+		apple += '<td style="border-bottom: 1px solid black; background-color:lightgray;">정류장이름</td>';
 		apple += '</tr>';
 	for(i in rList){
 		apple += '<tr>';

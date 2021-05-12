@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 김아름 -->
-<title>관리자 - 이용자 통계 보기</title>
+<title>관리자 - 이용자 관리 페이지</title>
 </head>
 <body>
 

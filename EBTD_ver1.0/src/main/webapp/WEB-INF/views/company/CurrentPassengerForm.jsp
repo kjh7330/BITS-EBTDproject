@@ -7,13 +7,14 @@
 <title>회사 - 고객 센터</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 57%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -36,7 +37,7 @@
 </head>
 <body>
 <div id="companyheader"><%@ include file="/WEB-INF/views/include/companyheader.jsp" %></div>
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="현재 탑승인원" readonly></div>
 
 	<select id = "busNumber">

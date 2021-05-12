@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시각유저 - 즐겨찾기 상세</title>
+<title>EBTD - 즐겨찾기 상세</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--font-awesome CDN-->
@@ -72,7 +72,7 @@
 </style>
 <body>
 	<div id="userheader"><%@ include
-			file="/WEB-INF/views/include/userheader.jsp"%></div>
+			file="/WEB-INF/views/include/userBlindHeader.jsp"%></div>
 			
 	<div id="bookmarkDetail"></div>
 			

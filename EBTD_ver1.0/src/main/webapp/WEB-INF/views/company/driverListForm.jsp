@@ -6,16 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 기사 관리</title>
+<title>회사 - 기사 관리 페이지</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 35%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -32,6 +33,9 @@
 #maintable{
 	font-size: 18px;
 }
+a:hover{
+ color:#007bff;
+}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -47,7 +51,7 @@
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
 	<div></div>
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="노선 별 기사 목록 및 수정" readonly></div>
 
 	<table id="maintable" class="table table-striped" style="color: black">
@@ -88,10 +92,10 @@ var html = '';
 	 html += '<td>'+dList[i].d_phoneNum+'</td>';
 	 html += '<td>'+dList[i].d_enterDate+'</td>';
 	 html += '<td>'+dList[i].b_no+'</td>';
-	 html += '<td>'+'<a href=/company/getDriverDetail?d_no='+dList[i].d_no+'>';
+	 html += '<td>'+'<a style="text-decoration: none;" href=/company/getDriverDetail?d_no='+dList[i].d_no+'>';
 	 html += "수정"+'</a>';
 	//html += '<td>'+'<button id="deleteDriver" onclick="deleteDriver()">'+'삭제'+'</button>'+'</td>';
-	 html += '<td>'+'<a id=delDriver href=/company/deleteDriver?d_no='+dList[i].d_no+'>';
+	 html += '<td>'+'<a style="text-decoration: none;" id=delDriver href=/company/deleteDriver?d_no='+dList[i].d_no+'>';
  	// html += '<td>'+'<a id=deleteDriver href=#>';
 	 html += "삭제"+'</a>';
 	 html += '</tr>';

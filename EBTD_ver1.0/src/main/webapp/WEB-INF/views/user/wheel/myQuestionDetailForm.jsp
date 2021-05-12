@@ -18,14 +18,16 @@
 		font-size: 18px;
 	}
 	.inputtitle{
-		width: 359px;
+		width: 265px;
 		height: 25px;
+		font-size: 15px;
 	}
 	.inputcontent{
 		margin-top: 5px;
 		width: 412px;
-		height: 385px;
+		height: 350px;
 		resize: none;
+		font-size: 15px;
 	}
 	.inputcontent:focus{
 		outline: none;
@@ -59,9 +61,22 @@
 		background-color: #f9eb99;
 	}
 	.recom{
-		width: 
+		width: 80px;
+		font-size: 20px;
+		border: none;
+		text-align: center;
 	}
-	
+.main-container{
+	position: relative;
+	top: 130px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 </style>
 </head>
 <body>
@@ -73,13 +88,13 @@
 			제목 : <input class="inputtitle" value="${v.v_title}">
 			<c:choose>
 				<c:when test="${v.voc_recommend eq 1}">
-					<input class="recom" type="text" value="추천">
+					<input class="recom" type="text" value="추천👍">
 				</c:when>
 				<c:when test="${v.voc_recommend eq -1}">
-					<input class="recom" type="text" value="비추천">
+					<input class="recom" type="text" value="비추천👎">
 				</c:when>
 			</c:choose>
-			내용<textarea class="inputcontent" name="v_content" cols="40" rows="8" readonly>${v.v_content}</textarea>
+			<br>내용<textarea class="inputcontent" name="v_content" cols="40" rows="8" readonly>${v.v_content}</textarea>
 		</c:forEach>
 		</div>
 		<div class="divbtn">

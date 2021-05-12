@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>EBTD - 비밀번호 찾기</title>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet"
@@ -23,12 +23,15 @@ body {
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	background-color: #0C3D6A;
-	width: 450px;
-	height: 80px;
-	text-align: center;
+            justify-content: center;
+            background-color : #0C3D6A;
+            width: 450px;
+            height: 80px;
+            text-align: center;
+            z-index: 2;
+            
+			position: relative;
+			color: black;
 }
 
 .headertitle {
@@ -85,7 +88,7 @@ footer {
 
 .tabletitle {
 	color: black;
-	font-size: 25px;
+	font-size: 22px;
 }
 
 .input {
@@ -102,8 +105,8 @@ footer {
 	font-size: 20px;
 	padding-top: 25px;
 	padding-bottom: 25px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 25px;
+	padding-right: 25px;
 	background-color: #f6e056;
 	color: #0C3D6A;
 	border-radius: 8px;
@@ -132,6 +135,17 @@ table {
 	font-size: 60px;
 	color: black;
 }
+.title1 {
+	font-size: 40px;
+	color: black;
+	font-weight: bold;
+	height: 25px;
+}
+.title2 {
+	color: black;
+	margin-bottom: 10px;
+	height: 25px;
+}
 </style>
 </head>
 <body>
@@ -146,7 +160,10 @@ table {
 		<div class="mainview">
 				<table class="formtable">
 					<tr>
-						<td class="tabletitle" colspan="4">정보를 입력해주세요</td>
+                        <td colspan="2"><p class="title1">PW 찾기</p></td>
+                    </tr>
+					<tr>
+						<td colspan="4"><p class="title2" >정보를 입력해주세요</p></td>
 					</tr>
 					<tr>
 						<td class="tabletitle">아이디 :</td>
@@ -175,10 +192,14 @@ table {
 							name="u_disabledno" maxlength="6"></td>
 						<td><div id="u_disable_noDiv"></div></td>
 					</tr>
-					<td rowspan="2"><input type="button" id="idCheckBtn"
-							class="loginbtn" value="확인하기"></input></td>
-					<tr><td>
-						<b id="resultDiv"></b>
+					<tr>
+						<td colspan="4">
+							<input type="button" id="idCheckBtn" class="loginbtn" value="확인하기" style="margin-top: 30px; font-weight: bold;"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b id="resultDiv"></b>
 						</td>
 					</tr>
 					<tr>
