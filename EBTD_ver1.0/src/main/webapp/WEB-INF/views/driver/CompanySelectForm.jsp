@@ -67,6 +67,7 @@
 			</td>
 			<td>
 				<button id = 'btn'>선택</button>
+				<a style="text-decoration: none;" href="/">로그아웃</a>
 			</td>
 		</tr>
 	</table>

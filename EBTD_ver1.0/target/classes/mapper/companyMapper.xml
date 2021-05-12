@@ -31,7 +31,7 @@
 	</insert>
 	
 	<insert id="driver_insert" parameterType = 'company_join_wh'>
-		insert into d values ( #{d_no}, #{c_username}, #{d_name}, null, #{d_phonenum}, #{d_enterdate}, #{d_b_no} )
+		insert into d values ( #{d_no}, #{c_username}, #{d_name}, #{d_phonenum}, #{d_enterdate}, #{d_b_no} )
 	</insert>
 	
 	<update id="update_od_no" parameterType = 'company_join_wh'>
