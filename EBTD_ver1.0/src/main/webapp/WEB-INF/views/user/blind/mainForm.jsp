@@ -61,7 +61,7 @@
 <div class="maindiv">
 	
 		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
-		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/getReservationInfo'">예약확인</button>
+		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/blind/getReservationInfo'">예약확인</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
 </div>
 

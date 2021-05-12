@@ -6,7 +6,7 @@
 
 <mapper namespace="com.ebtd.www.dao.I_UserReservationInfoDao">
 
-	<!-- 예약내역 가져오기 -->
+	<!-- 휠체어 예약내역 가져오기 -->
 	<select id="getReservationInfo" resultType="reservation">
 		SELECT UR.UR_NO, 
 				UR.U_USERNAME, 
@@ -23,7 +23,7 @@
 		WHERE U_USERNAME=#{u_username} AND UR_STATE IN(0,1) 
 	</select>
 	
-	<!-- 예약 상세내역 가져오기 -->
+	<!-- 휠체어 예약 상세내역 가져오기 -->
 	<select id="getReservationDetail" resultType="reservation">
 		SELECT UR.UR_NO, 
 				UR.U_USERNAME, 
@@ -40,6 +40,23 @@
 		JOIN S S2 ON UR.S_NOLAST=S2.S_NO 
 		JOIN B ON UR.B_NO = B.B_NO
 		WHERE UR_NO=#{ur_no} AND UR_STATE IN(0,1)
+	</select>
+	
+	<!-- 시각 예약내역 가져오기 -->
+	<select id="getBlindReservationInfo" resultType="reservation">
+		SELECT UR.UR_NO, 
+				UR.U_USERNAME, 
+				UR.S_NOSTART, 
+				S1.S_NAME S_NAMESTART, 
+				UR.S_NOLAST, 
+				S2.S_NAME S_NAMELAST,
+				UR.B_NO, 
+				UR.UR_DATE,
+				UR.UR_STATE 
+		FROM UR 
+		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
+		JOIN S S2 ON UR.S_NOLAST=S2.S_NO
+		WHERE U_USERNAME=#{u_username} AND UR_STATE IN(0,1) 
 	</select>
 	
 	<!-- 예약취소 -->

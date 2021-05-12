@@ -25,17 +25,24 @@ public class UserReservaionInfoController {	//김아름
 
 	ModelAndView mav;
 
-	//예약 확인 - 예약내역 가져오기
+	//예약 확인 - 휠체어 예약내역 가져오기
 	@GetMapping(value = "/getReservationInfo")
 	public ModelAndView getReservationInfo(HttpSession session) throws JsonProcessingException {			
 		mav = urim.getReservationInfo(session);	
 	return mav;		
 	}
 	
-	//예약 확인 - 예약 상세내역 가져오기
+	//예약 확인 - 휠체어 예약 상세내역 가져오기
 	@GetMapping(value = "/getReservationDetail")
 	public ModelAndView getReservationDetail(UserReservationBean rb) throws JsonProcessingException {			
 		mav = urim.getReservationDetail(rb);	
+	return mav;		
+	}
+	
+	//예약 확인 - 시각 예약내역 가져오기
+	@GetMapping(value = "/blind/getReservationInfo")
+	public ModelAndView getBlindReservationInfo(HttpSession session) throws JsonProcessingException {			
+		mav = urim.getBlindReservationInfo(session);	
 	return mav;		
 	}
 	
