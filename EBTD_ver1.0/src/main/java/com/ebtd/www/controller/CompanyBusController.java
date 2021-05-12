@@ -104,8 +104,8 @@ public class CompanyBusController {
 		mav = new ModelAndView();
 		System.out.println("버스넘버는"+model.getAttribute("busNum"));
 		System.out.println("세션은"+session.getAttribute("c_username"));
-		mav = bm.applyUpdateBusRoute(id, busNum, bm.get_od_no(session.getAttribute("c_username").toString()));
-		mav = bm.applyUpdateBusRouteDetail(busRoute, model); //순서 바꿔야함 밑이랑
+		bm.applyUpdateBusRoute(id, busNum, bm.get_od_no(session.getAttribute("c_username").toString()));
+		bm.applyUpdateBusRouteDetail(busRoute, model); //순서 바꿔야함 밑이랑
 		/* mav = bm.addUpdateBusNumber(busRoute, model); */
 		mav.setViewName("redirect:/company/mainForm");
 		return mav;

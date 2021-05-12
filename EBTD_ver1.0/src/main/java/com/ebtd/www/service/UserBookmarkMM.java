@@ -141,10 +141,61 @@ public class UserBookmarkMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}
-		
-	
-	
 
+
+	public List<String> getRouteBusList(String t_name) throws JsonProcessingException {
+			
+		return uBookDao.getRouteBusList(t_name);
+	}
+
+
+	public List<StopBean> getRouteStopList(String b_no) {
+		List<StopBean> sList = null;
+		ObjectMapper om = new ObjectMapper();
+		sList = uBookDao.getRouteStopList(b_no);
+		
+		return sList;
+	}
+
+
+	public String checkBookMark(HttpSession session, int s_nostart, int s_nolast) {
+		UserBookmarkBean ub = new UserBookmarkBean();
+		String u_username = session.getAttribute("u_username").toString();
+						
+		ub.setU_username(u_username);
+		ub.setS_nostart(s_nostart);
+		ub.setS_nolast(s_nolast);
+		ub = uBookDao.checkBookMark(ub);
+		if(ub!=null) {
+			return "이미 즐겨찾기 리스트에 있습니다.";
+		}
+			return "사용 가능 합니다.";	
+		
+	}
+
+
+	public ModelAndView addBookMark(HttpSession session, String b_no, int s_nostart, int s_nolast, String ub_alias) {
+		mav = new ModelAndView();
+		String view = null;
+		String u_username = session.getAttribute("u_username").toString();
+		String u_type = session.getAttribute("u_type").toString();
+		UserBookmarkBean ub = new UserBookmarkBean();
+		System.out.println("+++++++++++++++++++++++++++"+u_username);
+		
+		ub.setU_username(u_username);
+		ub.setB_no(b_no);
+		ub.setS_nostart(s_nostart);
+		ub.setS_nolast(s_nolast);
+		ub.setUb_alias(ub_alias);
+
+		if(uBookDao.addBookMark(ub)) {
+			view= "redirect:/user/getBookmarkList"; 
+		}else {
+			view = "/user/blind/mainForm";//.jsp
+		}
+		mav.setViewName(view);
+		return mav;
+}
 
 	
 		

@@ -150,7 +150,7 @@
 		</form>
         <div id="newcompany">
         	<form action="/company/main/getRecommandedStopList" method="get"><button id="btn">신규 회사 등록 신청</button></form></a><br/>
-        	<!-- <a href = '#'>ID/PW찾기</a> -->
+        	<!-- <a href = '#'>ID/PW찾기</a> --><a style="text-decoration: none;" href="/">로그아웃</a>
         </div>
         
     </section>
@@ -160,7 +160,7 @@
                 <img src="resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div> 
-                김혜지, 김아름, 김민주, 김주한, 신재구, 이충호, 황원혁
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁
             </div>
         </div>
     </footer>

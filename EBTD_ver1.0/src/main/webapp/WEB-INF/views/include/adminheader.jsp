@@ -273,7 +273,7 @@
                 <button class="dropbtn">고객 센터</button>
                 <div class="dropdown-content">
                     <div class="menudetail"><a style="text-decoration: none;" href="#">고객센터</a></div>
-                    <div class="menudetail"><a style="text-decoration: none;" href="#">로그아웃</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/">로그아웃</a></div>
                 </div>
             </div>
         </nav>

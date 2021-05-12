@@ -199,6 +199,7 @@
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
 		WHERE H.AP_STATE = 1 OR H.AP_STATE = 4
+		order by h.ap_date desc
 	</select>
 	<select id="getCompanyApprovalDetail" resultType="ApplyBusHistory">
 		SELECT C.C_NAME, C.C_USERNAME, HD.APDE_TURN, H.AP_B_NO, HD.S_NO, S.S_NAME
@@ -214,6 +215,7 @@
 		FROM COMPANY C
 		JOIN APPLY_BUS_HISTORY H ON C.C_USERNAME = H.C_USERNAME 
 		WHERE H.AP_STATE = 2 OR H.AP_STATE = 5
+		order by h.ap_date desc
 	</select>
 	<select id="getCompanyRejectDetail" resultType="ApplyBusHistory">
 		SELECT C.C_NAME, C.C_USERNAME, HD.APDE_TURN, H.AP_B_NO, HD.S_NO, S.S_NAME, H.AP_REJECT

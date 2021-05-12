@@ -51,4 +51,11 @@ public class UserBookmarkController {	//김아름
 		return mav;		
 	}
 	
+	@PostMapping(value = "/addBookMark")
+	public ModelAndView addBookMark(HttpSession session, String b_no, int s_nostart, int s_nolast, String ub_alias) throws JsonProcessingException{ 
+		mav = ubm.addBookMark(session, b_no, s_nostart, s_nolast, ub_alias);
+		return mav;
+		
+	}
+	
 }

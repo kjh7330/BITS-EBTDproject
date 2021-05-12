@@ -22,5 +22,17 @@ public interface I_UserBookmarkDao {
 
 	List<StopBean> stopList();
 
+	List<String> getRouteBusList(String t_name);
+
+	List<StopBean> getRouteStopList(String b_no);
+
+	String checkBookMark(int s_nostart, int s_nolast);
+
+	UserBookmarkBean checkBookMark(UserBookmarkBean ub);
+
+	boolean addBookMark(UserBookmarkBean ub);
+
+	
+
 	
 }
