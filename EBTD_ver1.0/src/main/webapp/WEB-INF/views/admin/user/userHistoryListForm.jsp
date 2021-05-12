@@ -101,7 +101,6 @@
 	<script type="text/javascript">
 			let urhList = ${urhList};
 			let str = "";
-		
 			//이용자 전체 히스토리 출력
 			for (let i = 0; i < urhList.length; i++) {
 				
@@ -127,8 +126,8 @@
 				str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 				str += '<td>' + urhList[i].b_no + '</td>'; //버스번호	
 				str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-				str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-				str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+				str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+				str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //출발지	
 				str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 				//아이디
 				str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
