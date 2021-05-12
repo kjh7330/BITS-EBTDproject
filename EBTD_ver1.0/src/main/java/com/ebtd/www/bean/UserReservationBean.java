@@ -1,10 +1,8 @@
 package com.ebtd.www.bean;
 
-import java.sql.Timestamp;
 
 import org.apache.ibatis.type.Alias;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -20,6 +18,7 @@ public class UserReservationBean {
 	private String ur_date;
 	private int ur_state;
 	
+	private String c_username;	//버스회사
 	private String s_namestart; //출발 정류장 이름
 	private String s_namelast;  //도착 정류장 이름
 }
