@@ -60,35 +60,33 @@
 	
 	<div style="color: black">
 		<br> 
+	<form action="addBookMark" method="post">	
+		동 이름 : <select id="t_nameSelect">
+				<option class="selectType" selected="selected">동 이름을 선택해주세요</option>
+			  </select><br><br>
+				
+		노선번호 : <select id="b_noSelect" id="b_no" name="b_no">
+				
+				</select><br><br>
 		
-		동 이름 : <select id="t_nameSelect" onchange="selectSortClick(this)">
-				<option class="selectType">동 이름을 선택해주세요</option>
-			  </select><br>
-				
-		<!-- 정렬에서 장애유형 선택하면 시각/휠체어 선택할수 있게 -->
-		<div id="selectSortDetail">
-		노선번호 : <select id="selectSortUType">
-					<option class="selectType">장애유형을 선택해주세요</option>
-					<option id="blind" class="selectType">시각</option>
-					<option id="wheel" class="selectType">휠체어</option>
-				</select><br>
-		</div>
 
-		<div id="selectSortDetail">
-		출발 정류장 : <select id="selectSortUType">
-					<option class="selectType">장애유형을 선택해주세요</option>
-					<option id="blind" class="selectType">시각</option>
-					<option id="wheel" class="selectType">휠체어</option>
-				</select><br>
+		출발 정류장 : <select class="check" id="startStopSelect"  name="s_nostart">
+				</select><br><br>
+				   
+		<input type="text" id="s_nostart" style="display: none;">
 				
-		<div id="selectSortDetail">
-		도착 정류장 : <select id="selectSortUType">
-					<option class="selectType">장애유형을 선택해주세요</option>
-					<option id="blind" class="selectType">시각</option>
-					<option id="wheel" class="selectType">휠체어</option>
+		
+		도착 정류장 : <select class="check" id="lastStopSelect"  name="s_nolast">
 				</select><br>
-		</div>
-
+		<input type="text" id="s_nolast" style="display: none;">
+				
+		<div id=checkBookMark style="visibility: hidden; width: 300px; height: 30px"> </div>
+		
+		즐겨찾기에 대한 별칭을 입력하세요(필수입력사항!)<br><br>
+		<input type="text" id = "ub_alias" name="ub_alias" style="width: 70%" ><br><br>
+		
+		<button id="submitBtn">즐겨찾기 등록하기</button>
+	</form>
 	</div>
 
 
@@ -116,8 +114,152 @@ let str='';
 	}
 	$("#t_nameSelect").append(str);
 
+	
+	$('#t_nameSelect').change(function(){
+		$('#b_noSelect').empty();
+		$('#startStopSelect').empty();
+		$('#lastStopSelect').empty();
+		
+		var t_name = $('#t_nameSelect').val();
+		console.log(t_name);
+		
+		if( t_name == "동 이름을 선택해주세요" ){
+			alert("동 이름을 선택해주세요");
+			$("#b_noSelect").empty();
+			$("#startStopSelect").empty();
+			$("#lastStopSelect").empty();
+			
+		
+		}else{
+			console.log("첫번째 통신");
+			$.ajax({
+				url: '/user/getRouteBusList?t_name='+t_name, //필수입력값
+				type: 'get',
+				dataType : 'json',
+				
+				success: function(data){ 
+					console.log("ajax통신 성공");
+					console.log(data[0]);
+					
+					str = "";
+					str2 = '';
+					$("#b_noSelect").empty();
+					str = '<option selected>노선번호를 선택해주세요</option>'
+					str2 = '<option selected>정류장을 선택해주세요</option>'
+					for (let i = 0; i < data.length; i++){
+						str += '<option value='+data[i]+'>'+data[i]+'</option>'
+					} //for end
+					
+					
+					$("#b_noSelect").append(str);
+					$("#startStopSelect").append(str2);
+					$("#lastStopSelect").append(str2);
+					
+				},
+				fail: function(err){
+					console.log("ajax통신 fail");
+					console.log(err);
+				}
+				
+			});	//ajax end 
 
+		}
+	}); 
+	
+	$('#b_noSelect').change(function(){
+		
+		
+		
+		var b_no = $('#b_noSelect').val();
+		console.log(t_name);
+		console.log("두번째 통신");
+		
+		
+			$.ajax({
+				
+				url: '/user/getRouteStopList?b_no='+b_no, //필수입력값
+				type: 'get',
+				dataType : 'json',
+				
+				success: function(data){ 
+				console.log("ajax통신 성공");
+				
+				console.log(data)
+					str = "";
+					$("#startStopSelect").empty();
+					$("#lastStopSelect").empty();
+					str = '<option selected>정류장을 선택해주세요</option>'
+					for (let i = 0; i < data.length; i++){
+						str += '<option value='+data[i].s_NO+'>'+data[i].s_NAME+'</option>'
+					} //for end
+					
+					$("#startStopSelect").append(str);
+					$("#lastStopSelect").append(str);
+					
+				},
+				fail: function(err){
+					console.log("ajax통신 fail");
+					console.log(err);
+				}
+			});	
+			
+		}); 
+	
 
+	$('#ub_alias').on('focus',function(){
+		console.log($("#startStopSelect option:selected").val());	
+		console.log($("#lastStopSelect option:selected").val());	
+		
+			$.ajax({
+				type : 'get',
+				url : 'checkBookMark',
+				data : { 
+							's_nostart' : $("#startStopSelect option:selected").val(),
+							's_nolast' : $("#lastStopSelect option:selected").val()
+						},
+				dataType : 'html', 
+				success : function(data) {
+					console.log(data);
+					if(data=="사용 가능 합니다."){
+					$('#checkBookMark').css('visibility','visible');
+					$('#checkBookMark').html(data).css('color','blue');
+					}else{
+					$('#checkBookMark').css('visibility','visible');
+					$('#checkBookMark').html(data).css('color','red');	
+					}},
+				error : function(err) {
+					$('#checkBookMark').html(err.responseText).css('color','red');
+					console.log("err.status : ", err.status);
+					}
+				}); //ajax End
+	}); //on End 
+
+//유효성 검사
+$('#submitBtn').click(function(){
+	
+	if($('#t_nameSelect option:selected').val() == '동 이름을 선택해주세요'){
+		alert('동 이름을 선택해주세요');
+		return false;
+			
+	}else if($('#b_noSelect option:selected').val() == '노선번호를 선택해주세요'){
+		alert('노선번호를 선택해주세요');
+		return false;	
+		
+	}else if($('#startStopSelect option:selected').val() == '정류장을 선택해주세요' || $('#lastStopSelect option:selected').val() == '정류장을 선택해주세요'){
+		alert('정류장을 선택해주세요.');
+		return false;
+			
+	}else if($('#ub_alias').val()==''){
+		alert('별칭을 지정해주세요.');
+		return false;
+	}else if($('#checkBookMark').html() == '' || $('#checkBookMark').html()=='이미 즐겨찾기 리스트에 있습니다.'){
+		alert('이미 즐겨찾기에 등록이 되어 있거나 정류장을 지정하시지 않았습니다.');
+		return false;
+	}else{
+		alert('즐겨찾기 등록 완료');
+		}
+	});
+	
 		$('#btn1').click(function(){
 			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
 				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){

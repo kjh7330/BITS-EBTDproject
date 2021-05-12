@@ -96,9 +96,6 @@
 	<div id="bookListDiv">
 	</div>
 	
-	<div id="plusBox">
-		<i class="fas fa-plus-circle fa-4x" id = "stopList" style="color: #0C3D6A"></i>
-	</div>
 	
 	<footer>
 	     <div class="footer-container">
@@ -115,22 +112,26 @@
 		
 		let i = 0;
 		for(i = 0; i < uBookList.length; i++){
-			str += '<button id="mbtn"'+i+' class="btn">'+uBookList[i].ub_alias+'</button>';
-			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">';	//즐겨찾기 번호
+			str += '<button id="mbtn'+i+'" class="btn">'+uBookList[i].ub_alias+'</button>';
+			str += '<input type="hidden" class="ub_no'+i+'" name="ub_no" value="'+uBookList[i].ub_no+'">';	//즐겨찾기 번호
 			str += '<input type="hidden" class="b_no" name="b_no" value="'+uBookList[i].b_no+'">';//버스번호
 			str += '<input type="hidden" class="s_nameStart" name="s_nameStart" value="'+uBookList[i].s_namestart+'">';	//출발정류장
 			str += '<input type="hidden" class="s_nameLast" name="s_nameLast" value="'+uBookList[i].s_namelast+'">';	//도착정류장
 			str += '<input type="hidden" class="s_noStart" name="s_noStart" value="'+uBookList[i].s_nostart+'">';	//도착정류장ID
 			str += '<input type="hidden" class="s_noLast" name="s_noLast" value="'+uBookList[i].s_nolast+'">';	//도착정류장ID
 		}
+		str+= '<div id="plusBox"><i class="fas fa-plus-circle fa-4x" id = "stopList" style="color: #0C3D6A"></i></div>';
 		
 		$('#bookListDiv').append(str); 
 		
 		
 		//즐겨찾기 클릭
 		$('.btn').click(function (){
-			let ub_no = $(this).parent().children('.ub_no').val();
-			location.href = '/user/getBookmarkDetail?ub_no='+ub_no;
+			for( child of $(this).parent().children() ){
+				if ( $(this).attr('id').substring(4) == $(child).attr('class').substring(5) ){
+					location.href = '/user/getBookmarkDetail?ub_no='+$(child).val();
+				} 
+			}
 		});
 		
 		$('#stopList').click(function () {
