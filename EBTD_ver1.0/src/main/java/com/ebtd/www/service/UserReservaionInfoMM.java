@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebtd.www.bean.UserReservationBean;
+import com.ebtd.www.dao.I_UserReservationDao;
 import com.ebtd.www.dao.I_UserReservationInfoDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,8 @@ public class UserReservaionInfoMM {	//김아름
 
 	@Autowired
 	private I_UserReservationInfoDao uriDao;
+	@Autowired
+	private I_UserReservationDao urDao;
 
 	ModelAndView mav;
 	
@@ -65,6 +68,7 @@ public class UserReservaionInfoMM {	//김아름
 		//디비에서 가져온 데이터가 있으면
 		if( (reserveDetail != null) ) {
 			mav.addObject("reserveDetail", om.writeValueAsString(reserveDetail));
+			mav.addObject("brList", om.writeValueAsString(urDao.getBusDetail(rb.getB_no())));
 			view = "/user/wheel/reservationInfoDetailForm";//.jsp
 		}else {
 			System.out.println("reserveDetail가져오기 실패-메인으로 이동");
