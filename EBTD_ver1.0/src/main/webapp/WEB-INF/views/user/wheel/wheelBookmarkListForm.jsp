@@ -14,6 +14,10 @@
 </head>
 
 <style>
+	#userBookmarkForm{	/* 폼태그 */
+		display: none;
+	}
+
 	#booklist { /* 즐겨찾기 전체 div */
 		height: 90px;
 		text-align: center;
@@ -37,28 +41,9 @@
 		font-size: 20px;
 		/* border: 0.3px solid black; */
 	}
-	
-	.ub_no{
-		display : none;
-	}
-	
-	.u_userName{
-		display : none;
-	}
-	
-	.s_noStart{
-		display : none;
-	}
-	
-	.s_noLast{
-		display : none;
-	}
 
 
-/*   모달css랑 스크립트, 버튼html 복사해서 쓰세요~!   */
-/*   스크립트는 맨 아래쪽에 있음   */
-/*   모달 버튼은 스크립트 위에 있음   */
-/* reset */
+/*모달*/
 body, html {
 	height: 100%;
 }
@@ -139,7 +124,7 @@ body {
 	color: #000;
 	cursor: pointer;
 }
-/*   모달css여기까지~!   */
+/* 모달css 끝 */
 
 </style>
 <body>
@@ -187,16 +172,16 @@ body {
 			str += '<div class="starIcon"><span class="fa-stack fa-lg"><i class="far fa-star fa-stack-2x"></i><i  class="fas fa-star" id="star'+i+'"></i></span></div>'; //폰트어썸 꽉찬별
 			//console.log( $('#star'+i) );
 			str += '<div class="bookList">';
-			str += '<input type="text" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">'	//즐겨찾기 번호
+			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">'	//즐겨찾기 번호
 			str += '<input type="text" class="ub_alias" name="ub_alias" value="'+uBookList[i].ub_alias+'">'	//별칭
 			str += '<input type="text" class="b_no" name="b_no" value="'+uBookList[i].b_no+'">'	//버스번호
 			str += '<input type="text" class="s_nameStart" name="s_namestart" value="'+uBookList[i].s_namestart+'">'	//출발정류장
 			str += '-->';
 			str += '<input type="text" class="s_nameLast" name="s_namelast" value="'+uBookList[i].s_namelast+'">'	//도착정류장
 			
-			str += '<input type="text" class="u_userName" name="u_username" value="'+uBookList[i].u_username+'">'	//아이디
-			str += '<input type="text" class="s_noStart" name="s_nostart" value="'+uBookList[i].s_nostart+'">'	//도착정류장ID
-			str += '<input type="text" class="s_noLast" name="s_nolast" value="'+uBookList[i].s_nolast+'">'	//도착정류장ID
+			str += '<input type="hidden" class="u_userName" name="u_username" value="'+uBookList[i].u_username+'">'	//아이디
+			str += '<input type="hidden" class="s_noStart" name="s_nostart" value="'+uBookList[i].s_nostart+'">'	//도착정류장ID
+			str += '<input type="hidden" class="s_noLast" name="s_nolast" value="'+uBookList[i].s_nolast+'">'	//도착정류장ID
 			str += '</div></div>';
 		}
 		$('#booklist').empty();
@@ -240,7 +225,6 @@ body {
 				
 				//예약 버튼 누르면
 				if(ub_no != ''){
-					console.log(ub_no);
 					$('form').trigger('submit');
 				}else{
 					console.log("즐겨찾기 값이 없습니다.");
