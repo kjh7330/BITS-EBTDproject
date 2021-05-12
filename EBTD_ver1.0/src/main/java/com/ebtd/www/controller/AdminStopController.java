@@ -103,4 +103,16 @@ public class AdminStopController {
 		return mav; 
 	}
 	
+	//정류장 이용자 히스토리 (이동만)
+	@RequestMapping(value = "/admin/stop/getStopHistory")
+	public String getStopHistory(){
+		return "/admin/stop/stopHistoryForm"; 
+	}
+	
+	//정류장 이용자 챠트 (이동만)
+	@RequestMapping(value = "/admin/stop/getStopChart")
+	public String getStopChart(){
+		return "/admin/stop/stopChartForm"; 
+	}
+	
 }

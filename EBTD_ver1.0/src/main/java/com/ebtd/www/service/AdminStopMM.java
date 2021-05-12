@@ -54,7 +54,7 @@ public class AdminStopMM {
 			mav.setViewName(view); 
 		} 
 		else { 
-			view = "admin/mainForm";
+			view = "redirect:/admin/mainForm";
 			//System.out.println("정류장 정보 가져오기 실패"); 
 		}
 		mav.setViewName(view);
@@ -139,7 +139,7 @@ public class AdminStopMM {
 			mav.addObject("saList", saList);
 			view = "admin/stop/stopConfirmDetailForm";//.jsp
 		}else {
-			view = "/admin";
+			view = "redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -170,7 +170,7 @@ public class AdminStopMM {
 			mav.addObject("sList", sList);
 			view = "admin/stop/addStopForm";//.jsp
 		}else {
-			view = "/admin";
+			view = "redirect:/admin";
 		}
 		mav.setViewName(view);
 		return mav;

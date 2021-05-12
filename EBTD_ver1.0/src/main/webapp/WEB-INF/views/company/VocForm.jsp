@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 고객 센터</title>
+<title>회사 - 고객 센터 페이지</title>
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -17,8 +17,8 @@
 button {
 	border: none;
 	font-size: 10px;
-	background: #f44336;
-	color: #f9f9f9;
+	background: #a1f8d5;
+	color: black;
 	padding: 8px 16px;
 }
 
@@ -94,13 +94,14 @@ body {
 }
 /*   모달css여기까지~!   */
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 35%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 input, textarea {
@@ -148,14 +149,15 @@ input, textarea {
 }
 
 .btn:hover {
-	background-color: gray;
+	background-color: #a1f8d5;
 }
+
 </style>
 <body>
 <div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%></div>
 
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="이용자 문의" readonly></div>
 	<div class="main">
 	<table id="maintable" style = "color : black;">
@@ -197,7 +199,7 @@ input, textarea {
 					<tr>
 						<td>문의 일시 : </td><td><input id = "vocDate" readonly></td>
 					<tr>
-						<td>내용 : </td><td><textarea id = "vocContent" style="height: 60px; width:158px;resize: none;" readonly></textarea></td>
+						<td>내용 : </td><td><textarea id = "vocContent" style="height: 60px; width:147px;resize: none;" readonly></textarea></td>
 					</tr>
 				</table>
 			</div>
@@ -218,7 +220,7 @@ input, textarea {
 							<td>▶ 제목 : </td><td><input type = "text" id = "replyTitle" name = "v_title" readonly></td>
 						</tr>
 						<tr>
-							<td>▶ 내용 : </td><td><textarea id = "replyContent" name = "v_content" style="height: 60px; width:158px;resize: none;"></textarea></td>
+							<td>▶ 내용 : </td><td><textarea id = "replyContent" name = "v_content" style="height: 60px; width:147px;resize: none;"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan="2" style="height:50px; text-align: center;"><input class="btn" style="background-color:#a1f8d5;" type = "submit" id = "replySubmit" value = "전송"></td>

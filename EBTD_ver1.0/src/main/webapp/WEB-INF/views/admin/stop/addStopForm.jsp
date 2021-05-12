@@ -6,19 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>정류장 등록 페이지</title>
+<title>관리자 - 정류장 관리 페이지</title>
 <style type="text/css">
 	.checkBox {
 		width: 180px;
 		display: hidden;
 	}
 	#main-container{
-		position: absolute;
-		left: 50%;
-		transform: translate(-50%,39%);
-		color: black;
-		width: 800px;
 		text-align: center;
+		            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 	}
 	.maindivinput{
 		border: none;
@@ -69,7 +71,7 @@
 	<div id="adminheader"><%@ include
 			file="/WEB-INF/views/include/adminheader.jsp"%></div>
 	<div id="main-container">
-	<div><br><input type="text" class="maindivinput" value="정류장 등록" readonly><br></div>
+	<div><input type="text" class="maindivinput" value="정류장 등록" readonly><br></div>
 	<br>
 	<form id="addStop" action="/admin/stop/addStop">
 		<table id="inputtable" border="1" style="color: black">

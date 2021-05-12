@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>휠체어유저 - 즐겨찾기</title>
+<title>EBTD - 즐겨찾기</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--font-awesome CDN-->
@@ -14,6 +14,9 @@
 </head>
 
 <style>
+	body{
+		color: black;
+	}
 	#userBookmarkForm{	/* 폼태그 */
 		display: none;
 	}
@@ -23,25 +26,38 @@
 		text-align: center;
 		font-size: 14pt;
 		color: black; /* width: 300px */
-		padding-top: 15px;
-		margin: 20px;
+		margin-left: 5px;
+		margin-right: 5px;
 	}
 	
 	.bookList { /* 즐겨찾기 개인 div */
-		height: 90px;
+		height: 125px;
 		text-align: center;
 		font-size: 14pt;
 		color: black; /* width:50px; */
 		padding-top: 15px; /* margin: 20px; */
 		border: 0.2px solid;
+		cursor: pointer;
+		padding-bottom: 10px;
 	}
 	
 	.starIcon { /* 폰트어썸 별 */
 		color: yellow;
-		font-size: 20px;
 		/* border: 0.3px solid black; */
 	}
+.mainview {
+	position: relative;
+	top: 130px;
+	color: black;
+	padding: 20px;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
 
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 
 /*모달*/
 body, html {
@@ -56,10 +72,8 @@ h2, p, div, h3 {
 /* modal trigger */
 button {
 	border: none;
-	font-size: 18px;
 	background: #f44336;
 	color: #f9f9f9;
-	padding: 8px 16px;
 }
 
 h2 {
@@ -86,7 +100,7 @@ body {
 
 /* modal box */
 .modal {
-	width: 80%;
+	width: 31%;
 	background: #f5f5f5;
 	margin: 150px auto;
 }
@@ -97,8 +111,7 @@ body {
 	color: black;
 }
 
-.modal_header h3 {
-	padding: 20px 0;
+.modal_header h4 {
 	color: #333;
 }
 
@@ -107,13 +120,14 @@ body {
 	background: #fefefe;
 	border: 1px solid #888;
 	box-sizing: border-box;
-	height: 200px;
+	height: 220px;
 	color: black;
+	padding-top: 20px;
 }
 
 .close {
 	position: absolute;
-	top: 10px;
+	top: -9px;
 	right: 20px;
 	font-size: 28px;
 	color: #aaa;
@@ -126,33 +140,59 @@ body {
 }
 /* 모달css 끝 */
 
+input{
+	width: 170px;
+	font-size: 18px;
+	border: none;
+	cursor: pointer;
+}
+input:focus{
+	outline: none;
+}
+
+.btn{
+	margin-top:15px;
+	width: 90px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;
+}
+        #myModal{
+        	position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-146%,-100%);
+			color: black;
+    	}
 </style>
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-
+	
+	<div class="mainview">
 	<!-- 즐겨찾기 리스트 -->
 	<form name="userBookmark" id="userBookmarkForm" action="/user/reservation" method="post">
 	</form>
 	<div id="booklist"></div> 
-	
+	</div>
 
 	<!-- 모달 -->
 	<div id="overlay">
 		<div id="myModal" class="modal">
 			<div class="modal_header">
-				<h5>즐겨찾기 예약</h5>
+				<h4>즐겨찾기 예약</h4>
 				<span class="close">&times;</span>
 			</div>
 			<div class="modal_content">
 				<p id = 'modal_content_p' style="color: black">
-					<button type="submit" id="reservationBtn">예약</button>
+					<button type="submit" class="btn" id="reservationBtn">예약</button>
 					<!-- <button onclick="location.href='user/reservation?ub_no='">예약</button> -->
-					<button id="modalOutBtn">취소</button>
+					<button class="btn"  id="modalOutBtn">취소</button>
 				</p>
 			</div>
 		</div>
 	</div>
+	
 	<!--    모달 버튼 끝!    -->
 	<div id="userfooter"><%@ include
 			file="/WEB-INF/views/include/userfooter.jsp"%></div>
@@ -169,20 +209,32 @@ body {
 		let i = 0;
 		for(i = 0; i < uBookList.length; i++){
 			str += '<div class="totalBookList" overflow="auto">'
-			str += '<div class="starIcon"><span class="fa-stack fa-lg"><i class="far fa-star fa-stack-2x"></i><i  class="fas fa-star" id="star'+i+'"></i></span></div>'; //폰트어썸 꽉찬별
 			//console.log( $('#star'+i) );
-			str += '<div class="bookList">';
-			str += '<input type="hidden" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">'	//즐겨찾기 번호
-			str += '<input type="text" class="ub_alias" name="ub_alias" value="'+uBookList[i].ub_alias+'">'	//별칭
-			str += '<input type="text" class="b_no" name="b_no" value="'+uBookList[i].b_no+'">'	//버스번호
-			str += '<input type="text" class="s_nameStart" name="s_namestart" value="'+uBookList[i].s_namestart+'">'	//출발정류장
-			str += '-->';
-			str += '<input type="text" class="s_nameLast" name="s_namelast" value="'+uBookList[i].s_namelast+'">'	//도착정류장
-			
-			str += '<input type="hidden" class="u_userName" name="u_username" value="'+uBookList[i].u_username+'">'	//아이디
-			str += '<input type="hidden" class="s_noStart" name="s_nostart" value="'+uBookList[i].s_nostart+'">'	//도착정류장ID
-			str += '<input type="hidden" class="s_noLast" name="s_nolast" value="'+uBookList[i].s_nolast+'">'	//도착정류장ID
-			str += '</div></div>';
+			str += '<table class="bookList">';
+			str += '<tr>';
+			str += 		'<td style="padding-left:5px; padding-bottom:15px; width:50px;">';
+			str += 			'<div class="starIcon"><span class="fa-stack fa-lg" style="font-size: 30px;"><i class="far fa-star fa-stack-2x"></i><i  class="fas fa-star" id="star'+i+'"></i></span></div>'; //폰트어썸 꽉찬별
+			str += 		'</td>';
+			str +=		'<td>'
+			str +=			'<input type="text" value="별명이름 : " style="width:83px;">';
+			str +=			'<input type="text" value="버스번호 : " style="width:83px;">';
+			str += 		'</td>';
+			str += 		'<td>';
+			str += 			'<input type="hidden" class="ub_no" name="ub_no" value="'+uBookList[i].ub_no+'">';	//즐겨찾기 번호
+			str += 			'<input type="text" class="ub_alias" name="ub_alias" value="'+uBookList[i].ub_alias+'" style="text-align: center;">';	//별칭
+			str += 			'<input type="text" class="b_no" name="b_no" value="'+uBookList[i].b_no+'" style="text-align: center;">';	//버스번호
+			str += 		'</td>';
+			str += '</tr>';
+			str += '<tr>';
+			str += 		'<td colspan="3" style="padding-left:15px;">';
+			str += 			'<input type="text" class="s_nameStart" name="s_namestart" value="'+uBookList[i].s_namestart+'" style="text-align: center;">';	//출발정류장
+			str += 			' <i class="fas fa-arrow-right"></i> <input type="text" class="s_nameLast" name="s_namelast" value="'+uBookList[i].s_namelast+'" style="text-align: center;">';	//도착정류장
+			str += 			'<input type="hidden" class="u_userName" name="u_username" value="'+uBookList[i].u_username+'">';	//아이디
+			str += 			'<input type="hidden" class="s_noStart" name="s_nostart" value="'+uBookList[i].s_nostart+'">';	//도착정류장ID
+			str += 			'<input type="hidden" class="s_noLast" name="s_nolast" value="'+uBookList[i].s_nolast+'">';
+			str += 		'</td>';
+			str += '</tr>';	//도착정류장ID
+			str += '</table></div><br>';
 		}
 		$('#booklist').empty();
 		$('#booklist').append(str); 

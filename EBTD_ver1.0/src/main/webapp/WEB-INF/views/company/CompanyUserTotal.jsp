@@ -16,10 +16,10 @@
 </script>
 <style type="text/css">
 .mainview {
-	position: absolute;
+	position: relative;
 	display: flex;
 	justify-content: space-around;
-    transform: translate(32%,35%);
+    transform: translate(0%,30%);
 	font-size: 40px;
 	color: black;
 	padding-bottom: 120px; /*footer여백*/

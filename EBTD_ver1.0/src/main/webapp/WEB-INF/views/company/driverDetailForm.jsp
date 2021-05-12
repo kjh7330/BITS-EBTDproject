@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 기사 관리</title>
+<title>회사 - 기사 관리 페이지</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 42%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -44,7 +45,7 @@
 	font-size: 18px;
 }
 #btn:hover {
-	background-color: gray;
+	background-color: #b6e8fc;
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +58,7 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="기사 정보 수정" readonly></div>
 <form action="/company/updateDriver" method="post">
 <div style="color: black">

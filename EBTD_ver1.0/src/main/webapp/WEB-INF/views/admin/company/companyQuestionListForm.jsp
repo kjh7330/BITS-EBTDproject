@@ -9,12 +9,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 		#main-container{
-			position: absolute;
+            width: 800px;
+            color: black;
             left: 50%;
-            transform: translate(-50%,23%);
-			color: black;
-			text-align: center;
-			padding-bottom: 140px;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            padding-bottom: 140px;
 		}
 		.maindivinput{
 			border: none;
@@ -36,7 +38,7 @@
 			width: 900px;
 			border: 1px solid black;
 			font-size: 15px;
-			margin-left: auto;
+			margin-left: -50px;
 			margin-right: auto;
 		}
 		tr, td{
@@ -52,7 +54,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 
 	<main id="main-container">
-		<div><br>
+		<div>
 			<input type="text" class="maindivinput" value="버스 회사 상세 정보" readonly><br>
 		</div><br>
 		<table class="maintable1">

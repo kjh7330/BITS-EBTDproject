@@ -8,14 +8,15 @@
 <meta charset="UTF-8">
 <title>회사 - 정류장 관리</title>
 <style type="text/css">
-.container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 24%);
-	color: black;
-	width: 800px;
+.container2 {
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -31,7 +32,7 @@
 }
 
 .main {
-	width: 200px;
+	width: 370px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 18px;
@@ -52,7 +53,10 @@
 	height: 40px;
 }
 #btn:hover {
-	background-color: gray;
+	background-color: #b6e8fc;
+}
+.checkSaName{
+	font-size:15px;
 }
 </style>
 <meta charset="utf-8">
@@ -66,40 +70,64 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-<div class="container">
+<div class="container2">
 	<div><input class="maininput" value="정류장 등록 신청" readonly></div>
   <div class="main">
   <form action="/company/addNewStop" method="post" onsubmit="return checkAll()">
-    <div class="form-group">
-      <label for="c_UserName"> 신청회사 </label>
-      <input type="text" class="form-control" id="c_UserName" name="c_UserName" value="${sessionScope.c_username}" readonly>
-    </div>
-    <div class="form-group">
-      <label for="sa_Name"> 정류장 이름 </label>
-      <input class="form-control" type="text" id="sa_Name" name="sa_Name">
-	  <div class="checkSaName" id="checkSaName"></div>
-    </div>
-    <div class="form-group">
-      <label for="sa_X"> x값 </label>
-      <input class="form-control" type="text" id="sa_X" name="sa_X" placeholder="X값">
-    </div>
-    <div class="form-group">
-      <label for="sa_Y"> y값 </label>
-      <input class="form-control" type="text" id="sa_Y" name="sa_Y" placeholder="Y값" >
-	  <div class="checkSaPosition" id="checkSaPosition"></div>
-    </div>
-    <div class="form-group">
-      <label for="t_Name"> 동 이름 </label>
-      <input type="text" class="form-control" id="t_Name" name="t_Name" readonly>
-    </div>
-    <div class="form-group">
-      <label for="sa_Reason"> 신청사유 </label>
-      <input type="text" class="form-control" id="sa_Reason" name="sa_Reason">
-    </div>
-    <input type="hidden" id="sa_State" name="sa_State" value="0">
-    
-    
-    <input id="btn" type="submit" id="addSubmit" value="신청하기" onClick=addNewStop()>
+  <table>
+  	<tr>
+	  	<td>
+		    <div class="form-group">
+		      <label for="c_UserName"> 신청회사 </label>
+		      <input type="text" class="form-control" id="c_UserName" name="c_UserName" value="${sessionScope.c_username}" readonly>
+		    </div>
+	    </td>
+		<td>
+	    	<div class="form-group">
+		      <label for="sa_Name"> 정류장 이름 </label>
+		      <input class="form-control" type="text" id="sa_Name" name="sa_Name" placeholder="입력하세요!">
+		    </div>
+	    </td>
+    </tr>
+    <tr>
+    	<td style="height: 22px;" /><td><div class="checkSaName" id="checkSaName"></div></td>
+    </tr>
+    <tr>
+   		<td>
+		    <div class="form-group">
+		      <label for="sa_X"> x값 </label>
+		      <input class="form-control" type="text" id="sa_X" name="sa_X" placeholder="X값">
+		    </div>
+		</td>
+		<td>
+		    <div class="form-group">
+		      <label for="sa_Y"> y값 </label>
+		      <input class="form-control" type="text" id="sa_Y" name="sa_Y" placeholder="Y값" >
+			  <div class="checkSaPosition" id="checkSaPosition"></div>
+		    </div>
+    	</td>
+    </tr>
+    <tr>
+	    <td>
+		    <div class="form-group">
+		      <label for="t_Name"> 동 이름 </label>
+		      <input type="text" class="form-control" id="t_Name" name="t_Name" readonly>
+		    </div>
+	    </td>
+	    <td>
+		    <div class="form-group">
+		      <label for="sa_Reason"> 신청사유 </label>
+		      <input type="text" class="form-control" id="sa_Reason" name="sa_Reason">
+		    </div>
+		    <input type="hidden" id="sa_State" name="sa_State" value="0">
+	    </td>
+    </tr>
+    <tr>
+    	<td colspan="2">
+    		<input id="btn" type="submit" id="addSubmit" value="신청하기" onClick=addNewStop()>
+  		</td>
+  	</tr>
+  </table>
   </form>
 </div>
 </div>	

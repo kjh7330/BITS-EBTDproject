@@ -123,11 +123,13 @@
 /*   모달css여기까지~!   */
 
     	.company-container{
-    		position: absolute;
             width: 600px;
             color: black;
             left: 50%;
-            transform: translate(-50%,45%);
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
         }
         .cdate{
             text-align: right;
@@ -342,7 +344,7 @@
     <div id="overlay4">
           <div id="myModal4" class="modal">
              <div class="modal_header">
-                <h5 style="margin-top:5px; margin-left:10px;">${abList[0].c_name} - 등록 신청 공문서 (노선) </h5>
+                <h5 style="margin-top:5px; margin-left:10px;">노선 상세</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content4">

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>EBTD - 로그인</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -130,16 +130,13 @@
             <form action="/user/loginAccess" name="login" method="post" onsubmit="return check()">
                 <table class="formtable">
                     <tr>
-                        <td class="titlename" colspan="4">EBTD</td>
-                    </tr>
-                    <tr>
-                        <td class="tabletitle">I D :</td>
+                        <td class="tabletitle" style="font-weight: bold;">I D :</td>
                         <td colspan="2"><input class="input" type="text" id="username" name="u_username"></td>
                         <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
-                        <td rowspan="2"><button id="logbtn" class="loginbtn" >Login</button> </td>
+                        <td rowspan="2"><button id="logbtn" class="loginbtn" style="font-weight: bold;">Login</button> </td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">P W :</td>
+                        <td class="tabletitle" style="font-weight: bold;">P W :</td>
                         <td colspan="2"><input class="input" type="password" id="password" name="u_password"></td>
                     </tr>
                     </form>

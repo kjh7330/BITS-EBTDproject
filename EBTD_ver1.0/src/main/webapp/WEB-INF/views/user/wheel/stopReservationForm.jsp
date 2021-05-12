@@ -5,26 +5,74 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ReservationForm</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>EBTD - 예약하기</title>
 <style type="text/css">
+.mainview {
+	position: relative;
+	top: 130px;
+	color: black;
+	padding: 20px;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+	overflow: auto;
+	background-color : #f6f4f4;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
+
+.btn {
+	text-align: center;
+	background-color: lightgray;
+	border-radius:23px;
+	border: none;
+	margin: 10px;
+	width: 182px;
+	height: 40px;
+	font-size: 20px;
+	cursor: pointer;
+}
+.btn:hover {
+	background-color: gray;
+}
+#search{
+	font-size:18px;
+	width: 385px;
+	height: 30px;
+	margin-left:10px;
+}
+.businput{
+	cursor: pointer;
+	height: 30px;
+	width: 385px;
+	padding-left: 15px;
+	font-size: 20px;
+	margin-bottom:-1px;
+	border: none;
+}
+.businput:focus{
+	outline: none;
+}
+.select{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 </style>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-
-	<input type="text" id="search" onkeyup="filter()">
-	<div>
-		<span><input type="button" id="busBtn" value="버스"> </span>
-		<span><input type="button" id="stopBtn" value="정류장"></span>
-	</div>
-	<main>
-		<table id="result">
-		</table>	
-	</main>
-			
+	<div class="mainview">
+		<input type="text" id="search" onkeyup="filter()">
+		<div>
+			<span><a href="/user/getBusList"><input type="button" class="btn" id="busBtn" value="버스"></a> </span>
+			<span><a href="/user/getStopList"><input type="button" class="btn" id="stopBtn" value="정류장"></a></span>
+		</div>
+		<table id="result"></table>	
+	</div>	
 	<div id="userfooter"><%@ include file="/WEB-INF/views/include/userfooter.jsp"%></div>
 	
 </body>
@@ -37,9 +85,12 @@ let str='';
 for(i; i<${sList}.length; i++){
 	str+='<tr class="line">';
 	
-	str+='<td class="info"><a href=/user/getStopDetail?s_No='+${sList}[i]["s_NO"]+'>'
-	str+=${sList}[i]['s_NAME']+'</a></td>'
-
+	str+='<td class="info"><a href=/user/getStopDetail?s_No='+${sList}[i]["s_NO"]+'>';
+	if(i%2 == 0){
+		str+='<input class="businput" style="background-color: #f9eb99;" value="'+${sList}[i]['s_NAME']+'"></a></td>'
+	}else{
+		str+='<input class="businput" style="background-color: #fffbe4;" value="'+${sList}[i]['s_NAME']+'"></a></td>'
+	}
 	str+="</tr>";
 };
 $("#result").append(str); 
@@ -57,7 +108,7 @@ function filter(){
     	line[i].style.display = "none";
  	 }
    }
-} 
+} /* 
 $('#busBtn').click(function(){
 	$.ajax({
 		type : 'get',
@@ -118,7 +169,7 @@ $.ajax({
 	}
 }); //ajax End
 }); //on End 
-
+ */
 
 </script>
 </html>

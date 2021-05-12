@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시각 - 메인</title>
+<title>EBTD - 메인</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -57,10 +57,10 @@
 </style>
 </head>
 <body>
-<div id="userheader"><%@ include file="/WEB-INF/views/include/userWheelHeader.jsp"%></div>
+<div id="userheader"><%@ include file="/WEB-INF/views/include/userBlindHeader.jsp"%></div>
 <div class="maindiv">
 	
-		<button id="mbtn1" class="mainbtn" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
+		<button id="mbtn1" class="mainbtn" style="margin-left:50px;" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
 		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/blind/getReservationInfo'">예약확인</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
 </div>
@@ -92,8 +92,8 @@
 <script>
 		
 		$('#btn1').click(function(){
-			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
 				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
 					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
@@ -108,10 +108,9 @@
 		
 		$('#btn2').click(function(){
 			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!")
+				alert("즐겨찾기");
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-				location.href = '/user/myPage';
+				alert("마이 페이지");
 			}
 		});
 		$('#btn3').click(function(){
@@ -137,9 +136,12 @@
 		function mouseUp1(){
 			clearTimeout(timer1);
 		}
-		function holding1(){
-			alert('이전페이지가 없음!!');
-			//location.href = '/user/???';
+		function holding2(){
+			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
+				location.href = '/user/getBookmarkList';
+			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+				location.href = '/user/myPage';
+			}
 		}
 		function mouseDown2(){
 			timer2 = setTimeout(function(){holding2();},2000);

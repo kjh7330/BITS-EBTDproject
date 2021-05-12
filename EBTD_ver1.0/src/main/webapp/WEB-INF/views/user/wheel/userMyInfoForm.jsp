@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 정보 확인</title>
+<title>EBTD - 내 정보 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 	.main-container{
@@ -14,7 +14,7 @@
 	.maintable{
 		font-size: 18px;
 		font-weight: bold;
-		height: 500px;
+		height: 420px;
 		margin-bottom: 20px;
 	}
 	.tdname{
@@ -67,6 +67,17 @@
 	.btndiv{
 		text-align: center;
 	}
+.main-container{
+	position: relative;
+	top: 130px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 </style>
 </head>
 <body>

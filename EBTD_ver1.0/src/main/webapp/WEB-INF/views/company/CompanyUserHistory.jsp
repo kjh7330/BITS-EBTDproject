@@ -10,13 +10,14 @@
 
 <style type="text/css">
 #userHistoryHeader {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 7%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 .maininput {
 	border: none;

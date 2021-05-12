@@ -7,16 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 기사 관리</title>
+<title>회사 - 기사 관리 페이지</title>
 <style type="text/css">
 .main-container {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 30%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 
 .maininput {
@@ -54,7 +55,7 @@
 	height: 40px;
 }
 #btn:hover {
-	background-color: gray;
+	background-color: #b6e8fc;
 }
 </style>
 <meta charset="utf-8">
@@ -68,7 +69,7 @@
 	<div id="companyheader"><%@ include
 			file="/WEB-INF/views/include/companyheader.jsp"%>
 	</div>
-<div class="main-container"><br>
+<div class="main-container">
 	<div><input class="maininput" value="노선 승인 내역" readonly></div>
 	<div class="insertData" style="color: black; text-align: center">
 		<form action="/company/addDriver" method="post" enctype="multipart/form-data">

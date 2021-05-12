@@ -40,7 +40,7 @@
 	<select id="getMyQuestionList" resultType="VocBean">
 		SELECT V_NO, C_USERNAME, B_NO, U_USERNAME, V_TITLE, V_CONTENT, TO_CHAR(V_DATE,'YYYY-MM-DD') AS V_DATE, V_IMGEXTENTION, VOC_RECOMMEND
 		FROM VOC
-		WHERE U_USERNAME = #{u_username} AND VOC_RECOMMEND = 1 OR VOC_RECOMMEND = -1
+		WHERE U_USERNAME = #{u_username} AND (VOC_RECOMMEND = 1 OR VOC_RECOMMEND = -1)
 		ORDER BY V_NO
 	</select>
 	<select id="getAnswerList" resultType="VocBean">

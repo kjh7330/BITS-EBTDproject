@@ -87,7 +87,7 @@
                 font-size: 20px;
             }
             .menudetail:hover {
-                background-color: #f1f1f1
+                background-color: #f1f1f1;
             }
             .navline{
                 margin: -13px;
@@ -194,6 +194,7 @@
         }
         .headeralarm{
             margin-right: 20px;
+            visibility: hidden;
         }
         .countinput{
             font: bold;
@@ -232,11 +233,11 @@
             <div class="dropdown">
                 <button class="dropbtn">노선 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="/company/newBusForm">새로운 노선 등록 신청</a></div>
-                    <div class="menudetail"><a href="/company/existBusUpdateForm">기존 노선 변경 신청</a></div>
-                    <div class="menudetail"><a href="#">노선 변경 및 등록 신청 내역</a></div>
-                    <div class="menudetail"><a class="/company/adetail" href="/company/newApplyForm">&nbsp;&nbsp;- 신규 신청 내역</a></div>
-                    <div class="menudetail"><a class="/company/adetail" href="/company/updateApplyForm">&nbsp;&nbsp;- 변경 신청 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/newBusForm">새로운 노선 등록 신청</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/existBusUpdateForm">기존 노선 변경 신청</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="#">노선 변경 및 등록 신청 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" class="/company/adetail" href="/company/newApplyForm">&nbsp;&nbsp;- 신규 신청 내역</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" class="/company/adetail" href="/company/updateApplyForm">&nbsp;&nbsp;- 변경 신청 내역</a></div>
                 </div>
             </div>
             <div class="navline">
@@ -245,8 +246,8 @@
             <div class="dropdown">
                 <button class="dropbtn">기사 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="/company/getDriverList">노선 별 기사 목록 및 수정</a></div>
-                    <div class="menudetail"><a href="/company/addDriverForm">기사 추가</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/getDriverList">노선 별 기사 목록 및 수정</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/addDriverForm">기사 추가</a></div>
                 </div>
             </div>
             <div class="navline">
@@ -255,9 +256,9 @@
             <div class="dropdown">
                 <button class="dropbtn">정류장 관리</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="/company/getStopList">정류장 목록</a></div>
-                    <div class="menudetail"><a href="/company/addNewStopForm">정류장 등록 신청</a></div>
-                    <div class="menudetail"><a href="/company/getNewStopConfirmList">정류장 등록 신청 내역 확인</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/getStopList">정류장 목록</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/addNewStopForm">정류장 등록 신청</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/getNewStopConfirmList">정류장 등록 신청 내역 확인</a></div>
                 </div>
             </div>
             <div class="navline">
@@ -266,10 +267,10 @@
             <div class="dropdown">
                 <button class="dropbtn">고객 센터</button>
                 <div class="dropdown-content">
-                    <div class="menudetail"><a href="/company/user/currentpassenger">현재 탑승 인원</a></div>
-                    <div class="menudetail"><a href="/company/user/history">당사 이용자 히스토리</a></div>
-                    <div class="menudetail"><a href="/company/user/total">전체 이용자 추이</a></div>
-                    <div class="menudetail"><a href="/company/user/vocForm">이용자 문의</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/user/currentpassenger">현재 탑승 인원</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/user/history">당사 이용자 히스토리</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/user/total">전체 이용자 추이</a></div>
+                    <div class="menudetail"><a style="text-decoration: none;" href="/company/user/vocForm">이용자 문의</a></div>
                 </div>
             </div>
         </nav>

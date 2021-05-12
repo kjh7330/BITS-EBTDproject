@@ -87,7 +87,7 @@
                 font-size: 20px;
             }
             .menudetail:hover {
-                background-color: #f1f1f1
+                background-color: #f1f1f1;
             }
             .navline{
                 margin: -13px;

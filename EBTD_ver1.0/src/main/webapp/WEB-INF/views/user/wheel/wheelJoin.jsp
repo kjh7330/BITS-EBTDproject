@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EBTD - 회원가입</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
@@ -22,12 +22,15 @@
             width: 450px; /*만들땐 450px에 두고 만들고 실제로 핸드폰 구현시는 100vw*/
         }
         .container {
-            display: flex;
             justify-content: center;
             background-color : #0C3D6A;
             width: 450px;
             height: 80px;
             text-align: center;
+            z-index: 2;
+            
+			position: relative;
+			color: black;
         }
         .headertitle{
             padding-top: 10px;
@@ -75,7 +78,8 @@
         }
         .tabletitle{
             color: black;
-            font-size: 25px;
+            font-size: 22px;
+            text-align: right;
         }
         .input{
             width: 180px;
@@ -90,13 +94,19 @@
             font-size: 20px;
             padding-top: 15px;
             padding-bottom: 18px;
-            padding-left: 18px;
-            padding-right: 15px;
+            padding-left: 25px;
+            padding-right: 25px;
             background-color: #f6e056;
             color: #0C3D6A;
             border-radius: 8px;
             border: none;
+            cursor: pointer;
+            font-weight: bold;
         }
+       	.loginbtn:hover{
+			background-color: #f9eb99;
+			color: black;
+       	}
         .otherbtn{
             width: 190px;
             font-size: 20px;
@@ -130,14 +140,17 @@
         <div class="mainview">
             <form action="/user/wheel/joinAccess" method="post" id="joinFrm">
             <input id="userType" type="hidden" name = "u_type">
-                <table class="formtable">
+                <table class="formtable" style="height: 325px">
                     <!-- <tr>
                         <td class="titlename" colspan="4">회원가입</td>
                     </tr> -->
                     <tr>
                         <td class="tabletitle">I D :</td>
-                        <td colspan="2"><input class="input" name = "u_username"  id = "u_username" required minlength="3"/><div style="font-size: 8px " class="check_font" id="id_check"></div></td>
+                        <td colspan="2"><input class="input" name = "u_username"  id = "u_username" required minlength="3"/></td>
                         <!-- <td rowspan="2"><input id="logbtn" class="loginbtn" type="button" value="LOGIN"></td>-->
+                    </tr>
+                    <tr>
+                    	<td colspan="3" style="text-align: right;"><div style="font-size: 8px " class="check_font" id="id_check"></div></td>
                     </tr>
                     <tr>
                         <td class="tabletitle">비밀번호 :</td>
@@ -152,59 +165,57 @@
                         <td colspan="2"><input class="input" name = "u_name"/></td>
                     </tr>
                     <tr>
-                        <td class="tabletitle" style="font-size: 15px;">장애 등록 번호 :</td>
+                        <td class="tabletitle">장애 등록 번호 :</td>
                         <td colspan="2"><input class="input" id='u_disable_no' name = "u_disable_no" minlength="6" maxlength="6" required="required"/><div class="check_font" id="no_check"></div></td>
                     </tr>
                     <tr>
-                        <td class="tabletitle" style="font-size: 20px;">핸드폰 번호 :</td>
-                        <td colspan="2"><input class="input" id = "u_userphonenum" name="u_userphonenum" placeholder="특수문자(-) 없이 입력해주세요" required minlength="11" maxlength="11"></td>
+                        <td class="tabletitle">핸드폰 번호 :</td>
+                        <td colspan="2"><input class="input" id = "u_userphonenum" name="u_userphonenum" placeholder="숫자만 입력하세요!" required minlength="11" maxlength="11"></td>
                     </tr>
                     <tr>
                     </tr>
                     <tr>
                         <td class="tabletitle">주소 :</td>
-                        <td colspan="2"><select class="input" id="AddressArr"></select></td>
-                        <input type="hidden" id='u_address' name = "u_address">
+                        <td colspan="2"><select class="input" id="AddressArr"></select>
+                        <input type="hidden" id='u_address' name = "u_address"></td>
                     </tr>
                     <tr>
                         <td class= "tabletitle">상세주소 :</td>
                         <td colspan="2"><input class="input" id = "AddressArr2"></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 15px;" class= "tabletitle">보호자와 관계 :</td>
-                        <td colspan="2">
-                        <select class="input" id="relation">
-                        	<option value="부">부</option>
-                        	<option value="모">모</option>
-                        	<option value="자">자</option>
-                        	<option value="녀">녀</option>
-                        	<option value="조부">조부</option>
-                        	<option value="조모">조모</option>
-                        	<option value="친인척">친인척</option>
-                        	<option value="지인">지인</option>
-                        	<option value="기타">기타</option>
-                        </select>
-                        <input type ="hidden" class="input" name = "u_guardrelation" id = "u_guardrelation">
-                        
-                        </td>
+                    	<td colspan="3"><div id="addr_check"></div></td>
                     </tr>
+                 </table>
+                 <table class="formtable" style="margin-left:10px; margin-top:15px;">
                     <tr>
                         <td class= "tabletitle">보호자명 :</td>
                         <td colspan="2"><input class="input" name = "u_guardname"></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 15px;" class= "tabletitle">보호자 핸드폰 :</td>
-                        <td colspan="2"><input class="input" id='u_guardphonenum' name = "u_guardphonenum" minlength="11" maxlength="11"></td>
+                        <td class= "tabletitle">보호자 핸드폰 :</td>
+                        <td colspan="2"><input class="input" id='u_guardphonenum' name = "u_guardphonenum" placeholder="숫자만 입력하세요!" minlength="11" maxlength="11"></td>
                     </tr>
-                    
-                    
-
-
                     <tr>
-                    <td> <div  id="addr_check"></div> </td>
-                        <td colspan="4"><button id="logbtn" class="loginbtn" >가입하기</button> </td>
+                        <td class= "tabletitle">보호자와 관계 :</td>
+                        <td colspan="2">
+	                        <select class="input" id="relation">
+	                        	<option value="부">부</option>
+	                        	<option value="모">모</option>
+	                        	<option value="자">자</option>
+	                        	<option value="녀">녀</option>
+	                        	<option value="조부">조부</option>
+	                        	<option value="조모">조모</option>
+	                        	<option value="친인척">친인척</option>
+	                        	<option value="지인">지인</option>
+	                        	<option value="기타">기타</option>
+	                        </select>
+                        	<input type ="hidden" class="input" name = "u_guardrelation" id = "u_guardrelation">
+                        </td>
                     </tr>
-                    
+                    <tr>
+                        <td colspan="5"><button id="logbtn" class="loginbtn" style="margin-top:10px">가입하기</button> </td>
+                    </tr>
                 </table>
                 </form>
                 <br>
@@ -216,7 +227,7 @@
                 <img src="/resources/image/teamlogo.png" alt="BITS로고"/>
             </div>
             <div>
-                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁, 이민성
+                김혜지, 김아름, 김민주, 김주한, 신재구, 황원혁
             </div>
         </div>
     </footer>
@@ -230,12 +241,11 @@ var tx =""
 $('#userType').val(${type});
 console.log("유저타입"+$('#userType').val());
 //비밀번호 check
-$('#u_password2').blur(function() {
+$('#u_password2').focusout(function() {
 	if($('#u_password').val() != $('#u_password2').val()) {
 		if($('#u_password').val()!='') {
 				alert("비밀번호가 일치하지 않습니다.");
-				$('#u_password2').val('')
-				$('#u_password2').focus();
+				$('#u_password2').val('');
 			};		
 		};
 		

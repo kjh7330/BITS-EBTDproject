@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EBTD</title>
+<title>EBTD 시작 페이지</title>
 <style type="text/css">
 	button{
 		width: 110px;

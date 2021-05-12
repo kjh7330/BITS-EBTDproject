@@ -13,9 +13,11 @@
         .company-container{
             width: 800px;
             color: black;
-            position: absolute;
             left: 50%;
-            transform: translate(-50%,140%);
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
         }
         .ctile{
             text-align: center;

@@ -10,12 +10,13 @@
 
     <style>
 		#main-container{
-		    position: absolute;
+            width: 800px;
+            color: black;
             left: 50%;
-            transform: translate(-50%,54%);
-			color: black;
-			width: 800px;
-            text-align: center;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 		}
 		.maindivinput{
 			border: none;
@@ -54,7 +55,7 @@
 <div id="adminheader"><%@ include file="/WEB-INF/views/include/adminheader.jsp" %></div>
 	<div id="main-container">
 
-		<div><br><input type="text" class="maindivinput" value="버스 회사 리스트" readonly><br></div>
+		<div><input type="text" class="maindivinput" value="버스 회사 리스트" readonly><br></div>
 		<br>
 		<div id="inputForm">회사 이름 : <input type="text" id="value" placeholder="검색어를 입력하세요." onkeyup="filter()" /></div>
 		<br>

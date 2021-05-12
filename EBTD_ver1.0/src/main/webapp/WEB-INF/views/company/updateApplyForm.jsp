@@ -4,20 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회사 - 노선 관리</title>
+<title>회사 - 노선 관리 페이지</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"></script>
 <style type="text/css">
 #newApplyListHeader {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 61%);
-	color: black;
-	width: 800px;
 	text-align: center;
-	padding-bottom: 140px;
+	            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 }
 #newApplyList {
 	border: 1px solid;
@@ -28,7 +29,7 @@ th, td {
 }
 .maininput {
 	border: none;
-	background-color: #f9eb99;
+	background-color: #a1f8d5;
 	font-size: 20px;
 	font-weight: bold;
 	width: 800px;
@@ -38,7 +39,7 @@ th, td {
 	border-radius: 10px;
 }
 .maintable{
-	width: 500px;
+	width: 600px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 18px;

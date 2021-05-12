@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객 소리함</title>
+<title>EBTD - 고객 소리함</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -24,14 +24,14 @@
 	.inputcontent{
 		margin-top: 5px;
 		width: 412px;
-		height: 400px;
+		height: 320px;
 		resize: none;
 	}
 	.inputcontent:focus{
 		outline: none;
 	}
 	.btn{
-		margin-top: 30px;
+		margin-top: 20px;
 		margin-left: 39.5%;
 		width: 90px;
 		height: 45px;
@@ -53,7 +53,17 @@
 		border: none;
 		text-align: right;
 	}
-	
+.main-container{
+	position: relative;
+	top: 130px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 </style>
 </head>
 <body>

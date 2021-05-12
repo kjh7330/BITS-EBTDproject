@@ -5,14 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객 소리함</title>
+<title>EBTD - 고객 소리함</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 	.main-container{
 		color: black;
+		background-color : #f6f4f4;
+		height: 100vh;
+		margin-top: -10px;
 	}
 	.divbtn{
-		margin-top: 20px;
 		margin-right: 10px;
 		text-align: right;
 	}
@@ -46,11 +48,23 @@
 	.tabletitle{
 		font-weight: bold;
 	}
+.main-container{
+	position: relative;
+	top: 130px;
+	color: black;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+}
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
 </style>
 </head>
 <body>
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userheader.jsp"%></div>
 <div class="main-container">
+<br>
 	<div class="divbtn">
 		<a href="/user/getMyQuestionWrite"><button class="btn">작성</button></a>
 	</div>

@@ -4,33 +4,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>휠체어 - 예약 상세보기</title>
+<title>EBTD - 예약 상세보기</title>
 <style>
+.reservation {
+	background-color: lightgray;
+	height: 385px;
+	margin: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 55px;
+	font-size: 20px;
+}
 
-	.reservation{
-		background-color: lightgray; 
-		height: 500px;
-		margin: 20px; padding: 20px;
-	}
-	
-	#nearBus{
-		color: red; font-weight:bold; background-color: lightgray;
-		border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
-	}
-	
-	.reservationContent{
-		margin: 10px; padding: 10px;
-	}
+#nearBus {
+	color: red;
+	font-weight: bold;
+	background-color: lightgray;
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+}
+
+.reservationContent {
+	margin: 10px;
+	padding: 10px;
+}
+
+.mainview {
+	position: relative;
+	top: 130px;
+	color: black;
+	padding: 20px;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+	background-color : #f6f4f4;
+}
+
+#userheader {
+	position: absolute;
+	z-index: 3;
+}
+#btn {
+	text-align: center;
+	background-color: #f9eb99;
+	border-radius: 8px;
+	margin: 10px;
+	width: 100px;
+	height: 40px;
+	margin-left: 114px;
+	font-size: 20px;
+	cursor: pointer;
+}
+#btn:hover{
+	background-color: #ff9292;
+}
 </style>
 </head>
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-
-	<form name="reservationCancel" id="reservationCancel" action="/user/reservationCancel" method="post"></form>
-	<div id="reserveDetail" style="color:black">
+	<div class="mainview">
+		<form name="reservationCancel" id="reservationCancel" action="/user/reservationCancel" method="post"></form>
+		<div id="reserveDetail" style="color:black">
+		</div>
 	</div>
-
 	<div id="userfooter"><%@ include
 			file="/WEB-INF/views/include/userfooter.jsp"%></div>
 </body>
@@ -48,8 +88,8 @@
 		str += '<div class="reservationContent">버스회사: ' +reserveDetail.c_username + '</div>'; //예약번호
 		str += '<div class="reservationContent">출발정류장: '+reserveDetail.s_namestart + '['+reserveDetail.s_nostart+']</div>'; //출발지
 		str += '<div class="reservationContent">도착정류장: '+reserveDetail.s_namelast + '['+reserveDetail.s_nolast+']</div>';//도착지
-		str += '<input type="hidden" class="ur_no" name="ur_no" value="'+reserveDetail.ur_no +'"><br>'; //예약넘버	
-		str += '<input type="button" class="cancelBtn" value="예약취소">';
+		str += '<input type="hidden" class="ur_no" name="ur_no" value="'+reserveDetail.ur_no +'">'; //예약넘버	
+		str += '<input type="button" id="btn" class="cancelBtn" value="예약취소">';
 		str += "</div>";
 	
 		

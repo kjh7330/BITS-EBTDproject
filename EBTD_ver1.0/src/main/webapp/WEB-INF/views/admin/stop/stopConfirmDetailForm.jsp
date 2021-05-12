@@ -4,16 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 정류장 관리 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 	#main-container{
-		position: absolute;
-		left: 50%;
-		transform: translate(-50%,34%);
-		color: black;
-		width: 800px;
 		text-align: center;
+		            width: 800px;
+            color: black;
+            left: 50%;
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
 	}
 	#confirmtitle{
 		border: none;
@@ -28,7 +30,7 @@
 	#table1{
         margin-top: 5px;
 		width: 600px;
-		height: 400px;
+		height: 342px;
 		color: black;
 		border: 1px solid black;
 		margin-left:auto;
@@ -45,7 +47,7 @@
         height: 40px;
 	}
     .jbtn:hover{
-      	background-color: gray;
+      	background-color: pink;
     }
 	/*   모달 CSS   */
         /* reset */
@@ -182,7 +184,7 @@
 <div id="overlay">
        <div id="myModal" class="modal">
           <div class="modal_header">
-             <h5 style="margin-top:5px; margin-left:10px; text-align: center;">정류장 등록 신청 공문서</h5>
+             <h5 style="margin-top:5px; margin-left:10px; text-align: left;">정류장 등록 신청 공문서</h5>
              <span class="close">&times;</span>
           </div>
           <div class="modal_content">

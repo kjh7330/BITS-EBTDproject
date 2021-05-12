@@ -11,7 +11,6 @@
 
 /*   모달 CSS   */
         /* reset */
-        .company-body { height:100%;}
         h2, p, div, h3 { margin:0; padding:0 }
 
         /* modal trigger */
@@ -123,11 +122,13 @@
 /*   모달css여기까지~!   */
 
     	.company-container{
-    		position: absolute;
             width: 800px;
             color: black;
             left: 50%;
-            transform: translate(-50%,101%);
+            padding-top:170px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 140px;
         }
         .cdate{
             text-align: right;
@@ -135,7 +136,6 @@
         .cname{
             text-align: center;
             width: 100%;
-            margin-top:14px;
             margin-bottom: 10px;
             background-color: #f9eb99;
             height: 50px;
@@ -217,22 +217,22 @@
         	<tr><td><br></td></tr>
 			<c:forEach var="abn" items="${abnList}">
 			<tr>
-			    <td>
+			    <td style="width:150px;">
         			<input class="nameinput" value="${abn.c_name}">
         		</td>
-        		<td>
+        		<td style="width:140px;">
         			<input class="nameinput" value="${abn.ap_b_no}">
         		</td>
-        		<td>
+        		<td style="width:125px;">
         			<button id="myBtn${abn.ap_b_no}" class="cdetail-btn10">노선보기</button><!-- 버스번호를 넘겨! -->
         		</td>
-        		<td>
+        		<td style="width:125px;">
         			<button id="myBtn1${abn.ap_no}" class="cdetail-btn20">공문보기</button><!-- 신청번호를 넘겨! -->
         		</td>
-        		<td>
+        		<td style="width:125px;">
                 	<button id="${abn.ap_no}${abn.ap_b_no}" class="cdetail-btn30">승인</button>
                 </td>
-                <td>
+                <td style="width:125px;">
                 	<button id="${abn.ap_no}${abn.ap_b_no}" class="cdetail-btn40">반려</button>
 				</td>
 			</tr>
@@ -302,7 +302,7 @@
     <div id="overlay4">
           <div id="myModal4" class="modal">
              <div class="modal_header">
-                <h5 class="headerroute" style="margin-top:5px; margin-left:10px;"> 등록 신청 공문서 (노선) </h5>
+                <h5 class="headerroute" style="margin-top:5px; margin-left:10px;">노선 상세</h5>
                 <span class="close">&times;</span>
              </div>
              <div class="modal_content4">
