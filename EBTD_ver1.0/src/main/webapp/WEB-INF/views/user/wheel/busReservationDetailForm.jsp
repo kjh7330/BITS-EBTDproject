@@ -153,6 +153,16 @@ input:focus{
 	cursor: pointer;
 	font-size: 15px;
 }
+.route_td{
+	width: 80px;
+}
+.stopList{
+	width: 160px;
+}
+.info{
+	font-size: 15px;
+	color: black;
+}
  
 </style>
 </head>
@@ -190,7 +200,6 @@ input:focus{
 					출발지 : <input class = "s_namestart" type="text" readonly='readonly'><br><br>
 					목적지 : <input class = "s_namelast" type="text" readonly='readonly'><br><br>
 					다음버스 : <input style="width: 216px;" id = "nearBus" type="text" readonly='readonly'><br><br>
-					그 다음버스 : <input style="width: 195px;" id = "distantBus" type="text" readonly='readonly'><br><br><br>
 				</p>
 				</div>
 				<div class="modal_content3">
@@ -247,11 +256,11 @@ let timer = setInterval(function () {
 				split = $(child).attr('id').split('_');
 				if( $(data)[idx]['r_turn'] == split[3] )
 					if( data[idx]['ab_type'] == 0 )
-						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html('<i class="fas fa-bus" style="color : blue;"></i><br>'+data[idx]['ab_no']+'상행');
-						else									$('#route_down_td_'+i+'').html('<i class="fas fa-bus" style="color : blue;"></i><br>'+data[idx]['ab_no']+'하행');
+						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html('<i class="fas fa-arrow-down style="color : black;"></i>&nbsp;<i class="fas fa-bus" style="color : blue;"></i><br>'+data[idx]['ab_no']);
+						else									$('#route_down_td_'+i+'').html('<i class="fas fa-bus" style="color : blue;"></i>&nbsp;<i class="fas fa-arrow-up style="color : black;"></i><br>'+data[idx]['ab_no']);
 					else
-						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html('<i class="fas fa-bus" style="color : green;"></i><br>'+data[idx]['ab_no']+'상행');
-						else									$('#route_down_td_'+i+'').html('<i class="fas fa-bus" style="color : green;"></i><br>'+data[idx]['ab_no']+'하행');
+						if( data[idx]['ab_updown'] == 1 )	$('#route_up_td_'+i+'').html('<i class="fas fa-arrow-down style="color : black;"></i>&nbsp;<i class="fas fa-bus" style="color : green;"></i><br><h3 class="info">'+data[idx]['ab_no']+'저상</h3>');
+						else									$('#route_down_td_'+i+'').html('<i class="fas fa-bus" style="color : green;"></i>&nbsp;<i class="fas fa-arrow-up style="color : black;"></i><br><h3 class="info">'+data[idx]['ab_no']+'저상</h3>');
 				if( split[1] == 'down' ) i++;
 			}
 			i = 1;
@@ -357,7 +366,7 @@ for (i; i<${brList}.length; i++){
 	
 	str+='<td class = "div_td">';
 	
-	str+='<div class="routeSetting" style="visibility : hidden"><span class="start"><input id="start"value="출발지"></span> &nbsp&nbsp&nbsp&nbsp&nbsp <span class="last"><input id="last" value="목적지"></span></div>';
+	str+='<div class="routeSetting" style="visibility : hidden"><span class="start"><input id="start"value="출발지"></span><span class="last"><input id="last" value="목적지"></span></div>';
 	
 	str+='</td>';
 	
@@ -415,11 +424,11 @@ $("#Btn").click(function() {
 			$('form').trigger('submit');
 		}
 		else{
-			alert('출발지와 정류장이 같습니다!');
+			alert('출발지와 도착지가 같습니다!');
 		}
 		
 	}else{
-		console.log("입력이나 해 충호야");
+			alert('출발지와 도착지를 입력해주세요!');
 	}
 });
 

@@ -146,6 +146,9 @@ table {
 	margin-bottom: 10px;
 	height: 25px;
 }
+#idCheckBtn{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>

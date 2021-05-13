@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EBTD - 비밀번호 찾기</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/v4-shims.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -115,6 +115,10 @@
             font-size: 60px;
             color: black;
         }
+        .loginbtn{
+        	margin-top: 10px;
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -128,10 +132,10 @@
             <form action="/user/rePw" name="login" method="post">
                 <table class="formtable">
                     <tr>
-                        <td class="titlename" colspan="4">EBTD</td>
+                        <td class="titlename" colspan="4">PW</td>
                     </tr>
                     <tr>
-                        <td class="tabletitle">비밀번호를 다시 입력해주세요</td>
+                        <td class="tabletitle" colspan="4">비밀번호를 다시 입력해주세요</td>
                     </tr>
                     <tr>
                         <td class="tabletitle">P W :</td>
@@ -139,7 +143,7 @@
                     	
                     </tr>
                     <tr>
-                    <td>
+                    <td colspan="4">
                     	<button class="loginbtn">비밀번호 재설정</button>
                     </td>    
                     </tr>
