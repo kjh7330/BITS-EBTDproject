@@ -30,6 +30,7 @@ public class UserBookmarkRestController {
 	//즐겨찾기 별 색깔 없애면
 	@PostMapping(value = "/deleteBookmark", produces =  "text/plain;charset=utf-8")
 	public String deleteBookmark(String ub_no) throws JsonProcessingException {	
+		System.out.println(ub_no);
 		return ubm.deleteBookmark(ub_no);	
 	}
 	

@@ -124,7 +124,7 @@
     </tr>
     <tr>
     	<td colspan="2">
-    		<input id="btn" type="submit" id="addSubmit" value="신청하기" onClick=addNewStop()>
+    		<input id="btn" type="submit" id="addSubmit" value="신청하기" >
   		</td>
   	</tr>
   </table>
@@ -249,12 +249,24 @@ $("#sa_Name").blur(function() {
 	var sa_X = $('#sa_X').val(); //입력한 X값
 	var sa_Y = $('#sa_Y').val(); //입력한 Y값
 	var sa_Reason = $('#sa_Reason').val(); //입력한 신청사유 
- 	 if(sa_Name == '')alert('정류장 이름을 입력하세요');
- 	 if(sa_X  == '')alert('y값을 입력하세요');
- 	 if(sa_Y  == '')alert('y값을 입력하세요'); 
- 	 if(sa_Reason == '')alert('신청 사유를 입력하세요');
+ 	 if(sa_Name == ''){
+ 		 alert('정류장 이름을 입력하세요');
+	 	 return false;
+ 	 }
+ 	 if(sa_X  == ''){
+ 		 alert('y값을 입력하세요');
+	 	 return false;
+ 	 }
+ 	 if(sa_Y  == ''){
+ 		 alert('y값을 입력하세요'); 
+	 	 return false;
+ 	 }
+ 	 if(sa_Reason == ''){
+ 		 alert('신청 사유를 입력하세요');
+	 	 return false;
+ 	 }
+	 	 return true;
  	 
- 	 return false;
  }  
 
 </script>

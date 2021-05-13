@@ -92,7 +92,7 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 10;
 	visibility: hidden;
 	opacity: 0;
 	transition: all 0.5s ease;
@@ -260,12 +260,16 @@ input:focus{
 		
 		//즐겨찾기 클릭
 		$('.bookList').click(function (){ 	// 모달창 열기 이벤트
+			
+			if($(this).attr('class') == "starIcon") return false;
 			$('#userBookmarkForm').html($(this).html());
 			$("#overlay").css({ visibility:"visible", opacity:1 });
 			
+			$('#modal_content_p').html('');
 			$('#modal_content_p').html($(this).html());
 			$('#modal_content_p').append(btn); 
 			$('#reservationBtn').click(function(){
+				
 				
 				let ub_no = $(this).parent().children('#userBookmarkForm').children('.ub_no').val();
 				let u_userName = $(this).parent().children('#userBookmarkForm').children('.u_username').val();
@@ -283,20 +287,19 @@ input:focus{
 				}
 				//취소버튼 누를 시 모달창 닫기
 				$('#modalOutBtn').click(function(){
+					console.log("dddd");
 					$("#overlay").css({ visibility:"hidden", opacity:0 });
 				});
 				
 			});
 		});
-		
-		//별 클릭
 		$('.starIcon').click(function(){
 			//off star
 			if( $(this).children().children().last().css("color") == "rgb(255, 255, 0)" ){ 
 				console.log("별이 켜진 상태에서 클릭");
 				$(this).children().children().last().css("color", "white");
 				
-				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
+				let ub_no = $(this).parent().parent().children().last().children('.ub_no').val();
 				$.ajax({
 					type: 'post',
 					url : "/user/deleteBookmark",
@@ -310,33 +313,37 @@ input:focus{
 			}else{		//on star
 				$(this).children().children().last().css("color", "rgb(255, 255, 0)"); 
 				
-				let ub_no = $(this).parent().children('.bookList').children('.ub_no').val();
-				let u_userName = $(this).parent().children('.bookList').children('.u_userName').val();
-				let s_noStart = $(this).parent().children('.bookList').children('.s_noStart').val();
-				let s_noLast = $(this).parent().children('.bookList').children('.s_noLast').val();
-				let b_no = $(this).parent().children('.bookList').children('.b_no').val();
-				let ub_alias = $(this).parent().children('.bookList').children('.ub_alias').val();
+				let ub_no = $(this).parent().parent().children().last().children('.ub_no').val();
+				let b_no = $(this).parent().parent().children().last().children('.b_no').val();
+				let ub_alias = $(this).parent().parent().children().last().children('.ub_alias').val();
+				
+				let u_userName = $(this).parent().parent().parent().children().last().children().children('.u_userName').val();
+				let s_noStart = $(this).parent().parent().parent().children().last().children().children('.s_noStart').val();
+				let s_noLast = $(this).parent().parent().parent().children().last().children().children('.s_noLast').val();
 
 				$.ajax({
 					type: 'post',
 					url : "/user/insertBookmark",
 				 	data : 	{ 
-				 				'ub_no' : ub_no,
+				 				'ub_no' : ub_no,  //
 				 				'u_userName' : u_userName,
-				 				'b_no' : b_no,
+				 				'b_no' : b_no,//
 				 				's_noStart' : s_noStart,
 				 				's_noLast' : s_noLast,
-				 				'ub_alias' : ub_alias
+				 				'ub_alias' : ub_alias//
 				 			},
 					dataType : 'html'
 				}).done(function(data){
 					console.log(data);
-	
 				}).fail(function(err){
 					console.log(err,"!!!!!!!!!!");
 				});
 			} //else end
+			
+			return false;
 		}); //별클릭 이벤트 end
+		//별 클릭
+		
 		
 		
 		
