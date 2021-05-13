@@ -82,7 +82,7 @@
 		height: 90px;
 		text-align: center;
 		color: black; /* width: 300px */
-		margin-top: 50px;
+		margin-top: 30px;
 	}
 	#stopList{
 		cursor: pointer;
@@ -99,9 +99,12 @@
 	
 	<footer>
 	     <div class="footer-container">
-	         	<button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
-	         	<button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
-	         	<button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
+	         	<!--  button id="btn1" class="footerbtn" onmousedown="mouseDown1()" onmouseup="mouseUp1()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
+	         	  button id="btn2" class="footerbtn" onmousedown="mouseDown2()" onmouseup="mouseUp2()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
+	         	 button id="btn3" class="footerbtn" onmousedown="mouseDown3()" onmouseup="mouseUp3()"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>-->
+	         	<button id="btn1" class="footerbtn"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-left"></i></button>
+	         	<button id="btn2" class="footerbtn"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-down"></i></button>
+	         	<button id="btn3" class="footerbtn"><i style="font-size:95px;color:#f9eb99;" class="fas fa-arrow-right"></i></button>
 	     </div>
 	</footer>
 </body>
@@ -110,7 +113,7 @@
 		let uBookList = ${uBookList};
 		let str = '';
 		
-		let i = 0;
+		let i = 0;//			4 0 1 2 3 4 5
 		for(i = 0; i < uBookList.length; i++){
 			str += '<button id="mbtn'+i+'" class="btn">'+uBookList[i].ub_alias+'</button>';
 			str += '<input type="hidden" class="ub_no'+i+'" name="ub_no" value="'+uBookList[i].ub_no+'">';	//즐겨찾기 번호
@@ -137,46 +140,49 @@
 		$('#stopList').click(function () {
 			location.href = '/user/stopList';
 		});
-	</script>
-	
-	<script>
 		
-		$('#btn1').click(function(){
-			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
-			}
+		
+		let idx = 0;
+		
+		
+		let check = 0;
+		$('.footerbtn').click(function () {
+			if( check == 0 ) check = 1;
+			else
+				if( $(this).attr('id').substring(3)  == 1 ) { // 이전거
+					idx--;
+					if (idx < 0)	idx = i-1;
+				}
+				else if( $(this).attr('id').substring(3)  == 3 ) { // 다음거
+					idx++;
+					if (idx == i )	idx = 0; 
+				}
+			
+			$('.btn').css('background-color', 'rgb(12, 61, 106)');
+			$('.btn').css('color', 'rgb(249, 235, 153)');
+			$('#mbtn'+idx+'').css('background-color','rgb(249, 235, 153)');
+			$('#mbtn'+idx+'').css('color','rgb(12, 61, 106)');
 		});
 		
-		$('#btn2').click(function(){
-			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!");
-			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-				location.href = '/user/myPage';
-			}
+		let timer1;
+		
+		$('#btn1').mousedown(function(){
+			timer1 = setTimeout(function () {
+				location.href = '/user/reservationCheck';
+			},2000);
 		});
-		$('#btn3').click(function(){
-			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
-			}
+		$('#btn1').mouseup(function () {
+			clearTimeout(timer1);
+		});
+		let timer2;  
+		$('#btn2').mousedown(function(){
+			timer2 = setTimeout(function () {
+				location.href = '/user/getBookmarkDetail?ub_no='+$('.ub_no'+idx+'').val();
+			},2000);
+		});
+		$('#btn2').mouseup(function () {
+			alert($('#mbtn'+idx).html());
+			clearTimeout(timer2);
 		});
 		//버튼 두번 클릭 혹은 롱 클릭
 		let timer;

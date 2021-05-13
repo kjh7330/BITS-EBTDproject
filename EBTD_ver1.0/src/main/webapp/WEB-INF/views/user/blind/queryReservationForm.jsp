@@ -43,13 +43,14 @@
     }
     .mainbtn{
     	width: 350px;
-    	height: 150px;
-    	font-size: 50px;
-    	margin-top: 95px;
+    	height: 74px;
+    	font-size: 35px;
+    	margin-top: 22px;
     	background-color: #0C3D6A;
     	color: #f9eb99;
     	border-radius: 15px;
     	cursor: pointer;
+    	margin-left:50px;
     }
 	#bookListDiv { /* 즐겨찾기 전체 div */
 		height: 90px;
@@ -95,12 +96,12 @@
 		
 			str += '<div class="bookmarkTotal" overflow="auto">';
 			str += '<div class="bookmark">';
-			str += '<button id="mbtn" class="mainbtn">'+bookmark.b_no+'</button>';
-			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namestart+'</button>';
-			str += '<button id="mbtn" class="mainbtn">'+bookmark.s_namelast+'</button>';
-			str += '<div id=quertyReservation style="color:black">예약하시겠습니까?</div>';
-			str += '<button id="yes" class="mainbtn">예</button>';
-			str += '<button id="no" class="mainbtn">아니오</button>';
+			str += '<button id="mbtn1" class="mainbtn">'+bookmark.b_no+'</button>';
+			str += '<button id="mbtn2" class="mainbtn">'+bookmark.s_namestart+'</button>';
+			str += '<button id="mbtn3" class="mainbtn">'+bookmark.s_namelast+'</button>';
+			str += '<div id=quertyReservation style="color:black">&nbsp;</div>';
+			str += '<button id="yes" class="mainbtn">예약하기</button>';
+			str += '<button id="no" class="mainbtn">예약안하기</button>';
 			
 			str += '<input type="hidden" id="b_no" class="mainbtn" name="b_no"value="'+bookmark.b_no+'">';
 			str += '<input type="hidden" class="u_username" name="u_username" value="'+bookmark.u_username+'">';	//아이디
@@ -138,40 +139,105 @@
 
 <script>
 		$('#btn1').click(function(){
-			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+				&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)'
+				&& $('#yes').css('color') == 'rgb(249, 235, 153)'
+				&& $('#no').css('color') == 'rgb(249, 235, 153)'){
+				   $('#no').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#no').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#no').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#yes').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#yes').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#yes').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn3').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn3').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
 			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
 				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#no').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}
 		});
 		
 		$('#btn2').click(function(){
 			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!");
+				alert($('#mbtn1').html()+"번 버스");
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-				location.href = '/user/myPage';
+				alert($('#mbtn2').html());
+			}else if( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' ){
+				alert($('#mbtn3').html());
+			}else if( $('#yes').css('color') == 'rgb(12, 61, 106)' ){
+				alert($('#yes').html());
+			}else if( $('#no').css('color') == 'rgb(12, 61, 106)' ){
+				alert($('#no').html());
 			}
 		});
 		$('#btn3').click(function(){
 			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+				&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)'
+				&& $('#yes').css('color') == 'rgb(249, 235, 153)'
+				&& $('#no').css('color') == 'rgb(249, 235, 153)'){
 				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
 			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
 				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn3').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#mbtn3').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#yes').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#yes').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#no').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#yes').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#no').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#no').css('color') == 'rgb(12, 61, 106)' 
+					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#mbtn3').css('color') == 'rgb(249, 235, 153)' 
+					&& $('#yes').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   $('#no').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}
 		});
 		//버튼 두번 클릭 혹은 롱 클릭
@@ -184,8 +250,7 @@
 			clearTimeout(timer1);
 		}
 		function holding1(){
-			alert('이전페이지가 없음!!');
-			//location.href = '/user/???';
+			window.history.back();
 		}
 		function mouseDown2(){
 			timer2 = setTimeout(function(){holding2();},2000);
@@ -193,9 +258,13 @@
 		function mouseUp2(){
 			clearTimeout(timer2);
 		}
-		/* function holding2(){
-			alert('holding');
-		} */
+		function holding2(){
+			if( $('#yes').css('color') == 'rgb(12, 61, 106)' ){
+				$('#yes').trigger('click');
+			}else if( $('#no').css('color') == 'rgb(12, 61, 106)' ){
+				window.history.back();
+			}
+		}
 		function mouseDown3(){
 			timer3 = setTimeout(function(){holding3();},2000);
 		}

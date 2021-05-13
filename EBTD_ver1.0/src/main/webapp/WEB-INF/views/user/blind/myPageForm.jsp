@@ -99,12 +99,13 @@ $('#btn1').click(function(){
 
 $('#btn2').click(function(){
 	if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-		location.href = '/user/getUserMyInfo';
+		alert("내 정보 확인");
 	}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-		location.href = '/user/getReservationHistoryList';
+		alert("이용 내역");
 	}else if( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' ){
-		location.href = '/user/getMyQuestionList';
+		alert("소리함");
 	}
+	
 });
 $('#btn3').click(function(){
 	if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
@@ -149,9 +150,15 @@ function mouseDown2(){
 function mouseUp2(){
 	clearTimeout(timer2);
 }
-/* function holding2(){
-	alert('holding');
-} */
+function holding2(){
+	if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
+		location.href = '/user/getUserMyInfo';
+	}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+		location.href = '/user/getReservationHistoryList';
+	}else if( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' ){
+		location.href = '/user/getMyQuestionList';
+	}
+}
 function mouseDown3(){
 	timer3 = setTimeout(function(){holding3();},2000);
 }

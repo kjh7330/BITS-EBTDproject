@@ -52,13 +52,31 @@
     	border-radius: 15px;
     	cursor: pointer;
     }
+.maindiv{
+	font-size: 20px;
+}
+#submitBtn{
+	 text-align: center;
+            background-color: lightgray;
+            border-radius: 8px;
+            border: none;
+            margin: 10px;
+            width: 210px;
+            height: 70px;
+            font-size:20px;
+            cursor: pointer;
+}
+#submitBtn:hover{
+	background-color: gray;
+}
+
 
 </style>
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userBlindHeader.jsp"%></div>
 	
-	<div style="color: black">
+	<div class="maindiv" style="color: black">
 		<br> 
 	<form action="addBookMark" method="post">	
 		동 이름 : <select id="t_nameSelect">
@@ -78,12 +96,12 @@
 		
 		도착 정류장 : <select class="check" id="lastStopSelect"  name="s_nolast">
 				</select><br>
-		<input type="text" id="s_nolast" style="display: none;">
+		<input type="text" id="s_nolast" style="display: none; text-align: center;">
 				
 		<div id=checkBookMark style="visibility: hidden; width: 300px; height: 30px"> </div>
 		
-		즐겨찾기에 대한 별칭을 입력하세요(필수입력사항!)<br><br>
-		<input type="text" id = "ub_alias" name="ub_alias" style="width: 70%" ><br><br>
+		즐겨찾기에 대한 별칭을 입력하세요<br>(필수입력사항!)<br>
+		<input type="text" id = "ub_alias" name="ub_alias" style="width: 70%;height: 20px;" ><br><br>
 		
 		<button id="submitBtn">즐겨찾기 등록하기</button>
 	</form>
@@ -261,40 +279,24 @@ $('#submitBtn').click(function(){
 	});
 	
 		$('#btn1').click(function(){
-			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if(    $('#submitBtn').css('color') == 'rgb(0, 0, 0)'){
+				   $('#submitBtn').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#submitBtn').css('color') == 'rgb(12, 61, 106)'){
+			  	   	   $('#submitBtn').css("background-color","rgb(211, 211, 211)").css("color","rgb(0, 0, 0)");
 			}
 		});
 		
 		$('#btn2').click(function(){
-			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!");
-			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-				location.href = '/user/myPage';
+			if( $('#submitBtn').css('color') == 'rgb(12, 61, 106)' ){
+				alert('즐겨찾기 등록하기');
 			}
 		});
+		
 		$('#btn3').click(function(){
-			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if(    $('#submitBtn').css('color') == 'rgb(0, 0, 0)'){
+				   $('#submitBtn').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#submitBtn').css('color') == 'rgb(12, 61, 106)'){
+			  	   	   $('#submitBtn').css("background-color","rgb(211, 211, 211)").css("color","rgb(0, 0, 0)");
 			}
 		});
 		//버튼 두번 클릭 혹은 롱 클릭
@@ -307,8 +309,7 @@ $('#submitBtn').click(function(){
 			clearTimeout(timer1);
 		}
 		function holding1(){
-			alert('이전페이지가 없음!!');
-			//location.href = '/user/???';
+			location.href = '/user/getBookmarkList';
 		}
 		function mouseDown2(){
 			timer2 = setTimeout(function(){holding2();},2000);
@@ -316,9 +317,11 @@ $('#submitBtn').click(function(){
 		function mouseUp2(){
 			clearTimeout(timer2);
 		}
-		/* function holding2(){
-			alert('holding');
-		} */
+		function holding2(){
+			if( $('#submitBtn').css('color') == 'rgb(12, 61, 106)' ){
+				$('#submitBtn').trigger('click');
+			}
+		}
 		function mouseDown3(){
 			timer3 = setTimeout(function(){holding3();},2000);
 		}

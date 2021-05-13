@@ -39,7 +39,7 @@
     	border:none;
     	cursor: pointer;
     }
-    .mainbtn{
+    .mainbtn, .mainbtn1{
     	width: 350px;
     	height: 150px;
     	font-size: 50px;
@@ -60,8 +60,8 @@
 <div id="userheader"><%@ include file="/WEB-INF/views/include/userBlindHeader.jsp"%></div>
 <div class="maindiv">
 	
-		<button id="mbtn1" class="mainbtn" style="margin-left:50px;" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
-		<button id="mbtn3" class="mainbtn" onclick="location.href='/user/blind/getReservationInfo'">예약확인</button>
+		<button id="mbtn1" class="mainbtn1" style="margin-left:50px;" onclick="location.href='/user/getBookmarkList'">즐겨찾기</button>
+		<button id="mbtn3" class="mainbtn1" style="margin-left:50px;" onclick="location.href='/user/blind/getReservationInfo'">예약확인</button>
 		<button id="mbtn2" class="mainbtn" onclick="location.href='/user/myPage'">마이페이지</button>
 </div>
 
@@ -92,21 +92,38 @@
 <script>
 		
 		$('#btn1').click(function(){
-			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if( 	$("#mbtn1").css("display") == "none"){
+				if(			$('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn3').css('color') == 'rgb(249, 235, 153)' ){
+							$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+				}else if (  $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
+						&&  $('#mbtn3').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   		$('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       		$('#mbtn3').css("background-color","#f9eb99").css("color","#0C3D6A"); 
+				}else if (  $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn3').css('color') == 'rgb(12, 61, 106)' ){
+			           		$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   		$('#mbtn3').css("background-color","#0C3D6A").css("color","#f9eb99");
+				}
+			}else if( 	$("#mbtn3").css("display") == "none"){
+				if(			$('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+							$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+				}else if (  $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
+						&&  $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   		$('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       		$('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A"); 
+				}else if (  $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
+			           		$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   		$('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+				}
 			}
 		});
 		
 		$('#btn2').click(function(){
+			if( 	$("#mbtn1").css("display") == "none"){
+			}
 			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
 				alert("즐겨찾기");
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
@@ -114,17 +131,32 @@
 			}
 		});
 		$('#btn3').click(function(){
-			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if( 	$("#mbtn1").css("display") == "none"){
+				if(			$('#mbtn2').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn3').css('color') == 'rgb(249, 235, 153)' ){
+							$('#mbtn3').css("background-color","#f9eb99").css("color","#0C3D6A");
+				}else if (  $('#mbtn3').css('color') == 'rgb(12, 61, 106)' 
+						&&  $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   		$('#mbtn3').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       		$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A"); 
+				}else if (  $('#mbtn3').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+			           		$('#mbtn3').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   		$('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				}
+			}else if( 	$("#mbtn3").css("display") == "none"){
+				if(			$('#mbtn1').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+							$('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
+				}else if (  $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
+						&&  $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
+			  	   	   		$('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+				       		$('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A"); 
+				}else if (  $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
+						&&  $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+			           		$('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
+		  	   	   	   		$('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+				}
 			}
 		});
 		//버튼 두번 클릭 혹은 롱 클릭
@@ -141,6 +173,8 @@
 				location.href = '/user/getBookmarkList';
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
 				location.href = '/user/myPage';
+			}else if( $('#mbtn3').css('color') == 'rgb(12, 61, 106)' ){
+				$('#mbtn3').trigger('click');
 			}
 		}
 		function mouseDown2(){
