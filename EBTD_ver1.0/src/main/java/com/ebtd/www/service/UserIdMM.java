@@ -82,9 +82,7 @@ public class UserIdMM {
 		mav = new ModelAndView();
 		String view = null;
 		//company DB에 일치하는 아이디 확인
-		System.out.println("username = " + ub.getU_username());
 		if(!uIdDao.existUsername(ub)) {
-			System.out.println("1");
 			//일치하는 아이디 없을 시 로그인창으로 이동 후 msg출력
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
 			mav.setViewName("redirect:/user/loginForm");
@@ -95,10 +93,7 @@ public class UserIdMM {
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();		
 		//패스워드 일치 확인
 		String dbPwd = uIdDao.getPwd(ub);
-		System.out.println(ub.getU_password());
-		System.out.println(dbPwd);
 		if(!pwdEncoder.matches(ub.getU_password(), dbPwd)) {
-			System.out.println("2");
 			mav.addObject("msg", "일치하는 아이디가 없습니다.");
 			mav.setViewName("redirect:/user/loginForm");
 			return mav;
@@ -108,20 +103,17 @@ public class UserIdMM {
 		//아이디 및 pw 일치 확인 후 username 정보 입력 (없으면 null)
 		String username = ub.getU_username();
 		if(username!=null) {
-			System.out.println("3");
 			//일치하는 정보 있을시 userState 정보 가저옴 (1 - 블라인드, 0 - 휠체어)			
 			int u_type = uIdDao.accessUserState(username);
-			System.out.println(u_type);
 			if(u_type==0){
-				System.out.println("4");
 				//휠체어 유저인 경우
 				session.setAttribute("u_username", username);
 				session.setAttribute("u_type", u_type);
+				
 				view = "redirect:/user/reservationCheck";
 				
 				
 			}else if(u_type==1) {
-				System.out.println("5");
 				//시각장애인 유저인 경우
 				view = "redirect:/user/reservationCheck";
 				session.setAttribute("u_username", username);
@@ -133,7 +125,7 @@ public class UserIdMM {
 			view = "redirect:user/loginForm";
 		}mav.setViewName(view);
         String u_type = session.getAttribute("u_type")+"";
-        Cookie userNameCookie = new Cookie("u_username", username);
+      /*  Cookie userNameCookie = new Cookie("u_username", username);
         Cookie TypeCookie = new Cookie("u_type", u_type);
         
         if (session.getAttribute("u_username")!=null) {
@@ -148,7 +140,7 @@ public class UserIdMM {
             TypeCookie.setMaxAge(0);
             response.addCookie(userNameCookie);
             response.addCookie(TypeCookie);
-        }
+        }*/
 		return mav;
 	}
 	public String findId(UserBean ub) {
