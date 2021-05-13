@@ -131,6 +131,7 @@
 		
 		//아니오 버튼 클릭 --> 즐겨찾기리스트 페이지로 이동
 		$('#no').click(function (){
+			window.history.back();
 			//let u_username = $(this).parent().children('.u_username').val();
 			//location.href = '/user/getBookmarkList';
 		});
