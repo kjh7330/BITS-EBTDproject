@@ -9,7 +9,7 @@
 
 	.reservation{
 		background-color: lightgray; 
-		height: 500px;
+		height: 404px;
 		margin: 20px; padding: 20px;
 	}
 	
@@ -55,18 +55,40 @@
     	color: #f9eb99;
     	border-radius: 15px;
     	cursor: pointer;
+    	
+    	
     }
-	
+    .mainview {
+	position: relative;
+	top: 120px;
+	color: black;
+	padding: 20px;
+	padding-bottom: 120px; /*footer여백*/
+	z-index: 1;
+	font-size: 18px;
+	background-color : #f6f4f4;
+}
+	#userheader {
+	position: absolute;
+	z-index: 3;
+}
+input{
+	font-size: 18px;
+	cursor: pointer;
+}
+input:focus{
+	outline: none;
+}
 </style>
 </head>
 <body>
 	<div id="userheader"><%@ include
 			file="/WEB-INF/views/include/userheader.jsp"%></div>
-
-	<form name="reservationCancel" id="reservationCancel" action="/user/reservationCancel" method="post"></form>
-	<div id="reserveDetail" style="color:black">
+	<div class="mainview">
+		<form name="reservationCancel" id="reservationCancel" action="/user/reservationCancel" method="post"></form>
+		<div id="reserveDetail" style="color:black">
+		</div>
 	</div>
-
 <!-- 버튼 왜 안들어가지? -->
 <footer>
      <div class="footer-container">
@@ -92,7 +114,7 @@
 		str += '<div class="reservationContent">출발정류장: '+reserveDetail.s_namestart + '['+reserveDetail.s_nostart+']</div>'; //출발지
 		str += '<div class="reservationContent">도착정류장: '+reserveDetail.s_namelast + '['+reserveDetail.s_nolast+']</div>';//도착지
 		str += '<input type="hidden" class="ur_no" name="ur_no" value="'+reserveDetail.ur_no +'"><br>'; //예약넘버	
-		str += '<input type="button" class="cancelBtn" value="예약취소">';
+		str += '<input type="button" id="btn7" class="cancelBtn" value="예약취소" style="margin-left: 94px; width:150px; height:40px; background-color:#f9eb99; color:#0C3D6A;">';
 		str += "</div>";
 	
 		
@@ -281,6 +303,65 @@
 		$('form').trigger('submit');
 	});
 	
+	
+	$('#btn1').click(function(){
+		if(      $('#btn7').css("background-color") == 'rgb(255, 165, 0)' ){
+			     $('#btn7').css("background-color","rgb(249, 235, 153)").css("color","rgb(255, 0, 0)");
+		}else if($('#btn7').css("background-color") == 'rgb(249, 235, 153)' ){
+		  		 $('#btn7').css("background-color","rgb(255, 165, 0)").css("color","rgb(12, 61, 106)");
+		}
+	});
+	
+	$('#btn2').click(function(){
+		if(  $('#btn7').css("background-color") == 'rgb(255, 165, 0)' ){
+			alert("예약취소");
+		}
+		
+/* 		if( $('#mbtn').css('color') == 'rgb(12, 61, 106)' ){
+			alert($('.mainbtn').html());
+		}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
+			location.href = '/user/myPage';
+		} */
+	});
+	$('#btn3').click(function(){
+		if(      $('#btn7').css("background-color") == 'rgb(255, 165, 0)' ){
+		     	 $('#btn7').css("background-color","rgb(249, 235, 153)").css("color","rgb(255, 0, 0)");
+		}else if($('#btn7').css("background-color") == 'rgb(249, 235, 153)' ){
+		  		 $('#btn7').css("background-color","rgb(255, 165, 0)").css("color","rgb(12, 61, 106)");
+		}
+	});
+	//버튼 두번 클릭 혹은 롱 클릭
+	let timer1;
+	let timer2;
+	let timer3;
+	let istrue = false;
+	function mouseDown1(){
+		timer1 = setTimeout(function(){holding1();},2000);
+	}
+	function mouseUp1(){
+		clearTimeout(timer1);
+	}
+	function holding1(){
+		window.history.back();
+	}
+	function mouseDown2(){
+		timer2 = setTimeout(function(){holding2();},2000);
+	}
+	function mouseUp2(){
+		clearTimeout(timer2);
+	}
+	function holding2(){
+			$('.cancelBtn').trigger('click');
+	}
+	function mouseDown3(){
+		timer3 = setTimeout(function(){holding3();},2000);
+	}
+	function mouseUp3(){
+		clearTimeout(timer3);
+	}
+	/* function holding3(){
+		location.href = '/user/loginForm';
+	} */
 	
 </script>
 

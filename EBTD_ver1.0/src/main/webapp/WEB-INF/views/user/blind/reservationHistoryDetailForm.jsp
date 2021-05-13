@@ -93,10 +93,10 @@
 				<td style="width: 120px;">버스번호</td><td><input type="hidden" name="u_username" value="${ubd.u_username}"><input class="input" name="b_no" value="${ubd.b_no}" readonly></td>
 			</tr>
 			<tr>
-				<td>출발지</td><td><input type="hidden" name="s_nostart" value="${ubd.s_nostart}"><input class="input" name="s_nameStart" value="${ubd.s_nameStart}" readonly></td>
+				<td>출발지</td><td><input type="hidden" name="s_nostart" value="${ubd.s_nostart}"><input class="input" name="s_namestart" value="${ubd.s_namestart}" readonly></td>
 			</tr>
 			<tr>
-				<td>도착지</td><td><input type="hidden" name="s_nolast" value="${ubd.s_nolast}"><input class="input" name="s_nameLast" value="${ubd.s_nameLast}" readonly></td>
+				<td>도착지</td><td><input type="hidden" name="s_nolast" value="${ubd.s_nolast}"><input class="input" name="s_nameLast" value="${ubd.s_namelast}" readonly></td>
 			</tr>
 			<tr>
 				<td>이용시간</td><td><input class="input" name="ur_date" value="${ubd.ur_date}" readonly></td>

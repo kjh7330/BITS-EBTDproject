@@ -44,12 +44,13 @@
     .mainbtn{
     	width: 350px;
     	height: 150px;
-    	font-size: 50px;
+    	font-size: 40px;
     	margin-top: 95px;
     	background-color: #0C3D6A;
     	color: #f9eb99;
     	border-radius: 15px;
     	cursor: pointer;
+    	margin-bottom:50px;
     }
 	#bookListDiv { /* 즐겨찾기 전체 div */
 		height: 90px;
@@ -68,6 +69,16 @@
 		padding-top: 15px; /* margin: 20px; */
 		border: 0.2px solid;
 	}
+	#bookmarkDetail input{
+		border: none;
+		font-size: 21px;
+		width: 180px;
+		text-align: center;
+	}
+	#bookmarkDetail{
+		margin-left: 48px;
+	}
+
 
 </style>
 <body>
@@ -118,40 +129,29 @@
 
 <script>
 		$('#btn1').click(function(){
-			if(    $('#mbtn2').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn1').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn2').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if(    $('#mbtn').css('color') == 'rgb(249, 235, 153)' ){
+				   $('#mbtn').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn').css('color') == 'rgb(12, 61, 106)' ){
+			  	   	   $('#mbtn').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}else if ( $('#mbtn').css('color') == 'rgb(249, 235, 153)'){
+			           $('#mbtn').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}
 		});
 		
 		$('#btn2').click(function(){
-			if( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' ){
-				//location.href = '/user/???';
-				console.log("아직 페이지 이동할 곳이 없음!");
+			if( $('#mbtn').css('color') == 'rgb(12, 61, 106)' ){
+				alert($('.mainbtn').html());
 			}else if( $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
 				location.href = '/user/myPage';
 			}
 		});
 		$('#btn3').click(function(){
-			if(    $('#mbtn1').css('color') == 'rgb(249, 235, 153)' 
-				&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-				   $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(12, 61, 106)' 
-					&& $('#mbtn2').css('color') == 'rgb(249, 235, 153)' ){
-			  	   	   $('#mbtn1').css("background-color","#0C3D6A").css("color","#f9eb99");
-				       $('#mbtn2').css("background-color","#f9eb99").css("color","#0C3D6A");
-			}else if ( $('#mbtn1').css('color') == 'rgb(249, 235, 153)'
-					&& $('#mbtn2').css('color') == 'rgb(12, 61, 106)' ){
-			           $('#mbtn1').css("background-color","#f9eb99").css("color","#0C3D6A");
-		  	   	   	   $('#mbtn2').css("background-color","#0C3D6A").css("color","#f9eb99");
+			if(    $('#mbtn').css('color') == 'rgb(249, 235, 153)' ){
+				   $('#mbtn').css("background-color","#f9eb99").css("color","#0C3D6A");
+			}else if ( $('#mbtn').css('color') == 'rgb(12, 61, 106)' ){
+			  	   	   $('#mbtn').css("background-color","#0C3D6A").css("color","#f9eb99");
+			}else if ( $('#mbtn').css('color') == 'rgb(249, 235, 153)'){
+			           $('#mbtn').css("background-color","#f9eb99").css("color","#0C3D6A");
 			}
 		});
 		//버튼 두번 클릭 혹은 롱 클릭
@@ -164,8 +164,7 @@
 			clearTimeout(timer1);
 		}
 		function holding1(){
-			alert('이전페이지가 없음!!');
-			//location.href = '/user/???';
+			window.history.back();
 		}
 		function mouseDown2(){
 			timer2 = setTimeout(function(){holding2();},2000);
@@ -173,9 +172,9 @@
 		function mouseUp2(){
 			clearTimeout(timer2);
 		}
-		/* function holding2(){
-			alert('holding');
-		} */
+		function holding2(){
+				$('.bookmark').trigger('click');
+		}
 		function mouseDown3(){
 			timer3 = setTimeout(function(){holding3();},2000);
 		}

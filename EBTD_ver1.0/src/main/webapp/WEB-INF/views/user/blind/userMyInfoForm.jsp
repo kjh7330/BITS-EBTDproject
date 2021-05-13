@@ -41,7 +41,7 @@
 	.maintable{
 		font-size: 18px;
 		font-weight: bold;
-		height: 500px;
+		height: 435px;
 		margin-bottom: 20px;
 	}
 	.tdname{
@@ -199,8 +199,12 @@ $('#btn1').click(function(){
 });
 
 $('#btn2').click(function(){
-	if( $('.tablebtn2').css('background-color') == 'rgb(255, 165, 0)' ){
-		location.href = '/user/myPage';
+	if( $('.tablebtn1').css("background-color") == "rgb(255, 165, 0)" ){
+		alert("수정");
+	}else if ( $('.tablebtn3').css("background-color") == "rgb(255, 165, 0)" ){
+		alert("로그아웃");
+	}else if( $('.tablebtn2').css('background-color') == 'rgb(255, 165, 0)' ){
+		alert("취소");
 	}
 });
 $('#btn3').click(function(){
@@ -251,6 +255,8 @@ function holding2(){
 		$('.tablebtn1').trigger('click');
 	}else if ( $('.tablebtn3').css("background-color") == "rgb(255, 165, 0)" ){
 				location.href = '/user/logout';
+	}else if( $('.tablebtn2').css('background-color') == 'rgb(255, 165, 0)' ){
+		location.href = '/user/myPage';
 	}
 }
 function mouseDown3(){
