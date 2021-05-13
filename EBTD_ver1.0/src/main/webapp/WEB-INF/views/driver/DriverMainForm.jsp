@@ -646,7 +646,7 @@
 					console.log(err,'!!!!!!!!!!!!!!');
 				});	
 			}, 2000);
-		});
+		}); 
 		$('#change').click(function () {
 			location.href = 'getDriverList?ab_no=${ab_no}&b_no=${b_no}&b_type=${b_type}';
 		});

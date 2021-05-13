@@ -95,7 +95,7 @@ public class UserIdController {	//유저 - 로그인, 회원가입
 	@RequestMapping(value = "/logout")
     public String logout(HttpSession session, HttpServletRequest request) {        
 	        //request객체에서 쿠키 가져옴
-	        /*Cookie[] cookies = request.getCookies();
+	        Cookie[] cookies = request.getCookies();
 	        //쿠키에 값이 있을경우
 	        if (cookies != null) {
 	            for (int i = 0; i < cookies.length; i++) {
@@ -103,7 +103,7 @@ public class UserIdController {	//유저 - 로그인, 회원가입
 	                //쿠키값 제거
 	                cookies[i].setMaxAge(0);
 	            }
-	        }*/
+	        }
 		session.removeAttribute("u_username");
 		session.removeAttribute("u_type");
 		
