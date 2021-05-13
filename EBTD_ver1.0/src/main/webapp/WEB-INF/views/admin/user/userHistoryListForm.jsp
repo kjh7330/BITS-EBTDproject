@@ -127,7 +127,7 @@
 				str += '<td>' + urhList[i].b_no + '</td>'; //버스번호	
 				str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
 				str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
-				str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //출발지	
+				str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 				str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 				//아이디
 				str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
@@ -235,57 +235,14 @@
 			//상세 클릭값 바뀌면
 			$('#selectSortDetail').change(function(){
 				var val = $('#selectSortDetail option:selected').val();
-	
+
 				switch(val){
 					case "시각":
-						$('#userHistoryList').html("");
-						str = "";
-						//리스트 중에 
-						for (let i = 0; i < urhList.length; i++) {
-							console.log(urhList[i].u_type);
-							//시각장애인만
-							if(urhList[i].u_type == "시각"){
-								//urhList[i].u_type = '시각';
-								str += '<tr>';
-								str += '<th>' + (i+1) + '</th>' //NO
-								str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
-								str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
-								str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-								str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-								str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-								str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
-								str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
-								str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
-								str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
-							}
-						}
-						$("#userHistoryList").empty();
-						$("#userHistoryList").append(str);
+						search_u_type(1);
 						break;
 						
 					case "휠체어":
-						$('#userHistoryList').html("");
-						str = "";
-						//리스트 중에 
-						for (let i = 0; i < urhList.length; i++) {
-							console.log(urhList[i].u_type);
-							//휠체어만
-							if(urhList[i].u_type == "휠체어"){
-								str += '<tr>';
-								str += '<th>' + (i+1) + '</th>' //NO
-								str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
-								str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
-								str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
-								str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-								str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-								str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
-								str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
-								str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
-								str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
-							}
-						}
-						$("#userHistoryList").empty();
-						$("#userHistoryList").append(str);
+						search_u_type(0);
 						break;
 					
 					case "1주일":
@@ -316,10 +273,56 @@
 					case "완료":
 						state_search(3);
 						break;
-					
 				}	//switch end
 				
 			}); //selectSortDetail change end
+			
+			function search_u_type(u_type){
+				$.ajax({
+					url : "/admin/user/getHistorySearchUType",
+					data : { 'u_type' : u_type },
+					dataType : 'json',
+				}).done(function (data) {
+					console.log(data);
+					let urhList = data;
+					let str = "";
+					
+					for (let i = 0; i < urhList.length; i++) {
+						//0,1을 --> 휠체어, 시각으로 바꾸어 출력
+						if (urhList[i].u_type == 0) {
+							urhList[i].u_type = '휠체어';
+						} else urhList[i].u_type = '시각';
+						
+						//현 이용상태(0:예약중, 1:탑승중, 2:취소, 3:완료)
+						if (urhList[i].ur_state == 2) {
+							urhList[i].ur_state = '취소';
+						} else if(urhList[i].ur_state == 3){
+							urhList[i].ur_state = '완료';
+						}else if(urhList[i].ur_state == 0){
+							urhList[i].ur_state = '예약중'
+						}else if(urhList[i].ur_state == 1){
+							urhList[i].ur_state = '탑승중'
+						}
+			
+						str += '<tr>';
+						str += '<th>' + (i+1) + '</th>' //NO
+						str += '<td>' + urhList[i].ur_no + '</td>';  //예약번호
+						str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
+						str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
+						str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
+						str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
+						str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
+						str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
+					}
+					$("#userHistoryList").empty();
+					$("#userHistoryList").append(str);
+					
+				}).fail(function(err) {
+					console.log(err,"!!!!!!!!!!");
+				});
+			}
 			
 			function state_search(state){
 				$.ajax({
@@ -354,8 +357,8 @@
 						str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 						str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 						str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-						str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-						str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 						str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 						str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 						str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -401,8 +404,8 @@
 						str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 						str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 						str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-						str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-						str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+						str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 						str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 						str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 						str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -459,8 +462,8 @@
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -505,8 +508,8 @@
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -552,8 +555,8 @@
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -599,8 +602,8 @@
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태
@@ -646,8 +649,8 @@
 									str += '<td>' + urhList[i].ur_date + '</td>'; //이용일
 									str += '<td>' + urhList[i].b_no + '</td>'; //버스번호
 									str += '<td><a href="/admin/company/getCompanyDetail?c_username='+urhList[i].c_username+'">'+urhList[i].c_username+'</a></td>'; 	
-									str += '<td>' + urhList[i].s_namestart + '</td>'; //출발지	
-									str += '<td>' + urhList[i].s_namelast + '</td>'; //목적지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nostart+'">' + urhList[i].s_namestart + '</a></td>'; //출발지	
+									str += '<td><a href="/admin/stop/getStopDetail?s_No='+urhList[i].s_nolast+'">' + urhList[i].s_namelast + '</a></td>'; //도착지	
 									str += '<td>' + urhList[i].u_type + '</td>'; //장애유형
 									str += '<td><a href="/admin/user/getUserDetail?u_userName=' + urhList[i].u_userName + '">'+urhList[i].u_userName+'</a></td>';
 									str += '<td>' + urhList[i].ur_state + '</td>';	 //이용상태

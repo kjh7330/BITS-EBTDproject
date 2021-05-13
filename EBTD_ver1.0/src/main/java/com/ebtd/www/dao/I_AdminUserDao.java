@@ -22,8 +22,11 @@ public interface I_AdminUserDao {
 
 	//유저히스토리에서 이용일 검색 ajax
 	List<UserReserveHistoryBean> getUserHistoryDateList(int period); 
+	
+	//유저히스토리에서 장애유형 검색
+	List<UserReserveHistoryBean> getHistorySearchUType(int u_type);
 
-	//유저히스토리에서 이용일 검색 ajax
+	//유저히스토리에서 아이디 검색 ajax
 	List<UserReserveHistoryBean> getUserHistoryUserName(String u_userName);
 
 	//유저히스토리에서 회사명 검색 ajax
@@ -40,6 +43,8 @@ public interface I_AdminUserDao {
 
 	//유저히스토리에서 이용상태 검색 ajax
 	List<UserReserveHistoryBean> getState(String ur_state);
+
+	
 
 	
 

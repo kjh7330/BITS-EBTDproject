@@ -64,6 +64,28 @@
  		ORDER BY UR.UR_NO DESC
 	</select>
 	
+	
+	<select id="getHistorySearchUType" resultType="userReserveHistory">
+		SELECT UR.UR_NO, 
+				UR.U_USERNAME, 
+				UR.B_NO,
+				B.C_USERNAME, 
+				UR.UR_DATE, 
+				UR.S_NOSTART,
+				S1.S_NAME S_NAMESTART,  
+				UR.S_NOLAST,
+				S2.S_NAME S_NAMELAST,
+				UR.UR_STATE, 
+				U.U_TYPE
+		FROM UR
+		LEFT JOIN B ON UR.B_NO = B.B_NO
+		LEFT JOIN U ON U.U_USERNAME = UR.U_USERNAME
+		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
+		JOIN S S2 ON UR.S_NOLAST=S2.S_NO
+ 		WHERE U.U_TYPE =#{u_type}
+ 		ORDER BY UR.UR_NO DESC
+ 	</select>
+	
 	<select id="getUserHistoryUserName" resultType="userReserveHistory">
 		SELECT UR.UR_NO, 
 				UR.U_USERNAME, 
