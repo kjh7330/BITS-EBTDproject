@@ -77,7 +77,9 @@ public class AdminUserMM {	//김아름
 			u_type2 = 0;
 		}
 		uerInfoList = uDao.getUserSearchUType(u_type2);	// 디비 가서 가져오기
-		
+		System.out.println("=============");
+
+		System.out.println(uerInfoList);
 		//디비에서 가져온 데이터가 있으면
 		if( uerInfoList!=null) {
 			return om.writeValueAsString(uerInfoList); //List를 json으로 변환
@@ -160,6 +162,22 @@ public class AdminUserMM {	//김아름
 			return om.writeValueAsString(urhList);
 	}
 	
+	//Rest
+	//이용자 히스토리 : 장애유형 검색
+	public String getHistorySearchUType(int u_type) throws JsonProcessingException {
+		mav = new ModelAndView();	
+		ObjectMapper om = new ObjectMapper();
+		List<UserReserveHistoryBean> urhList = null;
+ 
+		urhList = uDao.getHistorySearchUType(u_type);	//디비 가서 정보 가져오기
+		//디비에서 가져온 데이터가 있으면
+		if( urhList!=null) {
+			return om.writeValueAsString(urhList); //List를 json으로 변환
+		}else {
+			return "getHistorySearchUType 가져오기 실패";
+		}
+	}
+
 	//Rest
 	//이용자 히스토리 : 아이디 검색
 	public String getUserHistoryUserName(String u_userName) throws JsonProcessingException {
@@ -279,6 +297,7 @@ public class AdminUserMM {	//김아름
 		mav.setViewName(view);
 		return mav;
 	}	//getUserChart end
+
 
 
 
