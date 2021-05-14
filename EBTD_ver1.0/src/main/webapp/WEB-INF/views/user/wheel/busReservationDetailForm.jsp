@@ -293,7 +293,7 @@ let timer = setInterval(function () {
 		    			else if ( ( start_turn - ab_data['r_turn'] ) < 8 && ( ( start_turn - ab_data['r_turn'] ) != 0 ) )
 		    				$('#nearBus').val( ( ( start_turn - ab_data['r_turn'] ) * 3 ) + "분 남았습니다");
 		    			else{
-					    	$('#nearBus').val("도착 예정중인 버스가 없습니다."); 
+					    	$('#nearBus').val("도착 예정 버스가 없습니다."); 
 		    			}
 		    		}else if ( ab_data['r_turn'] <= start_turn && ab_data['ab_updown'] == 1 && start_turn < 8){
 	    				if	( start_turn - ab_data['r_turn'] == 1){
@@ -301,7 +301,7 @@ let timer = setInterval(function () {
 	    				}else if ( ( start_turn - ab_data['r_turn'] ) < 8 && ( start_turn - ab_data['r_turn'] ) != 0 ){
 		    				$('#nearBus').val( ( ( start_turn - ab_data['r_turn'] ) * 3 ) + "분 남았습니다");
 	    				}else{
-					    	$('#nearBus').val("도착 예정중인 버스가 없습니다."); 
+					    	$('#nearBus').val("도착 예정 버스가 없습니다."); 
 	    				}
 		    		}else if ( ab_data['r_turn'] <= (8-start_turn) && ab_data['ab_updown'] == 0 && start_turn < 8){
 						if( ( start_turn + ab_data['r_turn'] - 2 ) == 1 ){
@@ -309,7 +309,7 @@ let timer = setInterval(function () {
 						}else if (  ( start_turn + ab_data['r_turn'] - 2 ) < 8 ){
 		    				$('#nearBus').val( ( start_turn + ab_data['r_turn'] - 2 ) * 3 + "분 남았습니다." );
 						}else{
-					    	$('#nearBus').val("도착 예정중인 버스가 없습니다."); 
+					    	$('#nearBus').val("도착 예정 버스가 없습니다."); 
 						}
 		    		}
 		    	}else if (r_up_down == 0){				// 유저 상행
@@ -321,21 +321,21 @@ let timer = setInterval(function () {
 		    			else if ( ( ab_data['r_turn'] - start_turn ) < 8 && ( ( start_turn - ab_data['r_turn'] ) != 0 ) )
 			    			$('#nearBus').val( ( ( ab_data['r_turn'] - start_turn ) * 3 ) + "분 남았습니다");
 		    			else 
-					    	$('#nearBus').val("버스 없음1.");
+					    	$('#nearBus').val("도착 예정 버스가 없습니다.");
 		    		}else if ( ab_data['r_turn'] >= start_turn && ab_data['ab_updown'] == 0 && ( br_size - 7 ) < start_turn ){
 		    			if		( ( ab_data['r_turn'] - start_turn ) == 1 )
 		    				$('#nearBus').val("잠시 후 도착합니다.");
 	    			else if ( ( ab_data['r_turn'] - start_turn ) < 8 && ( ab_data['r_turn'] - start_turn ) != 0)
 			    			$('#nearBus').val( ( ( ab_data['r_turn'] - start_turn ) * 3 ) + "분 남았습니다");
 		    			else
-					    	$('#nearBus').val("버스 없음2.");
+					    	$('#nearBus').val("도착 예정 버스가 없습니다.");
 		    		}else{
 		    			if( ( br_size - ab_data['r_turn'] ) * 2 +ab_data['r_turn'] - start_turn == 1 )
 		    				$('#nearBus').val("잠시 후 도착합니다.");
 		    			else if ( ( br_size - ab_data['r_turn'] ) * 2 + ab_data['r_turn'] - start_turn < 8)
 		    				$('#nearBus').val( ( ( br_size - ab_data['r_turn'] ) * 2 + ab_data['r_turn'] - start_turn ) * 3 + "분 남았습니다.");
 						else
-					    	$('#nearBus').val("버스 없음3.");
+					    	$('#nearBus').val("도착 예정 버스가 없습니다.");
 		    		}
 		    	}
 	    	}
@@ -376,11 +376,13 @@ for (i; i<${brList}.length; i++){
 	for( idx in ${abList}){
 		if( ${abList}[idx]['r_turn'] == i+1 ) {
 			if( ${abList}[idx]['ab_type'] == 0 )
-				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'일반');
-				else									$('#route_down_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'일반');
+				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html('<i class="fas fa-arrow-down style="color : black;"></i>&nbsp;<i class="fas fa-bus" style="color : blue;"></i><br>'+${abList}[idx]['ab_no']);
+				else									$('#route_down_td_'+(i+1)+'').html('<i class="fas fa-bus" style="color : blue;"></i>&nbsp;<i class="fas fa-arrow-up style="color : black;"></i><br>'+${abList}[idx]['ab_no']);
+			
 			else
-				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'저상');
-				else									$('#route_down_td_'+(i+1)+'').html(${abList}[idx]['ab_no']+'저상');
+				if( ${abList}[idx]['ab_updown'] == 1 )	$('#route_up_td_'+(i+1)+'').html('<i class="fas fa-arrow-down style="color : black;"></i>&nbsp;<i class="fas fa-bus" style="color : green;"></i><br><h3 class="info">'+${abList}[idx]['ab_no']+'저상</h3>');
+				else									$('#route_down_td_'+(i+1)+'').html('<i class="fas fa-bus" style="color : green;"></i>&nbsp;<i class="fas fa-arrow-up style="color : black;"></i><br><h3 class="info">'+${abList}[idx]['ab_no']+'저상</h3>');
+			
 		}
 	}
 };

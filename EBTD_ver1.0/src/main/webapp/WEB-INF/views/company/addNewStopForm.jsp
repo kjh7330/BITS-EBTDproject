@@ -255,6 +255,17 @@ $("#sa_Name").blur(function() {
    var sa_X = $('#sa_X').val(); //입력한 X값
    var sa_Y = $('#sa_Y').val(); //입력한 Y값
    var sa_Reason = $('#sa_Reason').val(); //입력한 신청사유 
+   var checkPosition = $('#checkSaPosition').text();
+   var checkName = $('#checkSaName').text();
+   
+    if(checkName == '사용중인 정류장 이름 입니다'){
+    	alert('사용중인 정류장 이름 입니다');
+        return false;
+     } 
+    if(checkPosition == '사용중인 정류장 위치 입니다'){
+    	alert('사용중인 정류장 위치 입니다');
+        return false;
+     } 
      if(sa_Name == ''){
         alert('정류장 이름을 입력하세요');
         return false;

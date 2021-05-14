@@ -245,7 +245,7 @@ public class AdminStopMM {
 		String view = null;
 		
 		saList=sDao.getOfficialDocumentResult();
-		System.out.println("sajkdfhaskjrfhaehriaubfkjdsabrjkawherjkhfjkadsbnkjrhaiusfkjs"+saList);
+		
 		if(saList!=null && saList.size() != 0) {
 			mav.addObject("saList", saList);
 			view = "/admin/stop/officialDocumentResultForm";//.jsp

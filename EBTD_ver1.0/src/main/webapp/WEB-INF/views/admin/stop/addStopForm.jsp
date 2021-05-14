@@ -63,6 +63,10 @@
 	#submit:hover{
 		background-color: #ff8197;
 	}
+	#checktd, #checktd2{
+		border: none;
+	}
+	
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -95,21 +99,19 @@
 
 			<tr>
 				<td class="inputtitle">정류장 이름</td>
-				<td><input type="text" id="s_Name" placeholder="입력하세요~!" name="S_NAME"></td>
-				<td><div class="checkBox" id="checkName"></div></td>
+				<td><input type="text" id="s_Name" placeholder="입력하세요~!" name="S_NAME">
+				<span class="checkBox" id="checkName" style="display: inline-block; width: 350px;"></span></td>
 			</tr>
 
 			<tr>
 				<td class="inputtitle">x값</td>
-				<td><input type="text" class="check" id="s_X" name="S_X"
-					maxlength="3"></td>
+				<td><input type="text" class="check" id="s_X" name="S_X" maxlength="3"></td>
 			</tr>
 
 			<tr>
 				<td class="inputtitle">y값</td>
-				<td><input type="text" class="check" id="s_Y" name="S_Y"
-					maxlength="3"></td>
-				<td><div class="checkBox" id="checkPosition"></div></td>
+				<td><input type="text" class="check" id="s_Y" name="S_Y" maxlength="3">
+				<span class="checkBox" id="checkPosition" style="display: inline-block; width: 350px;"></span></td>
 			</tr>
 
 			<tr>
@@ -131,10 +133,15 @@
 			$('#s_No').focus();
 			return false;	
 			
-		}else if($('#s_Name').val() == ''){
+		}else if($('#checkName').text() == '사용 불가능 합니다.'){
 			alert('정류장 이름을 입력하세요.');
 			$('#s_Name').focus();
-			return false;	
+			return false;
+			
+		}else if($('#s_X').val() == ''){
+			alert('사용 불가능 합니다.');
+			$('#s_X').focus();
+			return false;
 			
 		}else if($('#s_X').val() == ''){
 			alert('X좌표를 입력하세요.');
@@ -142,8 +149,20 @@
 			return false;
 			
 		}else if($('#s_Y').val() == ''){
+			alert('Y좌표를 입력하세요.');
 			$('#s_Y').focus();
 			return false;
+			
+		}else if($('#checkPosition').text() == '해당 위치에 정류장이 있습니다.'){
+			alert('정류장 번호를 수정해주세요.');
+			$('#s_X').focus();
+			return false;
+			
+		}else if($('#checkPosition').text() == '좌표를 벗어났습니다.'){
+			alert('죄표를 벗어났습니다.');
+			$('#s_X').focus();
+			return false;
+			
 		}else{
 			alert('정류장 등록 완료');
 		}
@@ -160,8 +179,10 @@ $('#s_Name').on('focusout',function(){
 			dataType : 'html', 
 			success : function(data) {
 				if(data=="사용 가능 합니다."){
+				$('#checkName').css('visibility','visible');
 				$('#checkName').html(data).css('color','blue');
 				}else{
+				$('#checkName').css('visibility','visible');
 				$('#checkName').html(data).css('color','red');	
 				}
 			},
@@ -186,8 +207,10 @@ $('.check').on('focusout',function(){
 			dataType : 'html', 
 			success : function(data) {
 				if(data=="사용 가능 합니다."){
+				$('#checkPosition').css('visibility','visible');
 				$('#checkPosition').html(data).css('color','blue');
 				}else{
+				$('#checkPosition').css('visibility','visible');
 				$('#checkPosition').html(data).css('color','red');	
 				}},
 			error : function(err) {

@@ -48,11 +48,19 @@
 		<th>위치</th>
 		<th>동 이름</th>
 		<th>신청일</th>
-		<th>상태(1.승인 2.반려)</th>
+		<th>상태</th>
 	</tr>
 	<c:forEach var="sa" items="${saList}">
 		<tr>
-			<td>${sa.c_UserName}</td><td>${sa.sa_Name}</td><td>( ${sa.sa_X}, ${sa.sa_Y} )</td><td>${sa.t_Name}</td><td>${sa.sa_Date}</td><td>${sa.sa_State}</td>
+			<td>${sa.c_UserName}</td><td>${sa.sa_Name}</td><td>( ${sa.sa_X}, ${sa.sa_Y} )</td><td>${sa.t_Name}</td><td>${sa.sa_Date}</td>
+			<c:choose>
+			<c:when test="${sa.sa_State eq 1}">
+			<td>승인</td>
+			</c:when>
+			<c:when test="${sa.sa_State eq 2}">
+			<td>반려</td>
+			</c:when>
+			</c:choose>
 		</tr>
 	</c:forEach>
 	</table>
