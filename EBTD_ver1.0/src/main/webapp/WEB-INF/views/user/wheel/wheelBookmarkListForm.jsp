@@ -159,10 +159,10 @@ input:focus{
 }
         #myModal{
         	position: absolute;
-			top:50%;
-			left:50%;
-			transform: translate(-146%,-100%);
+			top:10%;
+			left:25px;
 			color: black;
+			width: 400px;
     	}
 </style>
 <body>
