@@ -8,7 +8,7 @@
 <style>
 .reservation {
 	background-color: lightgray;
-	height: 385px;
+	height: 500px;
 	margin: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -87,7 +87,9 @@
 		str += '<div class="reservationContent">버스번호: ' +reserveDetail.b_no +'&nbsp<input type="button" id="nearBus"></div>'; //버스번호
 		str += '<div class="reservationContent">버스회사: ' +reserveDetail.c_username + '</div>'; //예약번호
 		str += '<div class="reservationContent">출발정류장: '+reserveDetail.s_namestart + '['+reserveDetail.s_nostart+']</div>'; //출발지
+		str += '<div class="reservationContent">출발정류장 정보: '+ reserveDetail.s_detail_start + '</div>';
 		str += '<div class="reservationContent">도착정류장: '+reserveDetail.s_namelast + '['+reserveDetail.s_nolast+']</div>';//도착지
+		str += '<div class="reservationContent">도착정류장 정보: '+ reserveDetail.s_detail_last + '</div>';
 		str += '<input type="hidden" class="ur_no" name="ur_no" value="'+reserveDetail.ur_no +'">'; //예약넘버	
 		str += '<input type="button" id="btn" class="cancelBtn" value="예약취소">';
 		str += "</div>";

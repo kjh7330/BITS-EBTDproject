@@ -34,7 +34,9 @@
 				UR.B_NO, 
 				UR.UR_DATE,
 				UR.UR_STATE, 
-				B.C_USERNAME
+				B.C_USERNAME,
+				S1.S_DETAIL s_detail_start,
+				S2.S_DETAIL s_detail_last
 		FROM UR 
 		JOIN S S1 ON UR.S_NOSTART=S1.S_NO
 		JOIN S S2 ON UR.S_NOLAST=S2.S_NO 

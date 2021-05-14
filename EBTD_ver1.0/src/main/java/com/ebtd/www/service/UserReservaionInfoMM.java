@@ -64,7 +64,6 @@ public class UserReservaionInfoMM {	//김아름
 		
 		int ur_no = rb.getUr_no();
 		reserveDetail = uriDao.getReservationDetail(ur_no);
-
 		//디비에서 가져온 데이터가 있으면
 		if( (reserveDetail != null) ) {
 			mav.addObject("reserveDetail", om.writeValueAsString(reserveDetail));

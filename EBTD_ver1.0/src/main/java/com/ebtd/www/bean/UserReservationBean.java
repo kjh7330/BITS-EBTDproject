@@ -21,4 +21,8 @@ public class UserReservationBean {
 	private String c_username;	//버스회사
 	private String s_namestart; //출발 정류장 이름
 	private String s_namelast;  //도착 정류장 이름
+	
+	private String s_detail_start;	//출발 정류장 정보
+	private String s_detail_last;	//도착 정류장 정보
+
 }
