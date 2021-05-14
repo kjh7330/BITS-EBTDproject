@@ -105,6 +105,11 @@
 				op += '<option name="b_no">' + data[i]["b_no"] +'</option>';
 			}
 			$('#busnum').append(op);
+			
+			
+			$(".c_username").val(data[i]["c_username"]);
+			$(".u_username").val(data[i]["u_username"]);
+			
 		},
 		error : function(err){
 			console.log(err,'@@@@');
