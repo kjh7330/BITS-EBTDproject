@@ -423,7 +423,12 @@ $(".last").click(function () {
 $("#Btn").click(function() {
 	if($('.s_namestart').val()!=''&&$('.s_namelast').val()!=''){
 		if($('.s_namestart').val()!=$('.s_namelast').val()){
-			$('form').trigger('submit');
+			if($('#nearBus').val() == '잠시 후 도착합니다.'){
+				alert('잠시후 버스는 예약 할 수 없습니다.');
+				return false;
+			}else{
+				$('form').trigger('submit');
+			}
 		}
 		else{
 			alert('출발지와 도착지가 같습니다!');
@@ -433,6 +438,9 @@ $("#Btn").click(function() {
 			alert('출발지와 도착지를 입력해주세요!');
 	}
 });
+
+
+	
 
 </script>
 </html>
