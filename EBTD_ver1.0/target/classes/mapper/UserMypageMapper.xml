@@ -14,6 +14,7 @@
 		(SELECT S_NAME FROM S WHERE S_NOLAST=S_NO) AS S_NAMELAST,
 		B_NO, TO_CHAR(UR_DATE,'YYYY-MM-DD') AS UR_DATE
 		FROM USER_RESERVE WHERE U_USERNAME = #{u_username} AND UR_STATE = 3
+		order by ur_date desc
 	</select>
 	<select id="getReservationHistoryDetail" resultType="reservation">
 		SELECT UR_NO, U_USERNAME,

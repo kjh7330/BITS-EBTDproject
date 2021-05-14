@@ -209,7 +209,7 @@ public class AdminCompanyMM {
 		cList = cDao.getNewBusRouteList();
 		System.out.println(cList);
 		mav.addObject("cList", cList);
-		view="redirect:admin/company/getNewBusRouteList";
+		view="redirect:/admin/company/getNewBusRouteList";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -222,7 +222,7 @@ public class AdminCompanyMM {
 		abnList = cDao.getUpdateBusRouteList();
 		System.out.println(abnList);
 		mav.addObject("abnList",abnList);
-		view="admin/company/updateBusRouteListForm";
+		view="/admin/company/updateBusRouteListForm";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -312,7 +312,7 @@ public class AdminCompanyMM {
 		
 		if(cList != null && cList.size() != 0) {
 			mav.addObject("cList", om.writeValueAsString(cList));
-			view="admin/company/companyNameListForm";
+			view="/admin/company/companyNameListForm";
 		}else {
 			view="redirect:/admin";
 		}
@@ -339,7 +339,7 @@ public class AdminCompanyMM {
 			mav.addObject("vrCountList", vrCountList);
 			mav.addObject("bdCountList", bdCountList);
 			mav.addObject("lrCountList", lrCountList);
-			view="admin/company/companyDetailForm";
+			view="/admin/company/companyDetailForm";
 		}else {
 			view="redirect:/admin";
 		}
@@ -361,7 +361,7 @@ public class AdminCompanyMM {
 			mav.addObject("cName", cName);
 			mav.addObject("vrCountList", vrCountList);
 			mav.addObject("vocList", vocList);
-			view="admin/company/companyQuestionListForm";
+			view="/admin/company/companyQuestionListForm";
 		}else {
 			view="redirect:/admin";
 		}
@@ -377,7 +377,7 @@ public class AdminCompanyMM {
 		baList = cDao.getCompanyApprovalList();
 		
 		mav.addObject("baList", om.writeValueAsString(baList));
-		view="admin/company/companyApprovalListForm";
+		view="/admin/company/companyApprovalListForm";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -393,7 +393,7 @@ public class AdminCompanyMM {
 		aList = cDao.getCompanyApprovalDetail(abh);
 		System.out.println(aList);
 		mav.addObject("aList", om.writeValueAsString(aList));
-		view="admin/company/companyApprovalDetailForm";
+		view="/admin/company/companyApprovalDetailForm";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -406,7 +406,7 @@ public class AdminCompanyMM {
 		baList = cDao.getCompanyRejectList();
 		
 		mav.addObject("baList", om.writeValueAsString(baList));
-		view="admin/company/companyRejectListForm";
+		view="/admin/company/companyRejectListForm";
 		mav.setViewName(view);
 		return mav;
 	}
@@ -421,7 +421,7 @@ public class AdminCompanyMM {
 		abh.setAp_b_no(ap_b_no);
 		rList = cDao.getCompanyRejectDetail(abh);
 		mav.addObject("rList", om.writeValueAsString(rList));
-		view="admin/company/companyRejectDetailForm";
+		view="/admin/company/companyRejectDetailForm";
 		mav.setViewName(view);
 		return mav;
 	}

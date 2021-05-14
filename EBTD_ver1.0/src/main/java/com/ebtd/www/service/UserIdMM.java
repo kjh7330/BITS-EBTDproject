@@ -94,7 +94,7 @@ public class UserIdMM {
 		//패스워드 일치 확인
 		String dbPwd = uIdDao.getPwd(ub);
 		if(!pwdEncoder.matches(ub.getU_password(), dbPwd)) {
-			mav.addObject("msg", "일치하는 아이디가 없습니다.");
+			mav.addObject("msg", "비밀번호 불일치");
 			mav.setViewName("redirect:/user/loginForm");
 			return mav;
 		}

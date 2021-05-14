@@ -130,7 +130,7 @@ public class UserMypageMM {
 		System.out.println("뭐가 문제야?");
 		umDao.setMyQuestionWrite(vb);
 		System.out.println(vb+"응?");
-		view="user/getMyQuestionList"; //리스트로 다시 이동
+			view = "redirect:/user/getMyQuestionList";
 		System.out.println("말좀해봥");
 		mav.setViewName(view);
 		return mav;

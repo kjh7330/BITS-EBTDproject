@@ -193,6 +193,9 @@ body {
 						</select></td>
 						<td><input type = "button" value = "추가" id = "add"></td>
 					</tr>
+					
+				</table>
+				<table>
 					<tr>
 						<td>총 버스 갯수 : </td>
 						<td><input style="width: 150px;" id="motorCount" type = "text" name= "motorCount"></td><td colspan="2"><input id="submitRoute" type = "submit" style="background-color:#a1f8d5;" value="제출"></td>

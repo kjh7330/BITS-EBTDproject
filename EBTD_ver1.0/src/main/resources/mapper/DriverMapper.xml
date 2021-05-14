@@ -10,11 +10,12 @@
 	</select>
 	
 	<select id = "getBusList" resultType = "bus_wh">
-		select b.*, ab.ab_no, ab.ab_type 
+		select distinct b.*, ab.ab_no, ab.ab_type 
 		from b b join ab ab 
 		on b.b_no = ab.b_no join (select max(ap_no), ap_b_no, ap_state from ap group by ap_b_no, ap_state) ap 
 		on b.b_no = ap.ap_b_no 
 		where b.c_username = #{c_username} and ( ap.ap_state = 1 or ap.ap_state = 4 ) 
+		order by b.b_no
 	</select>
 	
 	<select id = "getDriverList" resultType = "driver_wh">
