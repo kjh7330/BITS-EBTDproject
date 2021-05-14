@@ -67,6 +67,7 @@ public class UserMypageController {
 	//마이페이지 - 고객 소리함 - 작성 하기
 	@PostMapping(value ="/user/setMyQuestionWrite")
 	public ModelAndView setMyQuestionWrite(VocBean vb) {
+		System.out.println("온거니?");
 		mav=umm.setMyQuestionWrite(vb);
 		return mav;
 	}

@@ -118,6 +118,7 @@ public class UserMypageMM {
 	public String getReservationBusNum(String u_username) throws JsonProcessingException {
 		mav = new ModelAndView();
 		ObjectMapper om = new ObjectMapper();
+		System.out.println(u_username);
 		List<UserReserveHistoryBean> urbList = null;
 		urbList = umDao.getReservationBusNum(u_username);
 		return om.writeValueAsString(urbList);
@@ -126,8 +127,11 @@ public class UserMypageMM {
 	public ModelAndView setMyQuestionWrite(VocBean vb) {
 		mav = new ModelAndView();
 		String view = null;
+		System.out.println("뭐가 문제야?");
 		umDao.setMyQuestionWrite(vb);
+		System.out.println(vb+"응?");
 		view="user/getMyQuestionList"; //리스트로 다시 이동
+		System.out.println("말좀해봥");
 		mav.setViewName(view);
 		return mav;
 	}
